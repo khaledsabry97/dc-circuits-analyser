@@ -6,4 +6,3 @@ It's designed, written and created completely by this team for a class project i
 
 You are welcome to modify and use it freely on your own.
 
-# All rights reserved.
