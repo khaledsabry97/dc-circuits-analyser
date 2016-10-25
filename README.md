@@ -1,4 +1,4 @@
-# CMP-2020 Circuits Project,
+# CMP-2020 Circuits Project
 
 # Team: Mahmoud Adas, Hadi, Mohammed Magdy, Mahmoud Youssri, Khaled Sabry.
 
