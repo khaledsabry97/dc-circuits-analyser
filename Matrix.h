@@ -1,6 +1,5 @@
 #include "Eigen/Dense"
 #include <iostream>
-#include <vector>
 using namespace std;
 
 typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic> Matrix;
