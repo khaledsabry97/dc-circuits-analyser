@@ -12,6 +12,7 @@ private:
     enum Type {R, E, J};
 
     Element* _next = nullptr;
+    Element* _prev = nullptr;
     Type _type = R;
     int _id = -1;
     double _value = 0;
@@ -65,7 +66,9 @@ public:
     char GetType();
     void ChangeType(char c);
     Element* GetNext();
+    Element* GetPrev();
     void SetNext(Element* n);
+    void SetPrev(Element* n);
     int GetId();
     void ChangeId(const int &num);
     double GetValue();
@@ -152,11 +155,13 @@ private:
     int _numElements = 0;
 
     /* prototypes */
-    void _SetNext(Node* n);
     void _SetFirstElem(Element* n);
 
-
     /* implementation */
+    void _SetFirstElem(Element* n)
+    {
+        _firstElement = n;
+    }
 public:
     /* prototypes */
     int GetId();
@@ -165,12 +170,46 @@ public:
     int GetNumOfElem();
     bool IsEssential();
     Element* GetFirstElem();
+    Node* GetNext();
+    void SetNext(Node* n);
     void Add(Element* e);
     void Remove(Element* e);
 
 
     /* implementation */
 
+    // next node:
+    void SetNext(Node* n)
+    {
+        _next = n;
+    }
+
+    Node* GetNext()
+    {
+        return (_next);
+    }
+
+    // elements:
+    void Add(Element* e)
+    {
+        
+        /* pseudo:
+            ;we have e and e2, that e is new and e2 is the prev
+            1- e2.prev points at e 
+            2- e.next points at e1
+            3- node.firstelement points at e
+        */
+
+        _firstElement->SetPrev(e);
+        e->SetNext(_firstElement);
+
+        _firstElement = e;
+    }
+
+    void Remove(Element* e)
+    {
+        
+    }
     
 };
 
