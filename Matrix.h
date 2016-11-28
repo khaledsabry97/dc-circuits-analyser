@@ -1,13 +1,13 @@
-#include "Eigen/Dense"
 #include <iostream>
+#include "Eigen/Dense"
+
 using namespace std;
+using namespace Eigen;
 
-typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic> Matrix;
-typedef Eigen::Matrix<float, Eigen::Dynamic, 1> Vector;
-
+typedef Matrix<float, Eigen::Dynamic, 1> Vector;
 
 // prototypes
-class Matrices
+class Solver
 {
 private:
     bool _calculated = false;
@@ -21,13 +21,13 @@ private:
     void _Print_A();
 
 public:
-    Matrix A;
+    MatrixXf A;
     Vector B;
     Vector X;
 
     const int rows, columns;
 
-    Matrices(int r, int c);
+    Solver(int r, int c);
 
     void Print();
     void Zero();
@@ -37,7 +37,7 @@ public:
 
 // implementation
 // public:
-Matrices::Matrices(int r, int c) :rows(r), columns(c) 
+Solver::Solver(int r, int c) :rows(r), columns(c) 
 {
     A.resize(rows, columns);
     B.resize(rows);
@@ -46,14 +46,14 @@ Matrices::Matrices(int r, int c) :rows(r), columns(c)
     Zero();
 }
 
-void Matrices::Zero()
+void Solver::Zero()
 {
-    A = Matrix::Zero(rows, columns);
-    B = Matrix::Zero(rows, 1);
-    X = Matrix::Zero(rows, 1);
+    A = MatrixXf::Zero(rows, columns);
+    B = MatrixXf::Zero(rows, 1);
+    X = MatrixXf::Zero(rows, 1);
 }
 
-void Matrices::Print()
+void Solver::Print()
 {
     cout << "From equation AX = B\n";
     _Print_A();
@@ -61,12 +61,12 @@ void Matrices::Print()
     _Print_B();
 }
 
-bool Matrices::IsZero()
+bool Solver::IsZero()
 {
     return (_is_A_zero() && _is_B_zero() && _is_X_zero()); 
 }
 
-Vector Matrices::Solve()
+Vector Solver::Solve()
 {
     using Eigen::ColPivHouseholderQR;
 
@@ -81,34 +81,34 @@ Vector Matrices::Solve()
 
 
 // private:
-bool Matrices::_is_A_zero()
+bool Solver::_is_A_zero()
 {
-    return (A == Matrix::Zero(rows, columns));
+    return (A == MatrixXf::Zero(rows, columns));
 }
-bool Matrices::_is_B_zero()
+bool Solver::_is_B_zero()
 {
-    return (B == Matrix::Zero(rows, 1));
+    return (B == MatrixXf::Zero(rows, 1));
 }
-bool Matrices::_is_X_zero()
+bool Solver::_is_X_zero()
 {
-    return (X == Matrix::Zero(rows, 1));
+    return (X == MatrixXf::Zero(rows, 1));
 }
 
-void Matrices::_Print_X()
+void Solver::_Print_X()
 {
     if (!_calculated)
         cout << "X isn't calculated\n";
     else
         cout << "X:\n" << X << endl;
 }
-void Matrices::_Print_A()
+void Solver::_Print_A()
 {
     if (_is_A_zero())
         cout << "A = Zero\n";
     else
         cout << "A:\n" << A << endl;
 }
-void Matrices::_Print_B()
+void Solver::_Print_B()
 {
     if (_is_A_zero())
         cout << "B = Zero\n";
