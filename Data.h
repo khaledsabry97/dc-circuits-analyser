@@ -204,13 +204,65 @@ public:
         e->SetNext(_firstElement);
 
         _firstElement = e;
+
+        _numElements++;
     }
 
     void Remove(Element* e)
     {
-        
+        /*pseudo:
+            ;general case
+            ;let e is the element, e- the previous one and e+ the next one
+            e+.prev = e-;
+            e-.next = e+;
+            delete e;
+        */
+
+        Element* e_minus = e->GetPrev();
+        Element* e_plus = e->GetNext();
+
+        if (e_minus)    // has prev element
+            e_minus->SetNext(e_plus);
+        else    // first elemen 
+            _firstElement = e_plus;
+
+        if (e_plus) // has next element
+            e_plus->SetPrev(e_minus);
+
+        _numElements--;
+        delete e;
+    }
+
+    Element* GetFirstElem()
+    {
+        return (_firstElement);
+    }
+
+    // node:
+    bool IsEssential()
+    {
+        return (_numElements > 2);
+    }
+
+    int GetNumOfElem()
+    {
+        return (_numElements);
+    }
+
+    double GetVolt()
+    {
+        return (_volt);
+    }
+
+    void ChangeVolt(const double &v)
+    {
+        _volt = v;
     }
     
+    int GetId()
+    {
+        return (_id);
+    }
 };
 
 class Circuit 
