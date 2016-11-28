@@ -71,8 +71,8 @@ private:
 public:
     void Add(Node* n);
     void Remove(Node* n);
-    void GetLastNode();
-    void GetFirstNode();
+    Node* GetLastNode();
+    Node* GetFirstNode();
 	int GetNumOfNodes();
     //void Read();
 	~Circuit();

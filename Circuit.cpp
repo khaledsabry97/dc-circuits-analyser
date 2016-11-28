@@ -72,7 +72,16 @@ void Circuit::Add(Node* n)
             or -----> n.next points at ptr & ptr 
     */
 
-    if (n.IsEssential())
+    // handle Special case, when last and first are nullptrs
+    if (!_lastNode && !_firstNode)
+    {
+        _lastNode = _firstNode = n;
+        _numNodes++;
+        return;
+    }
+
+    // general case
+    if (n->IsEssential())
     {
         // put at front
         n->SetNext(_firstNode);
@@ -111,7 +120,7 @@ void Circuit::Remove(Node* n)
 
     if (n == _firstNode)
     {
-        _firstNode = n;
+        _firstNode = n->GetNext();
         delete n;
         _numNodes--;
 
@@ -134,18 +143,18 @@ void Circuit::Remove(Node* n)
     if (n == _lastNode)
         _lastNode = n_minus;
 
-    n_minus->SetNext(n);
+    n_minus->SetNext(n->GetNext());
     delete n;
     _numNodes--;
 
 }
 
-void Circuit::GetLastNode()
+Node* Circuit::GetLastNode()
 {
     return (_lastNode);
 }
 
-void Circuit::GetFirstNode()
+Node* Circuit::GetFirstNode()
 {
     return (_firstNode);
 }
