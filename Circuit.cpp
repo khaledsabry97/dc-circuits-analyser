@@ -17,7 +17,7 @@
         for (int i = 1;; i++)
         {
             // new node with num = i
-            Node* n = new Node;
+            Node* n = new Node(1);
 
             cout << "Node " << i << ":\n";
 
@@ -25,7 +25,7 @@
             {
                 // read line
                 string line; 
-                cin.getline(line);
+                getline(cin, line);
                 // end node if x, return if xx
                 if (line[0] == 'x')
                 {

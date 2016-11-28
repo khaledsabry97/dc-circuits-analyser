@@ -19,7 +19,7 @@ private:
     void _SetId(const int &id);
 
 public:
-    Element();
+    Element(char t, const int &id, const double &v);
     char GetType();
     void ChangeType(char c);
     Element* GetNext();
@@ -54,6 +54,7 @@ public:
     void SetNext(Node* n);
     void Add(Element* e);
     void Remove(Element* e);
+    Node(const int &id);
 };
 
 class Circuit 
@@ -61,4 +62,6 @@ class Circuit
 public:
     Node* firstNode = nullptr;
     Node* lastNode = nullptr;
+    
+    void Read();
 };

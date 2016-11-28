@@ -8,6 +8,9 @@
         _firstElement = n;
     }
 //  public:
+    // constructor
+    Node::Node(const int &id) :_id(id)
+    {}
     // next node:
     void Node::SetNext(Node* n)
     {

@@ -6,7 +6,7 @@
 //  private:
     void Element::_SetType(const char c)
     {
-        switch(c):
+        switch (c)
         {
             case 'R':
                 _type = R;
@@ -81,6 +81,16 @@
     void Element::SetNext(Element* n)
     {
         _next = n;
+    }
+
+    Element* Element::GetPrev()
+    {
+        return (_prev);
+    }
+
+    void Element::SetPrev(Element* n)
+    {
+        _prev = n;
     }
 
     // ID:
