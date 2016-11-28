@@ -1,4 +1,4 @@
-#include "Matrix.h"
+#include "Solver.h"
 
 void mat()
 {
