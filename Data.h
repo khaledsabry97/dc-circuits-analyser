@@ -8,54 +8,168 @@ class Circuit;
 
 class Element
 {
-public:
-    string id = "None-Initialized";
-    double value = 0;
+private:
+    enum Type {R, E, J};
 
-    // ptrs
-    Element* next = nullptr;
+    Element* _next = nullptr;
+    Type _type = R;
+    int _id = -1;
+    double _value = 0;
 
-    bool CheckType()
+    /* prototypes: */
+
+    void _SetType(const char c);
+    void _SetValue(const int &num);
+    void _SetId(const int &id);
+
+    /* implementation */
+
+    void _SetType(const char c)
     {
-        char type = toupper(id[0]);
-
-        if (type == 'R' || type == 'I' || type == 'J')
-            return true;
-
-        return false;
+        switch(c):
+        {
+            case 'R':
+                _type = R;
+                break;
+            case 'E':
+                _type = E;
+                break;
+            case 'J':
+                _type = J;
+                break;
+            default:
+                throw -1;
+        }
     }
 
-    Element(string name, int num) :id(toupper(name)), value(num)
+    void _SetValue(const int &num)
     {
-        // id is invalid
-        if (!CheckID())
+        if (_type == R && num < 0)
             throw -1;
+
+        _value = num;
     }
 
-    // parse
-    Element(string line)
+    void _SetId(const int &id)
     {
-        
+        if (num < 0)
+            throw -1;
+
+        _id = num;
     }
-    void Add(Element* n)
+
+public:
+    /* prototypes: */
+
+    Element();
+    char GetType();
+    void ChangeType(char c);
+    Element* GetNext();
+    void SetNext(Element* n);
+    int GetId();
+    void ChangeId(const int &num);
+    double GetValue();
+    void ChangeValue(const int &num);
+    
+
+    /* implementation: */
+
+    // constructor
+    Element(char t, const int &id, const double &v)
     {
-        next = n;
-        n->prev = n;
+        _SetType(toupper(t));
+        _SetId(id);
+        _SetValue(v);
+    }
+
+    // Type:
+    // when source transformation only
+    void ChangeType(char c)
+    {
+        c = toupper(c);
+        _SetType(c);
     }
 
     char GetType()
     {
-        return (id[0]);
+        switch (_type):
+        {
+            case R:
+                return 'R';
+            case E:
+                return 'E';
+            case J:
+                return 'J';
+            default:
+                throw -1;
+        }
+    }  
+
+    // Ptr:
+    Element* GetNext()
+    {
+        return (_next);
+    }  
+
+    void SetNext(Element* n)
+    {
+        _next = n;
     }
+
+    // ID:
+    int GetId()
+    {
+        return (_id);
+    }
+
+    // needed for transforamtions
+    void ChangeId(const int &num)
+    {
+        _SetId(num);
+    }
+
+    // Value:
+    double GetValue()
+    {
+        return (_value);
+    }
+
+    // for transformations
+    void ChangeValue(const int &num)
+    {
+        _SetValue(num);
+    }
+
 };
 
 class Node 
 {
-public:
-    Node* next = nullptr;
-    Node* prev = nullptr;
+private:
+    Node* _next = nullptr;
+    Element* _firstElement = nullptr;
+    const int _id;
+    double _volt = 0;
+    int _numElements = 0;
 
-    Element* firstElement = nullptr;
+    /* prototypes */
+    void _SetNext(Node* n);
+    void _SetFirstElem(Element* n);
+
+
+    /* implementation */
+public:
+    /* prototypes */
+    int GetId();
+    void ChangeVolt(const double &v);
+    double GetVolt();
+    int GetNumOfElem();
+    bool IsEssential();
+    Element* GetFirstElem();
+    void Add(Element* e);
+    void Remove(Element* e);
+
+
+    /* implementation */
 
     
 };
