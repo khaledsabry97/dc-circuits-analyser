@@ -55,13 +55,25 @@ public:
     void Add(Element* e);
     void Remove(Element* e);
     Node(const int &id);
+	~Node();
 };
 
 class Circuit 
 {
+private:
+    Node* _firstNode = nullptr;
+    Node* _lastNode = nullptr;
+	int _numNodes = 0;
+
+    void _Set_firstNode(Node* n);
+    void _Set_lastNode(Node* n);
+
 public:
-    Node* firstNode = nullptr;
-    Node* lastNode = nullptr;
-    
-    void Read();
+    void Add(Node* n);
+    void Remove(Node* n);
+    void GetLastNode();
+    void GetFirstNode();
+	int GetNumOfNodes();
+    //void Read();
+	~Circuit();
 };
