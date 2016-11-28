@@ -18,8 +18,14 @@ void element1()
     delete n;
 }
 
+void el2()
+{
+    Element* n = new Element('r', 55, 60);
+}
+
 int main()
 {
     //mat();
-    element1();
+    //element1();
+    el2();
 }
