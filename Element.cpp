@@ -4,9 +4,9 @@
 /*      Element     */
 
 //  private:
-    void Element::_SetType(const char c)
+    void Element::_SetType(const char &c)
     {
-        switch (c)
+        switch (toupper(c))
         {
             case 'R':
                 _type = R;
@@ -42,18 +42,17 @@
     /* implementation: */
 
     // constructor
-    Element::Element(char t, const int &id, const double &v)
+    Element::Element(const char &t, const int &id, const double &v)
     {
-        _SetType(toupper(t));
+        _SetType(t);
         _SetId(id);
         _SetValue(v);
     }
 
     // Type:
     // when source transformation only
-    void Element::ChangeType(char c)
+    void Element::ChangeType(const char &c)
     {
-        c = toupper(c);
         _SetType(c);
     }
 

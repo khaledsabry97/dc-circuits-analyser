@@ -11,6 +11,7 @@
     // constructor
     Node::Node(const int &id) :_id(id)
     {}
+    
     // next node:
     void Node::SetNext(Node* n)
     {
@@ -27,14 +28,19 @@
     {
         
         /* pseudo:
-            ;we have e and e2, that e is new and e2 is the prev
-            1- e2.prev points at e 
-            2- e.next points at e1
+            ;let e be the added element and e+ the firstElement
+            ;e is new and e+ is the prev
+
+            1- e+.prev points at e 
+            2- e.next points at e+
             3- node.firstelement points at e
         */
+        Element* e_plus = _firstElement;
 
-        _firstElement->SetPrev(e);
-        e->SetNext(_firstElement);
+        if (e_plus)
+            e_plus->SetPrev(e);
+        
+        e->SetNext(e_plus);
 
         _firstElement = e;
 
@@ -46,6 +52,7 @@
         /*pseudo:
             ;general case
             ;let e is the element, e- the previous one and e+ the next one
+
             e+.prev = e-;
             e-.next = e+;
             delete e;

@@ -14,14 +14,14 @@ private:
     int _id = -1;
     double _value = 0;
 
-    void _SetType(const char c);
+    void _SetType(const char &c);
     void _SetValue(const int &num);
     void _SetId(const int &id);
 
 public:
-    Element(char t, const int &id, const double &v);
+    Element(const char &t, const int &id, const double &v);
     char GetType();
-    void ChangeType(char c);
+    void ChangeType(const char &c);
     Element* GetNext();
     Element* GetPrev();
     void SetNext(Element* n);
