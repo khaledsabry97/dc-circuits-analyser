@@ -1,4 +1,5 @@
 #include "Solver.h"
+#include "Data.h"
 
 void mat()
 {
@@ -11,7 +12,14 @@ void mat()
 
 }
 
+void element1()
+{
+    Element* n = new Element("t", 55);
+    delete n;
+}
+
 int main()
 {
-    mat();
+    //mat();
+    element1();
 }

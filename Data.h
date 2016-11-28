@@ -16,12 +16,5 @@ public:
     Element(string name, int num) :id(name), value(num)
     {}
 
-    ~Element(DEL operation= ONE)
-    {
-        if (operation == ALL)
-            if (next)
-                delete next(ALL); 
-    }
 
-    
 };
