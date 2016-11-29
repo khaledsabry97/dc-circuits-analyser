@@ -117,10 +117,12 @@ bool Circuit::Remove(Node* n)
         ;n = lastnode -----> +
         ;n is not in list ---->  +
     */
+    if (!n)
+        throw -1;       // cant delete null
 
     if (n == _firstNode)
     {
-        _firstNode = n->GetNext();
+        _firstNode = _firstNode->GetNext();
         delete n;
         _numNodes--;
 
@@ -166,19 +168,47 @@ int Circuit::GetNumOfNodes()
 }
 
 
-bool Push_back(Node* n)
+void Push_back(Node* n)
 {
+    if (!n)
+        throw -1;       // cant handle empty pointer
+
+    n->SetNext(nullptr);
+    _lastNode->SetNext(n);
+    _lastNode = n;
+
+    // special cases
+    // _lastNode = _firstNode = nullptr
+    if (!_firstNode) 
+        _firstNode = _lastNode;
 
 }
-bool Push_front(Node* n)
+void Push_front(Node* n)
 {
+    if (!n)
+        throw -1;       // cant handle empty pointer
+
+    n->SetNext(_firstNode);
+    _firstNode = n;
+
+    // special cases
+    // _lastNode = _firstNode = nullptr
+    if (!_lastNode) 
+        _lastNode = _firstNode;
 
 }
 bool Pop_back()
 {
+    if (!_lastNode)
+        return false;
+    Remove(_lastNode);
     return true;
 }
 bool Pop_front()
 {
+    if (!_frontNode)
+        return false;
+
+    Remove(_frontNode);
     return true;
 }
