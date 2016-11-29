@@ -5,19 +5,19 @@
 
 // public:
 
-Element(const char &type, const int &id, const double &value);
-~Element();
+Element::Element(const char &type, const int &id, const double &value);
+Element::~Element();
 
-char GetType();
-void ChangeType(const char &c);
-int GetId();
-void ChangeId(const int &num);
-double GetValue();
-void ChangeValue(const int &num);
+char Element::GetType();
+void Element::ChangeType(const char &c);
+int Element::GetId();
+void Element::ChangeId(const int &num);
+double Element::GetValue();
+void Element::ChangeValue(const int &num);
 
 
 // private:
 
-void _SetType(const char &c);
-void _SetValue(const int &num);
-void _SetId(const int &id);
+void Element::_SetType(const char &c);
+void Element::_SetValue(const int &num);
+void Element::_SetId(const int &id);

@@ -3,15 +3,15 @@
 /*      Node        */
 
 // public:
-Node(const int &id);
-~Node();
+Node::Node(const int &id);
+~Node::Node();
 
-int GetId();
-void ChangeVolt(const double &v);
-double GetVolt();
-int GetNumOfElem();
-bool IsEssential();
-void Add(Element* e);
-void Remove(Element* e);
+int Node::GetId();
+void Node::ChangeVolt(const double &v);
+double Node::GetVolt();
+int Node::GetNumOfElem();
+bool Node::IsEssential();
+void Node::Add(Element* e);
+void Node::Remove(Element* e);
 
 // private:

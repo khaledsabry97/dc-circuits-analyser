@@ -45,6 +45,7 @@ public:
     double GetVolt();
     int GetNumOfElem();
     bool IsEssential();
+	bool IsValid();
     void Add(Element* e);
     void Remove(Element* e);
 };
@@ -52,15 +53,17 @@ public:
 class Circuit 
 {
 private:
-    Node* _firstNode = nullptr;
-    Node* _lastNode = nullptr;
+    list<Node*> _nodes;
+	typedef list<Node*>::iterator itr;
+	typedef list<Node*>::reverse_iterator itr_r;
 
 public:
 	Circuit();
 	~Circuit();
 
-    bool Add(Node* n);
+    void Add(Node* n);
     bool Remove(Node* n);
+	Node* Search();
 	int GetNumOfNodes();
     void Read();
 	void Push_back(Node* n);

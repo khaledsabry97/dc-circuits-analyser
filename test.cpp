@@ -3,32 +3,38 @@
 
 int main()
 {
-    // test circuit 
-
-    Node* n;
-    Element* e;
-
-    // add nodes to circuit
-    Circuit* c = new Circuit;
-
-    for (int j = 20; j--;)
-    {
-        n = new Node(j);
-        for (int i = j; i--;)
-        {
-            e = new Element('E', i, i * 3 -9);
-            n->Add(e);
-        }
-        c->Add(n);
-    }
-
-    c->Remove(n);
-
-    c->GetLastNode();
-    c->GetFirstNode();
-
-    delete c;
+    // test circuit v2.0
+    //Circuit c;
 }
+
+// int main()
+// {
+//     // test circuit old way
+
+//     Node* n;
+//     Element* e;
+
+//     // add nodes to circuit
+//     Circuit* c = new Circuit;
+
+//     for (int j = 20; j--;)
+//     {
+//         n = new Node(j);
+//         for (int i = j; i--;)
+//         {
+//             e = new Element('E', i, i * 3 -9);
+//             n->Add(e);
+//         }
+//         c->Add(n);
+//     }
+
+//     c->Remove(n);
+
+//     c->GetLastNode();
+//     c->GetFirstNode();
+
+//     delete c;
+// }
 
 // int main()
 // {
