@@ -120,7 +120,7 @@ bool Circuit::Remove(Node* n)
         if (n_minus->GetNext() == n)
             break;
 
-        n_minus = _firstNode->GetNext();
+        n_minus = n_minus->GetNext();
     }
 
     if (!n_minus)       // not found in list

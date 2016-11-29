@@ -22,6 +22,8 @@ int main()
         c->Add(n);
     }
 
+    n = new Node(22);
+    c->Add(n);
     c->Remove(n);
 
     c->GetLastNode();
