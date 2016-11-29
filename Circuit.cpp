@@ -58,7 +58,7 @@ Circuit::~Circuit()
 // }
 
 
-void Circuit::Add(Node* n)
+bool Circuit::Add(Node* n)
 {
     /* pseudo:
         if essential:
@@ -99,7 +99,7 @@ void Circuit::Add(Node* n)
     _numNodes++;
 }
 
-void Circuit::Remove(Node* n)
+bool Circuit::Remove(Node* n)
 {
     /*  pseudo:
         get previous node:
@@ -138,7 +138,7 @@ void Circuit::Remove(Node* n)
     }
 
     if (!n_minus)       // not found in list
-        throw -1;
+        return false;
 
     if (n == _lastNode)
         _lastNode = n_minus;
@@ -147,6 +147,7 @@ void Circuit::Remove(Node* n)
     delete n;
     _numNodes--;
 
+    return true;
 }
 
 Node* Circuit::GetLastNode()
@@ -162,4 +163,22 @@ Node* Circuit::GetFirstNode()
 int Circuit::GetNumOfNodes()
 {
     return(_numNodes);
+}
+
+
+bool Push_back(Node* n)
+{
+
+}
+bool Push_front(Node* n)
+{
+
+}
+bool Pop_back()
+{
+    return true;
+}
+bool Pop_front()
+{
+    return true;
 }

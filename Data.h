@@ -69,11 +69,15 @@ private:
     void _Set_lastNode(Node* n);
 
 public:
-    void Add(Node* n);
-    void Remove(Node* n);
+    bool Add(Node* n);
+    bool Remove(Node* n);
     Node* GetLastNode();
     Node* GetFirstNode();
 	int GetNumOfNodes();
     //void Read();
 	~Circuit();
+	bool Push_back(Node* n);
+	bool Push_front(Node* n);
+	bool Pop_back();
+	bool Pop_front();
 };
