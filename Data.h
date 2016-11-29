@@ -66,7 +66,7 @@ private:
 	int _numNodes = 0;
 
 public:
-    bool Add(Node* n);
+    void Add(Node* n);
     bool Remove(Node* n);
     Node* GetLastNode();
     Node* GetFirstNode();

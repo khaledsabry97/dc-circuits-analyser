@@ -58,7 +58,7 @@ Circuit::~Circuit()
 // }
 
 
-bool Circuit::Add(Node* n)
+void Circuit::Add(Node* n)
 {
     /* pseudo:
         if essential:
@@ -73,30 +73,10 @@ bool Circuit::Add(Node* n)
     */
 
     // handle Special case, when last and first are nullptrs
-    if (!_lastNode && !_firstNode)
-    {
-        _lastNode = _firstNode = n;
-        _numNodes++;
-        return;
-    }
-
-    // general case
     if (n->IsEssential())
-    {
-        // put at front
-        n->SetNext(_firstNode);
-        _firstNode = n;
-    }
+        Push_front(n);
     else 
-    {
-        // put at end
-        if (_lastNode)
-            _lastNode->SetNext(n);
-
-        _lastNode = n;
-    }
-
-    _numNodes++;
+        Push_back(n);
 }
 
 bool Circuit::Remove(Node* n)
@@ -122,11 +102,15 @@ bool Circuit::Remove(Node* n)
 
     if (n == _firstNode)
     {
+        // if there is only one node, move both to null after removing it
+        if (_lastNode == _firstNode)
+            _lastNode = nullptr;     
+
         _firstNode = _firstNode->GetNext();
         delete n;
         _numNodes--;
 
-        return;
+        return true;
     }
 
     // get previous node
@@ -168,47 +152,53 @@ int Circuit::GetNumOfNodes()
 }
 
 
-void Push_back(Node* n)
+void Circuit::Push_back(Node* n)
 {
     if (!n)
         throw -1;       // cant handle empty pointer
 
     n->SetNext(nullptr);
+
+    if (!_lastNode && !_firstNode)
+    {
+        _lastNode = _firstNode = n;
+        return;
+    }
+
     _lastNode->SetNext(n);
     _lastNode = n;
-
-    // special cases
-    // _lastNode = _firstNode = nullptr
-    if (!_firstNode) 
-        _firstNode = _lastNode;
-
+    _numNodes++;
 }
-void Push_front(Node* n)
+
+void Circuit::Push_front(Node* n)
 {
     if (!n)
         throw -1;       // cant handle empty pointer
 
+    if (!_lastNode && !_firstNode)
+    {
+        _lastNode = _firstNode = n;
+        return;
+    }   
+
     n->SetNext(_firstNode);
     _firstNode = n;
-
-    // special cases
-    // _lastNode = _firstNode = nullptr
-    if (!_lastNode) 
-        _lastNode = _firstNode;
-
+    _numNodes++;
 }
-bool Pop_back()
+
+bool Circuit::Pop_back()
 {
     if (!_lastNode)
         return false;
+
     Remove(_lastNode);
     return true;
 }
-bool Pop_front()
+bool Circuit::Pop_front()
 {
-    if (!_frontNode)
+    if (!_firstNode)
         return false;
 
-    Remove(_frontNode);
+    Remove(_firstNode);
     return true;
 }
