@@ -18,7 +18,7 @@ private:
     void _SetId(const int &id);
 
 public:
-    Element(const char &t, const int &id, const double &v);
+    Element(const char &type, const int &id, const double &value);
 	~Element();
 
     char GetType();
