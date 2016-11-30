@@ -15,6 +15,11 @@ Circuit::~Circuit()
         Remove(_firstNode);
 }
 
+// Constructor
+Circuit::Circuit()
+	:_firstNode(nullptr), _lastNode(nullptr), _numNodes(0)
+	{}
+
 // void Circuit::Read()
 // {
 //     /* pseudo:

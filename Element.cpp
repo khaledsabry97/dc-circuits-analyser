@@ -22,7 +22,7 @@ void Element::_SetType(const char &c)
     }
 }
 
-void Element::_SetValue(const int &num)
+void Element::_SetValue(const double &num)
 {
     if (_type == R && num < 0)
         throw -1;
@@ -42,7 +42,8 @@ void Element::_SetId(const int &id)
 /* implementation: */
 
 // constructor
-Element::Element(const char &t, const int &id, const double &v)
+Element::Element(const char &t, const int &id, const double &v) 
+	:_next(nullptr), _prev(nullptr), _type(R), _id(-1), _value(0)
 {
     _SetType(t);
     _SetId(id);

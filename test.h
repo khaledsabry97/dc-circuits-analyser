@@ -1,5 +1,8 @@
-//#include "Solver.h"
+#pragma once
+#include "Solver.h"
 #include "Data.h"
+
+#define __TEST__
 
 int main()
 {

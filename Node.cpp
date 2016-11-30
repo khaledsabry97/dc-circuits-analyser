@@ -9,7 +9,8 @@ void Node::_SetFirstElem(Element* n)
 }
 //  public:
 // constructor
-Node::Node(const int &id) :_id(id)
+Node::Node(const int &id) 
+	:_id(id), _next(nullptr), _firstElement(nullptr), _volt(0), _numElements(0)
 {}
 
 // next node:

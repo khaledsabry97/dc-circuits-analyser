@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 using namespace std;
@@ -8,14 +9,14 @@ class Element
 private:
     enum Type {R, E, J};
 
-    Element* _next = nullptr;
-    Element* _prev = nullptr;
-    Type _type = R;
-    int _id = -1;
-    double _value = 0;
+    Element* _next;
+    Element* _prev;
+    Type _type;
+    int _id;
+    double _value;
 
     void _SetType(const char &c);
-    void _SetValue(const int &num);
+    void _SetValue(const double &num);
     void _SetId(const int &id);
 
 public:
@@ -35,11 +36,11 @@ public:
 class Node 
 {
 private:
-    Node* _next = nullptr;
-    Element* _firstElement = nullptr;
+    Node* _next;
+    Element* _firstElement;
     const int _id;
-    double _volt = 0;
-    int _numElements = 0;
+    double _volt;
+    int _numElements;
 
     void _SetFirstElem(Element* n);
 
@@ -61,9 +62,9 @@ public:
 class Circuit 
 {
 private:
-    Node* _firstNode = nullptr;
-    Node* _lastNode = nullptr;
-	int _numNodes = 0;
+    Node* _firstNode;
+    Node* _lastNode;
+	int _numNodes;
 
 public:
     void Add(Node* n);
@@ -73,6 +74,7 @@ public:
 	int GetNumOfNodes();
     //void Read();
 	~Circuit();
+	Circuit();
 	void Push_back(Node* n);
 	void Push_front(Node* n);
 	bool Pop_back();

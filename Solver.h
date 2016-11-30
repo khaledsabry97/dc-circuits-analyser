@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include "Eigen/Dense"
 
@@ -10,7 +11,7 @@ typedef Matrix<float, Eigen::Dynamic, 1> Vector;
 class Solver
 {
 private:
-    bool _calculated = false;
+    bool _calculated;
 
     bool _is_A_zero();
     bool _is_B_zero(); 
@@ -37,7 +38,8 @@ public:
 
 // implementation
 // public:
-Solver::Solver(int r, int c) :rows(r), columns(c) 
+Solver::Solver(int r, int c) 
+	:rows(r), columns(c), _calculated(false) 
 {
     A.resize(rows, columns);
     B.resize(rows);
