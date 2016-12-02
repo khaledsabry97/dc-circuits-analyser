@@ -3,6 +3,10 @@
 #include <string>
 using namespace std;
 
+#ifndef NULL
+#define NULL nullptr
+#endif
+
 /* PROTOTYPES */
 class Element
 {
@@ -59,6 +63,9 @@ public:
 	~Node();
 };
 
+// used in circuit methods
+enum SEARCH_BY {ID, VOLT};
+
 class Circuit 
 {
 private:
@@ -66,17 +73,25 @@ private:
     Node* _lastNode;
 	int _numNodes;
 
+    bool _IsIt(Node* ptr, const double &val, SEARCH_BY type);
+
 public:
     void Add(Node* n);
     bool Remove(Node* n);
     Node* GetLastNode();
     Node* GetFirstNode();
 	int GetNumOfNodes();
-    //void Read();
+    void Read();
 	~Circuit();
 	Circuit();
 	void Push_back(Node* n);
 	void Push_front(Node* n);
 	bool Pop_back();
 	bool Pop_front();
+
+    bool Remove(const double &val, SEARCH_BY type = ID);
+    Node* GetNode(const double &val, SEARCH_BY type = ID);
+    bool HasNode(const double &val, SEARCH_BY type = ID);
+    void RemoveDuplicates();
+    bool IsEmpty();
 };

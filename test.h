@@ -1,5 +1,5 @@
 #pragma once
-#include "Solver.h"
+//#include "Solver.h"
 #include "Data.h"
 
 #define __TEST__
@@ -27,13 +27,58 @@ int main()
 
     n = new Node(22);
     c->Add(n);
-    c->Remove(n);
+    
+    Node* temp = c->GetNode(2, ID);
+    temp = c->GetNode(22, ID);
+    temp = c->GetNode(0, VOLT);
 
-    c->GetLastNode();
-    c->GetFirstNode();
+    c->RemoveDuplicates();
 
-    delete c;
+    bool x = c->HasNode(5, ID);
+    if (c->IsEmpty())
+        printf("it is empty\n");
+    else 
+        printf("wow! it is not empty\n");
+
+    c->Remove(5);
+    if (c->HasNode(5))
+        cout << "moseeba!\n";
+    else 
+        cout << "qeshta \n";
+
+    
 }
+
+// int main()
+// {
+//     // test circuit 
+
+//     Node* n;
+//     Element* e;
+
+//     // add nodes to circuit
+//     Circuit* c = new Circuit;
+
+//     for (int j = 20; j--;)
+//     {
+//         n = new Node(j);
+//         for (int i = j; i--;)
+//         {
+//             e = new Element('E', i, i * 3 -9);
+//             n->Add(e);
+//         }
+//         c->Add(n);
+//     }
+
+//     n = new Node(22);
+//     c->Add(n);
+//     c->Remove(n);
+
+//     c->GetLastNode();
+//     c->GetFirstNode();
+
+//     delete c;
+// }
 
 // int main()
 // {

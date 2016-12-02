@@ -5,7 +5,7 @@
             "name": "C++ Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/test",
+            "program": "${workspaceRoot}/main",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceRoot}",

@@ -2,17 +2,26 @@
 
 /*      Circuit     */
 
+// private:
+bool Circuit::_IsIt(Node* ptr, const double &val, SEARCH_BY type)
+{
+    switch (type)
+    {
+        case ID:
+            return (val == ptr->GetId());
+        case VOLT:
+            return (val == ptr->GetVolt());
+        default:
+            throw -1;
+    }
+}
+
 //  public:
 
 // Deconstructor
 Circuit::~Circuit()
 {
-    /* pseudo:
-        call Remove on all nodes
-    */
-
-    while (_numNodes)
-        Remove(_firstNode);
+    while (Remove(_firstNode));
 }
 
 // Constructor
@@ -199,6 +208,7 @@ bool Circuit::Pop_back()
     Remove(_lastNode);
     return true;
 }
+
 bool Circuit::Pop_front()
 {
     if (!_firstNode)
@@ -206,4 +216,73 @@ bool Circuit::Pop_front()
 
     Remove(_firstNode);
     return true;
+}
+
+bool Circuit::Remove(const double &val, SEARCH_BY type)
+{
+    Node* temp = _firstNode;
+
+    // iterate through list 
+    while (!_IsIt(temp, val, type))
+    {
+        temp = temp->GetNext();
+        if (!temp)  // not found
+            return false;
+    }
+
+    return Remove(temp);
+}
+
+Node* Circuit::GetNode(const double &val, SEARCH_BY type)
+{
+     Node* temp = _firstNode;
+
+    // iterate through list 
+    while (!_IsIt(temp, val, type))
+    {
+        temp = temp->GetNext();
+        if (!temp)  // not found
+            return nullptr;
+    }
+
+    return temp;
+}
+
+bool Circuit::HasNode(const double &val, SEARCH_BY type)
+{
+    Node* temp = _firstNode;
+
+    // iterate through list 
+    while (!_IsIt(temp, val, type))
+    {
+        temp = temp->GetNext();
+        if (!temp)  // not found
+            return false;
+    }
+
+    return true;
+}
+
+void Circuit::RemoveDuplicates()
+{
+    Node* first = _firstNode;
+
+    // iterate through list, let every one of them be 'first' in its own sublist
+    while (first)    
+    {
+        // to point at others 
+        Node* other = first;
+
+        // iterate through all list to check duplicates of first
+        while (other = other->GetNext())
+            if (other->GetId() == first->GetId())
+                Remove(other);
+
+        first = first->GetNext();
+    }   
+}
+
+bool Circuit::IsEmpty()
+{
+    return (_firstNode == nullptr && _lastNode == nullptr);
 }
