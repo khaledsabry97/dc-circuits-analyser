@@ -42,12 +42,12 @@ void Element::_SetId(const int &id)
 /* implementation: */
 
 // constructor
-Element::Element(const char &t, const int &id, const double &v) 
+Element::Element(const char &type, const int &id, const double &val) 
 	:_next(nullptr), _prev(nullptr), _type(R), _id(-1), _value(0)
 {
-    _SetType(t);
+    _SetType(type);
     _SetId(id);
-    _SetValue(v);
+    _SetValue(val);
 }
 
 // Type:

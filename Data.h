@@ -28,7 +28,7 @@ private:
     void _SetId(const int &id);
 
 public:
-    Element(const char &t, const int &id, const double &v);
+    Element(const char &type, const int &id, const double &val);
     char GetType();
     void ChangeType(const char &c);
     Element* GetNext();
@@ -49,12 +49,11 @@ class Node
 {
 private:
     Node* _next;
+    Node* _prev;
     Element* _firstElement;
     const int _id;
     double _volt;
     int _numElements;
-
-    Node* _prev;
 
 public:
     int GetId();
@@ -69,7 +68,6 @@ public:
     bool Remove(Element* e);
     Node(const int &id);
 	~Node();
-
     Node* Copy();
 
     // friends 

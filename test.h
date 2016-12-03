@@ -6,58 +6,64 @@
 
 int main()
 {
-    // test circuit 
-
-    Node* n;
-    Element* e;
-
-    // add nodes to circuit
-    Circuit* c = new Circuit;
-
-    for (int j = 20; j--;)
-    {
-        n = new Node(j);
-        for (int i = j; i--;)
-        {
-            e = new Element('E', i, i * 3 -9);
-            n->Add(e);
-        }
-        c->Add(n);
-    }
-
-    // copy that circuit
-    Circuit* newOne = new Circuit(c);
-
-    // another copy
-    Circuit nn;
-    nn = *newOne;
-
-    newOne->IsEmpty();
-
-    // do the previous lines again wiht this
-    n = new Node(22);
-    newOne->Add(n);
-    newOne->Remove(n);
-    n = new Node(33);
     
-    Node* temp = newOne->GetNode(2, ID);
-    temp = newOne->GetNode(22, ID);
-    temp = newOne->GetNode(0, VOLT);
-    temp = newOne->GetNode(-2, VOLT);
-
-    bool x = newOne->HasNode(5, ID);
-    if (newOne->IsEmpty())
-        printf("it is empty\n");
-    else 
-        printf("wow! it is not empty\n");
-
-    newOne->Remove(5);
-    if (newOne->HasNode(5))
-        cout << "moseeba!\n";
-    else 
-        cout << "qeshta \n";
-
 }
+
+// // this test is done +
+// int main()
+// {
+//     // test circuit 
+
+//     Node* n;
+//     Element* e;
+
+//     // add nodes to circuit
+//     Circuit* c = new Circuit;
+
+//     for (int j = 20; j--;)
+//     {
+//         n = new Node(j);
+//         for (int i = j; i--;)
+//         {
+//             e = new Element('E', i, i * 3 -9);
+//             n->Add(e);
+//         }
+//         c->Add(n);
+//     }
+
+//     // copy that circuit
+//     Circuit* newOne = new Circuit(c);
+
+//     // another copy
+//     Circuit nn;
+//     nn = *newOne;
+
+//     newOne->IsEmpty();
+
+//     // do the previous lines again wiht this
+//     n = new Node(22);
+//     newOne->Add(n);
+//     newOne->Remove(n);
+//     n = new Node(33);
+    
+//     Node* temp = newOne->GetNode(2, ID);
+//     temp = newOne->GetNode(22, ID);
+//     temp = newOne->GetNode(0, VOLT);
+//     temp = newOne->GetNode(-2, VOLT);
+
+//     bool x = newOne->HasNode(5, ID);
+//     if (newOne->IsEmpty())
+//         printf("it is empty\n");
+//     else 
+//         printf("wow! it is not empty\n");
+
+//     newOne->Remove(5);
+//     if (newOne->HasNode(5))
+//         cout << "moseeba!\n";
+//     else 
+//         cout << "qeshta \n";
+
+// }
 
 // int main()
 // {
