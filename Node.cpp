@@ -3,22 +3,14 @@
 /*      Node        */
 
 //  private:
-void Node::_SetFirstElem(Element* n)
-{
-    _firstElement = n;
-}
+
 //  public:
 // constructor
 Node::Node(const int &id) 
-	:_id(id), _next(nullptr), _firstElement(nullptr), _volt(0), _numElements(0)
+	:_id(id), _next(nullptr), _prev(nullptr), _firstElement(nullptr), _volt(0), _numElements(0)
 {}
 
 // next node:
-void Node::SetNext(Node* n)
-{
-    _next = n;
-}
-
 Node* Node::GetNext()
 {
     return (_next);
@@ -36,19 +28,18 @@ void Node::Add(Element* e)
         2- e.next points at e+
         3- node.firstelement points at e
     */
-    Element* e_plus = _firstElement;
+    e->_next = _firstElement;
+    e->_prev = nullptr;
 
-    if (e_plus)
-        e_plus->SetPrev(e);
-    
-    e->SetNext(e_plus);
-
+    if (_firstElement)
+        _firstElement->_prev = e;
+        
     _firstElement = e;
 
     _numElements++;
 }
 
-void Node::Remove(Element* e)
+bool Node::Remove(Element* e)
 {
     /*pseudo:
         ;general case
@@ -58,23 +49,26 @@ void Node::Remove(Element* e)
         e-.next = e+;
         delete e;
     */
+    if (!e)
+        return false;
 
-    Element* e_minus = e->GetPrev();
-    Element* e_plus = e->GetNext();
+    Element* e_minus = e->_prev;
+    Element* e_plus = e->_next;
 
     if (e_minus)    // has prev element
-        e_minus->SetNext(e_plus);
-    else    // first elemen 
+        e_minus->_next = e_plus; 
+    else    // first element
         _firstElement = e_plus;
 
     if (e_plus) // has next element
-        e_plus->SetPrev(e_minus);
+        e_plus->_prev = e_minus;
 
     _numElements--;
     delete e;
+    return true;
 }
 
-Element* Node::GetFirstElem()
+Element* Node::GetFirstElement()
 {
     return (_firstElement);
 }
@@ -85,7 +79,7 @@ bool Node::IsEssential()
     return (_numElements > 2);
 }
 
-int Node::GetNumOfElem()
+int Node::GetNumOfElements()
 {
     return (_numElements);
 }
@@ -106,9 +100,39 @@ int Node::GetId()
 }
 
 // destructor
+
+// delete all elements before deleting the node
 Node::~Node()
 {
-    // delete all elements before deleting the node
-    while (_numElements)
-        Remove(_firstElement);
+    while (Remove(_firstElement));
+}
+
+// copies the node wiht its elements and return address for the copy
+// NOTE: the returned node doesn't point at any other node; next and prev are null
+Node* Node::Copy()
+{
+    // the new node
+    Node* newNode = new Node(_id);
+    newNode->_volt = _volt;
+
+    // temp pointer while iterating through elements
+    Element* originalElement = _firstElement;
+
+    // traverse till null
+    while (originalElement)
+    {
+        Element* copiedElement = originalElement->Copy();
+        newNode->Add(copiedElement);
+
+        // go to the next element
+        originalElement = originalElement->_next;
+    }
+
+    // here your node
+    return newNode;
+}
+
+bool Node::IsEmpty()
+{
+    return (!_numElements);
 }

@@ -16,6 +16,53 @@ bool Circuit::_IsIt(Node* ptr, const double &val, SEARCH_BY type)
     }
 }
 
+void Circuit::_RemoveDuplicates()
+{
+    Node* first = _firstNode;
+
+    // iterate through list, let every one of them be 'first' in its own sublist
+    while (first)    
+    {
+        // to point at others 
+        Node* other = first->_next;
+
+        // iterate through all list to check duplicates of first
+        while (other)
+        {
+            // there is a duplicate, remove it
+            if (other->GetId() == first->GetId())
+            {
+                Node* temp = other;
+                other = other->_next;
+
+                Remove(temp);
+
+                continue;
+            }
+
+            other = other->_next;
+        }
+
+        first = first->GetNext();
+    }   
+}
+
+void Circuit::_Copy_this_toMe(Circuit* c)
+{
+     // copy nodes
+    Node* originalNode = c->GetFirstNode();
+
+    // traverse through them all till null
+    while (originalNode)
+    {
+        Node* copiedNode = originalNode->Copy();
+        Add(copiedNode);
+
+        // go to the next
+        originalNode = originalNode->GetNext();
+    }
+}
+
 //  public:
 
 // Deconstructor
@@ -28,6 +75,16 @@ Circuit::~Circuit()
 Circuit::Circuit()
 	:_firstNode(nullptr), _lastNode(nullptr), _numNodes(0)
 	{}
+
+Circuit::Circuit(Circuit* c)
+{
+    _Copy_this_toMe(c);
+}
+
+Circuit::Circuit(Circuit& c)
+{
+    _Copy_this_toMe(&c);
+}
 
 // void Circuit::Read()
 // {
@@ -112,38 +169,20 @@ bool Circuit::Remove(Node* n)
         ;n is not in list ---->  +
     */
     if (!n)
-        throw -1;       // cant delete null
+        return false;       // cant delete null
 
+    // node is on edge: first/last
     if (n == _firstNode)
-    {
-        // if there is only one node, move both to null after removing it
-        if (_lastNode == _firstNode)
-            _lastNode = nullptr;     
+        return Pop_front();
+    else if (n == _lastNode)
+        return Pop_back();
 
-        _firstNode = _firstNode->GetNext();
-        delete n;
-        _numNodes--;
+    // node is in middle
+    Node* &n_minus = n->_prev;
+    Node* &n_plus = n->_next;
 
-        return true;
-    }
-
-    // get previous node
-    Node* n_minus = _firstNode;
-    while(n_minus)
-    {
-        if (n_minus->GetNext() == n)
-            break;
-
-        n_minus = n_minus->GetNext();
-    }
-
-    if (!n_minus)       // not found in list
-        return false;
-
-    if (n == _lastNode)
-        _lastNode = n_minus;
-
-    n_minus->SetNext(n->GetNext());
+    n_minus->_next = n_plus;
+    n_plus->_prev = n_minus;
     delete n;
     _numNodes--;
 
@@ -165,21 +204,24 @@ int Circuit::GetNumOfNodes()
     return(_numNodes);
 }
 
-
 void Circuit::Push_back(Node* n)
 {
     if (!n)
         throw -1;       // cant handle empty pointer
 
-    n->SetNext(nullptr);
+    n->_next = nullptr;
 
+    // handle special case, when first time pushing
     if (!_lastNode && !_firstNode)
     {
         _lastNode = _firstNode = n;
+        n->_prev = nullptr;
+        _numNodes++;
         return;
     }
 
-    _lastNode->SetNext(n);
+    _lastNode->_next = n;
+    n->_prev = _lastNode;
     _lastNode = n;
     _numNodes++;
 }
@@ -189,13 +231,18 @@ void Circuit::Push_front(Node* n)
     if (!n)
         throw -1;       // cant handle empty pointer
 
+    n->_prev = nullptr;
+
     if (!_lastNode && !_firstNode)
     {
         _lastNode = _firstNode = n;
+        n->_next = nullptr;
+        _numNodes++;
         return;
     }   
 
-    n->SetNext(_firstNode);
+    n->_next = _firstNode;
+    _firstNode->_prev = n; 
     _firstNode = n;
     _numNodes++;
 }
@@ -205,7 +252,17 @@ bool Circuit::Pop_back()
     if (!_lastNode)
         return false;
 
-    Remove(_lastNode);
+    Node* temp = _lastNode;
+
+    // if there is only one node, move both to null after removing it
+    if (_lastNode == _firstNode)
+        _lastNode = nullptr; 
+        
+    _lastNode = _lastNode->_prev;
+    _lastNode->_next = nullptr;
+    delete temp;
+    _numNodes--;
+
     return true;
 }
 
@@ -214,7 +271,17 @@ bool Circuit::Pop_front()
     if (!_firstNode)
         return false;
 
-    Remove(_firstNode);
+    Node* temp = _firstNode;
+
+    // if there is only one node, move both to null after removing it
+    if (_lastNode == _firstNode)
+        _lastNode = nullptr;     
+
+    _firstNode = _firstNode->_next;
+    _firstNode->_prev = nullptr;
+    delete temp;
+    _numNodes--;
+
     return true;
 }
 
@@ -263,26 +330,36 @@ bool Circuit::HasNode(const double &val, SEARCH_BY type)
     return true;
 }
 
-void Circuit::RemoveDuplicates()
-{
-    Node* first = _firstNode;
-
-    // iterate through list, let every one of them be 'first' in its own sublist
-    while (first)    
-    {
-        // to point at others 
-        Node* other = first;
-
-        // iterate through all list to check duplicates of first
-        while (other = other->GetNext())
-            if (other->GetId() == first->GetId())
-                Remove(other);
-
-        first = first->GetNext();
-    }   
-}
-
 bool Circuit::IsEmpty()
 {
     return (_firstNode == nullptr && _lastNode == nullptr);
+}
+
+// returns address of new circuit that is deepCopied of this
+Circuit* Circuit::Copy()
+{
+    // allocate data
+    Circuit* newCirc = new Circuit;
+
+    // copy nodes
+    Node* originalNode = _firstNode;
+
+    // traverse through them all till null
+    while (originalNode)
+    {
+        Node* copiedNode = originalNode->Copy();
+        newCirc->Add(copiedNode);
+
+        // go to the next
+        originalNode = originalNode->_next;
+    }
+
+    // here is your copy
+    return newCirc;
+}
+
+// operator overloading for copy
+Circuit& Circuit::operator= (Circuit &c)
+{
+    return (*c.Copy());
 }

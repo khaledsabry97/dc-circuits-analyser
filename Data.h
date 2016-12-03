@@ -7,12 +7,16 @@ using namespace std;
 #define NULL nullptr
 #endif
 
+// used in circuit methods
+enum SEARCH_BY {ID, VOLT};
+
+// element's type
+enum Type {R, E, J};
+
 /* PROTOTYPES */
 class Element
 {
 private:
-    enum Type {R, E, J};
-
     Element* _next;
     Element* _prev;
     Type _type;
@@ -29,12 +33,16 @@ public:
     void ChangeType(const char &c);
     Element* GetNext();
     Element* GetPrev();
-    void SetNext(Element* n);
-    void SetPrev(Element* n);
     int GetId();
     void ChangeId(const int &num);
     double GetValue();
     void ChangeValue(const int &num);
+
+    Element* Copy();
+
+    // friends
+    friend class Node;
+    friend class Circuit;
 };
 
 class Node 
@@ -46,25 +54,27 @@ private:
     double _volt;
     int _numElements;
 
-    void _SetFirstElem(Element* n);
+    Node* _prev;
 
 public:
     int GetId();
     void ChangeVolt(const double &v);
     double GetVolt();
-    int GetNumOfElem();
+    int GetNumOfElements();
     bool IsEssential();
-    Element* GetFirstElem();
+    bool IsEmpty();
+    Element* GetFirstElement();
     Node* GetNext();
-    void SetNext(Node* n);
     void Add(Element* e);
-    void Remove(Element* e);
+    bool Remove(Element* e);
     Node(const int &id);
 	~Node();
-};
 
-// used in circuit methods
-enum SEARCH_BY {ID, VOLT};
+    Node* Copy();
+
+    // friends 
+    friend class Circuit; 
+};
 
 class Circuit 
 {
@@ -74,6 +84,8 @@ private:
 	int _numNodes;
 
     bool _IsIt(Node* ptr, const double &val, SEARCH_BY type);
+    void _RemoveDuplicates();
+    void _Copy_this_toMe(Circuit*);
 
 public:
     void Add(Node* n);
@@ -84,14 +96,16 @@ public:
     void Read();
 	~Circuit();
 	Circuit();
+    Circuit(Circuit* c);
+    Circuit(Circuit& c);
 	void Push_back(Node* n);
 	void Push_front(Node* n);
 	bool Pop_back();
 	bool Pop_front();
-
     bool Remove(const double &val, SEARCH_BY type = ID);
     Node* GetNode(const double &val, SEARCH_BY type = ID);
     bool HasNode(const double &val, SEARCH_BY type = ID);
-    void RemoveDuplicates();
     bool IsEmpty();
+    Circuit& operator= (Circuit &c);
+    Circuit* Copy();
 };

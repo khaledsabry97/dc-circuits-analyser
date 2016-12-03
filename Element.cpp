@@ -78,19 +78,9 @@ Element* Element::GetNext()
     return (_next);
 }  
 
-void Element::SetNext(Element* n)
-{
-    _next = n;
-}
-
 Element* Element::GetPrev()
 {
     return (_prev);
-}
-
-void Element::SetPrev(Element* n)
-{
-    _prev = n;
 }
 
 // ID:
@@ -115,4 +105,14 @@ double Element::GetValue()
 void Element::ChangeValue(const int &num)
 {
     _SetValue(num);
+}
+
+// retunrs address of new element wiht the same variables as this
+// Note: next and prev with the returned one are NULL
+Element* Element::Copy()
+{
+    // make new one
+    Element* newElement = new Element(GetType(), _id, _value);
+
+    return newElement;
 }
