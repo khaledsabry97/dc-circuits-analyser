@@ -4,6 +4,52 @@
 
 //  private:
 
+// make the required checks that the node is perfect
+// returns true if it needed repairs, false otherwise
+bool Node::_Repair(_List &l)
+{
+    bool needRepairs = false;
+
+    Element* first = _firstElement;
+
+    // iterate through list
+    while (first)    
+    {
+        // to point at others 
+        Element* other = first->_next;
+
+        // iterate through all list to check duplicates of first
+        while (other)
+        {
+            // there is a duplicate
+            if (*other == *first)
+            {
+                // log to user
+                cerr << "===> ERROR! Found Duplicate Element" << other->GetType() << other->GetId() 
+                    << " in Node #" << _id 
+                    << "\nRemoving one of them\n";   
+
+                // remove it
+                Element* temp = other;
+                other = other->_next;
+                Remove(temp);
+
+                // mark it
+                needRepairs = true;
+
+                continue;
+            }
+
+            // move to next
+            other = other->_next;
+        }
+
+        // move first
+        first = first->_next;
+    }   
+
+    return needRepairs;
+}
 //  public:
 // constructor
 Node::Node(const int &id) 

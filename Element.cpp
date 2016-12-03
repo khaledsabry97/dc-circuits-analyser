@@ -116,3 +116,10 @@ Element* Element::Copy()
 
     return newElement;
 }
+
+// operator overloading 
+// returns true if id and type are equall
+bool Element::operator== (Element& e)
+{
+    return (_id == e.GetId() && GetType() == e.GetType());
+}

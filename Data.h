@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <vector>
+#include <tuple>
 using namespace std;
 
 #ifndef NULL
@@ -27,6 +29,39 @@ private:
     void _SetValue(const double &num);
     void _SetId(const int &id);
 
+    class _List
+    {
+        //         type, id, val
+        vector<tuple<char, int, double>> l;
+    public:
+        bool Add(Element* e)
+        {
+            auto tu = make_tuple(e->GetType, e->GetId, e->GetValue);
+
+            // search for one like this 
+            int occ = 0;
+            for (int i = l.size(); i >= 0; i--)
+            {
+                // if same type and id 
+                if (get<0>(l[i]) == get<0>(tu) && get<1>(l[i]) == get<1>(tu))
+                {
+                    occ++;
+
+                    // if not a resistence
+                    if (e->GetType() != 'R')
+                    {
+                        // if the same polarity, give error
+                        if (get<2>(l[i]) == get<2>(tu))
+                        {
+                            cerr << "====> ERROR! Found Current/Voltage Source with the same polarity on two nodes, Removing it...\n";
+
+                        }
+                    }
+                }
+            }
+        } 
+    }
+
 public:
     Element(const char &type, const int &id, const double &val);
     char GetType();
@@ -39,6 +74,7 @@ public:
     void ChangeValue(const int &num);
 
     Element* Copy();
+    bool operator== (Element&);
 
     // friends
     friend class Node;
@@ -54,6 +90,8 @@ private:
     const int _id;
     double _volt;
     int _numElements;
+
+    bool _Repair(List &l);
 
 public:
     int GetId();
@@ -84,6 +122,8 @@ private:
     bool _IsIt(Node* ptr, const double &val, SEARCH_BY type);
     void _RemoveDuplicates();
     void _Copy_this_toMe(Circuit*);
+
+    bool _Repair();
 
 public:
     void Add(Node* n);

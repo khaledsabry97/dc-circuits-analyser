@@ -16,6 +16,7 @@ bool Circuit::_IsIt(Node* ptr, const double &val, SEARCH_BY type)
     }
 }
 
+// i don't know why i wrote it, but maybe Hadi asks for it , who knows :D
 void Circuit::_RemoveDuplicates()
 {
     Node* first = _firstNode;
@@ -63,6 +64,53 @@ void Circuit::_Copy_this_toMe(Circuit* c)
     }
 }
 
+// remove duplicate elements/nodes,
+// sources that connect to more than two node 
+// or have the same sign/direction with two nodes
+// make voltage sources at the first of list
+bool Circuit::_Repair()
+{
+    bool needRepairs = false;
+
+    // traverse through all nodes
+    Node* first = _firstNode;
+
+    // list to store elements 
+    List l;
+
+    while (first)
+    {
+        // repair this node first
+        first->_Repair(l);
+
+        // check duplicates of first
+        Node* other = first->_next;
+        while (other)
+        {
+            // there is a duplicate, remove it
+            if (other->GetId() == first->GetId())
+            {
+                cerr << "===> ERROR! Found Node Dupliacte,Removeing it..\n";
+
+                Node* temp = other;
+                other = other->_next;
+                Remove(temp);
+
+                needRepairs = true;
+
+                continue;
+            }
+
+            other = other->_next;
+        }
+
+        // move first to next
+        first = first->_next;
+    }
+
+    return needRepairs;
+}
+
 //  public:
 
 // Deconstructor
@@ -86,48 +134,77 @@ Circuit::Circuit(Circuit& c)
     _Copy_this_toMe(&c);
 }
 
-// void Circuit::Read()
-// {
-//     /* pseudo:
-//         loop:
-//             addd node with number
-//             loop:
-//                 add elements
-//             stop on x
-//         stop on xx
-//     */
+// read the whole circuit from the user
+void Circuit::Read()
+{
+    cout << "Please enter the elements node by node \nTo end the node type x \nTo end all nodes type xx\n";
 
-//     cout << "Enter circuit's nodes\nWhen node is entered, type x \nWhen finished the circuit, type xx\n\n";
+    // read nodes
+    bool read = true;
+    for (int nodeI = 1; read; nodeI++)
+    {
+        cout << "Node #" << nodeI << ":\n";
 
-//     for (int i = 1;; i++)
-//     {
-//         new node with num = i
-//         Node* n = new Node(1);
+        Node* newNode = new Node(nodeI);
 
-//         cout << "Node " << i << ":\n";
+        // variables to store the element
+        char type;
+        int id;
+        double val;
+        
+        // read elements
+        while (true)
+        {
+            // get first character 
+            type = cin.get();
 
-//         while (true)
-//         {
-//             read line
-//             string line; 
-//             getline(cin, line);
-//             end node if x, return if xx
-//             if (line[0] == 'x')
-//             {
-//                 if (line[1] == 'x')
-//                     return;
-//                 else 
-//                     break;
-//             }
+            // user entered x
+            if (toupper(type) == 'X')   
+            {
+                // if user typed another x, end all ciruit
+                type = cin.get();
+                if (toupper(type) == 'X') 
+                    read = false;
+                
+                break;
+            }
 
-//             parse line into variables 
-//             check if line is valid
+            // user entered element
+            else 
+            {
+                cin >> id >> val;
 
-//             new element with variables
-//         }
-//     }
-// }
+                Element* e = new Element(type, id, val);
 
+                newNode->Add(e);
+            }
+        }
+
+        // if node is empty, delete it and tell user that it's not added
+        if (newNode->IsEmpty())
+        {
+            cout << "====> Node is empty, node will be deleted\n";
+            delete newNode;
+        }
+        else if (newNode->GetNumOfElements() == 1)  // has one node
+        {
+            cout << "====> Warning: Node has one element, node will be deleted\n";
+            delete newNode;
+        }
+        else        // not empty, add it 
+            Add(newNode);
+    }
+
+    // look for invalid elements
+    //
+
+
+    if (IsEmpty())
+    {
+        cerr << "====> ERROR! Circuit is Empty \nCan not proceed, Please rerun the program\n";
+        throw -1;
+    }
+}
 
 void Circuit::Add(Node* n)
 {
