@@ -8,7 +8,7 @@ using namespace Eigen;
 typedef Matrix<float, Eigen::Dynamic, 1> Vector;
 
 // prototypes
-class Solver
+class Equation
 {
 private:
     bool _calculated;
@@ -28,7 +28,7 @@ public:
 
     const int rows, columns;
 
-    Solver(int r, int c);
+    Equation(int r, int c);
 
     void Print();
     void Zero();
@@ -38,7 +38,7 @@ public:
 
 // implementation
 // public:
-Solver::Solver(int r, int c) 
+Equation::Equation(int r, int c) 
 	:rows(r), columns(c), _calculated(false) 
 {
     A.resize(rows, columns);
@@ -48,14 +48,14 @@ Solver::Solver(int r, int c)
     Zero();
 }
 
-void Solver::Zero()
+void Equation::Zero()
 {
     A = MatrixXf::Zero(rows, columns);
     B = MatrixXf::Zero(rows, 1);
     X = MatrixXf::Zero(rows, 1);
 }
 
-void Solver::Print()
+void Equation::Print()
 {
     cout << "From equation AX = B\n";
     _Print_A();
@@ -63,12 +63,12 @@ void Solver::Print()
     _Print_B();
 }
 
-bool Solver::IsZero()
+bool Equation::IsZero()
 {
     return (_is_A_zero() && _is_B_zero() && _is_X_zero()); 
 }
 
-Vector Solver::Solve()
+Vector Equation::Solve()
 {
     using Eigen::ColPivHouseholderQR;
 
@@ -83,34 +83,34 @@ Vector Solver::Solve()
 
 
 // private:
-bool Solver::_is_A_zero()
+bool Equation::_is_A_zero()
 {
     return (A == MatrixXf::Zero(rows, columns));
 }
-bool Solver::_is_B_zero()
+bool Equation::_is_B_zero()
 {
     return (B == MatrixXf::Zero(rows, 1));
 }
-bool Solver::_is_X_zero()
+bool Equation::_is_X_zero()
 {
     return (X == MatrixXf::Zero(rows, 1));
 }
 
-void Solver::_Print_X()
+void Equation::_Print_X()
 {
     if (!_calculated)
         cout << "X isn't calculated\n";
     else
         cout << "X:\n" << X << endl;
 }
-void Solver::_Print_A()
+void Equation::_Print_A()
 {
     if (_is_A_zero())
         cout << "A = Zero\n";
     else
         cout << "A:\n" << A << endl;
 }
-void Solver::_Print_B()
+void Equation::_Print_B()
 {
     if (_is_A_zero())
         cout << "B = Zero\n";
