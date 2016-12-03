@@ -64,53 +64,6 @@ void Circuit::_Copy_this_toMe(Circuit* c)
     }
 }
 
-// remove duplicate elements/nodes,
-// sources that connect to more than two node 
-// or have the same sign/direction with two nodes
-// make voltage sources at the first of list
-bool Circuit::_Repair()
-{
-    bool needRepairs = false;
-
-    // traverse through all nodes
-    Node* first = _firstNode;
-
-    // list to store elements 
-    List l;
-
-    while (first)
-    {
-        // repair this node first
-        first->_Repair(l);
-
-        // check duplicates of first
-        Node* other = first->_next;
-        while (other)
-        {
-            // there is a duplicate, remove it
-            if (other->GetId() == first->GetId())
-            {
-                cerr << "===> ERROR! Found Node Dupliacte,Removeing it..\n";
-
-                Node* temp = other;
-                other = other->_next;
-                Remove(temp);
-
-                needRepairs = true;
-
-                continue;
-            }
-
-            other = other->_next;
-        }
-
-        // move first to next
-        first = first->_next;
-    }
-
-    return needRepairs;
-}
-
 //  public:
 
 // Deconstructor
@@ -178,6 +131,8 @@ void Circuit::Read()
 
                 newNode->Add(e);
             }
+
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
 
         // if node is empty, delete it and tell user that it's not added
@@ -195,13 +150,12 @@ void Circuit::Read()
             Add(newNode);
     }
 
-    // look for invalid elements
-    //
-
+    // repair it
+    Repair();
 
     if (IsEmpty())
     {
-        cerr << "====> ERROR! Circuit is Empty \nCan not proceed, Please rerun the program\n";
+        cerr << "====> ERROR! Circuit is Empty \nCan not proceed, Program will exit\n";
         throw -1;
     }
 }
@@ -439,4 +393,31 @@ Circuit* Circuit::Copy()
 Circuit& Circuit::operator= (Circuit &c)
 {
     return (*c.Copy());
+}
+
+// remove duplicate elements/nodes,
+// sources that connect to more than two node +
+// or have the same sign/direction with two nodes +
+// make voltage sources at the first of list +
+bool Circuit::Repair()
+{
+    bool needRepairs = false;
+
+    // traverse through all nodes
+    Node* n = _firstNode;
+
+    // list to store elements 
+    Node::_List l;
+
+    while (n)
+    {
+        // repair this node first
+        if (n->_Repair(l))
+            needRepairs = true;
+
+        // move n to next
+        n = n->_next;
+    }
+
+    return needRepairs;
 }

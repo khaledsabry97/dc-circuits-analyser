@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <tuple>
+#include <limits>
 using namespace std;
 
 #ifndef NULL
@@ -28,39 +28,6 @@ private:
     void _SetType(const char &c);
     void _SetValue(const double &num);
     void _SetId(const int &id);
-
-    class _List
-    {
-        //         type, id, val
-        vector<tuple<char, int, double>> l;
-    public:
-        bool Add(Element* e)
-        {
-            auto tu = make_tuple(e->GetType, e->GetId, e->GetValue);
-
-            // search for one like this 
-            int occ = 0;
-            for (int i = l.size(); i >= 0; i--)
-            {
-                // if same type and id 
-                if (get<0>(l[i]) == get<0>(tu) && get<1>(l[i]) == get<1>(tu))
-                {
-                    occ++;
-
-                    // if not a resistence
-                    if (e->GetType() != 'R')
-                    {
-                        // if the same polarity, give error
-                        if (get<2>(l[i]) == get<2>(tu))
-                        {
-                            cerr << "====> ERROR! Found Current/Voltage Source with the same polarity on two nodes, Removing it...\n";
-
-                        }
-                    }
-                }
-            }
-        } 
-    }
 
 public:
     Element(const char &type, const int &id, const double &val);
@@ -91,7 +58,48 @@ private:
     double _volt;
     int _numElements;
 
-    bool _Repair(List &l);
+    class _List
+    {
+        vector<Element*> v;
+    public:
+        // adds address of element in list, if it is found there more than two times, returns false 
+        // otherwise return true
+        bool Add(Element* e)
+        {
+            // number of times that this element hadd occurred in vector
+            int occ = 0;
+
+            // iterate through all elements in list befor adding it 
+            for (int i = v.size(); i--;)
+            {
+                if (*e == *v[i])
+                {
+                    occ++;
+
+                    // if it is source
+                    if (e->GetType() != 'R')
+                    {
+                        // if the source is duplicate with the same polarity in both nodes
+                        // then end program, this error can't be handled 
+                        if (e->GetValue() == v[i]->GetValue())
+                        {
+                            cerr << "====> ERROR! Found Source Element with the same polarity in both terminals, Program will terminate now\n";
+                            throw -1;
+                        }
+                    }
+                }
+                
+                if (occ > 2)
+                    return false;
+            }
+
+            // add it 
+            v.push_back(e);
+
+            return true;
+        }
+    };
+    bool _Repair(_List &l);
 
 public:
     int GetId();
@@ -123,8 +131,6 @@ private:
     void _RemoveDuplicates();
     void _Copy_this_toMe(Circuit*);
 
-    bool _Repair();
-
 public:
     void Add(Node* n);
     bool Remove(Node* n);
@@ -146,4 +152,5 @@ public:
     bool IsEmpty();
     Circuit& operator= (Circuit &c);
     Circuit* Copy();
+    bool Repair();
 };

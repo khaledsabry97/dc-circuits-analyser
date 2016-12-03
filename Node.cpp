@@ -10,46 +10,53 @@ bool Node::_Repair(_List &l)
 {
     bool needRepairs = false;
 
-    Element* first = _firstElement;
+    Element* e = _firstElement;
 
     // iterate through list
-    while (first)    
+    while (e)    
     {
-        // to point at others 
-        Element* other = first->_next;
+        // add it to the list of elements
+        bool added = l.Add(e);
 
-        // iterate through all list to check duplicates of first
-        while (other)
+        // there is a duplicate if not added
+        if (!added)
         {
-            // there is a duplicate
-            if (*other == *first)
-            {
-                // log to user
-                cerr << "===> ERROR! Found Duplicate Element" << other->GetType() << other->GetId() 
-                    << " in Node #" << _id 
-                    << "\nRemoving one of them\n";   
+            // log to user
+            cerr << "===> ERROR! Found Duplicate Element" << e->GetType() << e->GetId() 
+                << " in Node #" << _id 
+                << "\nRemoving the last of them\n";   
 
-                // remove it
-                Element* temp = other;
-                other = other->_next;
-                Remove(temp);
+            // remove it
+            Element* temp = e;
+            e = e->_next;
+            Remove(temp);
 
-                // mark it
-                needRepairs = true;
+            // mark it
+            needRepairs = true;
 
-                continue;
-            }
-
-            // move to next
-            other = other->_next;
+            continue;
         }
 
-        // move first
-        first = first->_next;
+        // if voltage, move it to first
+        if (e->GetType() == 'E')
+        {
+            Element* temp = e;
+            e = e->_next;
+
+
+            // add it to first
+            Add(temp);
+
+            continue;
+        }
+
+        // move e
+        e = e->_next;
     }   
 
     return needRepairs;
 }
+
 //  public:
 // constructor
 Node::Node(const int &id) 

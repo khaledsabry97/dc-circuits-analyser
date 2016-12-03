@@ -6,7 +6,8 @@
 
 int main()
 {
-    
+    Circuit* c = new Circuit;
+    c->Read();
 }
 
 // // this test is done +
