@@ -69,6 +69,11 @@ Node* Node::GetNext()
     return (_next);
 }
 
+Node* GetPrev()
+{
+    return (_prev);
+}
+
 // elements:
 void Node::Add(Element* e)
 {

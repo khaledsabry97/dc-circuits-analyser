@@ -39,7 +39,6 @@ public:
     void ChangeId(const int &num);
     double GetValue();
     void ChangeValue(const int &num);
-
     Element* Copy();
     bool operator== (Element&);
 
@@ -110,6 +109,7 @@ public:
     bool IsEmpty();
     Element* GetFirstElement();
     Node* GetNext();
+    Node* GetPrev();
     void Add(Element* e);
     bool Remove(Element* e);
     Node(const int &id);
