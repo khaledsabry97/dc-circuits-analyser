@@ -93,3 +93,5 @@ double GetValue();
 
 // changes the value of the element
 void ChangeValue(const int &num);
+
+#endif

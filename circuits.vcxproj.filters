@@ -38,5 +38,14 @@
     <ClInclude Include="test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Documentation\Circuit Doc.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Documentation\Element Doc.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Documentation\Node Doc.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

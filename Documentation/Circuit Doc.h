@@ -211,3 +211,5 @@ bool Repair();
     c->Repair();
     // now all issues are handled, you can use it safely
 <END>
+
+#endif

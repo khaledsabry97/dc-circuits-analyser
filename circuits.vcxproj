@@ -18,6 +18,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Data.h" />
+    <ClInclude Include="Documentation\Circuit Doc.h" />
+    <ClInclude Include="Documentation\Element Doc.h" />
+    <ClInclude Include="Documentation\Node Doc.h" />
     <ClInclude Include="Solver.h" />
     <ClInclude Include="test.h" />
   </ItemGroup>

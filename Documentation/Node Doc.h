@@ -14,7 +14,9 @@ void Add(Element* e);
 bool Remove(Element* e);
 bool IsEmpty();
 Element* GetFirstElement();
+
 Node* GetNext();
+Node* GetPrev();
 
 int GetId();
 void ChangeVolt(const double &v);
@@ -116,3 +118,5 @@ int GetNumOfElements();
 // returns true if node is essential, false otherwise
 // essential: has more than two elements
 bool IsEssential();
+
+#endif

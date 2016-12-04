@@ -69,7 +69,7 @@ Node* Node::GetNext()
     return (_next);
 }
 
-Node* GetPrev()
+Node* Node::GetPrev()
 {
     return (_prev);
 }
