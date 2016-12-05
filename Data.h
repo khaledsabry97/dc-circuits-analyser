@@ -38,7 +38,7 @@ public:
     int GetId();
     void ChangeId(const int &num);
     double GetValue();
-    void ChangeValue(const int &num);
+    void ChangeValue(const double &num);
     Element* Copy();
     bool operator== (Element&);
 

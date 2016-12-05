@@ -102,7 +102,7 @@ double Element::GetValue()
 }
 
 // for transformations
-void Element::ChangeValue(const int &num)
+void Element::ChangeValue(const double &num)
 {
     _SetValue(num);
 }
