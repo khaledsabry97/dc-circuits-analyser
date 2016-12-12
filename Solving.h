@@ -1,4 +1,4 @@
-//#pragma once
+#pragma once
 #include "Data.h"
 #include <iostream>
 #include <string>
