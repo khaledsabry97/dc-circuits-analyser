@@ -1,13 +1,26 @@
 #pragma once
-//#include "Equation.h"
 #include "Data.h"
+#include "Solving.h"
 
 #define __TEST__
 
 int main()
 {
     Circuit* c = new Circuit;
-    c->Read();
+    c->Read();						//Reading the Circuit
+	Circuit *c2 = c->Copy();		//Copying The Circuit To Another Pointer
+	voltageTransformation(c2);		//Voltage Source Transformation
+	cout << "Circuit Before Solving: "<<endl;
+	print(c2);
+	solve(c2);
+	cout << "Circuit After Solving:"<<endl;
+	print(c2);
+	VoltageBack(c2, c);
+	cout << "Main Circuit After Getting The Nodes Voltage Back To It: " <<endl;
+	print(c);
+	cout << "New Circuit After Solving:"<<endl;
+	SolveNonEss(c);
+	print(c);
 }
 
 // // this test is done +

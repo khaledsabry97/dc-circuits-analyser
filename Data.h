@@ -88,7 +88,7 @@ private:
                     }
                 }
                 
-                if (occ = 2)
+                if (occ != 2)
                     return false;
             }
 

@@ -32,9 +32,9 @@ void Element::_SetValue(const double &num)
 
 void Element::_SetId(const int &id)
 {
-    if (id < 0)
+    /*if (id < 0)
         throw -1;
-
+*/
     _id = id;
 }
 
