@@ -92,9 +92,12 @@ void Circuit::Read()
 {
     cout << "Please enter the elements node by node \nTo end the node type x \nTo end all nodes type xx\n";
 
+    // to store elements
+    Node::_List l;
+
     // read nodes
-    bool read = true;
-    for (int nodeI = 1; read; nodeI++)
+    bool continueReading = true;
+    for (int nodeI = 1; continueReading; nodeI++)
     {
         cout << "Node #" << nodeI << ":\n";
 
@@ -109,11 +112,7 @@ void Circuit::Read()
         while (true)
         {
             // get first character 
-            type = cin.get();
-
-            // handle different input
-            if (type == '\n' || type == ' ')
-                continue;
+            cin >> type;
 
             // user entered x
             if (toupper(type) == 'X')   
@@ -121,7 +120,7 @@ void Circuit::Read()
                 // if user typed another x, end all circuit
                 type = cin.get();
                 if (toupper(type) == 'X') 
-                    read = false;
+                    continueReading = false;
                 
                 break;
             }
@@ -131,7 +130,16 @@ void Circuit::Read()
             {
                 cin >> id >> val;
 
-                Element* e = new Element(type, id, val);
+                try
+                {
+                    Element* e = new Element(type, id, val);
+                    l.Add(e);
+                }
+                catch()
+                {
+                    //TODO
+                    // catch errors that happened when inserting the element
+                }
 
                 newNode->Add(e);
             }
@@ -142,9 +150,12 @@ void Circuit::Read()
         // if node is empty, delete it and tell user that it's not added
         if (newNode->IsEmpty())
         {
-            cout << "====> Node is empty, node will be deleted\n";
-            delete newNode;
-            nodeI--;
+            if (continueReading)
+            {
+                cout << "====> Node is empty\n";
+                delete newNode;
+                nodeI--;
+            }
         }
         else if (newNode->GetNumOfElements() == 1)  // has one node
         {
@@ -152,17 +163,17 @@ void Circuit::Read()
             delete newNode;
             nodeI--;
         }
-        else        // not empty, add it 
+        else        //  node has > 1 element ,add it 
             Add(newNode);
     }
 
     // repair it
-    Repair();
+    Repair(l);
 
     if (IsEmpty())
     {
-        cerr << "====> ERROR! Circuit is Empty \nCan not proceed, Program will exit\n";
-        throw -1;
+        cerr << "====> ERROR! Circuit is Empty \n" << "Enter the circuit again\n";
+        Read();
     }
 }
 

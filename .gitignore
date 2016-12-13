@@ -129,8 +129,6 @@ publish/
 *.pubxml
 *.publishproj
 
-# NuGet Packages Directory
-## TODO: If you have NuGet Package Restore enabled, uncomment the next line
 #packages/
 
 # Windows Azure Build Output
@@ -214,3 +212,6 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+t
+result
