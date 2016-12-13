@@ -59,15 +59,12 @@ private:
 
     class _List
     {
+    private:
         vector<Element*> v;
-    public:
-        // adds address of element in list
-        // returns number of occurrences of that element
-        int Add(Element* e)
-        {
-            // number of times that this element hadd occurred in vector
-            int occ = 0;
 
+        // check the list from errors
+        void _Check(Element* e, int &occ)
+        {
             // iterate through all elements in list befor adding it 
             for (int i = v.size(); i--;)
             {
@@ -78,32 +75,47 @@ private:
                     occ++;
 
                     // check the duplicate type:
-
+                    //
                     // if it is source
                     if (e->GetType() != 'R')
-                    {
-                        // if the source is duplicate with the same polarity in both nodes
-                        // then end program, this error can't be handled 
+                        // error if the source is duplicate with the same polarity in both nodes
                         if (e->GetValue() == v[i]->GetValue())
-                        {
-                            cerr << "====> ERROR! Found Source Element with the same polarity in both terminals, Program will terminate now\n";
-                            throw -1;
-                        }
-                    }
-                    // if not a source element
+                            throw SAME_POLARITY;
+
+                    // resistance element
                     else
-                    {
                         // resistance cant be duplicate with different values
                         if (e->GetValue() != v[i]->GetValue())
-                            throw -1;
-                    }
+                            throw DUPLICATE_WITH_SAME_VALUES;
                 }
+
+                if (occ > 2)
+                    throw DUPLICATE_ELEMENT;
             }
+        }
+
+    public:
+        enum check {CHECK, NO_CHECK};
+
+        // adds address of element in list
+        // returns number of occurrences of that element
+        int Add(Element* e, check c = NO_CHECK)
+        {
+            // number of times that this element hadd occurred in vector
+            int occ = 0;
+
+            if (c == CHECK)
+                _Check(e, occ);
 
             // add it 
             v.push_back(e);
 
             return occ;
+        }
+
+        void Clear()
+        {
+            v.clear();
         }
     };
     bool _Repair(_List &l);
