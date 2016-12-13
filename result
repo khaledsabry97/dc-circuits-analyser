@@ -4,59 +4,16 @@ To end all nodes type xx
 Node #1:
 Node #2:
 Node #3:
-Circuit Before Solving: 
-The 1 Node Has Volt: 0
-The Element Type Is: R	And Id: 1	And val: 2
-The Element Type Is: R	And Id: 2	And val: 5
-The Element Type Is: E	And Id: 1	And val: -2
-The 2 Node Has Volt: 0
-The Element Type Is: R	And Id: 1	And val: 2
-The Element Type Is: R	And Id: 2	And val: 5
-The Element Type Is: E	And Id: 1	And val: 2
-The Element Type Is: J	And Id: 1	And val: -9
-The 3 Node Has Volt: 0
-The Element Type Is: J	And Id: 1	And val: 9
-The Element Type Is: R	And Id: 3	And val: 6
-The Element Type Is: R	And Id: 3	And val: 6
-Circuit After Solving:
-The 1 Node Has Volt: 0
-The Element Type Is: R	And Id: 1	And val: 2
-The Element Type Is: R	And Id: 2	And val: 5
-The Element Type Is: E	And Id: 1	And val: -2
-The 2 Node Has Volt: -12.8571
-The Element Type Is: R	And Id: 1	And val: 2
-The Element Type Is: R	And Id: 2	And val: 5
-The Element Type Is: E	And Id: 1	And val: 2
-The Element Type Is: J	And Id: 1	And val: -9
-The 3 Node Has Volt: 27
-The Element Type Is: J	And Id: 1	And val: 9
-The Element Type Is: R	And Id: 3	And val: 6
-The Element Type Is: R	And Id: 3	And val: 6
-Main Circuit After Getting The Nodes Voltage Back To It: 
-The 3 Node Has Volt: 27
-The Element Type Is: R	And Id: 3	And val: 6
-The Element Type Is: R	And Id: 3	And val: 6
-The Element Type Is: J	And Id: 1	And val: 9
-The 2 Node Has Volt: -12.8571
-The Element Type Is: J	And Id: 1	And val: -9
-The Element Type Is: E	And Id: 1	And val: 2
-The Element Type Is: R	And Id: 2	And val: 5
-The Element Type Is: R	And Id: 1	And val: 2
-The 1 Node Has Volt: 0
-The Element Type Is: E	And Id: 1	And val: -2
-The Element Type Is: R	And Id: 2	And val: 5
-The Element Type Is: R	And Id: 1	And val: 2
-New Circuit After Solving:
-The 3 Node Has Volt: 27
-The Element Type Is: R	And Id: 3	And val: 6
-The Element Type Is: R	And Id: 3	And val: 6
-The Element Type Is: J	And Id: 1	And val: 9
-The 2 Node Has Volt: -12.8571
-The Element Type Is: J	And Id: 1	And val: -9
-The Element Type Is: E	And Id: 1	And val: 2
-The Element Type Is: R	And Id: 2	And val: 5
-The Element Type Is: R	And Id: 1	And val: 2
-The 1 Node Has Volt: 0
-The Element Type Is: E	And Id: 1	And val: -2
-The Element Type Is: R	And Id: 2	And val: 5
-The Element Type Is: R	And Id: 1	And val: 2
+===> ERROR! Found Duplicate ElementJ1 in Node #2
+Removing the last of them
+===> ERROR! Found Duplicate ElementE1 in Node #2
+Removing the last of them
+===> ERROR! Found Duplicate ElementR2 in Node #2
+Removing the last of them
+===> ERROR! Found Duplicate ElementR1 in Node #2
+Removing the last of them
+===> ERROR! Found Duplicate ElementE1 in Node #1
+Removing the last of them
+===> ERROR! Found Duplicate ElementR2 in Node #1
+Removing the last of them
+libc++abi.dylib: terminating with uncaught exception of type int
