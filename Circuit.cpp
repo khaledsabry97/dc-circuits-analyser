@@ -111,10 +111,14 @@ void Circuit::Read()
             // get first character 
             type = cin.get();
 
+            // handle different input
+            if (type == '\n' || type == ' ')
+                continue;
+
             // user entered x
             if (toupper(type) == 'X')   
             {
-                // if user typed another x, end all ciruit
+                // if user typed another x, end all circuit
                 type = cin.get();
                 if (toupper(type) == 'X') 
                     read = false;
@@ -140,11 +144,13 @@ void Circuit::Read()
         {
             cout << "====> Node is empty, node will be deleted\n";
             delete newNode;
+            nodeI--;
         }
         else if (newNode->GetNumOfElements() == 1)  // has one node
         {
             cout << "====> Warning: Node has one element, node will be deleted\n";
             delete newNode;
+            nodeI--;
         }
         else        // not empty, add it 
             Add(newNode);

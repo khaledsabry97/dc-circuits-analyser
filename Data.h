@@ -61,9 +61,9 @@ private:
     {
         vector<Element*> v;
     public:
-        // adds address of element in list, if it is found there more than two times, returns false 
-        // otherwise return true
-        bool Add(Element* e)
+        // adds address of element in list
+        // returns number of occurrences of that element
+        int Add(Element* e)
         {
             // number of times that this element hadd occurred in vector
             int occ = 0;
@@ -71,9 +71,13 @@ private:
             // iterate through all elements in list befor adding it 
             for (int i = v.size(); i--;)
             {
+                // if both elements are equal in id and type
                 if (*e == *v[i])
                 {
+                    // now we have found the duplicate element in list
                     occ++;
+
+                    // check the duplicate type:
 
                     // if it is source
                     if (e->GetType() != 'R')
@@ -86,16 +90,20 @@ private:
                             throw -1;
                         }
                     }
+                    // if not a source element
+                    else
+                    {
+                        // resistance cant be duplicate with different values
+                        if (e->GetValue() != v[i]->GetValue())
+                        
+                    }
                 }
-                
-                if (occ != 2)
-                    return false;
             }
 
             // add it 
             v.push_back(e);
 
-            return true;
+            return occ;
         }
     };
     bool _Repair(_List &l);
