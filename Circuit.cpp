@@ -157,7 +157,7 @@ void Circuit::Read()
     }
 
     // repair it
-    /*Repair();*/
+    Repair();
 
     if (IsEmpty())
     {

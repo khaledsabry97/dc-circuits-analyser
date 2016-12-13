@@ -95,7 +95,7 @@ private:
                     {
                         // resistance cant be duplicate with different values
                         if (e->GetValue() != v[i]->GetValue())
-                        
+                            throw -1;
                     }
                 }
             }
