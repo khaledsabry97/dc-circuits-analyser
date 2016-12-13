@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <limits>
+#include "errors.h"
 using namespace std;
 
 #ifndef NULL
@@ -63,6 +64,7 @@ private:
         vector<Element*> v;
 
         // check the list from errors
+        // throw error when found
         void _Check(Element* e, int &occ)
         {
             // iterate through all elements in list befor adding it 
@@ -86,7 +88,7 @@ private:
                     else
                         // resistance cant be duplicate with different values
                         if (e->GetValue() != v[i]->GetValue())
-                            throw DUPLICATE_WITH_SAME_VALUES;
+                            throw DUPLICATE_WITH_DIFF_VALUES;
                 }
 
                 if (occ > 2)
@@ -113,6 +115,7 @@ private:
             return occ;
         }
 
+        // clears the vector from data
         void Clear()
         {
             v.clear();

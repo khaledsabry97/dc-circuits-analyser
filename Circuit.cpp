@@ -133,12 +133,36 @@ void Circuit::Read()
                 try
                 {
                     Element* e = new Element(type, id, val);
-                    l.Add(e);
+                    l.Add(e, NO_CHECK);
                 }
-                catch()
+                catch(const error &err)
                 {
                     //TODO
                     // catch errors that happened when inserting the element
+
+                    switch (err)
+                    {
+                        case SAME_POLARITY:
+                        {
+                            cerr << HANDLE_SAME_POLARITY;
+                            break;
+                        }
+                        case DUPLICATE_WITH_DIFF_VALUES:
+                        {
+                            cerr << HANDLE_DUPLICATE_WITH_DIFF_VALUES;
+                            break;
+                        }
+                        case DUPLICATE_ELEMENT:
+                        {   
+                            cerr << HANDLE_DUPLICATE_ELEMENT;
+                            break;
+                        }
+                        default:
+                            assert(FOR_DEBUGGING && "unhandled exeption");
+
+                        delete e;
+                        continue;
+                    }
                 }
 
                 newNode->Add(e);
