@@ -119,31 +119,41 @@ private:
 
 
         // detects lonely elements
-        // using XORING technique with elements id's
         // returns the address of the first lonely element found, or nullptr otherwise
         Element* Get_lonely_elements()
         {
-            int result = 0;
-            for (int i = v.size(); i-- && result == 0;)
+            for (int i = 0; i < v.size(); i++)
             {
-                int id = v[i]->GetId();
-                result ^= id;
+                bool is_lonely = true;
+
+                // now we pick v[i] and check if lonely
+                for (int j = i + 1; j < v.size(); j++)
+                {
+                    if (v[i]->GetId() == v[j]->GetId() && v[i]->GetType() == v[j]->GetType())   // found duplicate, v[i] is not lonely
+                    {
+                        //delete the duplicate 
+                        v.erase(v.begin() + j);
+
+                        is_lonely = false;
+                        break;
+                    }
+                }
+
+                if (is_lonely)
+                    return v[i];
             }
 
-            // search for result
-            if (result)
-            {
-                for (int i = v.size(); i--;)
-                {
-                    if (v[i]->GetId() == result)
-                        return v[i];        // returrn the address 
-                }
-                
-                assert(FOR_DEBUGGING && "trying to remove lonely element but couldnt found him, check Get_lonely_elements function");
-            }
-            else 
-                return nullptr;
+            return nullptr;
         } 
+
+        // TODO
+        // removes element from list, it doesn't delete it from memory
+        // if found, it removes it and retunrs true
+        // otherwise returns false
+        bool Remove(Element* e)
+        {
+            return true;
+        }
 
         // clears the vector from data
         void Clear()

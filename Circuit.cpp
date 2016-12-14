@@ -172,6 +172,7 @@ void Circuit::Read()
                             assert(FOR_DEBUGGING && "unhandled exeption");
 
                         delete e;
+                        
                         continue;
                     }
                 }
