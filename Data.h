@@ -103,7 +103,7 @@ private:
     public:
         // adds address of element in list
         // returns number of occurrences of that element
-        // set check to true to make it check errors during adding to list, it is used in repair
+        // set check to true to make it check errors during adding to list
         int Add(Element* e, bool check = false)
         {
             // number of times that this element hadd occurred in vector
@@ -181,7 +181,6 @@ private:
                 cout << v[i]->GetId() << ' ' << v[i]->GetType() << ' ' << v[i]->GetValue() << '\n';
         }
     };
-    bool _Repair(_List &l);
 
 public:
     int GetId();
@@ -216,6 +215,7 @@ private:
     void _RemoveDuplicates();
     void _Copy_this_toMe(Circuit*);
     void _Check_invalid_nodes();
+    void _Print();
 public:
     void Add(Node* n);
     bool Remove(Node* n);
@@ -238,7 +238,7 @@ public:
     bool HasElement(char type, const int &id);
     bool IsEmpty();
     Circuit& operator= (Circuit &c);
-    Circuit* Copy();
-    bool Repair();
-    void Print();
+    Circuit* Copy();  
+    Node** GetTerminals(Element* e);  
+    Node** GetTerminals(Element* e, Node* &n1, Node* &n2);
 };

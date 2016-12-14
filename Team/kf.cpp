@@ -158,13 +158,3 @@ void Get_2_Nodes(Element* e,Node* &n1,Node* &n2,Circuit* c)
 		}
 	}
 }
-
-// Node* Get_two_nodes(Circuit* c, Element* e)
-// {
-// 	Node** arr = new Node[2];
-// 	int this_node = 0;		// integer mark the node that we are getting now
-
-// 	// traverse through nodes
-// 	Node* n = //
-// 	// TODO later to optimize
-// }

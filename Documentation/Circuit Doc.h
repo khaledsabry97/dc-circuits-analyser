@@ -12,7 +12,6 @@ Circuit(Circuit* c);
 Circuit(Circuit& c);
 Circuit* Copy();
 void Read();
-bool Repair();
 
 void Add(Node* n);
 bool Remove(Node* n);
@@ -28,6 +27,12 @@ bool Remove(const double &val, SEARCH_BY type = ID);
 Node* GetNode(const double &val, SEARCH_BY type = ID);
 bool HasNode(const double &val, SEARCH_BY type = ID);
 bool IsEmpty();
+
+
+Element* GetElement(char type, const int &id);
+bool HasElement(char type, const int &id);  
+Node** GetTerminals(Element* e);  
+Node** GetTerminals(Element* e, Node* &n1, Node* &n2);
 
 
 /* Constructs */
@@ -105,7 +110,7 @@ Node* GetFirstNode();
 int GetNumOfNodes();
 
 // 1- read nodes from user
-// 2- calls Reapair() to remove invalid items -- refer to Circuit::Repair()
+// TODO
 // 3- throws (-1) and terminates program if circuit was empty, to avoid affecting other steps in program 
 void Read();
 
@@ -200,16 +205,44 @@ Circuit* Copy();
     Circuit* newC = c->Copy();      // now newC has the same items of c
 <END>
 
-// 1- iterates through all nodes and elements
-// 2- checks for errors and handles them 
-// issues like: c/v source with same sign in two nodes, duplicate element in more than 2 nodes, node that has one element... etc
-bool Repair();
+
+// elements:
+
+// look for a specific element in circuit, returns its address if found
+// NULL otherwise
+Element* GetElement(char type, const int &id);
 
 <EXAMPLE>
     Circuit* c = new Circuit;
     // fill it..
-    c->Repair();
-    // now all issues are handled, you can use it safely
+    Element* e = c->GetElement('R', 5); // if found, e points at that address
+<END>
+
+// the same as GetElement but returns boolean
+bool HasElement(char type, const int &id);  
+
+// returns array of two terminals (nodes) attached to this element
+// it raises exception(error LONELY_ELEMENT) if not found 
+Node** GetTerminals(Element* e);  
+
+<EXAMPLE>
+    Circuit* c = new Circuit;
+    // fill it..
+    // e is an element in circuit
+    Node** terminals = c->GetTerminals(e);
+    // now terminals[0] and terminals[1] are the two nodes attached to element e
+<END>
+
+// the same, but it returns nodes in references and addresses
+Node** GetTerminals(Element* e, Node* &n1, Node* &n2);
+
+<EXAMPLE>
+    Circuit* c = new Circuit;
+    // fill it..
+    // e is an element in circuit
+    Node* n1, n2;
+    c->GetTerminals(e, n1, n2);
+    // n1 and n2 are the terminals of element e
 <END>
 
 #endif

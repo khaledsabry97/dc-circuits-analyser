@@ -1,6 +1,5 @@
 #ifdef _DO_NOT_INCLUDE_ME_
 // do not include this header file in project
-// TODO update this
 Documentation of the Classes:
 listing public functionality only
 
@@ -17,6 +16,9 @@ Element* GetFirstElement();
 
 Node* GetNext();
 Node* GetPrev();
+
+Element* GetElement(char type, const int &id);
+bool HasElement(char type, const int &id);
 
 int GetId();
 void ChangeVolt(const double &v);

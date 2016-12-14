@@ -4,59 +4,6 @@
 
 //  private:
 
-// make the required checks that the node is perfect
-// returns true if it needed repairs, false otherwise
-bool Node::_Repair(_List &l)
-{
-    bool needRepairs = false;
-
-    Element* e = _firstElement;
-
-    // iterate through list
-    while (e)    
-    {
-        // add it to the list of elements
-        bool added = l.Add(e);
-
-        // there is a duplicate if not added
-        if (!added)
-        {
-            // log to user
-            cerr << "===> ERROR! Found Duplicate Element" << e->GetType() << e->GetId() 
-                << " in Node #" << _id 
-                << "\nRemoving the last of them\n";   
-
-            // remove it
-            Element* temp = e;
-            e = e->_next;
-            Remove(temp);
-
-            // mark it
-            needRepairs = true;
-
-            continue;
-        }
-
-        // if voltage, move it to first
-        if (e->GetType() == 'E')
-        {
-            Element* temp = e;
-            e = e->_next;
-
-
-            // add it to first
-            Add(temp);
-
-            continue;
-        }
-
-        // move e
-        e = e->_next;
-    }   
-
-    return needRepairs;
-}
-
 //  public:
 // constructor
 Node::Node(const int &id) 

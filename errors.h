@@ -4,7 +4,6 @@
 #define WITH_CHECK 1
 #define NO_CHECK 0
 
-// TODO
 // identify different errors that might happen
 enum error {SAME_POLARITY, 
             DUPLICATE_WITH_DIFF_VALUES, 

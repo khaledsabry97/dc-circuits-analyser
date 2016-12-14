@@ -89,6 +89,30 @@ void Circuit::_Check_invalid_nodes()
     }
 }
 
+// for testing 
+void Circuit::_Print()
+{
+	if(IsEmpty())
+		cout << "The Circuit Is Empty\n";
+	else
+	{
+		Node* n = GetFirstNode();
+        while (n)
+        {
+            cout << "---Node #" << n->GetId() << " with voltage " << n->GetVolt() << " volt\n";
+
+            Element* e = n->GetFirstElement();
+            while (e)
+            {
+                cout << "-Element " << e->GetType() << e->GetId() << " = " << e->GetValue() << '\n';
+                e = e->GetNext();
+            }
+
+            n = n->GetNext();
+        }
+	}
+}
+
 //  public:
 
 // Deconstructor
@@ -203,8 +227,8 @@ void Circuit::Read()
 
                 newNode->Add(e);
 
-                // for debug
-                l.Print();
+                // // for debug
+                // l.Print();
             }
 
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -233,9 +257,9 @@ void Circuit::Read()
         else        //  node has > 1 element ,add it 
             Add(newNode);
 
-        // debug
-        cout << "After Reading Node # " << nodeI << '\n';
-        Print();
+        // // debug
+        // cout << "After Reading Node # " << nodeI << '\n';
+        // Print();
     }
 
     // remove lonely elements that occurred in list one time 
@@ -266,25 +290,24 @@ void Circuit::Read()
         cerr << "===> ERROR, found lonely element " << lonely->GetType() << lonely->GetId() << " in Node #" << n->GetId() 
             << " ,Removing it\n" ;
 
-        // debug
-        Print();
+        // // debug
+        // Print();
 
         l.Remove(e);    // remove from list
         n->Remove(e);   // remove from node and memory
 
-        // debug
-        l.Print();
+        // // debug
+        // l.Print();
     }
 
-    Print();
     // clear list
     l.Clear();
 
     // remove invalid nodes
     _Check_invalid_nodes();
 
-    // debug
-    Print();
+    // // debug
+    // Print();
 
     if (IsEmpty())
     {
@@ -528,33 +551,6 @@ Circuit& Circuit::operator= (Circuit &c)
     return (*c.Copy());
 }
 
-// remove duplicate elements/nodes,
-// sources that connect to more than two node +
-// or have the same sign/direction with two nodes +
-// make voltage sources at the first of list +
-bool Circuit::Repair()
-{
-    bool needRepairs = false;
-
-    // traverse through all nodes
-    Node* n = _firstNode;
-
-    // list to store elements 
-    Node::_List l;
-
-    while (n)
-    {
-        // repair this node first
-        if (n->_Repair(l))
-            needRepairs = true;
-
-        // move n to next
-        n = n->_next;
-    }
-
-    return needRepairs;
-}
-
 // search for element in circuit 
 // returns the address of the element if found
 // otherwise nullptr
@@ -593,26 +589,70 @@ bool Circuit::HasElement(char type, const int &id)
     return false;
 }
 
-// for testing 
-void Circuit::Print()
+// returns 2 nodes that the given element is connected to 
+Node** Circuit::GetTerminals(Element* e)
 {
-	if(IsEmpty())
-		cout << "The Circuit Is Empty\n";
-	else
-	{
-		Node* n = GetFirstNode();
+    // array to hold the addresses of the terminals
+    Node** terminal = new Node*[2];
+    terminal[0] = terminal[1] = nullptr;
+
+    // select the first terminal, get him, then do the same for the second one
+    int select = 0;
+
+    while (true)   
+    {
+        // traverse through all nodes to get the first one 
+        Node* n = GetFirstNode();
         while (n)
         {
-            cout << "---Node #" << n->GetId() << " with voltage " << n->GetVolt() << " volt\n";
-
-            Element* e = n->GetFirstElement();
-            while (e)
-            {
-                cout << "-Element " << e->GetType() << e->GetId() << " = " << e->GetValue() << '\n';
-                e = e->GetNext();
-            }
+            if (n->HasElement(e->GetType(), e->GetId()))
+                terminal[select++] = n;
 
             n = n->GetNext();
         }
-	}
+
+        // both of them is found
+        if (terminal[0] && terminal[1])
+            break;
+        else // not found some/all of them
+            throw LONELY_ELEMENT;
+    }
+
+    return terminal;
+}
+
+// the same as above, but takes 2 nodes by argument to put nodes in them
+Node** Circuit::GetTerminals(Element* e, Node* &n1, Node* &n2)
+{
+    // array to hold the addresses of the terminals
+    Node** terminal = new Node*[2];
+    terminal[0] = terminal[1] = nullptr;
+
+    // select the first terminal, get him, then do the same for the second one
+    int select = 0;
+
+    while (true)   
+    {
+        // traverse through all nodes to get the first one 
+        Node* n = GetFirstNode();
+        while (n)
+        {
+            if (n->HasElement(e->GetType(), e->GetId()))
+                terminal[select++] = n;
+
+            n = n->GetNext();
+        }
+
+        // both of them is found
+        if (terminal[0] && terminal[1])
+            break;
+        else // not found some/all of them
+            throw LONELY_ELEMENT;
+    }
+
+    // return them
+    n1 = terminal[0];
+    n2 = terminal[1];
+
+    return terminal;
 }
