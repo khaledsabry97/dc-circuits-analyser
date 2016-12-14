@@ -171,8 +171,7 @@ void Circuit::Read()
                         default:
                             assert(FOR_DEBUGGING && "unhandled exeption");
 
-                        delete e;
-                        
+                        delete e;       
                         continue;
                     }
                 }
@@ -228,10 +227,11 @@ void Circuit::Read()
             assert(FOR_DEBUGGING && "cant find the lonely element");
 
         // tell the user the details and delete it
-        cerr << "===> ERROR, found lonely element " << lonely->GetType() << lonely->GetId() << "in Node #" << n->GetId() 
+        cerr << "===> ERROR, found lonely element " << lonely->GetType() << lonely->GetId() << " in Node #" << n->GetId() 
             << " ,Removing it\n" ;
 
-        n->Remove(e);
+        l.Remove(e);    // remove from list
+        n->Remove(e);   // remove from node and memory
     }
 
     // clear list

@@ -58,6 +58,7 @@ private:
     double _volt;
     int _numElements;
 
+    // list to store elements while reading
     class _List
     {
     private:
@@ -131,8 +132,9 @@ private:
                 {
                     if (v[i]->GetId() == v[j]->GetId() && v[i]->GetType() == v[j]->GetType())   // found duplicate, v[i] is not lonely
                     {
-                        //delete the duplicate 
+                        //delete both of them 
                         v.erase(v.begin() + j);
+                        v.erase(v.begin() + i);
 
                         is_lonely = false;
                         break;
@@ -146,13 +148,21 @@ private:
             return nullptr;
         } 
 
-        // TODO
         // removes element from list, it doesn't delete it from memory
         // if found, it removes it and retunrs true
         // otherwise returns false
         bool Remove(Element* e)
         {
-            return true;
+            for (int i = 0; i < v.size(); i++)
+            {
+                if (v[i] == e)
+                {
+                    v.erase(v.begin() + i);
+                    return true;    // success
+                }
+            }
+
+            return false;   // failure
         }
 
         // clears the vector from data
