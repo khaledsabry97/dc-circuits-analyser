@@ -1,6 +1,8 @@
 #pragma once
 #include <cassert>
 #define FOR_DEBUGGING 0
+#define WITH_CHECK 1
+#define NO_CHECK 0
 
 // TODO
 // identify different errors that might happen

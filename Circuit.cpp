@@ -130,10 +130,12 @@ void Circuit::Read()
             {
                 cin >> id >> val;
 
+                Element* e = nullptr;
+                
                 try
                 {
-                    Element* e = new Element(type, id, val);
-                    l.Add(e, NO_CHECK);
+                    e = new Element(type, id, val);
+                    l.Add(e, WITH_CHECK);
                 }
                 catch(const error &err)
                 {
@@ -207,16 +209,28 @@ void Circuit::Read()
         if (!lonely)    // no lonely elements
             break;
 
-        // search for it in nodes
+        char type = lonely->GetType();
+        int id = lonely->GetId();
+
+        // look for it in nodes
         Node* n = GetFirstNode();
+        Element* e = nullptr;
         while (n)
         {
-
-
-            n = n->GetNext();
+            e = n->GetElement(type, id);
+            if (e)  // found it 
+                break;
+            else    // not yet
+                n = n->GetNext();
         }
+        if (!e) // not found after searching, there is a problem
+            assert(FOR_DEBUGGING && "cant find the lonely element");
 
-        cerr << "===> ERROR, found lonely element " << lonely->GetType() << lonely->GetId() << 
+        // tell the user the details and delete it
+        cerr << "===> ERROR, found lonely element " << lonely->GetType() << lonely->GetId() << "in Node #" << n->GetId() 
+            << " ,Removing it\n" ;
+
+        n->Remove(e);
     }
 
     // clear list

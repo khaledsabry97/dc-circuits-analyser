@@ -80,15 +80,18 @@ private:
                     //
                     // if it is source
                     if (e->GetType() != 'R')
+                    {
                         // error if the source is duplicate with the same polarity in both nodes
                         if (e->GetValue() == v[i]->GetValue())
                             throw SAME_POLARITY;
-
+                    }
                     // resistance element
                     else
+                    {
                         // resistance cant be duplicate with different values
                         if (e->GetValue() != v[i]->GetValue())
                             throw DUPLICATE_WITH_DIFF_VALUES;
+                    }
                 }
 
                 if (occ > 2)
@@ -97,16 +100,15 @@ private:
         }
 
     public:
-        enum check {CHECK, NO_CHECK};
-
         // adds address of element in list
         // returns number of occurrences of that element
-        int Add(Element* e, check c = NO_CHECK)
+        // set check to true to make it check errors during adding to list, it is used in repair
+        int Add(Element* e, bool check = false)
         {
             // number of times that this element hadd occurred in vector
             int occ = 0;
 
-            if (c == CHECK)
+            if (check)
                 _Check(e, occ);
 
             // add it 
@@ -122,7 +124,7 @@ private:
         Element* Get_lonely_elements()
         {
             int result = 0;
-            for (int i = v.size(); i--;)
+            for (int i = v.size(); i-- && result == 0;)
             {
                 int id = v[i]->GetId();
                 result ^= id;
@@ -130,11 +132,15 @@ private:
 
             // search for result
             if (result)
+            {
                 for (int i = v.size(); i--;)
+                {
                     if (v[i]->GetId() == result)
                         return v[i];        // returrn the address 
+                }
                 
                 assert(FOR_DEBUGGING && "trying to remove lonely element but couldnt found him, check Get_lonely_elements function");
+            }
             else 
                 return nullptr;
         } 
