@@ -195,13 +195,16 @@ void Circuit::Read()
                             assert(FOR_DEBUGGING && "INVALID_STORED_TYPE");
                         default:
                             assert(FOR_DEBUGGING && "unhandled exeption");
-
-                        delete e;       
-                        continue;
                     }
+
+                    delete e;       
+                    continue;
                 }
 
                 newNode->Add(e);
+
+                // for debug
+                l.Print();
             }
 
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -220,11 +223,19 @@ void Circuit::Read()
         else if (newNode->GetNumOfElements() == 1)  // has one node
         {
             cout << "====> Warning: Node has one element, node will be deleted\n";
+            
+            // remove the element from the list before removing the node
+            l.Remove(newNode->GetFirstElement());
+
             delete newNode;
             nodeI--;
         }
         else        //  node has > 1 element ,add it 
             Add(newNode);
+
+        // debug
+        cout << "After Reading Node # " << nodeI << '\n';
+        Print();
     }
 
     // remove lonely elements that occurred in list one time 
@@ -255,15 +266,25 @@ void Circuit::Read()
         cerr << "===> ERROR, found lonely element " << lonely->GetType() << lonely->GetId() << " in Node #" << n->GetId() 
             << " ,Removing it\n" ;
 
+        // debug
+        Print();
+
         l.Remove(e);    // remove from list
         n->Remove(e);   // remove from node and memory
+
+        // debug
+        l.Print();
     }
 
+    Print();
     // clear list
     l.Clear();
 
     // remove invalid nodes
     _Check_invalid_nodes();
+
+    // debug
+    Print();
 
     if (IsEmpty())
     {
@@ -570,4 +591,28 @@ bool Circuit::HasElement(char type, const int &id)
 
     // not found
     return false;
+}
+
+// for testing 
+void Circuit::Print()
+{
+	if(IsEmpty())
+		cout << "The Circuit Is Empty\n";
+	else
+	{
+		Node* n = GetFirstNode();
+        while (n)
+        {
+            cout << "---Node #" << n->GetId() << " with voltage " << n->GetVolt() << " volt\n";
+
+            Element* e = n->GetFirstElement();
+            while (e)
+            {
+                cout << "-Element " << e->GetType() << e->GetId() << " = " << e->GetValue() << '\n';
+                e = e->GetNext();
+            }
+
+            n = n->GetNext();
+        }
+	}
 }

@@ -6,22 +6,28 @@
 
 int main()
 {
-    Circuit* c = new Circuit;
-    c->Read();						//Reading the Circuit
-	Circuit *c2 = c->Copy();		//Copying The Circuit To Another Pointer
-	voltageTransformation(c2);		//Voltage Source Transformation
-	cout << "Circuit Before Solving: "<<endl;
-	print(c2);
-	solve(c2);
-	cout << "Circuit After Solving:"<<endl;
-	print(c2);
-	VoltageBack(c2, c);
-	cout << "Main Circuit After Getting The Nodes Voltage Back To It: " <<endl;
-	print(c);
-	cout << "New Circuit After Solving:"<<endl;
-	SolveNonEss(c);
-	print(c);
+	Circuit c;
+	c.Read();
 }
+
+// int main()
+// {
+//     Circuit* c = new Circuit;
+//     c->Read();						//Reading the Circuit
+// 	Circuit *c2 = c->Copy();		//Copying The Circuit To Another Pointer
+// 	voltageTransformation(c2);		//Voltage Source Transformation
+// 	cout << "Circuit Before Solving: "<<endl;
+// 	print(c2);
+// 	solve(c2);
+// 	cout << "Circuit After Solving:"<<endl;
+// 	print(c2);
+// 	VoltageBack(c2, c);
+// 	cout << "Main Circuit After Getting The Nodes Voltage Back To It: " <<endl;
+// 	print(c);
+// 	cout << "New Circuit After Solving:"<<endl;
+// 	SolveNonEss(c);
+// 	print(c);
+// }
 
 // // this test is done +
 // int main()

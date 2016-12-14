@@ -112,6 +112,9 @@ private:
             if (check)
                 _Check(e, occ);
 
+            if (e->GetType() == 'J' && e->GetId() == 1)
+                cout << "this shouldnt be printed\n";
+
             // add it 
             v.push_back(e);
 
@@ -169,6 +172,13 @@ private:
         void Clear()
         {
             v.clear();
+        }
+
+        // for debugging
+        void Print()
+        {
+            for (int i = 0; i < v.size(); i++)
+                cout << v[i]->GetId() << ' ' << v[i]->GetType() << ' ' << v[i]->GetValue() << '\n';
         }
     };
     bool _Repair(_List &l);
@@ -230,4 +240,5 @@ public:
     Circuit& operator= (Circuit &c);
     Circuit* Copy();
     bool Repair();
+    void Print();
 };
