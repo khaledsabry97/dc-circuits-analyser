@@ -4,7 +4,7 @@
 
 // TODO
 // identify different errors that might happen
-enum error {SAME_POLARITY, DUPLICATE_WITH_DIFF_VALUES, DUPLICATE_ELEMENT, BAD_TYPE_NAME, NEGATIVE_RESISTANCE, INVALID_STORED_TYPE};
+enum error {SAME_POLARITY, DUPLICATE_WITH_DIFF_VALUES, DUPLICATE_ELEMENT, BAD_TYPE_NAME, NEGATIVE_RESISTANCE, INVALID_STORED_TYPE, LONELY_ELEMENT};
 
 // strings to handle errors
 #define HANDLE_SAME_POLARITY "===> ERROR, found source element with the same polarity, deleting the last one found\n"

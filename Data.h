@@ -115,6 +115,30 @@ private:
             return occ;
         }
 
+
+        // detects lonely elements
+        // using XORING technique with elements id's
+        // returns the address of the first lonely element found, or nullptr otherwise
+        Element* Get_lonely_elements()
+        {
+            int result = 0;
+            for (int i = v.size(); i--;)
+            {
+                int id = v[i]->GetId();
+                result ^= id;
+            }
+
+            // search for result
+            if (result)
+                for (int i = v.size(); i--;)
+                    if (v[i]->GetId() == result)
+                        return v[i];        // returrn the address 
+                
+                assert(FOR_DEBUGGING && "trying to remove lonely element but couldnt found him, check Get_lonely_elements function");
+            else 
+                return nullptr;
+        } 
+
         // clears the vector from data
         void Clear()
         {
