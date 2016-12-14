@@ -194,3 +194,37 @@ bool Node::IsEmpty()
 {
     return (!_numElements);
 }
+
+// look for the element in list
+// returns the address of the element if found, otherwise nullptr
+Element* Node::GetElement(char type, const int &id)
+{
+    type = toupper(type);
+
+    Element* e = GetFirstElement();
+    while (e)
+    {
+        if (e->GetType() == type && e->GetId() == id)
+            return e;   // found it
+
+        e = e->GetNext();
+    }
+
+    return nullptr;         // not found
+}
+
+bool Node::HasElement(char type, const int &id)
+{
+    type = toupper(type);
+
+    Element* e = GetFirstElement();
+    while (e)
+    {
+        if (e->GetType() == type && e->GetId() == id)
+            return true;   // found it
+
+        e = e->GetNext();
+    }
+
+    return false;         // not found
+}

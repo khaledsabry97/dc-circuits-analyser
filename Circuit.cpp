@@ -200,8 +200,27 @@ void Circuit::Read()
             Add(newNode);
     }
 
-    // repair it
-    Repair(l);
+    // remove lonely elements that occurred in list one time 
+    while (true)
+    {
+        Element* lonely = l.Get_lonely_elements();
+        if (!lonely)    // no lonely elements
+            break;
+
+        // search for it in nodes
+        Node* n = GetFirstNode();
+        while (n)
+        {
+
+
+            n = n->GetNext();
+        }
+
+        cerr << "===> ERROR, found lonely element " << lonely->GetType() << lonely->GetId() << 
+    }
+
+    // clear list
+    l.Clear();
 
     if (IsEmpty())
     {
@@ -470,4 +489,42 @@ bool Circuit::Repair()
     }
 
     return needRepairs;
+}
+
+// search for element in circuit 
+// returns the address of the element if found
+// otherwise nullptr
+Element* Circuit::GetElement(char type, const int &id)
+{
+    // through nodes
+    Node* n = GetFirstNode();
+    while (n)
+    {
+        Element* e = n->GetElement(type, id);
+        if (e)  // found in this node
+            return e;
+        else 
+            n = n->GetNext();   // no in this node
+    }
+
+    // not found
+    return nullptr;
+}
+
+// returns true if element is found in circuit
+// false otherwise
+bool Circuit::HasElement(char type, const int &id)
+{
+    // through nodes
+    Node* n = GetFirstNode();
+    while (n)
+    {
+        if (n->HasElement(type, id))  // found in this node
+            return true;
+        else 
+            n = n->GetNext();   // no in this node
+    }
+
+    // not found
+    return false;
 }

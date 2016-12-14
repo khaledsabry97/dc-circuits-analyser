@@ -159,6 +159,8 @@ public:
     Node* GetPrev();
     void Add(Element* e);
     bool Remove(Element* e);
+    Element* GetElement(char type, const int &id);
+    bool HasElement(char type, const int &id);
     Node(const int &id);
 	~Node();
     Node* Copy();
@@ -196,6 +198,8 @@ public:
     bool Remove(const double &val, SEARCH_BY type = ID);
     Node* GetNode(const double &val, SEARCH_BY type = ID);
     bool HasNode(const double &val, SEARCH_BY type = ID);
+    Element* GetElement(char type, const int &id);
+    bool HasElement(char type, const int &id);
     bool IsEmpty();
     Circuit& operator= (Circuit &c);
     Circuit* Copy();
