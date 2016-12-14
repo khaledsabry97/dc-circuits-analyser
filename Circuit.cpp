@@ -64,6 +64,31 @@ void Circuit::_Copy_this_toMe(Circuit* c)
     }
 }
 
+// removes invalid nodes: that have one/zero elements
+void Circuit::_Check_invalid_nodes()
+{
+    Node* n = GetFirstNode();
+    for (int count = 0; n; count++)
+    {
+        if (n->IsEmpty())
+        {
+            cerr << HANDLE_EMPTY_NODE << " Node #" << n->GetId() << '\n';
+            Node* temp = n;
+            n = n->GetNext();
+            Remove(temp);
+        }
+        else if (n->GetNumOfElements() < 2) // one element
+        {
+            cerr << HANDLE_NODE_WITH_ONE_ELEM << " Node #" << n->GetId() << '\n';
+            Node* temp = n;
+            n = n->GetNext();
+            Remove(temp);
+        }
+
+        n = n->GetNext();
+    }
+}
+
 //  public:
 
 // Deconstructor
@@ -236,6 +261,9 @@ void Circuit::Read()
 
     // clear list
     l.Clear();
+
+    // remove invalid nodes
+    _Check_invalid_nodes();
 
     if (IsEmpty())
     {

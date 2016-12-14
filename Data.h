@@ -205,7 +205,7 @@ private:
     bool _IsIt(Node* ptr, const double &val, SEARCH_BY type);
     void _RemoveDuplicates();
     void _Copy_this_toMe(Circuit*);
-
+    void _Check_invalid_nodes();
 public:
     void Add(Node* n);
     bool Remove(Node* n);
