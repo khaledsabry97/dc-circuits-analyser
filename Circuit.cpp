@@ -137,9 +137,6 @@ void Circuit::Read()
                 }
                 catch(const error &err)
                 {
-                    //TODO
-                    // catch errors that happened when inserting the element
-
                     switch (err)
                     {
                         case SAME_POLARITY:
@@ -157,6 +154,18 @@ void Circuit::Read()
                             cerr << HANDLE_DUPLICATE_ELEMENT;
                             break;
                         }
+                        case BAD_TYPE_NAME:
+                        {
+                            cerr << HANDLE_BAD_TYPE_NAME;
+                            break;
+                        }
+                        case NEGATIVE_RESISTANCE:
+                        {
+                            cerr << HANDLE_NEGATIVE_RESISTANCE;
+                            break;
+                        }
+                        case INVALID_STORED_TYPE:
+                            assert(FOR_DEBUGGING && "INVALID_STORED_TYPE");
                         default:
                             assert(FOR_DEBUGGING && "unhandled exeption");
 

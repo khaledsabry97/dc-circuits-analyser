@@ -18,23 +18,20 @@ void Element::_SetType(const char &c)
             _type = J;
             break;
         default:
-            throw -1;
+            throw BAD_TYPE_NAME;
     }
 }
 
 void Element::_SetValue(const double &num)
 {
     if (_type == R && num < 0)
-        throw -1;
+        throw NEGATIVE_RESISTANCE;
 
     _value = num;
 }
 
 void Element::_SetId(const int &id)
 {
-    /*if (id < 0)
-        throw -1;
-*/
     _id = id;
 }
 
@@ -68,7 +65,7 @@ char Element::GetType()
         case J:
             return 'J';
         default:
-            throw -1;
+            throw INVALID_STORED_TYPE;
     }
 }  
 
