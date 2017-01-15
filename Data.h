@@ -112,6 +112,7 @@ private:
             if (check)
                 _Check(e, occ);
 
+            // TODO: what the hell is this?
             if (e->GetType() == 'J' && e->GetId() == 1)
                 cout << "this shouldnt be printed\n";
 
