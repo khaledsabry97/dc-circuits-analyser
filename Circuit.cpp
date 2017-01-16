@@ -226,9 +226,6 @@ void Circuit::Read()
                 }
 
                 newNode->Add(e);
-
-                // // for debug
-                // l.Print();
             }
 
             cin.ignore(numeric_limits<streamsize>::max(), '\n');

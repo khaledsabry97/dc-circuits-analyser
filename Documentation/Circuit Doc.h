@@ -110,7 +110,7 @@ Node* GetFirstNode();
 int GetNumOfNodes();
 
 // 1- read nodes from user
-// TODO
+// 2- Solves known issues of the circuit while reading 
 // 3- throws (-1) and terminates program if circuit was empty, to avoid affecting other steps in program 
 void Read();
 
