@@ -77,7 +77,7 @@ void Circuit::_Check_invalid_nodes()
             n = n->GetNext();
             Remove(temp);
         }
-        else if (n->GetNumOfElements() < 2) // one element
+        else if (n->GetNumOfElements() == 1) // one element
         {
             cerr << HANDLE_NODE_WITH_ONE_ELEM << " Node #" << n->GetId() << '\n';
             Node* temp = n;
@@ -139,7 +139,7 @@ Circuit::Circuit(Circuit& c)
 // read the whole circuit from the user
 void Circuit::Read()
 {
-    cout << "Please enter the elements node by node \nTo end the node type x \nTo end all nodes type xx\n";
+    cout << HELP;
 
     // to store elements
     Node::_List l;
@@ -148,8 +148,9 @@ void Circuit::Read()
     bool continueReading = true;
     for (int nodeI = 1; continueReading; nodeI++)
     {
+        cout << RESET_COLOR;
         cout << "Node #" << nodeI << ":\n";
-
+        
         Node* newNode = new Node(nodeI);
 
         // variables to store the element
@@ -160,6 +161,8 @@ void Circuit::Read()
         // read elements
         while (true)
         {
+            cout << PROMPT;
+
             // get first character 
             cin >> type;
 
@@ -174,6 +177,14 @@ void Circuit::Read()
                 break;
             }
 
+            // user entered h
+            else if (toupper(type) == 'H')
+                cout << HELP;
+
+            // user entered p
+            else if (toupper(type) == 'P')
+                _Print();
+
             // user entered element
             else 
             {
@@ -183,8 +194,8 @@ void Circuit::Read()
                 
                 try
                 {
-                    e = new Element(type, id, val);
-                    l.Add(e, WITH_CHECK);
+                    e = new Element(type, id, val, nodeI);
+                    l.Add(e);
                 }
                 catch(const error &err)
                 {
@@ -254,9 +265,6 @@ void Circuit::Read()
         else        //  node has > 1 element ,add it 
             Add(newNode);
 
-        // // debug
-        // cout << "After Reading Node # " << nodeI << '\n';
-        // Print();
     }
 
     // remove lonely elements that occurred in list one time 
@@ -300,11 +308,8 @@ void Circuit::Read()
     // clear list
     l.Clear();
 
-    // remove invalid nodes
-    _Check_invalid_nodes();
+    _Check_invalid_nodes();     // remove them
 
-    // // debug
-    // Print();
 
     if (IsEmpty())
     {
@@ -462,7 +467,8 @@ bool Circuit::Pop_front()
         _lastNode = nullptr;     
 
     _firstNode = _firstNode->_next;
-    _firstNode->_prev = nullptr;
+    if (_firstNode)     // TODO: chekc if this helped avoid seg. fault
+        _firstNode->_prev = nullptr;
     delete temp;
     _numNodes--;
 

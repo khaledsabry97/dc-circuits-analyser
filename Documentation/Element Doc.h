@@ -1,6 +1,6 @@
 #ifdef _DO_NOT_INCLUDE_ME_
 // do not include this header file in project
-
+// TODO include GetNodeId
 Documentation of the Classes:
 listing public functionality only
 

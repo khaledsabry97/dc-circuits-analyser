@@ -4,11 +4,14 @@
 #include <vector>
 #include <limits>
 #include "errors.h"
+#include "Interface.h"
 using namespace std;
 
 #ifndef NULL
 #define NULL nullptr
 #endif
+
+// TODO: solve problem of infinte loop when entering invalid key
 
 // used in circuit methods
 enum SEARCH_BY {ID, VOLT};
@@ -25,18 +28,22 @@ private:
     Type _type;
     int _id;
     double _value;
+    int _node_id;//TODO
 
     void _SetType(const char &c);
     void _SetValue(const double &num);
     void _SetId(const int &id);
+    void _SetNodeId(const int &node_id);//TODO
 
 public:
     Element(const char &type, const int &id, const double &val);
+    Element(const char &type, const int &id, const double &val, const int &node_id);//TODO
     char GetType();
     void ChangeType(const char &c);
     Element* GetNext();
     Element* GetPrev();
     int GetId();
+    int GetNodeId();//TODO
     void ChangeId(const int &num);
     double GetValue();
     void ChangeValue(const double &num);
@@ -58,130 +65,8 @@ private:
     double _volt;
     int _numElements;
 
-    // list to store elements while reading
-    class _List
-    {
-    private:
-        vector<Element*> v;
-
-        // check the list from errors
-        // throw error when found
-        void _Check(Element* e, int &occ)
-        {
-            // iterate through all elements in list befor adding it 
-            for (int i = v.size(); i--;)
-            {
-                // if both elements are equal in id and type
-                if (*e == *v[i])
-                {
-                    // now we have found the duplicate element in list
-                    occ++;
-
-                    // check the duplicate type:
-                    //
-                    // if it is source
-                    if (e->GetType() != 'R')
-                    {
-                        // error if the source is duplicate with the same polarity in both nodes
-                        if (e->GetValue() == v[i]->GetValue())
-                            throw SAME_POLARITY;
-                    }
-                    // resistance element
-                    else
-                    {
-                        // resistance cant be duplicate with different values
-                        if (e->GetValue() != v[i]->GetValue())
-                            throw DUPLICATE_WITH_DIFF_VALUES;
-                    }
-                }
-
-                if (occ > 2)
-                    throw DUPLICATE_ELEMENT;
-            }
-        }
-
-    public:
-        // adds address of element in list
-        // returns number of occurrences of that element
-        // set check to true to make it check errors during adding to list
-        int Add(Element* e, bool check = false)
-        {
-            // number of times that this element hadd occurred in vector
-            int occ = 0;
-
-            if (check)
-                _Check(e, occ);
-
-            // TODO: what the hell is this?
-            if (e->GetType() == 'J' && e->GetId() == 1)
-                cout << "this shouldnt be printed\n";
-
-            // add it 
-            v.push_back(e);
-
-            return occ;
-        }
-
-
-        // detects lonely elements
-        // returns the address of the first lonely element found, or nullptr otherwise
-        Element* Get_lonely_elements()
-        {
-            for (int i = 0; i < v.size(); i++)
-            {
-                bool is_lonely = true;
-
-                // now we pick v[i] and check if lonely
-                for (int j = i + 1; j < v.size(); j++)
-                {
-                    if (v[i]->GetId() == v[j]->GetId() && v[i]->GetType() == v[j]->GetType())   // found duplicate, v[i] is not lonely
-                    {
-                        //delete both of them 
-                        v.erase(v.begin() + j);
-                        v.erase(v.begin() + i);
-
-                        is_lonely = false;
-                        break;
-                    }
-                }
-
-                if (is_lonely)
-                    return v[i];
-            }
-
-            return nullptr;
-        } 
-
-        // removes element from list, it doesn't delete it from memory
-        // if found, it removes it and retunrs true
-        // otherwise returns false
-        bool Remove(Element* e)
-        {
-            for (int i = 0; i < v.size(); i++)
-            {
-                if (v[i] == e)
-                {
-                    v.erase(v.begin() + i);
-                    return true;    // success
-                }
-            }
-
-            return false;   // failure
-        }
-
-        // clears the vector from data
-        void Clear()
-        {
-            v.clear();
-        }
-
-        // for debugging
-        void Print()
-        {
-            for (int i = 0; i < v.size(); i++)
-                cout << v[i]->GetId() << ' ' << v[i]->GetType() << ' ' << v[i]->GetValue() << '\n';
-        }
-    };
+    
+    class _List;
 
 public:
     int GetId();
@@ -242,4 +127,19 @@ public:
     Circuit* Copy();  
     Node** GetTerminals(Element* e);  
     Node** GetTerminals(Element* e, Node* &n1, Node* &n2);
+};
+
+class Node::_List
+{
+private:
+    vector<Element*> v;
+
+    void _Check(Element* e, int &occ);
+
+public:
+    int Add(Element*);
+    Element* Get_lonely_elements();
+    bool Remove(Element* e);
+    void Clear();
+    void Print();
 };

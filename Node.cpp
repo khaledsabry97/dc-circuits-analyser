@@ -21,10 +21,16 @@ Node* Node::GetPrev()
     return (_prev);
 }
 
-// elements:
+
+// add element to this node
 void Node::Add(Element* e)
 {
-    
+    if (!e)
+        throw DEREF_NULL_PTR;
+
+    // assign node value to this node while inserting
+    e->_node_id = GetId();
+
     /* pseudo:
         ;let e be the added element and e+ the firstElement
         ;e is new and e+ is the prev
@@ -44,6 +50,8 @@ void Node::Add(Element* e)
     _numElements++;
 }
 
+// remove given element from this node
+// throws DEL_ELEMENT_FROM_WRONG_NODE if element is not in this node
 bool Node::Remove(Element* e)
 {
     /*pseudo:
@@ -56,6 +64,8 @@ bool Node::Remove(Element* e)
     */
     if (!e)
         return false;
+    else if (e->GetNodeId() != GetId())
+        throw DEL_ELEMENT_FROM_WRONG_NODE;
 
     Element* e_minus = e->_prev;
     Element* e_plus = e->_next;

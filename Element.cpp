@@ -35,16 +35,34 @@ void Element::_SetId(const int &id)
     _id = id;
 }
 
+void Element::_SetNodeId(const int &node_id)//TODO
+{
+    if (node_id < 0)
+        throw INVALID_NODE_ID;
+
+    _node_id = node_id;
+}
+
 //  public:
-/* implementation: */
 
 // constructor
 Element::Element(const char &type, const int &id, const double &val) 
-	:_next(nullptr), _prev(nullptr), _type(R), _id(-1), _value(0)
+	:_next(nullptr), _prev(nullptr), _type(R), _id(-1), _value(0), _node_id(-1)
 {
     _SetType(type);
     _SetId(id);
     _SetValue(val);
+}
+
+// constructor for Circuit::Read() to assign the element its node_id on creation
+// before testing it and adding to its node
+Element::Element(const char &type, const int &id, const double &val, const int &node_id)//TODO
+    :_next(nullptr), _prev(nullptr), _type(R), _id(-1), _value(0)
+{
+    _SetType(type);
+    _SetId(id);
+    _SetValue(val);
+    _SetNodeId(node_id);
 }
 
 // Type:
@@ -119,4 +137,14 @@ Element* Element::Copy()
 bool Element::operator== (Element& e)
 {
     return (_id == e.GetId() && GetType() == e.GetType());
+}
+
+// return current node id
+// throws NODE_ID_IN_ELEM_UNASSIGNED if id wasn't assigned
+int Element::GetNodeId()//TODO
+{
+    if (_node_id != -1)
+        return (_node_id);
+    else
+        throw NODE_ID_IN_ELEM_UNASSIGNED; 
 }
