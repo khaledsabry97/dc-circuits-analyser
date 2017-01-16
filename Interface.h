@@ -1,4 +1,5 @@
 #include "_Colors.h"
+// TODO add credits
 
 #define PROMPT BLUE ">>> " CYAN
 
