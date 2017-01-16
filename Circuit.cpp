@@ -247,14 +247,14 @@ void Circuit::Read()
         {
             if (continueReading)
             {
-                cout << "====> Node is empty\n";
+                cout << HANDLE_EMPTY_NODE;
                 delete newNode;
                 nodeI--;
             }
         }
         else if (newNode->GetNumOfElements() == 1)  // has one node
         {
-            cout << "====> Warning: Node has one element, node will be deleted\n";
+            cout << HANDLE_NODE_WITH_ONE_ELEM;
             
             // remove the element from the list before removing the node
             l.Remove(newNode->GetFirstElement());
