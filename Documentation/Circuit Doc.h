@@ -17,10 +17,6 @@ bool Remove(Node* n);
 Node* GetLastNode();
 Node* GetFirstNode();
 int GetNumOfNodes();
-void Push_back(Node* n);
-void Push_front(Node* n);
-bool Pop_back();
-bool Pop_front();
 
 bool Remove(const double &val, SEARCH_BY type = ID);
 Node* GetNode(const double &val, SEARCH_BY type = ID);
@@ -118,36 +114,6 @@ void Read();
     c->Read();  
     // assume user filled it correctly 
     // it is full of valid data now
-<END>
-
-// add given node at the end of the list
-// throws -1 and terminates program if it is null
-void Push_back(Node* n);
-
-<EXAMPLE>
-    Circuit* c = new Circuit;
-    Node* n = new Node(3);
-    c->Push_back(n);
-    // it is at the end of the list
-<END>
-
-// same as push_back but adds to front
-void Push_front(Node* n);
-
-// delete last node
-bool Pop_back();
-
-// delete first element
-bool Pop_front();
-
-<EXAMPLE>
-    Circuit* c = new Circuit;
-    // fill with data ..
-    c->Pop_front();     // first one is deleted
-    c->Pop_back();      // last one is deleted
-
-    // let's delete em all!
-    while (c->Pop_back());
 <END>
 
 /* Specific Nodes */

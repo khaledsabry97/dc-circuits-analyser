@@ -1,11 +1,40 @@
+# directories
+SRC_DIR = Sources
+
+HDR_DIR = Headers
+
+BLD_DIR = Build
+
+# executable
+EXEC = $(BLD_DIR)/main
+
+# compiler
+COMPILER = g++
+
+CPP_VER = 11
+
+COMPILER_FLAGS = -std=c++$(CPP_VER)
+COMPILER_FLAGS += -I $(HDR_DIR) 
+COMPILER_FLAGS += -g 
+COMPILER_FLAGS += $(SRC_DIR)/*.cpp -o $(EXEC)
+
+
+run:
+	if [ ! -x $(EXEC) ]; then make main; fi
+	$(EXEC)
+
 main: 
-	g++ -std=c++11 -g *.cpp  -o main
+	$(COMPILER) $(COMPILER_FLAGS) 
 
 test:
-	cat ./test/input | ./main &> ./test/result ; less ./test/result
+	cat ./test/input | $(EXEC) &> ./test/result
+	less ./test/result
 
 archieve:
-	mkdir ./test/archieve ; cp -n ./test/input ./test/archieve; cp -n ./test/result ./test/archieve/result 
+	mkdir ./test/archieve
+	cp -n ./test/input ./test/archieve
+	cp -n ./test/result ./test/archieve/result 
 
 clean:
-	rm -f *.o main
+	rm $(EXEC) 2> /dev/null
+	rm -r *.dSYM $(BLD_DIR)/*.dSYM 2> /dev/null
