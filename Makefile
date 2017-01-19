@@ -1,4 +1,4 @@
-main: main.cpp Node.cpp Element.cpp Circuit.cpp Solving.cpp
+main: 
 	g++ -std=c++11 -g *.cpp  -o main
 
 test:

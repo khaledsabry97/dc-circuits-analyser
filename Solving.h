@@ -5,9 +5,9 @@
 
 using namespace std;
 
+/*          Hadi          */
 
 //Matrix Solving Functions
-
 void insert(double **arr,double *arr2,int);
 void print(double **arr,double *arr2, int);		//Just  For Debuging The Matrix Work
 void swapMat(double arr[][50],double arr2[][1],int,int,double arr3[][50]);
@@ -18,26 +18,28 @@ void init(double **arr, int);
 double *SolvingMat(double **arr,double *arr2,int);
 
 //My Own Functions
-
 int sizeOfTheMat(Circuit *c);
-
 double SearchNodeByElement(Element *e, Circuit *c);
-
 Node *SearchNode(Circuit *c, int ID);
-
 Element *SearchElement(Element *e, int, Circuit *c);
 
 
 
 
-//*****************************************************Functions That You can Use [Orderd]**********************************************************************************
+//*******************Functions you can use [Orderd]*******************
 
-void voltageTransformation(Circuit *&c);	//Transform The Voltage Source To Current Source
+// Transform The Voltage Source To Current Source
+void voltageTransformation(Circuit *&c);	
 
-void solve(Circuit *&c);	//Solving Essential Nodes
+// Solving Essential Nodes
+void solve(Circuit *&c);	
 
-void VoltageBack(Circuit *in, Circuit*& out);	//Get The Voltage Back To The Main Circuit
+// Get The Voltage Back To The Main Circuit
+void VoltageBack(Circuit *in, Circuit*& out);	
 
-void SolveNonEss(Circuit *&c);	//Solving None Essentail Nodes
+// Solving Non-Essentail Nodes
+void SolveNonEss(Circuit *&c);	
 
-void print(Circuit *c);		//Just For Testing
+
+
+/*              Khaled & Youssri             */
