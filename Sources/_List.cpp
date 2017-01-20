@@ -1,6 +1,6 @@
 #include "Data.h"
 
-/*     Node::_List     */
+/*     Circuit::_List     */
 
 // list to store elements while reading
 // used for issue tracking (error handling during reading)
@@ -9,7 +9,7 @@
 
 // check the list from errors
 // throw error when found
-void Node::_List::_Check(Element* e, int &occ)
+void Circuit::_List::_Check(Element* e, int &occ)
 {
     // iterate through all elements in list before adding it 
     for (int i = v.size(); i--;)
@@ -52,7 +52,7 @@ void Node::_List::_Check(Element* e, int &occ)
 // adds address of element in list
 // returns number of occurrences of that element
 // set check to true to make it check errors during adding to list
-int Node::_List::Add(Element* e)
+int Circuit::_List::Add(Element* e)
 {
     // number of times that this element hadd occurred in vector
     int occ = 0;
@@ -71,7 +71,7 @@ int Node::_List::Add(Element* e)
 
 // detects lonely elements
 // returns the address of the first lonely element found, or nullptr otherwise
-Element* Node::_List::Get_lonely_elements()
+Element* Circuit::_List::Get_lonely_elements()
 {
     for (int i = 0; i < v.size(); i++)
     {
@@ -105,7 +105,7 @@ Element* Node::_List::Get_lonely_elements()
 // removes element from list, it doesn't delete it from memory
 // if found, it removes it and retunrs true
 // otherwise returns false
-bool Node::_List::Remove(Element* e)
+bool Circuit::_List::Remove(Element* e)
 {
     for (int i = 0; i < v.size(); i++)
     {
@@ -120,13 +120,13 @@ bool Node::_List::Remove(Element* e)
 }
 
 // clears the vector from data
-void Node::_List::Clear()
+void Circuit::_List::Clear()
 {
     v.clear();
 }
 
 // for debugging
-void Node::_List::Print()
+void Circuit::_List::Print()
 {
     for (int i = 0; i < v.size(); i++)
         cout << v[i]->GetId() << ' ' << v[i]->GetType() << ' ' << v[i]->GetValue() << '\n';

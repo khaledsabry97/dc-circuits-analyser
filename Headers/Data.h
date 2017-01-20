@@ -2,8 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <limits>
-#include "errors.h"
+#include "Errors.h"
 #include "Interface.h"// TODO: find another name/use for this header
 using namespace std;
 
@@ -13,6 +12,7 @@ using namespace std;
 
 // TODO: solve problem of infinte loop when entering invalid key
 // TODO: add functionality to enable/disable colors
+// TODO: check why it terminates with segmentation fault when circuit is not full (has one element)
 
 // see Circuit::GetNode and Circuit::HasNode
 enum SEARCH_BY {ID, VOLT};
@@ -23,17 +23,27 @@ enum Type {R, E, J};
 class Element
 {
     public:
+        // constructors
         Element(const char &type, const int &id, const double &val);
-        Element(const char &type, const int &id, const double &val, const int &node_id);//TODO
+
+        // only used in Circuit::Read
+        Element(const char &type, const int &id, const double &val, const int &node_id);
+
         char GetType();
         void ChangeType(const char &c);
+
         Element* GetNext();
         Element* GetPrev();
+
         int GetId();
-        int GetNodeId();//TODO
         void ChangeId(const int &num);
+
+        // return id of node which contains this element
+        int GetNodeId();
+        
         double GetValue();
         void ChangeValue(const double &num);
+
         Element* Copy();
         bool operator== (Element&);
 
@@ -58,21 +68,38 @@ class Element
 class Node 
 {
     public:
+
         int GetId();
+
         void ChangeVolt(const double &v);
+
         double GetVolt();
+
         int GetNumOfElements();
+
+        // true if node has nodes > 2
         bool IsEssential();
+
         bool IsEmpty();
+
         Element* GetFirstElement();
+
         Node* GetNext();
         Node* GetPrev();
+
         void Add(Element* e);
         bool Remove(Element* e);
+
         Element* GetElement(char type, const int &id);
         bool HasElement(char type, const int &id);
+
+        // constructor, used only on reading the circuit 
         Node(const int &id);
+
+        // destructor
         ~Node();
+
+        // return address of a copy of the node
         Node* Copy();
 
     private:
@@ -82,21 +109,6 @@ class Node
         const int _id;
         double _volt;
         int _numElements;
-
-        class _List
-        {
-            private:
-                vector<Element*> v;
-
-                void _Check(Element* e, int &occ);
-
-            public:
-                int Add(Element*);
-                Element* Get_lonely_elements();
-                bool Remove(Element* e);
-                void Clear();
-                void Print();
-        };
 
         friend class Circuit; 
 };
@@ -160,16 +172,38 @@ class Circuit
         void Print();
         
     private:
+        // temp list for elements while reading
+        class _List
+        {
+            private:
+                vector<Element*> v;
+
+                void _Check(Element* e, int &occ);
+
+            public:
+                int Add(Element*);
+                Element* Get_lonely_elements();
+                bool Remove(Element* e);
+                void Clear();
+                void Print();
+        };
+
         Node* _firstNode;
         Node* _lastNode;
         int _numNodes;
 
         bool _IsIt(Node* ptr, const double &val, SEARCH_BY type);
         void _RemoveDuplicates();
-        void _Copy_this_toMe(Circuit*);
-        void _Check_invalid_nodes();
+        void _Copy_this_to_me(Circuit*);
+        void _Remove_invalid_nodes();
         void _Push_back(Node* n);
         void _Push_front(Node* n);
         bool _Pop_back();
         bool _Pop_front();
+        void _Remove_lonely_elements(_List&);
+        void _Reread_if_empty();
+        void _Read_nodes(_List& list);
+        void _Read_elements(_List& list, Node* newNode, bool& continueReading, const int& nodeI);
+        void _Check_and_add_node(Node* newNode, _List& list ,int& nodeI, const bool& continueReading);
+        bool _Is_valid_type(char& readenChar);
 };

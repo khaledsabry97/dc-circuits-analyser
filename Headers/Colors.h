@@ -6,4 +6,4 @@
 #define YELLOW "\033[1;33m"
 #define CYAN "\033[0;36m"
 
-#define RESET_COLOR "\033[0m"
+#define WHITE "\033[0m"

@@ -48,7 +48,7 @@ void Circuit::_RemoveDuplicates()
     }   
 }
 
-void Circuit::_Copy_this_toMe(Circuit* c)
+void Circuit::_Copy_this_to_me(Circuit* c)
 {
      // copy nodes
     Node* originalNode = c->GetFirstNode();
@@ -65,7 +65,7 @@ void Circuit::_Copy_this_toMe(Circuit* c)
 }
 
 // removes invalid nodes: that have one/zero elements
-void Circuit::_Check_invalid_nodes()
+void Circuit::_Remove_invalid_nodes()
 {
     Node* n = GetFirstNode();
     for (int count = 0; n; count++)
@@ -88,6 +88,176 @@ void Circuit::_Check_invalid_nodes()
         n = n->GetNext();
     }
 }
+
+void Circuit::_Remove_lonely_elements(_List& list)
+{
+    // remove lonely elements that occurred in list one time 
+    while (true)
+    {
+        Element* lonely = list.Get_lonely_elements();
+        if (!lonely)    // no lonely elements
+            break;
+
+        char type = lonely->GetType();
+        int id = lonely->GetId();
+
+        // look for it in nodes
+        Node* n = GetFirstNode();
+        Element* e = nullptr;
+        while (n)
+        {
+            e = n->GetElement(type, id);
+            if (e)  // found it 
+                break;
+            else    // not yet
+                n = n->GetNext();
+        }
+        if (!e) // not found after searching, there is a problem
+            assert(FOR_DEBUGGING && "cant find the lonely element");
+
+        // tell the user the details and delete it TODO: add colors to this 
+        cerr << "===> ERROR, found lonely element " << lonely->GetType() << lonely->GetId() << " in Node #" << n->GetId() 
+            << " ,Removing it\n" ;
+
+        // remove from list
+        list.Remove(e);  
+
+        // remove from node and memory  
+        n->Remove(e);   
+
+    }
+}
+
+void Circuit::_Reread_if_empty()
+{
+    if (IsEmpty())
+    {
+        // TODO: add colors
+        cerr << "====> ERROR! Circuit is Empty \n" << "Enter the circuit again\n";
+        Read();
+    }
+}
+
+void Circuit::_Read_nodes(_List& list)
+{
+    bool continueReading = true;
+
+    for (int nodeI = 1; continueReading; nodeI++)
+    {
+        cout << WHITE 
+            << "Node #" << nodeI << ":" 
+            << "\n";
+        
+        Node* newNode = new Node(nodeI);
+        
+        _Read_elements(list, newNode, continueReading, nodeI);
+
+        _Check_and_add_node(newNode, list ,nodeI, continueReading);
+    }
+}
+
+void Circuit::_Read_elements(_List& list, Node* newNode, bool& continueReading, const int& nodeI)
+{
+    // variables to store the element
+    char type;
+    int id;
+    double val;
+
+    Element* e = nullptr;
+
+    // loop through all elements
+    // TODO: use scanf instead of cin to parse arguments
+    // TODO: bug when entering more than one r or j it goes to Element
+    while (true)
+    {
+        cout << PROMPT;
+
+        // get first character, escape spaces
+        do cin >> type; 
+        while (type == ' ');
+
+        if (_Is_valid_type(type)) 
+        {
+            cin >> id >> val;
+            
+            try
+            {
+                e = new Element(type, id, val, nodeI);
+                list.Add(e);
+            }
+            catch(const error &err)
+            {
+                HandleError(err);
+                delete e;       
+                continue;
+            }
+
+            newNode->Add(e);
+        }
+
+        // TODO: enhance commands
+        else if (toupper(type) == 'X')   
+        {
+            // if user typed another x, end all circuit
+            type = cin.get();
+            if (toupper(type) == 'X') 
+                continueReading = false;
+            
+            break;
+        }
+        else if (toupper(type) == 'H')
+            cout << HELP;
+        else if (toupper(type) == 'P')
+            Print();
+        else
+            HandleError(BAD_TYPE_NAME);
+    }
+}
+
+bool Circuit::_Is_valid_type(char& readenChar)
+{
+    readenChar = toupper(readenChar);
+    switch(readenChar)
+    {
+        case 'R': break;
+        case 'J': break;
+        case 'E': break;
+
+        default: return false;
+    }
+    return true;
+}
+
+void Circuit::_Check_and_add_node(Node* newNode, _List& list ,int& nodeI, const bool& continueReading)
+{
+    if (newNode->IsEmpty())
+    {
+        // delete it and tell user that it's not added
+
+        // only tell user if he didn't type xx
+        if (continueReading)
+        {
+            cout << HANDLE_EMPTY_NODE;
+            delete newNode;
+            nodeI--;
+        }
+    }
+    else if (newNode->GetNumOfElements() == 1)  
+    {
+        cout << HANDLE_NODE_WITH_ONE_ELEM;
+        
+        // remove the element from the list before removing the node
+        list.Remove(newNode->GetFirstElement());
+
+        delete newNode;
+        nodeI--;
+    }
+    // valid node
+    else         
+        Add(newNode);
+}
+
+//  public:
 
 // for testing 
 void Circuit::Print()
@@ -113,8 +283,6 @@ void Circuit::Print()
 	}
 }
 
-//  public:
-
 // Deconstructor
 Circuit::~Circuit()
 {
@@ -124,198 +292,36 @@ Circuit::~Circuit()
 // Constructor
 Circuit::Circuit()
 	:_firstNode(nullptr), _lastNode(nullptr), _numNodes(0)
-	{}
+{
+}
 
 Circuit::Circuit(Circuit* c)
 {
-    _Copy_this_toMe(c);
+    _Copy_this_to_me(c);
 }
 
 Circuit::Circuit(Circuit& c)
 {
-    _Copy_this_toMe(&c);
+    _Copy_this_to_me(&c);
 }
 
 // read the whole circuit from the user
 void Circuit::Read()
 {
-    cout << HELP;
+    // TODO: make help function and add valid keywords
+    cout << HELP; 
 
-    // to store elements
-    Node::_List l;
+    // vector to store elements temporarily
+    _List list;
 
-    // read nodes
-    bool continueReading = true;
-    for (int nodeI = 1; continueReading; nodeI++)
-    {
-        cout << RESET_COLOR;
-        cout << "Node #" << nodeI << ":\n";
-        
-        Node* newNode = new Node(nodeI);
+    _Read_nodes(list);
+    
+    // handle issues
+    _Remove_lonely_elements(list);
 
-        // variables to store the element
-        char type;
-        int id;
-        double val;
-        
-        // read elements
-        while (true)
-        {
-            cout << PROMPT;
+    _Remove_invalid_nodes();     
 
-            // get first character 
-            cin >> type;
-
-            // user entered x
-            if (toupper(type) == 'X')   
-            {
-                // if user typed another x, end all circuit
-                type = cin.get();
-                if (toupper(type) == 'X') 
-                    continueReading = false;
-                
-                break;
-            }
-
-            // user entered h
-            else if (toupper(type) == 'H')
-                cout << HELP;
-
-            // user entered p
-            else if (toupper(type) == 'P')
-                Print();
-
-            // user entered element
-            else 
-            {
-                cin >> id >> val;
-
-                Element* e = nullptr;
-                
-                try
-                {
-                    e = new Element(type, id, val, nodeI);
-                    l.Add(e);
-                }
-                catch(const error &err)
-                {
-                    switch (err)
-                    {
-                        case SAME_POLARITY:
-                        {
-                            cerr << HANDLE_SAME_POLARITY;
-                            break;
-                        }
-                        case DUPLICATE_WITH_DIFF_VALUES:
-                        {
-                            cerr << HANDLE_DUPLICATE_WITH_DIFF_VALUES;
-                            break;
-                        }
-                        case DUPLICATE_ELEMENT:
-                        {   
-                            cerr << HANDLE_DUPLICATE_ELEMENT;
-                            break;
-                        }
-                        case BAD_TYPE_NAME:
-                        {
-                            cerr << HANDLE_BAD_TYPE_NAME;
-                            break;
-                        }
-                        case NEGATIVE_RESISTANCE:
-                        {
-                            cerr << HANDLE_NEGATIVE_RESISTANCE;
-                            break;
-                        }
-                        case INVALID_STORED_TYPE:
-                            assert(FOR_DEBUGGING && "INVALID_STORED_TYPE");
-                        default:
-                            assert(FOR_DEBUGGING && "unhandled exeption");
-                    }
-
-                    delete e;       
-                    continue;
-                }
-
-                newNode->Add(e);
-            }
-
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-
-        // if node is empty, delete it and tell user that it's not added
-        if (newNode->IsEmpty())
-        {
-            if (continueReading)
-            {
-                cout << HANDLE_EMPTY_NODE;
-                delete newNode;
-                nodeI--;
-            }
-        }
-        else if (newNode->GetNumOfElements() == 1)  // has one node
-        {
-            cout << HANDLE_NODE_WITH_ONE_ELEM;
-            
-            // remove the element from the list before removing the node
-            l.Remove(newNode->GetFirstElement());
-
-            delete newNode;
-            nodeI--;
-        }
-        else        //  node has > 1 element ,add it 
-            Add(newNode);
-
-    }
-
-    // remove lonely elements that occurred in list one time 
-    while (true)
-    {
-        Element* lonely = l.Get_lonely_elements();
-        if (!lonely)    // no lonely elements
-            break;
-
-        char type = lonely->GetType();
-        int id = lonely->GetId();
-
-        // look for it in nodes
-        Node* n = GetFirstNode();
-        Element* e = nullptr;
-        while (n)
-        {
-            e = n->GetElement(type, id);
-            if (e)  // found it 
-                break;
-            else    // not yet
-                n = n->GetNext();
-        }
-        if (!e) // not found after searching, there is a problem
-            assert(FOR_DEBUGGING && "cant find the lonely element");
-
-        // tell the user the details and delete it
-        cerr << "===> ERROR, found lonely element " << lonely->GetType() << lonely->GetId() << " in Node #" << n->GetId() 
-            << " ,Removing it\n" ;
-
-        // // debug
-        // Print();
-
-        l.Remove(e);    // remove from list
-        n->Remove(e);   // remove from node and memory
-
-        // // debug
-        // l.Print();
-    }
-
-    // clear list
-    l.Clear();
-
-    _Check_invalid_nodes();     // remove them
-
-
-    if (IsEmpty())
-    {
-        cerr << "====> ERROR! Circuit is Empty \n" << "Enter the circuit again\n";
-        Read();
-    }
+    _Reread_if_empty();
 }
 
 void Circuit::Add(Node* n)
