@@ -1,16 +1,15 @@
+/*
+      Node public methods source 
+*/
 #include "Data.h"
 
-/*      Node        */
 
-//  private:
-
-//  public:
 // constructor
 Node::Node(const int &id) 
 	:_id(id), _next(nullptr), _prev(nullptr), _firstElement(nullptr), _volt(0), _numElements(0)
 {}
 
-// next node:
+// next node
 Node* Node::GetNext()
 {
     return (_next);
@@ -115,7 +114,6 @@ int Node::GetId()
 }
 
 // destructor
-
 // delete all elements before deleting the node
 Node::~Node()
 {
