@@ -11,20 +11,28 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Circuit.cpp" />
-    <ClCompile Include="Element.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Node.cpp" />
-    <ClCompile Include="Solving.cpp" />
+    <ClCompile Include="Sources\Circuit.cpp" />
+    <ClCompile Include="Sources\Element.cpp" />
+    <ClCompile Include="Sources\Errors.cpp" />
+    <ClCompile Include="Sources\Hadi_Solving.cpp" />
+    <ClCompile Include="Sources\K&amp;Y_Solving.cpp" />
+    <ClCompile Include="Sources\Main.cpp" />
+    <ClCompile Include="Sources\Node.cpp" />
+    <ClCompile Include="Sources\_Circuit.cpp" />
+    <ClCompile Include="Sources\_Element.cpp" />
+    <ClCompile Include="Sources\_Input.cpp" />
+    <ClCompile Include="Sources\_List.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Data.h" />
     <ClInclude Include="Documentation\Circuit Doc.h" />
     <ClInclude Include="Documentation\Element Doc.h" />
     <ClInclude Include="Documentation\Node Doc.h" />
-    <ClInclude Include="Equation.h" />
-    <ClInclude Include="Solving.h" />
-    <ClInclude Include="test.h" />
+    <ClInclude Include="Headers\Colors.h" />
+    <ClInclude Include="Headers\Data.h" />
+    <ClInclude Include="Headers\Errors.h" />
+    <ClInclude Include="Headers\Solving.h" />
+    <ClInclude Include="Headers\Test.h" />
+    <ClInclude Include="Headers\___.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CB6BBCC1-2FCF-4093-8B83-351352FA1800}</ProjectGuid>
@@ -58,6 +66,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)\Headers;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
