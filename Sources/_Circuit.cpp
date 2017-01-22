@@ -156,32 +156,21 @@ void Circuit::_Read_nodes(_List& list)
     }
 }
 
-void Circuit::_Read_elements(_List& list, Node* newNode, bool& continueReading, const int& nodeI)
+void Circuit::_Read_elements(_List& list, Node* newNode, bool& reading_nodes, const int& nodeI)
 {
-    // variables to store the element
-    char type;
-    int id = 0;
-    double val = 0;
-
     Element* e = nullptr;
-
-    int temp = 0;
+    bool reading_elements = true;
+    _Input input;
 
     // loop through all elements
-    // TODO: use scanf instead of cin to parse arguments
     // TODO: bug when entering more than one r or j it goes to Element
-    while (true)
+    // TODO: BUG: id is allowed to be negative, how?
+    while (reading_elements)
     {
-        cout << PROMPT;
-
-        // get first character, escape spaces
-        do cin >> type; 
-        while (type == ' ');
-
-        if (_Is_valid_type(type)) 
+        input.Get();
+        
+        if (input.IsElement()) 
         {
-            cin >> id >> val;
-            
             try
             {
                 e = new Element(type, id, val, nodeI);
@@ -189,41 +178,44 @@ void Circuit::_Read_elements(_List& list, Node* newNode, bool& continueReading, 
             }
             catch(const error &err)
             {
-                HandleError(err);
-                cout << err;
-                if (err == BAD_TYPE_NAME || err == DUPLICATE_ELEMENT)
-                    temp++;
-                cout << temp << '\n';
-                if (temp > 10)
-                    assert(FOR_DEBUGGING);
-
-                // escape this when element constructor is the thrower of problem
-                // TODO: their is a better way to approach this solution
-                if (err != NEGATIVE_RESISTANCE and err != BAD_TYPE_NAME)
-                    delete e;       
-
                 continue;
             }
 
             newNode->Add(e);
         }
-
-        // TODO: enhance commands
-        else if (toupper(type) == 'X')   
+        else if (input.IsCommand())
         {
-            // if user typed another x, end all circuit
-            type = cin.get();
-            if (toupper(type) == 'X') 
-                continueReading = false;
-            
-            break;
+            // TODO: export to a function
+            switch (input.GetCommand())
+            {
+                case Help:
+                {
+                    cout << HELP; 
+                    break;
+                } 
+                case Print:
+                {
+                    Print();
+                    break;
+                }
+                case EndAll:
+                {
+                    reading_nodes = false;
+                    return;
+                }
+                case EndNode:
+                {
+                    reading_elements = false;
+                    break;
+                }
+                default: 
+                    assert(FOR_DEBUGGING && "unhandled exception, returned command is unknown");
+            }
         }
-        else if (toupper(type) == 'H')
-            cout << HELP;
-        else if (toupper(type) == 'P')
-            Print();
-        else
-            HandleError(BAD_TYPE_NAME);
+        else if (input.IsInvalid())
+            HandleError(INVALID_INPUT);
+
+        input.Reset();
     }
 }
 

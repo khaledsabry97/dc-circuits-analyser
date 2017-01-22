@@ -51,17 +51,22 @@ void Circuit::_List::_Check(Element* e, int &occ)
 
 // adds address of element in list
 // returns number of occurrences of that element
-// set check to true to make it check errors during adding to list
+// TODO: change return type
 int Circuit::_List::Add(Element* e)
 {
     // number of times that this element hadd occurred in vector
     int occ = 0;
 
-    _Check(e, occ);
-
-    // TODO: what the hell is this?
-    // if (e->GetType() == 'J' && e->GetId() == 1)
-    //     cout << "this shouldnt be printed\n";
+    try
+    {
+        _Check(e, occ);
+    }
+    catch (const error &err)
+    {
+        HandleError(err);
+        delete e;
+        return occ;
+    }
 
     // add it 
     v.push_back(e);

@@ -180,7 +180,7 @@ class Circuit
         class _List
         {
             private:
-                vector<Element*> v;
+                vector<Element*> v;// TODO: make it a list not vector (if you can)
 
                 void _Check(Element* e, int &occ);
 
@@ -191,6 +191,91 @@ class Circuit
                 void Clear();
                 void Print();
         };
+
+        // handle user input in reading
+        class _Input
+        {
+            private:
+                // commands available to user
+                enum _Command {
+                        Help,
+                        Print, 
+                        EndNode, 
+                        EndAll,
+                        NotCommand,
+                    };
+
+                string _line;
+                bool _is_valid;
+                _Command _cmd;
+
+            public:
+                char type;
+                int id;
+                double val;
+
+                _Iinput()
+                    :_is_valid(false), type('\0'), id(-1), val(-1), _cmd(NotCommand);
+                
+                // TODO: prevent adding invalid line like this j1 without val
+                // TODO: when typing jj or tt it should be invalid not duplicate
+                void Get()
+                {
+                    cout << PROMPT;
+
+                    getline(cin, line);
+                    sscanf(line.c_str()," %c%i %lf ", &type, &id, &val);
+                    type = toupper(type);
+
+
+
+                    else if (type == 'X')   
+                    {
+                        // if user typed another x, end all circuit
+                        if (sscanf(stdin_line.c_str(), " x%c", &type) == 1)
+                        {
+                            if (toupper(type) == 'X')
+                            {
+                                continueReading = false;
+                                break;
+                            }
+                            // user typed something else after x
+                            else
+                                HandleError(INVALID_INPUT);
+                        }
+                        // if user typed one x, then break the loop
+                        else
+                            break;
+
+                    }
+                }
+
+                bool IsElement()
+                {
+                    return (_is_valid && );
+                }
+
+                bool IsCommand()
+                {
+                    return (_cmd != NotCommand);
+                }
+
+                bool IsValid()
+                {
+                    return _is_valid;
+                }
+
+                _Command GetCommand()
+                {
+                    return (_cmd);
+                }
+
+                void Reset()
+                {
+                    _Input();
+                }
+        } 
+        
 
         Node* _firstNode;
         Node* _lastNode;
@@ -207,7 +292,7 @@ class Circuit
         void _Remove_lonely_elements(_List&);
         void _Reread_if_empty();
         void _Read_nodes(_List& list);
-        void _Read_elements(_List& list, Node* newNode, bool& continueReading, const int& nodeI);
+        void _Read_elements(_List& list, Node* newNode, bool& reading_nodes, const int& nodeI);
         void _Check_and_add_node(Node* newNode, _List& list ,int& nodeI, const bool& continueReading);
         bool _Is_valid_type(char& readenChar);
 };

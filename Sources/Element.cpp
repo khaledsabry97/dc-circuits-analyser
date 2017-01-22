@@ -14,13 +14,21 @@ Element::Element(const char &type, const int &id, const double &val)
 
 // constructor for Circuit::Read() to assign the element its node_id on creation
 // before testing it and adding to its node
-Element::Element(const char &type, const int &id, const double &val, const int &node_id)//TODO
+Element::Element(const char &type, const int &id, const double &val, const int &node_id)
     :_next(nullptr), _prev(nullptr), _type(R), _id(-1), _value(0)
 {
-    _SetType(type);
-    _SetId(id);
-    _SetValue(val);
-    _SetNodeId(node_id);
+    try
+    {
+        _SetType(type);
+        _SetId(id);
+        _SetValue(val);
+        _SetNodeId(node_id);
+    }
+    catch (const error &err)
+    {
+        HandleError(err);
+        throw err;
+    }
 }
 
 // Type:
