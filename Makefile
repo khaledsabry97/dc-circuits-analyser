@@ -35,6 +35,9 @@ archieve:
 	cp -n ./test/input ./test/archieve
 	cp -n ./test/result ./test/archieve/result 
 
+duty:
+	egrep -H -n 'BUG|TODO'  Sources/* Headers/* -A 1 -B 1
+
 clean:
 	rm $(EXEC) 2> /dev/null
 	rm -r *.dSYM $(BLD_DIR)/*.dSYM 2> /dev/null
