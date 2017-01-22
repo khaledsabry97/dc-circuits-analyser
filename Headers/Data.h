@@ -13,25 +13,31 @@ using namespace std;
 #define NULL nullptr
 #endif
 
-// TODO: solve problem of infinte loop when entering invalid key
 // TODO: add functionality to enable/disable colors
-// TODO: check why it terminates with segmentation fault when circuit is not full (has one element)
-// TODO: bug when entering one node with this element r1 1
+// BUG: terminates with segmentation fault when circuit is not full (has one element) or has no node
+// BUG: when entering one node with this element r1 1
+// BUG: invalid key tells it is negative resistance (rty)
+// BUG: type (r) and it prints negative resistance
+// BUG: type (p) and it will continue printing 
+// BUG: cant exit from program, gets in infinte loop 
 
 // see Circuit::GetNode and Circuit::HasNode
-enum SEARCH_BY {ID, VOLT};
+enum 
+SEARCH_BY {ID, VOLT};
 
 // element's type
-enum Type {R, E, J};
+enum 
+Type {R, E, J};
 
 // commands available to user
-enum Command {
-        Help,
-        Print_Circuit, 
-        EndNode, 
-        EndAll,
-        NotCommand,
-    };
+enum 
+Command {
+    Help,
+    Print_Circuit, 
+    EndNode, 
+    EndAll,
+    NotCommand,
+};
 
 class Element
 {
