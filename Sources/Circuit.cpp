@@ -26,10 +26,11 @@ Circuit::~Circuit()
 }
 
 // read the whole circuit from the user
-void Circuit::Read()
+void Circuit::Read(bool start_with_printing_help)
 {
     // TODO: make help function and add valid keywords
-    cout << HELP; 
+    if (start_with_printing_help)
+        cout << HELP; 
 
     // vector to store elements temporarily
     _List list;
@@ -51,9 +52,24 @@ void Circuit::Print()
 		cout << "The Circuit Is Empty\n";
 	else
 	{
+        // get nodes in an array
+        int size = GetNumOfNodes();
+        Node** arr = new Node*[size];
+
+        // loop through nodes
 		Node* n = GetFirstNode();
         while (n)
         {
+            arr[n->GetId() - 1] = n;
+
+            n = n->GetNext();
+        }
+
+        // print them sorted in the array
+        for (int i = 0; i < size; i++)
+        {
+            n = arr[i];
+            
             cout << "---Node #" << n->GetId() << " with voltage " << n->GetVolt() << " volt\n";
 
             Element* e = n->GetFirstElement();
@@ -62,11 +78,10 @@ void Circuit::Print()
                 cout << "-Element " << e->GetType() << e->GetId() << " = " << e->GetValue() << '\n';
                 e = e->GetNext();
             }
-
-            n = n->GetNext();
         }
 	}
 }
+            
 
 void Circuit::Add(Node* n)
 {

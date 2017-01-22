@@ -14,20 +14,16 @@ using namespace std;
 #endif
 
 // TODO: add functionality to enable/disable colors
-// BUG: terminates with segmentation fault when circuit is not full (has one element) or has no node
-// BUG: when entering one node with this element r1 1
-// BUG: invalid key tells it is negative resistance (rty)
-// BUG: type (r) and it prints negative resistance
-// BUG: type (p) and it will continue printing 
-// BUG: cant exit from program, gets in infinte loop 
+// TODO: edit Circuit::Print to print in order using an array
+// TODO: help is printed in the beginning of the program only
 
 // see Circuit::GetNode and Circuit::HasNode
 enum 
-SEARCH_BY {ID, VOLT};
+SEARCH_BY { ID, VOLT };
 
 // element's type
 enum 
-Type {R, E, J};
+Type { R, E, J };
 
 // commands available to user
 enum 
@@ -36,7 +32,7 @@ Command {
     Print_Circuit, 
     EndNode, 
     EndAll,
-    NotCommand,
+    InvalidCommand,
 };
 
 class Element
@@ -150,7 +146,8 @@ class Circuit
         int GetNumOfNodes();
 
         // read nodes from user
-        void Read();
+        // prints the help at beginning, pass false to prevent it
+        void Read(bool start_with_printing_help = true);
 
         // deconstructor, 
         // this is called automatically when circuit is deleted
@@ -200,7 +197,7 @@ class Circuit
                 void _Check(Element* e, int &occ);
 
             public:
-                int Add(Element*);
+                void Add(Element*);
                 Element* Get_lonely_elements();
                 bool Remove(Element* e);
                 void Clear();
@@ -212,8 +209,16 @@ class Circuit
         {   
             private:
 
+                enum 
+                InputType {
+                    CMD, 
+                    ELMNT,
+                    INVALID,
+                    UNKNOWN
+                };
+
                 string _line;
-                bool _is_valid;
+                InputType input_type;
                 Command _cmd;
 
                 void Command_Parse();

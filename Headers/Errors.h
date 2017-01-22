@@ -31,7 +31,7 @@ enum error {
 // strings to handle errors
 #define HANDLE_SAME_POLARITY RED "\tTheir is two source elements with the same polarity, deleting the last one\n" WHITE
 #define HANDLE_DUPLICATE_ELEMENT RED "\tDuplicate element, deleting it\n" WHITE
-#define HANDLE_DUPLICATE_WITH_DIFF_VALUES RED "\tfound two elements having same ID and differnt values, deleting the last one\n" WHITE
+#define HANDLE_DUPLICATE_WITH_DIFF_VALUES RED "\tFound two elements having same ID and differnt values, deleting the last one\n" WHITE
 #define HANDLE_BAD_TYPE_NAME RED "\tInvalid Type, please re-enter it\n" WHITE
 #define HANDLE_NEGATIVE_RESISTANCE RED "\tResistance can't be negative, deleted it\n" WHITE
 #define HANDLE_EMPTY_NODE RED "\tLast node is empty, deleting it\n" WHITE

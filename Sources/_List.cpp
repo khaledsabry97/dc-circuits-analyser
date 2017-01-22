@@ -1,9 +1,9 @@
+/*     
+        Circuit::_List
+     list to store elements while reading
+     used for issue tracking (error handling during reading)
+*/
 #include "Data.h"
-
-/*     Circuit::_List     */
-
-// list to store elements while reading
-// used for issue tracking (error handling during reading)
 
 //      private:
 
@@ -32,6 +32,9 @@ void Circuit::_List::_Check(Element* e, int &occ)
                 // error if the source is duplicate with the same polarity in both nodes
                 if (e->GetValue() == v[i]->GetValue())
                     throw SAME_POLARITY;
+                // error if source is duplicate with different values 
+                else if (e->GetValue() != - v[i]->GetValue())
+                    throw DUPLICATE_WITH_DIFF_VALUES;
             }
             // resistance element
             else
@@ -50,9 +53,7 @@ void Circuit::_List::_Check(Element* e, int &occ)
 //      public:
 
 // adds address of element in list
-// returns number of occurrences of that element
-// TODO: change return type
-int Circuit::_List::Add(Element* e)
+void Circuit::_List::Add(Element* e)
 {
     // number of times that this element hadd occurred in vector
     int occ = 0;
@@ -65,13 +66,11 @@ int Circuit::_List::Add(Element* e)
     {
         HandleError(err);
         delete e;
-        return occ;
+        throw err;
     }
 
     // add it 
     v.push_back(e);
-
-    return occ;
 }
 
 // detects lonely elements

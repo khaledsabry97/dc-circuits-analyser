@@ -84,8 +84,9 @@ void Circuit::_Remove_invalid_nodes()
             n = n->GetNext();
             Remove(temp);
         }
+        else
+            n = n->GetNext();
 
-        n = n->GetNext();
     }
 }
 
@@ -134,7 +135,7 @@ void Circuit::_Reread_if_empty()
     {
         // TODO: add colors
         cerr << "====> ERROR! Circuit is Empty \n" << "Enter the circuit again\n";
-        Read();
+        Read(false);
     }
 }
 
@@ -163,7 +164,7 @@ void Circuit::_Read_elements(_List& list, Node* newNode, bool& still_reading_nod
     _Input input;
 
     // loop through all elements
-    // TODO: bug when entering more than one r or j it goes to Element
+    
     while (still_reading_elements)
     {
         // get/parse input 
@@ -260,7 +261,6 @@ void Circuit::_HadleCommand(const Command &cmd, bool &still_reading_nodes, bool 
         case EndAll:
         {
             still_reading_nodes = false;
-            return;
         }
         case EndNode:
         {
@@ -268,6 +268,6 @@ void Circuit::_HadleCommand(const Command &cmd, bool &still_reading_nodes, bool 
             break;
         }
         default: 
-            assert(FOR_DEBUGGING && "unhandled exception, returned command is unknown");
+            HandleError(INVALID_INPUT);
     }
 }

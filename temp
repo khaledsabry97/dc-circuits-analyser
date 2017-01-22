@@ -1,0 +1,15 @@
+if [ ! -x Build/main ]; then make main; fi
+Build/main
+[0;32mEnter the elements node by node 
+Only the following commands are valid:-
+----> x or X	ends the node
+----> xx or XX	ends all nodes
+----> h or H	prints this help
+----> p or P	prints the completed nodes
+----> Ctrl+z or Ctrl+c exit program
+
+[0m[0mNode #1:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0mNode #2:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0mNode #3:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0mNode #4:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m
