@@ -1,6 +1,22 @@
 #include "Solving.h"
 
 // remove all Voltage sources and current sources
+void Disable_Sources(Circuit* c);
+
+// calculate voltage between two nodes
+int Voltage(Node* n1, Node* n2);
+
+// calculate amper between two nodes
+int Ampere(Node* n1, Node* n2, Element* e);
+
+// calculate Power between two nodes
+int Power(Element* e, Circuit* c);
+
+// find the two nodes that contains that element 
+void Get_2_Nodes(Element* e, Node* &n1, Node* &n2, Circuit* c);
+
+
+// remove all Voltage sources and current sources
 void Disable_Sources(Circuit* c)
 {
 	Node* n = c->GetFirstNode();

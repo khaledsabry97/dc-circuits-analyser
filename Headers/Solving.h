@@ -1,3 +1,7 @@
+/*
+        Getting voltages, current and power funcitons
+    by Hadi, Khaled and M.Youssri 
+*/
 #pragma once
 #include "Data.h"
 #include <iostream>
@@ -41,17 +45,4 @@ void SolveNonEss(Circuit *&c);
 
 /*              Khaled & Youssri             */
 
-// remove all Voltage sources and current sources
-void Disable_Sources(Circuit* c);
-
-// calculate voltage between two nodes
-int Voltage(Node* n1, Node* n2);
-
-// calculate amper between two nodes
-int Ampere(Node* n1, Node* n2, Element* e);
-
-// calculate Power between two nodes
-int Power(Element* e, Circuit* c);
-
-// find the two nodes that contains that element 
-void Get_2_Nodes(Element* e, Node* &n1, Node* &n2, Circuit* c);
+// TODO: write definitions for them

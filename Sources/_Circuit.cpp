@@ -160,10 +160,12 @@ void Circuit::_Read_elements(_List& list, Node* newNode, bool& continueReading, 
 {
     // variables to store the element
     char type;
-    int id;
-    double val;
+    int id = 0;
+    double val = 0;
 
     Element* e = nullptr;
+
+    int temp = 0;
 
     // loop through all elements
     // TODO: use scanf instead of cin to parse arguments
@@ -188,7 +190,18 @@ void Circuit::_Read_elements(_List& list, Node* newNode, bool& continueReading, 
             catch(const error &err)
             {
                 HandleError(err);
-                delete e;       
+                cout << err;
+                if (err == BAD_TYPE_NAME || err == DUPLICATE_ELEMENT)
+                    temp++;
+                cout << temp << '\n';
+                if (temp > 10)
+                    assert(FOR_DEBUGGING);
+
+                // escape this when element constructor is the thrower of problem
+                // TODO: their is a better way to approach this solution
+                if (err != NEGATIVE_RESISTANCE and err != BAD_TYPE_NAME)
+                    delete e;       
+
                 continue;
             }
 

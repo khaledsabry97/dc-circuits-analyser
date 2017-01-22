@@ -99,7 +99,7 @@ bool Element::operator== (Element& e)
 
 // return current node id
 // throws NODE_ID_IN_ELEM_UNASSIGNED if id wasn't assigned
-int Element::GetNodeId()//TODO
+int Element::GetNodeId()
 {
     if (_node_id != -1)
         return (_node_id);

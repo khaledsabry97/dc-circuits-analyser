@@ -18,6 +18,7 @@ void Element::_SetType(const char &c)
             _type = J;
             break;
         default:
+            assert(FOR_DEBUGGING);
             throw BAD_TYPE_NAME;
     }
 }

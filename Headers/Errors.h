@@ -20,7 +20,7 @@ enum error
     DUPLICATE_ELEMENT, 
     BAD_TYPE_NAME, 
     NEGATIVE_RESISTANCE, 
-    INVALID_STORED_TYPE, 
+    INVALID_STORED_TYPE, // when a type is stored against rules, happens when accessing invalid memory
     LONELY_ELEMENT,
     DEREF_NULL_PTR,
     DEL_ELEMENT_FROM_WRONG_NODE,

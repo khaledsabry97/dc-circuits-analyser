@@ -1,3 +1,6 @@
+/*
+        Data structure definitions 
+*/
 #pragma once
 #include <iostream>
 #include <string>
@@ -13,6 +16,7 @@ using namespace std;
 // TODO: solve problem of infinte loop when entering invalid key
 // TODO: add functionality to enable/disable colors
 // TODO: check why it terminates with segmentation fault when circuit is not full (has one element)
+// TODO: bug when entering one node with this element r1 1
 
 // see Circuit::GetNode and Circuit::HasNode
 enum SEARCH_BY {ID, VOLT};
