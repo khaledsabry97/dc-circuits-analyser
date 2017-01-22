@@ -140,9 +140,9 @@ void Circuit::_Reread_if_empty()
 
 void Circuit::_Read_nodes(_List& list)
 {
-    bool continueReading = true;
+    bool still_reading_nodes = true;
 
-    for (int nodeI = 1; continueReading; nodeI++)
+    for (int nodeI = 1; still_reading_nodes; nodeI++)
     {
         cout << WHITE 
             << "Node #" << nodeI << ":" 
@@ -150,71 +150,52 @@ void Circuit::_Read_nodes(_List& list)
         
         Node* newNode = new Node(nodeI);
         
-        _Read_elements(list, newNode, continueReading, nodeI);
+        _Read_elements(list, newNode, still_reading_nodes, nodeI);
 
-        _Check_and_add_node(newNode, list ,nodeI, continueReading);
+        _Check_and_add_node(newNode, list ,nodeI, still_reading_nodes);
     }
 }
 
-void Circuit::_Read_elements(_List& list, Node* newNode, bool& reading_nodes, const int& nodeI)
+void Circuit::_Read_elements(_List& list, Node* newNode, bool& still_reading_nodes, const int& nodeI)
 {
     Element* e = nullptr;
-    bool reading_elements = true;
+    bool still_reading_elements = true;
     _Input input;
 
     // loop through all elements
     // TODO: bug when entering more than one r or j it goes to Element
-    // TODO: BUG: id is allowed to be negative, how?
-    while (reading_elements)
+    while (still_reading_elements)
     {
+        // get/parse input 
         input.Get();
         
+        // react
         if (input.IsElement()) 
         {
             try
             {
-                e = new Element(type, id, val, nodeI);
+                e = new Element(input.type, input.id, input.val, nodeI);
                 list.Add(e);
             }
-            catch(const error &err)
+            catch (const error &err)
             {
                 continue;
             }
-
-            newNode->Add(e);
+            // else
+            {
+                newNode->Add(e);
+            }
         }
         else if (input.IsCommand())
         {
-            // TODO: export to a function
-            switch (input.GetCommand())
-            {
-                case Help:
-                {
-                    cout << HELP; 
-                    break;
-                } 
-                case Print:
-                {
-                    Print();
-                    break;
-                }
-                case EndAll:
-                {
-                    reading_nodes = false;
-                    return;
-                }
-                case EndNode:
-                {
-                    reading_elements = false;
-                    break;
-                }
-                default: 
-                    assert(FOR_DEBUGGING && "unhandled exception, returned command is unknown");
-            }
+            _HadleCommand(input.GetCommand(), still_reading_nodes, still_reading_elements);
         }
         else if (input.IsInvalid())
+        {
             HandleError(INVALID_INPUT);
+        }
 
+        // reset variables
         input.Reset();
     }
 }
@@ -260,4 +241,33 @@ void Circuit::_Check_and_add_node(Node* newNode, _List& list ,int& nodeI, const 
     // valid node
     else         
         Add(newNode);
+}
+
+void Circuit::_HadleCommand(const Command &cmd, bool &still_reading_nodes, bool &still_reading_elements)
+{
+    switch (cmd)
+    {
+        case Help:
+        {
+            cout << HELP; 
+            break;
+        } 
+        case Print_Circuit:
+        {
+            Print();
+            break;
+        }
+        case EndAll:
+        {
+            still_reading_nodes = false;
+            return;
+        }
+        case EndNode:
+        {
+            still_reading_elements = false;
+            break;
+        }
+        default: 
+            assert(FOR_DEBUGGING && "unhandled exception, returned command is unknown");
+    }
 }
