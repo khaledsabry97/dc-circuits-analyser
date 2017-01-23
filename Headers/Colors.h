@@ -1,13 +1,17 @@
 /*  colors used by program  */
 
 #if defined(_WIN32)
-    #define RED ""
-    #define BLUE ""
-    #define GREEN ""
-    #define YELLOW ""
-    #define CYAN ""
+    // TODO: test this for windows
+    #include "colorwin/src/colorwin.hpp"
+    using namespace colorwin;
 
-    #define WHITE ""
+    #define RED color(red);
+    #define BLUE color(blue);
+    #define GREEN color(green);
+    #define YELLOW color(yellow);
+    #define CYAN color(cyan);
+
+    #define WHITE color(white);
 #else
     #define RED "\033[0;31m"
     #define BLUE "\033[0;34m"
