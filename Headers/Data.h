@@ -188,27 +188,31 @@ class Circuit
         void Print();
         
     private:
-        // temp list for elements while reading
+        // temp vector(TODO: list) for elements 
+        // store them while reading for error checking
         class _List
         {
             private:
-                vector<Element*> v;// TODO: make it a list not vector (if you can)
+                // TODO: make it a list not vector (if you can)
+                vector<Element*> v;
 
-                void _Check(Element* e, int &occ);
-
+                // check element is not duplicate/invalid before adding it
+                void _Check(Element* e);
             public:
                 void Add(Element*);
                 Element* Get_lonely_elements();
                 bool Remove(Element* e);
                 void Clear();
+                // debugging
                 void Print();
         };
 
         // handle user input in reading
+        // accepts command and elements
+        // NO error handling inside, expects to handle them externally using its functions
         class _Input
         {   
             private:
-
                 enum 
                 InputType {
                     CMD, 
@@ -218,10 +222,12 @@ class Circuit
                 };
 
                 string _line;
+
+                // is it command? element? or invalid?
                 InputType input_type;
                 Command _cmd;
 
-                void Command_Parse();
+                void _Command_Parse();
                 void _Element_Parse();
                 
 
@@ -230,14 +236,27 @@ class Circuit
                 int id;
                 double val;
 
+                // constructor
                 _Input();
-    
-                // parse the line and detect whether it has a command or not
+
+            // use this first
+                // parse the line 
+                // and detect whether it has a command or not
                 void Get();
+
+            // use those after parsing
+ 
                 bool IsElement();
+
                 bool IsCommand();
-                bool IsInvalid();
                 Command GetCommand();
+
+                // not valid command nor element
+                bool IsInvalid();
+
+            // reset variables in this class for next use
+                // when NOT used, results in unexpected behaviour 
+                // because variables still hold prev data
                 void Reset();
                 
         };
@@ -246,19 +265,47 @@ class Circuit
         Node* _lastNode;
         int _numNodes;
 
+        // is this given val (ID or VOLT) is in ptr? 
+        // used to increase readability
         bool _IsIt(Node* ptr, const double &val, SEARCH_BY type);
+
         void _RemoveDuplicates();
+
+        // take circuit and make me a deep copy of it 
+        // after: this circuit is the same as the given
         void _Copy_this_to_me(Circuit*);
+
+        // invalid node : has one element or empty
         void _Remove_invalid_nodes();
+
         void _Push_back(Node* n);
         void _Push_front(Node* n);
         bool _Pop_back();
         bool _Pop_front();
+
+        // lonely element : that exists one time
         void _Remove_lonely_elements(_List&);
+
+        // re-read this circuit if Circuit::Read ended with empty circuit
         void _Reread_if_empty();
+
         void _Read_nodes(_List& list);
         void _Read_elements(_List& list, Node* newNode, bool& still_reading_nodes, const int& nodeI);
+
+        // check node is valid before adding it
         void _Check_and_add_node(Node* newNode, _List& list ,int& nodeI, const bool& continueReading);
+
+        // is this given character a valid type?
+        // valid types: r, e, j
+        // why static? -to be called without making object of the circuit, it's nicer :)
         static bool _Is_valid_type(char& readenChar);
+
+        // make response according to given command from user input
+        // see Circuit::_Input and command enumerator
         void _HadleCommand(const Command &cmd, bool &still_reading_nodes, bool &still_reading_elements);
+
+        // invalid source : 
+        // current srcs in series OR
+        // voltage srcs in parallel
+        void _Remove_invalid_sources();
 };

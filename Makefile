@@ -32,11 +32,11 @@ test:
 
 archieve:
 	mkdir ./test/archieve
-	cp -n ./test/input ./test/archieve
-	cp -n ./test/result ./test/archieve/result 
+	cp -i ./test/input ./test/archieve
+	cp -i ./test/result ./test/archieve
 
 duty:
-	egrep -H -n 'BUG|TODO'  Sources/* Headers/* -A 1 -B 1
+	egrep -H -n '(BUG|TODO):'  Sources/*.* Headers/*.* -A 1 -B 1
 
 clean:
 	rm $(EXEC) 2> /dev/null

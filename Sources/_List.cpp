@@ -9,43 +9,55 @@
 
 // check the list from errors
 // throw error when found
-void Circuit::_List::_Check(Element* e, int &occ)
+void Circuit::_List::_Check(Element* e)
 {
-    // iterate through all elements in list before adding it 
-    for (int i = v.size(); i--;)
-    {
-        // if both elements are equal in id and type
-        if (*e == *v[i])
-        {
-            // now we have found the duplicate element in list
-            occ++;
+    // number of times that this element had occurred in vector
+    int duplicates = 0;
 
-            // if both are in same node, they are duplicate
-            if (e->GetNodeId() == v[i]->GetNodeId())
+    // iterate through all elements in list 
+    for (int i = 0; i < v.size(); i++)
+    {
+        // aliases, for convenience
+        Element*&     e_in_list   =    v[i];
+        Element*&     e_given     =    e;
+
+        // if both elements are equal in id and type
+        if (    e_given->GetId()     ==   e_in_list->GetId() 
+                                     && 
+                e_given->GetType()   ==   e_in_list->GetType()     )
+        {
+            // now we have found a duplicate element in list
+            duplicates++;
+
+            // duplicates cant be in same node
+            if (e_given->GetNodeId()     ==   e_in_list->GetNodeId())
                 throw DUPLICATE_ELEMENT;
 
-            // check the duplicate type:
-            //
-            // if it is source
-            if (e->GetType() != 'R')
+            // check duplicate type:
+
+            // resistance element
+            if (e_given->GetType() == 'R')
             {
-                // error if the source is duplicate with the same polarity in both nodes
-                if (e->GetValue() == v[i]->GetValue())
-                    throw SAME_POLARITY;
-                // error if source is duplicate with different values 
-                else if (e->GetValue() != - v[i]->GetValue())
+                // assert r_given == r_in_list
+                if (e_given->GetValue() != e_in_list->GetValue())
                     throw DUPLICATE_WITH_DIFF_VALUES;
             }
-            // resistance element
+
+            // current/voltage source
             else
             {
-                // resistance cant be duplicate with different values
-                if (e->GetValue() != v[i]->GetValue())
+                // assert   source1   !=   source2
+                if (e_given->GetValue()      ==       e_in_list->GetValue())
+                    throw SAME_POLARITY;
+
+                // assert   source1    == - source2
+                if (e_given->GetValue()      !=       - e_in_list->GetValue())
                     throw DUPLICATE_WITH_DIFF_VALUES;
             }
         }
 
-        if (occ > 2)
+        // we allow element to have one duplicate, no more
+        if (duplicates > 1)
             throw DUPLICATE_ELEMENT;
     }
 }
@@ -55,12 +67,9 @@ void Circuit::_List::_Check(Element* e, int &occ)
 // adds address of element in list
 void Circuit::_List::Add(Element* e)
 {
-    // number of times that this element hadd occurred in vector
-    int occ = 0;
-
     try
     {
-        _Check(e, occ);
+        _Check(e);
     }
     catch (const error &err)
     {

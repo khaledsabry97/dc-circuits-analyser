@@ -40,7 +40,9 @@ void Circuit::Read(bool start_with_printing_help)
     // handle issues
     _Remove_lonely_elements(list);
 
-    _Remove_invalid_nodes();     
+    _Remove_invalid_nodes();   
+
+    _Remove_invalid_sources();  
 
     _Reread_if_empty();
 }

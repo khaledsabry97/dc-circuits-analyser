@@ -271,3 +271,8 @@ void Circuit::_HadleCommand(const Command &cmd, bool &still_reading_nodes, bool 
             HandleError(INVALID_INPUT);
     }
 }
+
+void Circuit::_Remove_invalid_sources()
+{
+    
+}

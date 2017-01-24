@@ -5,7 +5,7 @@
 
 //    private:
 
-void Circuit::_Input::Command_Parse()
+void Circuit::_Input::_Command_Parse()
 {
     switch (type)
     {
@@ -83,7 +83,7 @@ void Circuit::_Input::Get()
                 continue;
             case 1:
                 input_type = CMD;
-                Command_Parse();
+                _Command_Parse();
                 return;
             case 3:
                 input_type = ELMNT;
