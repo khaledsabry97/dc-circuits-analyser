@@ -45,4 +45,16 @@ void SolveNonEss(Circuit *&c);
 
 /*              Khaled & Youssri             */
 
-// TODO: write definitions for them
+double Get_Total_Supplied_Power(const Circuit*& circuit);
+
+double Get_Total_Dissipated_Power(const Circuit*& circuit);
+
+// returns true if total power is balanced, false otherwise
+bool Circuit_Is_Power_Balanced(const Circuit*& circuit);
+
+// get the value of resistance such that it
+// receives maximum power from the circuit
+double Get_Res_Max(const Circuit*& circiut, const Element*& resistance);
+
+// for the given resistance
+double Get_Pow_Max(const Circuit*& circiut, const Element*& resistance);
