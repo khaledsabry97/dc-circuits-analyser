@@ -27,6 +27,9 @@ void Circuit::_Input::_Command_Parse()
         case 'P':
             _cmd = Print_Circuit;
             break;
+        case 'C':
+            _cmd = Print_Credits;
+            break;
         default: 
             input_type = INVALID;
             break;

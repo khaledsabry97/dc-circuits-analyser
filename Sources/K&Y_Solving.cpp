@@ -18,15 +18,6 @@ void Get_2_Nodes(Element* e, Node* &n1, Node* &n2, Circuit* c);
 // remove all Voltage sources and current sources only one source remains
 Circuit* Disable_Sources_superpostion(Circuit* c,Element* e_temp);
 
-// calculate total power Dissipated in the circuit "positive"
-double Get_Total_Dissipated_Power(Circuit* c);
-
-// calculate total power supplied in the circuit "negative"
-double Get_Total_Supplied_Power(Circuit* c);
-
-// returns true if total power is balanced, false otherwise
-bool Circuit_Is_Power_Balanced(const Circuit*& c);
-
 // remove all Voltage sources and current sources only one source remains
 // return circuit with one (voltag or current) source 
 Circuit* Disable_Sources_superpostion(Circuit* c,Element* e_temp)
@@ -81,11 +72,11 @@ double Voltage(Node* n1, Node* n2)
 // calculate amper between two nodes
 double Ampere(Node* n1, Node* n2, Element* e, Circuit* c)
 {
-	if( e->GetType == 'J') 
+	if(e->GetType() == 'J') 
 		// if the element is a current source so return the value of the current source
 		return e->GetValue();
 
-	else if( e->GetType == 'E' )
+	else if(e->GetType() == 'E' )
 		// if the element is a voltage source so the voltage source must be between two nodes
 	{
 		if(!n1->IsEssential())
@@ -150,12 +141,15 @@ double Power(Element* e, Circuit* c)
 	Node* n1;
 	Node* n2;
 	Element* e_temp;
-	int id=e->GetType();
-	int i=0;
+	int id = e->GetType();
+	int i = 0;
 	int I;
-    Get_2_Nodes(e,n1,n2,c);
+
+
 	//get two nodes the have the element
-		switch (id)
+    Get_2_Nodes(e, n1, n2, c);
+	
+	switch (id)
 	{
 	case'E':
 		{
@@ -198,7 +192,7 @@ double Power(Element* e, Circuit* c)
 				if(e_temp->GetId() == e->GetId()&& e_temp->GetType() == e->GetType())
 				check = false;
 				else
-				e_temp =e_temp->GetNext;
+				e_temp = e_temp->GetNext();
 			}
 			return((n1->GetVolt()-n2->GetVolt())*(e_temp->GetValue()));
 		}
@@ -286,12 +280,13 @@ double Get_Total_Dissipated_Power(Circuit* c)
 // calculate total power supplied in the circuit "negative"
 double Get_Total_Supplied_Power(Circuit* c)
 {
-	Node* n1 = c->GetFirstNode();
-	Element* e1 =n1->GetFirstElement();
 	double TP = 0 ,P = 0, I;
-	while (n1!=NULL)
+
+	Node* n1 = c->GetFirstNode();
+	Element* e1 = n1->GetFirstElement();
+	while (n1 != NULL)
 	{
-		while( e1 !=NULL)
+		while(e1 != NULL)
 		{
 			if (e1->GetType() == 'E' || e1->GetType() == 'J' )
 			{
@@ -310,82 +305,78 @@ double Get_Total_Supplied_Power(Circuit* c)
 }
 
 // returns true if total power is balanced, false otherwise
-bool Circuit_Is_Power_Balanced(const Circuit*& c)
+bool Circuit_Is_Power_Balanced(Circuit* c)
 {
 	double TSP = Get_Total_Supplied_Power(c);
 	double TDP = Get_Total_Dissipated_Power(c);
-	return ( -1*TSP == TDP );
+	return ( -1 * TSP == TDP );
 }
 
 
-double Get_Res_Max(const Circuit*& circiut, const Element*& resistance)
-{      bool removed_1,removed_2;
-
-       Element* resistance_2;  //pointer to the resistance in second node
-
-	   int resistance_2id;     //to store id of resistance
-
-       Disable_Sources(circiut);
-   
-	   Node**nodes=new Node* [2];  //array of pointers to nodes that have resistance
-
-	   nodes = circiut->GetTerminals(resistance);   
-
-	   resistance_2id=resistance->GetId;
-
-	   removed_1 = nodes[0]->Remove(resistance);   //delete resistance in first node
-
-	   resistance_2= nodes[1]->GetElement(R, resistance_2id);
-
-	   removed_2 = nodes[1]->Remove(resistance_2);  //delete resistance in second node
-
-	    Element* e1 = new Element('j', 100, 1);    
-
-		Element* e2= new Element('j', 100, -1);
-
-		nodes[0]->Add(e1);                 //put current source in the place of resistance
-		                              
-		nodes[1]->Add(e2);
-
-		Circuit *c2 = circiut->Copy();		//Copying The Circuit To Another Pointer
-	   
-		voltageTransformation(c2);		//Voltage Source Transformation
-	    
-		solve(c2);
-	    
-		VoltageBack(c2, circiut);
-	   
-		SolveNonEss(circiut);	
-
-		return abs( Voltage(nodes[0], nodes[1]));    // voltage ==  Rth
-
-}
-
-
-double Get_Pow_Max(const Circuit*& circiut, const Element*& resistance)
+double Get_Res_Max(Circuit* circuit, Element* resistance)
 {
-     double vth;
-    
-	 Circuit *c2 = circiut->Copy();		//Copying The Circuit To Another Pointer
-	   
-	 voltageTransformation(c2);		//Voltage Source Transformation
-	    
-	  solve(c2);
-	    
-	  VoltageBack(c2, circiut);
-	   
-	  SolveNonEss(circiut);
+	bool removed_1,removed_2;
+	Element* resistance_2;  //pointer to the resistance in second node
+	int resistance_2id;     //to store id of resistance
 
-	   Node**nodes=new Node* [2];
+	Disable_Sources(circuit);
 
-	   nodes = GetTerminals(resistance);
+	Node** nodes = nullptr;  //array of pointers to nodes that have resistance
+	nodes = circuit->GetTerminals(resistance);   
 
-	   vth=Voltage(nodes[0], nodes[1]);   //Vth is the voltage acroos the resistance
+	resistance_2id = resistance->GetId();
 
-	  double rth= Get_Res_Max( circiut,  resistance);
+	removed_1 = nodes[0]->Remove(resistance);   //delete resistance in first node
 
-	  return (vth^2)/(4*rth);   //return pmax
+	resistance_2 = nodes[1]->GetElement(R, resistance_2id);
+
+	removed_2 = nodes[1]->Remove(resistance_2);  //delete resistance in second node
+
+	Element* e1 = new Element('j', 100, 1);    
+
+	Element* e2= new Element('j', 100, -1);
+
+	nodes[0]->Add(e1);                 //put current source in the place of resistance
+								
+	nodes[1]->Add(e2);
+
+	Circuit *c2 = circuit->Copy();		//Copying The Circuit To Another Pointer
+
+	voltageTransformation(c2);		//Voltage Source Transformation
+
+	solve(c2);
+
+	VoltageBack(c2, circuit);
+
+	SolveNonEss(circuit);	
+
+	return abs( Voltage(nodes[0], nodes[1]) );    // voltage ==  Rth
+}
 
 
+double Get_Pow_Max(Circuit* circuit, Element* resistance)
+{
+	double vth;
+
+	Circuit *c2 = circuit->Copy();		//Copying The Circuit To Another Pointer
+	
+	voltageTransformation(c2);		//Voltage Source Transformation
+	
+	solve(c2);
+	
+	VoltageBack(c2, circuit);
+	
+	SolveNonEss(circuit);
+
+	Node** nodes = circuit->GetTerminals(resistance);
+
+	vth = Voltage(nodes[0], nodes[1]);   //Vth is the voltage acroos the resistance
+
+	double rth = Get_Res_Max( circuit,  resistance);
+
+	// just for debugging
+	assert(rth != 0 && "trying to divide on zero, v-thevenin is zero, cant divide on it!");
+
+	return ((vth * vth )/( 4 * rth));   //return pmax
 
 }

@@ -92,7 +92,7 @@ void Circuit::_Remove_invalid_nodes()
 
 void Circuit::_Remove_lonely_elements()
 {
-    // create list again from this circiut
+    // create list again from this circuit
     _List list;
     Node* n = GetFirstNode();
     while (n)
@@ -268,6 +268,11 @@ void Circuit::_HadleCommand(const Command &cmd, bool &still_reading_nodes, bool 
             cout << HELP; 
             break;
         } 
+        case Print_Credits:
+        {
+            cout << CREDITS;
+            break;
+        }
         case Print_Circuit:
         {
             Print();

@@ -27,6 +27,7 @@ Type { R, E, J };
 enum 
 Command {
     Help,
+    Print_Credits,
     Print_Circuit, 
     EndNode, 
     EndAll,
@@ -172,7 +173,7 @@ class Circuit
 
         bool IsEmpty();
 
-        // operator overloading to copy given circiut to this
+        // operator overloading to copy given circuit to this
         Circuit& operator= (Circuit &c);
 
         // return a deep copy of this circuit
