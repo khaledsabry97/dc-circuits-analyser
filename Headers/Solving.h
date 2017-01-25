@@ -12,20 +12,33 @@ using namespace std;
 /*          Hadi          */
 
 // Matrix Solving Functions
-void insert(double **arr,double *arr2,int);
+
+void insert(double **arr,double *arr2,int);		//Inserting The Matrix
 void print(double **arr,double *arr2, int);		//Just  For Debuging The Matrix Work
-void swapMat(double arr[][50],double arr2[][1],int,int,double arr3[][50]);
-void intElements(double arr[][50],int);
-double detMat(double arr[][50],int);
-void DoublingMat(double **arr, int);
-void init(double **arr, int);
-double *SolvingMat(double **arr,double *arr2,int);
+void swapMat(double arr[][50],double arr2[][1],int,int,double arr3[][50]);		//Swaping The Matrix Column To Make The Detemined Matrix
+void intElements(double arr[][50],int);			//Doubling n-1 Column
+double detMat(double arr[][50],int);			//Determining The Matrix
+void DoublingMat(double **arr, int);			
+void init(double **arr, int);					//Initializing The Matrix
+double *SolvingMat(double **arr,double *arr2,int);		//Solving The Equations
+
 
 // My Own Functions
-int sizeOfTheMat(Circuit *c);
-double SearchNodeByElement(Element *e, Circuit *c);
-Node *SearchNode(Circuit *c, int ID);
-Element *SearchElement(Element *e, int, Circuit *c);
+
+int sizeOfTheMat(Circuit *c);					//Counting The Size Of The Matrix Using The Circuit
+
+int countCircuit(Circuit *c);					//Counting The Circuit Nodes
+
+double SearchNodeByElement(Element *e, Circuit *c);		//Searching For The Essential Node By The Element
+
+Node *SearchNodeNon(Element *&e, Circuit *c, int ID);	//Searching For The Non Essential Node By The Element [This Function Returns The another Node That Has The Element e And Returns The Another Element Next To The Element In The Node]
+
+Node *SearchNode(Circuit *c, int ID);				//Searching The Node By Its ID
+
+Element *SearchElement(Element *e, int, Circuit *c);		//Searching The Element
+
+void print(Circuit *c);		//Just For Testing
+
 
 //*******************Functions you can use [Orderd]*******************
 

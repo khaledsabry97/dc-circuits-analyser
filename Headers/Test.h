@@ -24,8 +24,29 @@ void Redirect_IO(bool redirect)
 	freopen(INPUT_FILE, "r", stdin);
 }
 
+void test_hadi_solving2()
+{
+    Circuit* c = new Circuit;
+    c->Read();						//Reading the Circuit
+	Circuit *c2 = c->Copy();		//Copying The Circuit To Another Pointer
+	voltageTransformation(c2);		//Voltage Source Transformation
+	cout << "Circuit Before Solving: "<<endl;
+	print(c2);						//Print The Circuit Data
+	solve(c2);						//Solve Essential Node Of The Copied Circuit
+	cout << "Circuit After Solving:"<<endl;
+	print(c2);	
+	VoltageBack(c2, c);				//This Function Get The Circuit Voltage From The Copied Circuit [c2] To The Main Circuit [c]
+	cout << "Main Circuit After Getting The Nodes Voltage Back To It: " <<endl;
+	print(c);
+	cout << "New Circuit After Solving:"<<endl;
+	SolveNonEss(c);					//Solvig Non Essential Nodes [This Function Take THe Main Circuit As A parameter]		
+	print(c);
+}
+
 int main()
 {
+	test_hadi_solving2();
+
 	Redirect_IO(false);
 
 	Circuit c;
