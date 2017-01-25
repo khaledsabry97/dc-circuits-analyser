@@ -5,6 +5,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <list>
+#include <tuple>
 #include "Errors.h"
 #include "___.h"// TODO: find another name/use for this header
 using namespace std;
@@ -260,10 +262,13 @@ class Circuit
                 void Reset();
                 
         };
-        
+
         Node* _firstNode;
         Node* _lastNode;
         int _numNodes;
+
+        // alias for tuple
+        typedef tuple<Element*, Node*, Node*> ElementTuple;
 
         // is this given val (ID or VOLT) is in ptr? 
         // used to increase readability
@@ -308,4 +313,9 @@ class Circuit
         // current srcs in series OR
         // voltage srcs in parallel
         void _Remove_invalid_sources();
+        void _Remove_invalid_voltage_sources(list<ElementTuple>& volt_list);
+        void _Remove_invalid_current_sources(list<ElementTuple>& curr_list);
+        // help remove invalid sources
+        void _Get_Sources(list<ElementTuple>& volt_list, list<ElementTuple>& curr_list);
+        void _Add_to_tuple_list(Element* e, Node* terminal, list<ElementTuple>& some_list);
 };

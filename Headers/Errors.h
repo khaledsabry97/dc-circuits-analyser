@@ -13,19 +13,22 @@ using namespace std;
 
 
 // identify different errors that might happen
-enum error {
+enum 
+error {
     SAME_POLARITY, 
-    DUPLICATE_WITH_DIFF_VALUES, // TODO: see why this is not going to appear
+    DUPLICATE_WITH_DIFF_VALUES, 
     DUPLICATE_ELEMENT, 
     BAD_TYPE_NAME, 
     NEGATIVE_RESISTANCE, 
-    INVALID_STORED_TYPE, // when a type is stored against rules, happens when accessing invalid memory
+    INVALID_STORED_TYPE, // stored type is against rules, usually happens when accessing invalid memory
     LONELY_ELEMENT,
     DEREF_NULL_PTR,
     DEL_ELEMENT_FROM_WRONG_NODE,
     NODE_ID_IN_ELEM_UNASSIGNED,
     INVALID_NODE_ID,
-    INVALID_INPUT
+    INVALID_INPUT,
+    PARALLEL_DIFF_VOLTAGES,
+    SERIES_DIFF_CURRENTS,
 };
 
 // strings to handle errors
@@ -37,6 +40,8 @@ enum error {
 #define HANDLE_EMPTY_NODE RED "\tLast node is empty, deleting it\n" WHITE
 #define HANDLE_NODE_WITH_ONE_ELEM RED "\tFound node with one element, deleting the node and the element\n" WHITE
 #define HANDLE_INVALID_INPUT RED "\tInvalid input, type h to see valid commands\n" WHITE
+#define HANDLE_PARALLEL_DIFF_VOLTAGES RED "\tFound two parallel voltage sources with different values, deleteing both of them\n" WHITE
+#define HANDLE_SERIES_DIFF_CURRENTS RED "\tFound two current sources with different values in series, deleteing both of them\n" WHITE
 
 // print the appropriate message for the error 
 // with color RED if colors are enabled

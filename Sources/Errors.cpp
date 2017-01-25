@@ -34,6 +34,16 @@ void HandleError(const error& err)
             cerr << HANDLE_INVALID_INPUT;
             break;
         }
+        case PARALLEL_DIFF_VOLTAGES:
+        {
+            cerr << HANDLE_PARALLEL_DIFF_VOLTAGES;
+            break;
+        }
+        case SERIES_DIFF_CURRENTS:
+        {
+            cerr << HANDLE_SERIES_DIFF_CURRENTS;
+            break;
+        }
         case INVALID_STORED_TYPE:
             assert(FOR_DEBUGGING && "INVALID_STORED_TYPE Exception has been thrown, you seem to be accessing invalid memory");
         default:

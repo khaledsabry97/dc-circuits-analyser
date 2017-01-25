@@ -274,5 +274,198 @@ void Circuit::_HadleCommand(const Command &cmd, bool &still_reading_nodes, bool 
 
 void Circuit::_Remove_invalid_sources()
 {
-    
+    /*pseudo-code:
+        get data
+            make list for current
+            --    --  for voltage
+            file them with tuples
+
+        track issues
+            v: terminals cant be duplic with different voltage value
+            c: one terminal cant be duplic in any with different curr value
+
+        O(n^2)
+    */
+
+    list<ElementTuple> volt_list;
+    list<ElementTuple> curr_list;
+
+    _Get_Sources(volt_list, curr_list);
+
+    _Remove_invalid_voltage_sources(volt_list);
+
+    _Remove_invalid_current_sources(curr_list);
+}
+
+// fill lists with sources from this circuit
+void Circuit::_Get_Sources(list<ElementTuple>& volt_list, list<ElementTuple>& curr_list)
+{
+    Node* n = GetFirstNode();
+    while (n)
+    {
+        Element* e = n->GetFirstElement();
+        while (e)
+        {
+            // is current source
+            if (e->GetType() == 'J')
+                _Add_to_tuple_list(e, n, curr_list);
+            // is voltage source
+            else if (e->GetType() == 'E')
+                _Add_to_tuple_list(e, n, volt_list);
+
+            e = e->GetNext();
+        }
+
+        n = n->GetNext();
+    }
+}
+
+// adds given element with its terminal(node) to the list
+void Circuit::_Add_to_tuple_list(Element* e, Node* terminal, list<ElementTuple>& some_list)
+{
+    /*pseudo-code:
+        // search in the list
+        // found it?   
+            // add terminal as second one
+        // no!
+            // make tuple
+            // add tuple
+    */
+
+    // search in reverse; to find a match quickly
+    for (auto itr = some_list.rbegin(); itr != some_list.rend(); itr++)
+    {
+        // aliases
+        Element*& e2 = get<0>(*itr);
+        Node*& new_terminal = get<2>(*itr);
+
+        // found
+        if (e == e2)
+        {
+            // add terminal as second one
+            new_terminal = terminal;
+        }
+    }
+
+    // not found
+    // add one
+    ElementTuple tpl(e, terminal, nullptr);
+    some_list.push_back(tpl);
+}
+
+// BUG: infinte loop, it seems it doesnt work
+// TODO: group all those aliases in one function 
+void Circuit::_Remove_invalid_voltage_sources(list<ElementTuple>& volt_list)
+{
+    // iterate volt sources
+    for (auto itr = volt_list.begin(); itr != volt_list.end(); itr++)
+    {
+        /*  aliases: e_tuple, e, e_term_1, e_term_2  */
+            ElementTuple& e_tuple = *itr;
+
+            Element*& e = get<0>(e_tuple);//element
+
+            // terminals in order
+            Node*& e_term_1 = get<1>(e_tuple);
+            Node*& e_term_2 = get<2>(e_tuple);
+
+        for (auto itr2 = next(itr); itr != volt_list.end(); itr2++)
+        {
+            /*  aliases: e2_tuple, e2, e2_term_1, e2_term_2 */
+                ElementTuple& e2_tuple = *itr2;
+
+                Element*& e2 = get<0>(e2_tuple);//element
+
+                // terminals in order
+                Node*& e2_term_1 = get<1>(e2_tuple);
+                Node*& e2_term_2 = get<2>(e2_tuple);
+
+
+            // terminals cant be duplic with different voltage value
+            if (e_term_1 == e2_term_1       &&       e_term_2 == e2_term_2)
+                if (e->GetValue()   !=   e2->GetValue())
+                {
+                    // tell user
+                    HandleError(PARALLEL_DIFF_VOLTAGES);
+
+                    // remove both of them
+                    //
+                    // remove from term_1
+                    e_term_1->Remove(e);
+                    e_term_1->Remove(e2);
+                    // remove from term_1
+                    e_term_2->Remove(e);
+                    e_term_2->Remove(e2);
+
+                    // remove tuples from list
+                    auto temp_itr = itr; itr++;
+                    volt_list.erase(temp_itr);
+                    volt_list.erase(itr2);
+
+                    // stop the inner loop
+                    break;
+                }
+        }
+    }
+}
+
+void Circuit::_Remove_invalid_current_sources(list<ElementTuple>& curr_list)
+{
+
+    // iterate current sources
+    for (auto itr = curr_list.begin(); itr != curr_list.end(); itr++)
+    {
+        /*  aliases: e_tuple, e, e_term_1, e_term_2  */
+            ElementTuple& e_tuple = *itr;
+
+            Element*& e = get<0>(e_tuple);//element
+
+            // terminals in order
+            Node*& e_term_1 = get<1>(e_tuple);
+            Node*& e_term_2 = get<2>(e_tuple);
+
+        for (auto itr2 = next(itr); itr != curr_list.end(); itr2++)
+        {
+            /*  aliases: e2_tuple, e2, e2_term_1, e2_term_2 */
+                ElementTuple& e2_tuple = *itr2;
+
+                Element*& e2 = get<0>(e2_tuple);//element
+
+                // terminals in order
+                Node*& e2_term_1 = get<1>(e2_tuple);
+                Node*& e2_term_2 = get<2>(e2_tuple);
+
+            // one terminal cant have a duplicate while curr valu is different
+            if (e_term_2 == e2_term_1)
+            {
+                if (e->GetValue()  !=  e2->GetValue())
+                {
+                    // tell user
+                    HandleError(PARALLEL_DIFF_VOLTAGES);
+
+                    // remove both of them
+                    //
+                    // remove from term_1
+                    e_term_1->Remove(e);
+                    e_term_1->Remove(e2);
+                    // remove from term_1
+                    e_term_2->Remove(e);
+                    e_term_2->Remove(e2);
+
+                    // remove tuples from list
+                    auto temp_itr = itr; itr++;
+                    curr_list.erase(temp_itr);
+                    curr_list.erase(itr2);
+                }
+                else // they are equall
+                {
+                    // just remove last one 
+                    curr_list.erase(itr2);
+                }
+
+                // stop the inner loop
+                break;
+            }
+        }
+    }
 }
