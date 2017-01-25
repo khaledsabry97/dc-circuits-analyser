@@ -1,8 +1,7 @@
 #include "Colors.h"
 
-// TODO add credits
+#define CREDITS YELLOW "Credits:\n> Hadi Maher\tMahmoud Youssri\n> Mohammed Magdi\tKhaled Sabri\tMahmoud Adas\n\n" WHITE
 
 #define PROMPT BLUE ">>> " CYAN
 
-#define HELP GREEN "Enter the elements node by node \nOnly the following commands are valid:-\n----> x or X\tends the node\n----> xx or XX\tends all nodes\n----> h or H\tprints this help\n----> p or P\tprints the completed nodes\n----> Ctrl+z or Ctrl+c exit program\n\n" WHITE
-// TODO: add valid types to the help message
+#define HELP GREEN "Enter the elements node by node \n\nValid Commands:-\n----> x \tend the node\n----> xx \tend all nodes\n----> h \thelp\n----> c \tcredits\n----> p \tprint the completed nodes\n----> Ctrl+z\texit program\n----> # \tmake a comment\n\nValid Types:-\n----> r \tResistance\n----> e \tVoltage Source\n----> j \tCurrent Source\nAll commands/types could be written upper/lower case\n\n" WHITE CREDITS

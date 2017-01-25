@@ -82,6 +82,11 @@ void Circuit::_List::Add(Element* e)
     v.push_back(e);
 }
 
+void Circuit::_List::Add_without_check(Element* e)
+{
+    v.push_back(e);
+}
+
 // detects lonely elements
 // returns the address of the first lonely element found, or nullptr otherwise
 Element* Circuit::_List::Get_lonely_elements()

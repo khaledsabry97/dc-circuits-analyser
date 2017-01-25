@@ -1,0 +1,24 @@
+# current in series
+# j1, j2
+
+r2 1
+r1 2
+r5 6
+x
+
+j1 3
+r2 1
+r1 2
+x
+
+j1 -3
+j2 5
+r5 6
+r7 88
+x
+
+j2 -5
+r7 88
+xx
+
+# success

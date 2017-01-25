@@ -72,13 +72,17 @@ void Circuit::_Input::Get()
 
         type = toupper(type);
 
-        // 0       --> ask again (continue)
-        // 1       --> parse command
-        // 3       --> parse element
+        // ignore comments                        
+        if (type == '#') continue;
 
-        // default --> error
+        // 0,-1       --> ask again (continue)
+        // 1          --> parse command
+        // 3          --> parse element
+
+        // default    --> error
         switch (num_of_tokens)
         {
+            case -1:
             case 0:
                 continue;
             case 1:

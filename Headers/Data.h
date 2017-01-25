@@ -15,10 +15,6 @@ using namespace std;
 #define NULL nullptr
 #endif
 
-// TODO: add functionality to enable/disable colors
-// TODO: edit Circuit::Print to print in order using an array
-// TODO: help is printed in the beginning of the program only
-
 // see Circuit::GetNode and Circuit::HasNode
 enum 
 SEARCH_BY { ID, VOLT };
@@ -106,6 +102,7 @@ class Node
 
         void Add(Element* e);
         bool Remove(Element* e);
+        bool Remove(char type, const int &id);
 
         Element* GetElement(char type, const int &id);
         bool HasElement(char type, const int &id);
@@ -202,6 +199,7 @@ class Circuit
                 void _Check(Element* e);
             public:
                 void Add(Element*);
+                void Add_without_check(Element*);
                 Element* Get_lonely_elements();
                 bool Remove(Element* e);
                 void Clear();
@@ -289,12 +287,12 @@ class Circuit
         bool _Pop_front();
 
         // lonely element : that exists one time
-        void _Remove_lonely_elements(_List&);
+        void _Remove_lonely_elements();
 
         // re-read this circuit if Circuit::Read ended with empty circuit
         void _Reread_if_empty();
 
-        void _Read_nodes(_List& list);
+        void _Read_nodes();
         void _Read_elements(_List& list, Node* newNode, bool& still_reading_nodes, const int& nodeI);
 
         // check node is valid before adding it
@@ -318,4 +316,8 @@ class Circuit
         // help remove invalid sources
         void _Get_Sources(list<ElementTuple>& volt_list, list<ElementTuple>& curr_list);
         void _Add_to_tuple_list(Element* e, Node* terminal, list<ElementTuple>& some_list);
+        void _Parse_ElementTuple_pointers(ElementTuple& tpl ,Element*& e, Node*& term1, Node*& term2);
+        void _Print_Tuple_list(list<ElementTuple>& some_list);
+        bool _Is_Parallel(const ElementTuple& first, const ElementTuple& second);
+        bool _Is_Series(const ElementTuple& first, const ElementTuple& second);
 };

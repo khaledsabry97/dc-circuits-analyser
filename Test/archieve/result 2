@@ -1,0 +1,36 @@
+[0;32mEnter the elements node by node 
+Only the following commands are valid:-
+----> x or X	ends the node
+----> xx or XX	ends all nodes
+----> h or H	prints this help
+----> p or P	prints the completed nodes
+----> Ctrl+z or Ctrl+c exit program
+
+[0m[0mNode #1:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0mNode #2:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0mNode #3:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0mNode #4:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36mElement is E1 Terminal 2
+Element is E1 Terminal 1
+Element is E2 Terminal 3
+Element is E3 Terminal 3
+Element is E2 Terminal 4
+Element is E3 Terminal 4
+Element E1 terminals 2 and 1
+Element E2 terminals 3 and 4
+Element E3 terminals 3 and 4
+[0;31m	Found two parallel voltage sources with different values, deleteing both of them
+[0m---Node #1 with voltage 0 volt
+-Element E1 = -2
+-Element R2 = 5
+-Element R1 = 2
+---Node #2 with voltage 0 volt
+-Element E1 = 2
+-Element R2 = 5
+-Element R1 = 2
+---Node #3 with voltage 0 volt
+---Node #4 with voltage 0 volt
+[0;31m	Last node is empty, deleting it
+[0m Node #3
+[0;31m	Last node is empty, deleting it
+[0m Node #4

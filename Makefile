@@ -28,12 +28,14 @@ main:
 
 test:
 	cat ./test/input | $(EXEC) &> ./test/result
-	less ./test/result
+	cat ./test/result
 
 archieve:
-	mkdir ./test/archieve
-	cp -i ./test/input ./test/archieve
-	cp -i ./test/result ./test/archieve
+	cp ./test/input ./Test/archieve/input`date +%d-%H:%M`
+	cp ./test/result ./Test/archieve/result`date +%d-%H:%M`
+
+newtest:
+	printf '# \n\nxx\n\n# ' > ./test/input
 
 duty:
 	egrep -H -n '(BUG|TODO):'  Sources/*.* Headers/*.* -A 1 -B 1

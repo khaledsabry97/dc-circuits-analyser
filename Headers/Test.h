@@ -6,12 +6,33 @@
 #define __RELEASE__ 
 #include "Data.h"
 #include "Solving.h"
+#include <cstdio>
 
+#define INPUT_FILE "./Test/input"
+#define OUTPUT_FILE "./Test/result"
+
+// redirect input/output
+// change cin/cout/cerr behaviour to make them print to a file and get input from another
+void Redirect_IO(bool redirect)
+{
+	if (!redirect)
+		return;
+
+	freopen(OUTPUT_FILE, "w", stdout);
+	freopen(OUTPUT_FILE, "w", stderr);
+
+	freopen(INPUT_FILE, "r", stdin);
+}
 
 int main()
 {
+	Redirect_IO(false);
+
 	Circuit c;
 	c.Read();
+
+	cout << "\n\tCircuit after reading is: \n";
+	c.Print();
 }
 
 #ifdef __OLD_TESTS__

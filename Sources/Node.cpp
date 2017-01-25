@@ -82,6 +82,12 @@ bool Node::Remove(Element* e)
     return true;
 }
 
+bool Node::Remove(char type, const int &id)
+{
+    Element* e = GetElement(type, id);
+    return (Remove(e));
+}
+
 Element* Node::GetFirstElement()
 {
     return (_firstElement);

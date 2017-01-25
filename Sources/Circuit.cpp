@@ -32,17 +32,11 @@ void Circuit::Read(bool start_with_printing_help)
     if (start_with_printing_help)
         cout << HELP; 
 
-    // vector to store elements temporarily
-    _List list;
-
-    _Read_nodes(list);
+    _Read_nodes();
     
-    // handle issues
-    _Remove_lonely_elements(list);
-
-    _Remove_invalid_nodes();   
-
     _Remove_invalid_sources();  
+    _Remove_lonely_elements();
+    _Remove_invalid_nodes();   
 
     _Reread_if_empty();
 }

@@ -1,0 +1,14 @@
+[0;32mEnter the elements node by node 
+Only the following commands are valid:-
+----> x or X	ends the node
+----> xx or XX	ends all nodes
+----> h or H	prints this help
+----> p or P	prints the completed nodes
+----> Ctrl+z or Ctrl+c exit program
+
+[0m[0mNode #1:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0mNode #2:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0mNode #3:
+[0;34m>>> [0;36m[0;31m	Their is two source elements with the same polarity, deleting the last one
+[0m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;31m	Found node with one element, deleting the node and the element
+[0m===> ERROR, found lonely element J1 in Node #2 ,Removing it
