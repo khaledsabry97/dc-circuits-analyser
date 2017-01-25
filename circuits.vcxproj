@@ -14,10 +14,9 @@
     <ClCompile Include="Sources\Circuit.cpp" />
     <ClCompile Include="Sources\Element.cpp" />
     <ClCompile Include="Sources\Errors.cpp" />
-    <ClCompile Include="Sources\Hadi_Solving.cpp" />
-    <ClCompile Include="Sources\K&amp;Y_Solving.cpp" />
     <ClCompile Include="Sources\Main.cpp" />
     <ClCompile Include="Sources\Node.cpp" />
+    <ClCompile Include="Sources\NodeSolving.cpp" />
     <ClCompile Include="Sources\_Circuit.cpp" />
     <ClCompile Include="Sources\_Element.cpp" />
     <ClCompile Include="Sources\_Input.cpp" />
@@ -28,6 +27,7 @@
     <ClInclude Include="Documentation\Element Doc.h" />
     <ClInclude Include="Documentation\Node Doc.h" />
     <ClInclude Include="Headers\Colors.h" />
+    <ClInclude Include="Headers\colorwin.hpp" />
     <ClInclude Include="Headers\Data.h" />
     <ClInclude Include="Headers\Errors.h" />
     <ClInclude Include="Headers\Solving.h" />

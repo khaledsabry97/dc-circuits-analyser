@@ -32,16 +32,16 @@ error {
 };
 
 // strings to handle errors
-#define HANDLE_SAME_POLARITY RED "\tTheir is two source elements with the same polarity, deleting the last one\n" WHITE
-#define HANDLE_DUPLICATE_ELEMENT RED "\tDuplicate element, deleting it\n" WHITE
-#define HANDLE_DUPLICATE_WITH_DIFF_VALUES RED "\tFound two elements having same ID and differnt values, deleting the last one\n" WHITE
-#define HANDLE_BAD_TYPE_NAME RED "\tInvalid Type, please re-enter it\n" WHITE
-#define HANDLE_NEGATIVE_RESISTANCE RED "\tResistance can't be negative, deleted it\n" WHITE
-#define HANDLE_EMPTY_NODE RED "\tLast node is empty, deleting it\n" WHITE
-#define HANDLE_NODE_WITH_ONE_ELEM RED "\tFound node with one element, deleting the node and the element\n" WHITE
-#define HANDLE_INVALID_INPUT RED "\tInvalid input, type h to see valid commands\n" WHITE
-#define HANDLE_PARALLEL_DIFF_VOLTAGES RED "\tFound two parallel voltage sources with different values, deleteing both of them\n" WHITE
-#define HANDLE_SERIES_DIFF_CURRENTS RED "\tFound two current sources with different values in series, deleteing both of them\n" WHITE
+#define HANDLE_SAME_POLARITY RED << "\tTheir is two source elements with the same polarity, deleting the last one\n" << WHITE
+#define HANDLE_DUPLICATE_ELEMENT RED << "\tDuplicate element, deleting it\n" << WHITE
+#define HANDLE_DUPLICATE_WITH_DIFF_VALUES RED << "\tFound two elements having same ID and differnt values, deleting the last one\n" << WHITE
+#define HANDLE_BAD_TYPE_NAME RED << "\tInvalid Type, please re-enter it\n" << WHITE
+#define HANDLE_NEGATIVE_RESISTANCE RED << "\tResistance can't be negative, deleted it\n" << WHITE
+#define HANDLE_EMPTY_NODE RED << "\tLast node is empty, deleting it\n" << WHITE
+#define HANDLE_NODE_WITH_ONE_ELEM RED << "\tFound node with one element, deleting the node and the element\n" << WHITE
+#define HANDLE_INVALID_INPUT RED << "\tInvalid input, type h to see valid commands\n" << WHITE 
+#define HANDLE_PARALLEL_DIFF_VOLTAGES RED << "\tFound two parallel voltage sources with different values, deleteing both of them\n" << WHITE
+#define HANDLE_SERIES_DIFF_CURRENTS RED <<  "\tFound two current sources with different values in series, deleteing both of them\n" << WHITE
 
 // print the appropriate message for the error 
 // with color RED if colors are enabled

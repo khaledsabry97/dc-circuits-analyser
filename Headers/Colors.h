@@ -2,16 +2,16 @@
 
 #if defined(_WIN32)
     // TODO: test this for windows
-    #include "colorwin/src/colorwin.hpp"
+    #include "colorwin.hpp"
     using namespace colorwin;
 
-    #define RED color(red);
-    #define BLUE color(blue);
-    #define GREEN color(green);
-    #define YELLOW color(yellow);
-    #define CYAN color(cyan);
+    #define RED color(red)
+    #define BLUE color(magenta)
+    #define GREEN color(green)
+    #define YELLOW color(yellow)
+    #define CYAN color(cyan)
 
-    #define WHITE color(white);
+    #define WHITE color(white)
 #else
     #define RED "\033[0;31m"
     #define BLUE "\033[0;34m"
