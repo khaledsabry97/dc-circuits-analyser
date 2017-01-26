@@ -95,4 +95,4 @@ double Get_Power(Circuit* circuit, Element* element, Element* due_to_element);
 double Get_VoltDiff(Circuit* circuit, const int node1_id, const int node2_id);
 
 // voltage differnt between two nodes that due_to_element caused 
-double Get_VoltDiff(Circuit* circuit, const int node1_id, const int node2_id, const Element*& due_to_element);
+double Get_VoltDiff(Circuit* circuit, const int node1_id, const int node2_id, Element*& due_to_element);

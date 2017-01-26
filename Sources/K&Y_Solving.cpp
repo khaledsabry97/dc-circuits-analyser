@@ -1,5 +1,7 @@
 #include "Solving.h"
 
+/*		private		*/
+
 // remove all Voltage sources and current sources
 void Disable_Sources(Circuit* c);
 
@@ -7,7 +9,7 @@ void Disable_Sources(Circuit* c);
 double Voltage(Node* n1, Node* n2);
 
 // calculate amper between two nodes
-double Ampere(Node* n1, Node* n2, Element* e);
+double Ampere(Node* n1, Node* n2, Element* e, Circuit* c);
 
 // calculate Power between two nodes
 double Power(Element* e, Circuit* c);
@@ -248,6 +250,8 @@ void Get_2_Nodes(Element* e, Node* &n1, Node* &n2, Circuit* c)
 	}
 }
 
+/*		public		*/
+
 double Get_Total_Dissipated_Power(Circuit* c)
 {
 	Node* n1 = c->GetFirstNode();
@@ -315,6 +319,8 @@ bool Circuit_Is_Power_Balanced(Circuit* c)
 
 double Get_Res_Max(Circuit* circuit, Element* resistance)
 {
+	circuit = circuit->Copy();
+
 	bool removed_1,removed_2;
 	Element* resistance_2;  //pointer to the resistance in second node
 	int resistance_2id;     //to store id of resistance
@@ -356,6 +362,8 @@ double Get_Res_Max(Circuit* circuit, Element* resistance)
 
 double Get_Pow_Max(Circuit* circuit, Element* resistance)
 {
+	circuit = circuit->Copy();
+
 	double vth;
 
 	Circuit *c2 = circuit->Copy();		//Copying The Circuit To Another Pointer
@@ -379,4 +387,139 @@ double Get_Pow_Max(Circuit* circuit, Element* resistance)
 
 	return ((vth * vth )/( 4 * rth));   //return pmax
 
+}
+
+/*   Extended public   */
+
+// current in given element
+double Get_Current(Circuit* circuit, Element* element)
+{
+	Node** nodes = circuit->GetTerminals(element);       //get terminals of element
+
+ 	return  Ampere(nodes[0], nodes[1], element, circuit);
+}
+
+// current in element due to another element
+// (the current that due_to_element caused in element)
+double Get_Current(Circuit* circuit, Element* element, Element* due_to_element)
+{
+   	Circuit *c2;
+  
+	c2 = Disable_Sources_superpostion(circuit,due_to_element);    //disable the sources in the copied circuit except the due to element
+
+    Circuit *c3 = c2->Copy();		//Copying The Circuit To Another Pointer
+	   
+	voltageTransformation(c3);		//Voltage Source Transformation
+
+	solve(c3);
+
+	VoltageBack(c3, c2);
+
+	SolveNonEss(c2);
+
+	return  Get_Current(c2,  element);
+
+}
+
+// positive when dissipated, negative when supplied
+double Get_Power(Circuit* circuit, Element* element)
+{
+	Node* n1;
+	Node* n2;
+	Element* e_temp;
+	int id=element->GetType();
+	int i=0;
+	int I;
+    Get_2_Nodes(element,n1,n2,circuit);
+	//get two nodes the have the element
+	switch (id)
+	{
+	case'E':
+		{
+		I = Ampere(n1,n2,element,circuit);
+		//get the ampere
+		if(! n1->IsEssential())
+			// this condition is important for sign
+		    //and this is important for to get the correct power and the total power
+		{
+			e_temp = n1->GetFirstElement();
+			if(e_temp->GetType() != element ->GetType())
+			{ 
+				e_temp= e_temp->GetNext();
+			}
+		}
+		else 
+		{
+			e_temp = n2->GetFirstElement();
+			if(e_temp->GetType() != element ->GetType())
+			{ 
+				e_temp= e_temp->GetNext();
+			}
+		}
+		    return (-1 * I*e_temp->GetValue() );
+			// -1 I added it after ads told me supplied power is negative
+			//and disspated power is positive
+		}
+		
+	case'J':
+		{
+			//volt n1 - volt n2= v12
+			//P = v12 * I
+			e_temp = n1->GetFirstElement();
+			// I try here to handel the sign 
+			//by pointing a pointer to one of the two nodes that have the current source
+		    // to get the value and the sign
+		    bool check =true;
+			while(check)
+			{
+				if(e_temp->GetId() == element->GetId() && e_temp->GetType() == element->GetType())
+					check = false;
+				else
+					e_temp =e_temp->GetNext();
+			}
+			return((n1->GetVolt()-n2->GetVolt())*(e_temp->GetValue()));
+		}
+
+	default: //R
+		//volt n1 - volt n2= v12 
+		//P = [v12 *V12]/ R
+		assert(e_temp->GetValue() == 0 && "error, attempt to divide on zero, elemet e_temp value is zero");
+
+		return(((n1->GetVolt() - n2->GetVolt()) * (n1->GetVolt() - n2->GetVolt())) / e_temp->GetValue());
+		break;
+		}
+
+
+}
+
+// voltage difference between node1 & node2
+// given the ids' of them, it searched for them in circuit
+// given ids' are expected to be valid (in the circuit)
+double Get_VoltDiff(Circuit* circuit, const int node1_id, const int node2_id)
+{
+	Node*node1 = circuit->GetNode( node1_id);
+
+	Node*node2 = circuit->GetNode( node2_id);      //get pointers to the nodes by their id
+
+	return Voltage(node1, node2);
+}
+
+// voltage differnt between two nodes that due_to_element caused 
+double Get_VoltDiff(Circuit* circuit, const int node1_id, const int node2_id, Element*& due_to_element)
+{ 
+	Circuit *c2;
+  
+	c2 = Disable_Sources_superpostion(circuit, due_to_element);
+
+    Circuit *c3 = c2->Copy();		//Copying The Circuit To Another Pointer
+	   
+	voltageTransformation(c3);		//Voltage Source Transformation
+
+	solve(c3);
+
+	VoltageBack(c3, c2);
+
+	SolveNonEss(c2);
+
+	return Get_VoltDiff(c2,  node1_id,  node2_id);
 }
