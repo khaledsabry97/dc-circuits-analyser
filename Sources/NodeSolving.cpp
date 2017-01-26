@@ -96,7 +96,21 @@ void voltageTransformation(Circuit *&C)
 		}
 		Head = Head->GetNext();
 	}
-
+	Head = C->GetFirstNode();
+	while (Head)
+	{
+		Element *ele = Head->GetFirstElement();
+		while (ele)
+		{
+			if (ele->GetType() == 'E')
+			{
+				Head->Remove(ele);
+				ele = Head->GetFirstElement();
+			}
+			ele = ele->GetNext();
+		}
+		Head = Head->GetNext();
+	}
 }
 
 void print(Circuit *C)
