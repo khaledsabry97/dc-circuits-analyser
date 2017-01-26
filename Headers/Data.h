@@ -7,8 +7,9 @@
 #include <vector>
 #include <list>
 #include <tuple>
+#include <cmath>
 #include "Errors.h"
-#include "___.h"// TODO: find another name/use for this header
+#include "Format.h"
 using namespace std;
 
 #ifndef NULL
@@ -26,12 +27,12 @@ Type { R, E, J };
 // commands available to user
 enum 
 Command {
-    Help,
-    Print_Credits,
-    Print_Circuit, 
-    EndNode, 
-    EndAll,
-    InvalidCommand,
+    CMD_PRINT_HELP,
+    CMD_PRINT_CREDITS,
+    CMD_PRINT_CIRC, 
+    CMD_END_NODE, 
+    CMD_END_ALL,
+    CMD_INVALID,
 };
 
 class Element
@@ -146,8 +147,7 @@ class Circuit
         int GetNumOfNodes();
 
         // read nodes from user
-        // prints the help at beginning, pass false to prevent it
-        void Read(bool start_with_printing_help = true);
+        void Read();
 
         // deconstructor, 
         // this is called automatically when circuit is deleted

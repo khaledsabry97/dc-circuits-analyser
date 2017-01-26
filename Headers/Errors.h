@@ -5,11 +5,22 @@
         used in exception handling.
 */
 #pragma once
-#include "Colors.h"
+#include "Format.h"
 #include <cassert>
 #include <iostream>
+#include <csignal>
 using namespace std;
 #define FOR_DEBUGGING 0
+#define SUCCESS 0
+
+// for sleeping
+#if !defined(_WIN32)
+    #include <unistd.h>
+    #define Sleep(milliseconds) usleep(milliseconds * 1000)
+#else
+    #include <windows.h>
+#endif
+#define SECOND 1000
 
 
 // identify different errors that might happen
@@ -47,3 +58,24 @@ error {
 // with color RED if colors are enabled
 // if exception is not listed, it asserts for debugging printing that error is not handled
 void HandleError(const error& err);
+
+// TODO: test those for windows
+#if !defined(_WIN32)
+    // run this to set functions in signal to specific system signals
+    // to be run at beginning
+    void HandleSignals();
+
+    namespace sgnl
+    {
+        // accessing invalid memory
+        void Seg_Fault(int signum);
+
+        // stopping program
+        void Terminate(int signum);
+
+        // float point signal
+        void Divide_by_zero(int signum);
+    }
+#else
+    #define HandleSignals() 
+#endif

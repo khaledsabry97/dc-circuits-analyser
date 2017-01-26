@@ -19,12 +19,12 @@ COMPILER_FLAGS += -g
 COMPILER_FLAGS += $(SRC_DIR)/*.cpp -o $(EXEC)
 
 
+main: 
+	$(COMPILER) $(COMPILER_FLAGS) 
+	
 run:
 	if [ ! -x $(EXEC) ]; then make main; fi
 	$(EXEC)
-
-main: 
-	$(COMPILER) $(COMPILER_FLAGS) 
 
 test:
 	cat ./test/input | $(EXEC) &> ./test/result

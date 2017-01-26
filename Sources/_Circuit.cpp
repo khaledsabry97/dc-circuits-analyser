@@ -149,7 +149,7 @@ void Circuit::_Reread_if_empty()
     if (IsEmpty())
     {
         cerr << RED << "\tCircuit is Empty \n" << "\tEnter the circuit again\n" << WHITE;
-        Read(false);
+        Read();
     }
 }
 
@@ -263,32 +263,35 @@ void Circuit::_HadleCommand(const Command &cmd, bool &still_reading_nodes, bool 
 {
     switch (cmd)
     {
-        case Help:
+        case CMD_PRINT_HELP:
         {
-            cout << HELP; 
+            Print_Help(); 
             break;
         } 
-        case Print_Credits:
+        case CMD_PRINT_CREDITS:
         {
-            cout << CREDITS;
+            Print_Credits();
             break;
         }
-        case Print_Circuit:
+        case CMD_PRINT_CIRC:
         {
             Print();
             break;
         }
-        case EndAll:
+        case CMD_END_ALL:
         {
             still_reading_nodes = false;
         }
-        case EndNode:
+        case CMD_END_NODE:
         {
             still_reading_elements = false;
             break;
         }
-        default: 
+        case CMD_INVALID: 
             HandleError(INVALID_INPUT);
+            break;
+        default:
+            assert(FOR_DEBUGGING && "passed command is unknown and not-invalid either, check cases in Circuit::_HadleCommand");
     }
 }
 

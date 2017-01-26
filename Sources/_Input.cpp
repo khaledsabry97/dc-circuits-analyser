@@ -10,25 +10,25 @@ void Circuit::_Input::_Command_Parse()
     switch (type)
     {
         case 'H':
-            _cmd = Help;
+            _cmd = CMD_PRINT_HELP;
             break;
         case 'X':
-            // if user typed another x, it is EndAll
+            // if user typed another x, it is CMD_END_ALL
             if (sscanf(_line.c_str(), " x%c", &type) == 1)
             {
                 // user typed another x
                 if (toupper(type) == 'X')
-                    _cmd = EndAll;
+                    _cmd = CMD_END_ALL;
             }
             else 
-                _cmd = EndNode;
+                _cmd = CMD_END_NODE;
             
             break;
         case 'P':
-            _cmd = Print_Circuit;
+            _cmd = CMD_PRINT_CIRC;
             break;
         case 'C':
-            _cmd = Print_Credits;
+            _cmd = CMD_PRINT_CREDITS;
             break;
         default: 
             input_type = INVALID;
@@ -61,8 +61,7 @@ void Circuit::_Input::Get()
 
     while (true)
     {
-        // print the prompt >>>
-        cout << PROMPT;
+        Print_Prompt();
 
         getline(cin, _line);
 
@@ -125,8 +124,7 @@ Command Circuit::_Input::GetCommand()
 
 void Circuit::_Input::Reset()
 {
-    input_type = UNKNOWN;
     type = '\0';
     id = val = -1;
-    _cmd = InvalidCommand;
+    _cmd = CMD_INVALID;
 }

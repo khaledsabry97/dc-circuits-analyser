@@ -1,7 +1,16 @@
-/*  colors used by program  */
+/*  Formatting output to user  */
+#ifndef __Format__
+#define __Format__
+
+#include <iostream>
+using namespace std;
+
+/*   colors   */
+
+// to disable colors, uncomment this
+// #define NOCOLOR
 
 #if defined(_WIN32)
-    // TODO: test this for windows
     #include "colorwin.hpp"
     using namespace colorwin;
 
@@ -12,6 +21,14 @@
     #define CYAN color(cyan)
 
     #define WHITE color(white)
+#elif defined(NOCOLOR)
+    #define RED ""
+    #define BLUE ""
+    #define GREEN ""
+    #define YELLOW ""
+    #define CYAN ""
+
+    #define WHITE ""
 #else
     #define RED "\033[0;31m"
     #define BLUE "\033[0;34m"
@@ -21,3 +38,11 @@
 
     #define WHITE "\033[0m"
 #endif
+
+
+/*   info   */
+void Print_Credits();
+void Print_Prompt();
+void Print_Help();
+
+#endif /* __Format__ */

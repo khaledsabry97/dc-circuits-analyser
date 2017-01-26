@@ -1,6 +1,6 @@
 /*
 		Testing functions
-	when function is finished, move it under the preprocessor __OLD_TESTS__
+	when a test is finished, move it under the preprocessor __OLD_TESTS__
 */
 #pragma once
 #define __RELEASE__ 
@@ -45,15 +45,9 @@ void test_hadi_solving2()
 
 int main()
 {
+	HandleSignals();
+
 	test_hadi_solving2();
-
-	Redirect_IO(false);
-
-	Circuit c;
-	c.Read();
-
-	cout << "\n\tCircuit after reading is: \n";
-	c.Print();
 }
 
 #ifdef __OLD_TESTS__

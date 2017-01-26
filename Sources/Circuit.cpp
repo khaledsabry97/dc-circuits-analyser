@@ -26,12 +26,8 @@ Circuit::~Circuit()
 }
 
 // read the whole circuit from the user
-void Circuit::Read(bool start_with_printing_help)
+void Circuit::Read()
 {
-    // TODO: make help function and add valid keywords
-    if (start_with_printing_help)
-        cout << HELP; 
-
     _Read_nodes();
     
     _Remove_invalid_sources();  
