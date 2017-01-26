@@ -1,0 +1,125 @@
+\hypertarget{_data_8h}{}\section{Headers/\+Data.h File Reference}
+\label{_data_8h}\index{Headers/\+Data.\+h@{Headers/\+Data.\+h}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$list$>$}\newline
+{\ttfamily \#include $<$tuple$>$}\newline
+{\ttfamily \#include \char`\"{}Errors.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}\+\_\+\+\_\+\+\_\+.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_element}{Element}
+\item 
+class \hyperlink{class_node}{Node}
+\item 
+class \hyperlink{class_circuit}{Circuit}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_data_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{N\+U\+LL}~nullptr
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcd}{S\+E\+A\+R\+C\+H\+\_\+\+BY} \{ \hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcda001479a58fb44c39a29b20d565081a68}{ID}, 
+\hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcda3ce1b86ac14b7894674b9ffbeb7b0df1}{V\+O\+LT}
+ \}
+\item 
+enum \hyperlink{_data_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type} \{ \hyperlink{_data_8h_a1d1cfd8ffb84e947f82999c682b666a7a1784b1a3d7cbd43c45ff82c72d05e4ae}{R}, 
+\hyperlink{_data_8h_a1d1cfd8ffb84e947f82999c682b666a7ab199e021998d49b1f09338d8b9b18ecb}{E}, 
+\hyperlink{_data_8h_a1d1cfd8ffb84e947f82999c682b666a7a03605500b0c55f3d95874e8edfcf4e30}{J}
+ \}
+\item 
+enum \hyperlink{_data_8h_a2afce0a47a93eee73a314d53e4890153}{Command} \{ \newline
+\hyperlink{_data_8h_a2afce0a47a93eee73a314d53e4890153a2c1b595c80ad4c1b7452f5ef8887ffba}{Help}, 
+\hyperlink{_data_8h_a2afce0a47a93eee73a314d53e4890153a090fa71914980b03d27ba3e8b08dbdd7}{Print\+\_\+\+Credits}, 
+\hyperlink{_data_8h_a2afce0a47a93eee73a314d53e4890153ad8caf5f8753cc0caae50401643068897}{Print\+\_\+\+Circuit}, 
+\hyperlink{_data_8h_a2afce0a47a93eee73a314d53e4890153adf37e77656b12751e91ed674d1e403a9}{End\+Node}, 
+\newline
+\hyperlink{_data_8h_a2afce0a47a93eee73a314d53e4890153a011a9700d19dfb3e3509982ccf7ad891}{End\+All}, 
+\hyperlink{_data_8h_a2afce0a47a93eee73a314d53e4890153aaee4e454479c355f784ba6746ca84ffe}{Invalid\+Command}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_data_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}\label{_data_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}} 
+\index{Data.\+h@{Data.\+h}!N\+U\+LL@{N\+U\+LL}}
+\index{N\+U\+LL@{N\+U\+LL}!Data.\+h@{Data.\+h}}
+\subsubsection{\texorpdfstring{N\+U\+LL}{NULL}}
+{\footnotesize\ttfamily \#define N\+U\+LL~nullptr}
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{_data_8h_a2afce0a47a93eee73a314d53e4890153}\label{_data_8h_a2afce0a47a93eee73a314d53e4890153}} 
+\index{Data.\+h@{Data.\+h}!Command@{Command}}
+\index{Command@{Command}!Data.\+h@{Data.\+h}}
+\subsubsection{\texorpdfstring{Command}{Command}}
+{\footnotesize\ttfamily enum \hyperlink{_data_8h_a2afce0a47a93eee73a314d53e4890153}{Command}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Help@{Help}!Data.\+h@{Data.\+h}}\index{Data.\+h@{Data.\+h}!Help@{Help}}}\mbox{\Hypertarget{_data_8h_a2afce0a47a93eee73a314d53e4890153a2c1b595c80ad4c1b7452f5ef8887ffba}\label{_data_8h_a2afce0a47a93eee73a314d53e4890153a2c1b595c80ad4c1b7452f5ef8887ffba}} 
+Help&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Print\+\_\+\+Credits@{Print\+\_\+\+Credits}!Data.\+h@{Data.\+h}}\index{Data.\+h@{Data.\+h}!Print\+\_\+\+Credits@{Print\+\_\+\+Credits}}}\mbox{\Hypertarget{_data_8h_a2afce0a47a93eee73a314d53e4890153a090fa71914980b03d27ba3e8b08dbdd7}\label{_data_8h_a2afce0a47a93eee73a314d53e4890153a090fa71914980b03d27ba3e8b08dbdd7}} 
+Print\+\_\+\+Credits&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Print\+\_\+\+Circuit@{Print\+\_\+\+Circuit}!Data.\+h@{Data.\+h}}\index{Data.\+h@{Data.\+h}!Print\+\_\+\+Circuit@{Print\+\_\+\+Circuit}}}\mbox{\Hypertarget{_data_8h_a2afce0a47a93eee73a314d53e4890153ad8caf5f8753cc0caae50401643068897}\label{_data_8h_a2afce0a47a93eee73a314d53e4890153ad8caf5f8753cc0caae50401643068897}} 
+Print\+\_\+\+Circuit&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{End\+Node@{End\+Node}!Data.\+h@{Data.\+h}}\index{Data.\+h@{Data.\+h}!End\+Node@{End\+Node}}}\mbox{\Hypertarget{_data_8h_a2afce0a47a93eee73a314d53e4890153adf37e77656b12751e91ed674d1e403a9}\label{_data_8h_a2afce0a47a93eee73a314d53e4890153adf37e77656b12751e91ed674d1e403a9}} 
+End\+Node&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{End\+All@{End\+All}!Data.\+h@{Data.\+h}}\index{Data.\+h@{Data.\+h}!End\+All@{End\+All}}}\mbox{\Hypertarget{_data_8h_a2afce0a47a93eee73a314d53e4890153a011a9700d19dfb3e3509982ccf7ad891}\label{_data_8h_a2afce0a47a93eee73a314d53e4890153a011a9700d19dfb3e3509982ccf7ad891}} 
+End\+All&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Invalid\+Command@{Invalid\+Command}!Data.\+h@{Data.\+h}}\index{Data.\+h@{Data.\+h}!Invalid\+Command@{Invalid\+Command}}}\mbox{\Hypertarget{_data_8h_a2afce0a47a93eee73a314d53e4890153aaee4e454479c355f784ba6746ca84ffe}\label{_data_8h_a2afce0a47a93eee73a314d53e4890153aaee4e454479c355f784ba6746ca84ffe}} 
+Invalid\+Command&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcd}\label{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcd}} 
+\index{Data.\+h@{Data.\+h}!S\+E\+A\+R\+C\+H\+\_\+\+BY@{S\+E\+A\+R\+C\+H\+\_\+\+BY}}
+\index{S\+E\+A\+R\+C\+H\+\_\+\+BY@{S\+E\+A\+R\+C\+H\+\_\+\+BY}!Data.\+h@{Data.\+h}}
+\subsubsection{\texorpdfstring{S\+E\+A\+R\+C\+H\+\_\+\+BY}{SEARCH\_BY}}
+{\footnotesize\ttfamily enum \hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcd}{S\+E\+A\+R\+C\+H\+\_\+\+BY}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ID@{ID}!Data.\+h@{Data.\+h}}\index{Data.\+h@{Data.\+h}!ID@{ID}}}\mbox{\Hypertarget{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcda001479a58fb44c39a29b20d565081a68}\label{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcda001479a58fb44c39a29b20d565081a68}} 
+ID&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\+O\+LT@{V\+O\+LT}!Data.\+h@{Data.\+h}}\index{Data.\+h@{Data.\+h}!V\+O\+LT@{V\+O\+LT}}}\mbox{\Hypertarget{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcda3ce1b86ac14b7894674b9ffbeb7b0df1}\label{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcda3ce1b86ac14b7894674b9ffbeb7b0df1}} 
+V\+O\+LT&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{_data_8h_a1d1cfd8ffb84e947f82999c682b666a7}\label{_data_8h_a1d1cfd8ffb84e947f82999c682b666a7}} 
+\index{Data.\+h@{Data.\+h}!Type@{Type}}
+\index{Type@{Type}!Data.\+h@{Data.\+h}}
+\subsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily enum \hyperlink{_data_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R@{R}!Data.\+h@{Data.\+h}}\index{Data.\+h@{Data.\+h}!R@{R}}}\mbox{\Hypertarget{_data_8h_a1d1cfd8ffb84e947f82999c682b666a7a1784b1a3d7cbd43c45ff82c72d05e4ae}\label{_data_8h_a1d1cfd8ffb84e947f82999c682b666a7a1784b1a3d7cbd43c45ff82c72d05e4ae}} 
+R&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{E@{E}!Data.\+h@{Data.\+h}}\index{Data.\+h@{Data.\+h}!E@{E}}}\mbox{\Hypertarget{_data_8h_a1d1cfd8ffb84e947f82999c682b666a7ab199e021998d49b1f09338d8b9b18ecb}\label{_data_8h_a1d1cfd8ffb84e947f82999c682b666a7ab199e021998d49b1f09338d8b9b18ecb}} 
+E&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J@{J}!Data.\+h@{Data.\+h}}\index{Data.\+h@{Data.\+h}!J@{J}}}\mbox{\Hypertarget{_data_8h_a1d1cfd8ffb84e947f82999c682b666a7a03605500b0c55f3d95874e8edfcf4e30}\label{_data_8h_a1d1cfd8ffb84e947f82999c682b666a7a03605500b0c55f3d95874e8edfcf4e30}} 
+J&\\
+\hline
+
+\end{DoxyEnumFields}

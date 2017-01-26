@@ -1,0 +1,148 @@
+\hypertarget{class_element}{}\section{Element Class Reference}
+\label{class_element}\index{Element@{Element}}
+
+
+{\ttfamily \#include $<$Data.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_element_a46b133f5dd7f66a6e77628e1c5909bb1}{Element} (const char \&type, const int \&id, const double \&val)
+\item 
+\hyperlink{class_element_a9c44833eb17cd7dcde61cf62441ddc6f}{Element} (const char \&type, const int \&id, const double \&val, const int \&node\+\_\+id)
+\item 
+char \hyperlink{class_element_abf168ef6eb9292ad9878de3927382988}{Get\+Type} ()
+\item 
+void \hyperlink{class_element_ad815916d8823e895a58aae13d6f9bdc1}{Change\+Type} (const char \&c)
+\item 
+\hyperlink{class_element}{Element} $\ast$ \hyperlink{class_element_aa2e180ec42309fa35851a8e6ea5d7b7d}{Get\+Next} ()
+\item 
+\hyperlink{class_element}{Element} $\ast$ \hyperlink{class_element_a2697e4bfa4e1a68413fe04acc95418ef}{Get\+Prev} ()
+\item 
+int \hyperlink{class_element_a1192c24be1306b12c253b24abd03eeb9}{Get\+Id} ()
+\item 
+void \hyperlink{class_element_ae485f257d8d1bfa17799e89a5c755050}{Change\+Id} (const int \&num)
+\item 
+int \hyperlink{class_element_a7c6a9ed71c86ae116e289ad4337b3bce}{Get\+Node\+Id} ()
+\item 
+double \hyperlink{class_element_a0bdfb4632264f577549e3d63a96d873a}{Get\+Value} ()
+\item 
+void \hyperlink{class_element_a05e7b2e6cd8036ea3ae07cb71df60499}{Change\+Value} (const double \&num)
+\item 
+\hyperlink{class_element}{Element} $\ast$ \hyperlink{class_element_a5610b61ae29c76de5806068d30366e3c}{Copy} ()
+\item 
+bool \hyperlink{class_element_a27fd8cbd0279307253208407944edfc9}{operator==} (\hyperlink{class_element}{Element} \&)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_element_a6db9d28bd448a131448276ee03de1e6d}{Node}
+\item 
+class \hyperlink{class_element_a120b136c2c9bc1938e0cd2cca80d91e4}{Circuit}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_element_a46b133f5dd7f66a6e77628e1c5909bb1}\label{class_element_a46b133f5dd7f66a6e77628e1c5909bb1}} 
+\index{Element@{Element}!Element@{Element}}
+\index{Element@{Element}!Element@{Element}}
+\subsubsection{\texorpdfstring{Element()}{Element()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Element\+::\+Element (\begin{DoxyParamCaption}\item[{const char \&}]{type,  }\item[{const int \&}]{id,  }\item[{const double \&}]{val }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_element_a9c44833eb17cd7dcde61cf62441ddc6f}\label{class_element_a9c44833eb17cd7dcde61cf62441ddc6f}} 
+\index{Element@{Element}!Element@{Element}}
+\index{Element@{Element}!Element@{Element}}
+\subsubsection{\texorpdfstring{Element()}{Element()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Element\+::\+Element (\begin{DoxyParamCaption}\item[{const char \&}]{type,  }\item[{const int \&}]{id,  }\item[{const double \&}]{val,  }\item[{const int \&}]{node\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_element_ae485f257d8d1bfa17799e89a5c755050}\label{class_element_ae485f257d8d1bfa17799e89a5c755050}} 
+\index{Element@{Element}!Change\+Id@{Change\+Id}}
+\index{Change\+Id@{Change\+Id}!Element@{Element}}
+\subsubsection{\texorpdfstring{Change\+Id()}{ChangeId()}}
+{\footnotesize\ttfamily void Element\+::\+Change\+Id (\begin{DoxyParamCaption}\item[{const int \&}]{num }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_element_ad815916d8823e895a58aae13d6f9bdc1}\label{class_element_ad815916d8823e895a58aae13d6f9bdc1}} 
+\index{Element@{Element}!Change\+Type@{Change\+Type}}
+\index{Change\+Type@{Change\+Type}!Element@{Element}}
+\subsubsection{\texorpdfstring{Change\+Type()}{ChangeType()}}
+{\footnotesize\ttfamily void Element\+::\+Change\+Type (\begin{DoxyParamCaption}\item[{const char \&}]{c }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_element_a05e7b2e6cd8036ea3ae07cb71df60499}\label{class_element_a05e7b2e6cd8036ea3ae07cb71df60499}} 
+\index{Element@{Element}!Change\+Value@{Change\+Value}}
+\index{Change\+Value@{Change\+Value}!Element@{Element}}
+\subsubsection{\texorpdfstring{Change\+Value()}{ChangeValue()}}
+{\footnotesize\ttfamily void Element\+::\+Change\+Value (\begin{DoxyParamCaption}\item[{const double \&}]{num }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_element_a5610b61ae29c76de5806068d30366e3c}\label{class_element_a5610b61ae29c76de5806068d30366e3c}} 
+\index{Element@{Element}!Copy@{Copy}}
+\index{Copy@{Copy}!Element@{Element}}
+\subsubsection{\texorpdfstring{Copy()}{Copy()}}
+{\footnotesize\ttfamily \hyperlink{class_element}{Element} $\ast$ Element\+::\+Copy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_element_a1192c24be1306b12c253b24abd03eeb9}\label{class_element_a1192c24be1306b12c253b24abd03eeb9}} 
+\index{Element@{Element}!Get\+Id@{Get\+Id}}
+\index{Get\+Id@{Get\+Id}!Element@{Element}}
+\subsubsection{\texorpdfstring{Get\+Id()}{GetId()}}
+{\footnotesize\ttfamily int Element\+::\+Get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_element_aa2e180ec42309fa35851a8e6ea5d7b7d}\label{class_element_aa2e180ec42309fa35851a8e6ea5d7b7d}} 
+\index{Element@{Element}!Get\+Next@{Get\+Next}}
+\index{Get\+Next@{Get\+Next}!Element@{Element}}
+\subsubsection{\texorpdfstring{Get\+Next()}{GetNext()}}
+{\footnotesize\ttfamily \hyperlink{class_element}{Element} $\ast$ Element\+::\+Get\+Next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_element_a7c6a9ed71c86ae116e289ad4337b3bce}\label{class_element_a7c6a9ed71c86ae116e289ad4337b3bce}} 
+\index{Element@{Element}!Get\+Node\+Id@{Get\+Node\+Id}}
+\index{Get\+Node\+Id@{Get\+Node\+Id}!Element@{Element}}
+\subsubsection{\texorpdfstring{Get\+Node\+Id()}{GetNodeId()}}
+{\footnotesize\ttfamily int Element\+::\+Get\+Node\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_element_a2697e4bfa4e1a68413fe04acc95418ef}\label{class_element_a2697e4bfa4e1a68413fe04acc95418ef}} 
+\index{Element@{Element}!Get\+Prev@{Get\+Prev}}
+\index{Get\+Prev@{Get\+Prev}!Element@{Element}}
+\subsubsection{\texorpdfstring{Get\+Prev()}{GetPrev()}}
+{\footnotesize\ttfamily \hyperlink{class_element}{Element} $\ast$ Element\+::\+Get\+Prev (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_element_abf168ef6eb9292ad9878de3927382988}\label{class_element_abf168ef6eb9292ad9878de3927382988}} 
+\index{Element@{Element}!Get\+Type@{Get\+Type}}
+\index{Get\+Type@{Get\+Type}!Element@{Element}}
+\subsubsection{\texorpdfstring{Get\+Type()}{GetType()}}
+{\footnotesize\ttfamily char Element\+::\+Get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_element_a0bdfb4632264f577549e3d63a96d873a}\label{class_element_a0bdfb4632264f577549e3d63a96d873a}} 
+\index{Element@{Element}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!Element@{Element}}
+\subsubsection{\texorpdfstring{Get\+Value()}{GetValue()}}
+{\footnotesize\ttfamily double Element\+::\+Get\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_element_a27fd8cbd0279307253208407944edfc9}\label{class_element_a27fd8cbd0279307253208407944edfc9}} 
+\index{Element@{Element}!operator==@{operator==}}
+\index{operator==@{operator==}!Element@{Element}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Element\+::operator== (\begin{DoxyParamCaption}\item[{\hyperlink{class_element}{Element} \&}]{e }\end{DoxyParamCaption})}
+
+
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_element_a120b136c2c9bc1938e0cd2cca80d91e4}\label{class_element_a120b136c2c9bc1938e0cd2cca80d91e4}} 
+\index{Element@{Element}!Circuit@{Circuit}}
+\index{Circuit@{Circuit}!Element@{Element}}
+\subsubsection{\texorpdfstring{Circuit}{Circuit}}
+{\footnotesize\ttfamily friend class \hyperlink{class_circuit}{Circuit}\hspace{0.3cm}{\ttfamily [friend]}}
+
+\mbox{\Hypertarget{class_element_a6db9d28bd448a131448276ee03de1e6d}\label{class_element_a6db9d28bd448a131448276ee03de1e6d}} 
+\index{Element@{Element}!Node@{Node}}
+\index{Node@{Node}!Element@{Element}}
+\subsubsection{\texorpdfstring{Node}{Node}}
+{\footnotesize\ttfamily friend class \hyperlink{class_node}{Node}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Headers/\hyperlink{_data_8h}{Data.\+h}\item 
+Sources/\hyperlink{___element_8cpp}{\+\_\+\+Element.\+cpp}\item 
+Sources/\hyperlink{_element_8cpp}{Element.\+cpp}\end{DoxyCompactItemize}

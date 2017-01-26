@@ -1,0 +1,190 @@
+\hypertarget{class_circuit}{}\section{Circuit Class Reference}
+\label{class_circuit}\index{Circuit@{Circuit}}
+
+
+{\ttfamily \#include $<$Data.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_circuit_ac8df627490e7b70cbdc547c2be4337d4}{Add} (\hyperlink{class_node}{Node} $\ast$n)
+\item 
+bool \hyperlink{class_circuit_a727524e3f110219f51bcbc4e057f12ef}{Remove} (\hyperlink{class_node}{Node} $\ast$n)
+\item 
+bool \hyperlink{class_circuit_abe72294beb015a2662f1ee79d2409b8b}{Remove} (const double \&val, \hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcd}{S\+E\+A\+R\+C\+H\+\_\+\+BY} type=\hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcda001479a58fb44c39a29b20d565081a68}{ID})
+\item 
+\hyperlink{class_node}{Node} $\ast$ \hyperlink{class_circuit_aeb86f8d79ac985158d41fbee772cc4fc}{Get\+Last\+Node} ()
+\item 
+\hyperlink{class_node}{Node} $\ast$ \hyperlink{class_circuit_aff4874c7202cfdba682aec96a9bb4079}{Get\+First\+Node} ()
+\item 
+int \hyperlink{class_circuit_aa78d50e940323ecd69d42fa2219aeff8}{Get\+Num\+Of\+Nodes} ()
+\item 
+void \hyperlink{class_circuit_a66f32b5192bba342006dbc8f512fda12}{Read} (bool start\+\_\+with\+\_\+printing\+\_\+help=true)
+\item 
+\hyperlink{class_circuit_a1134e16f26a878377f4d502bff111b9e}{$\sim$\+Circuit} ()
+\item 
+\hyperlink{class_circuit_a6a9c21735a28f1222797d71ece99521c}{Circuit} ()
+\item 
+\hyperlink{class_circuit_aaf90541f622878c55fe6377e9d656684}{Circuit} (\hyperlink{class_circuit}{Circuit} $\ast$c)
+\item 
+\hyperlink{class_circuit_ae98bb5b64036d61c927cfbb2a1e82ad0}{Circuit} (\hyperlink{class_circuit}{Circuit} \&c)
+\item 
+\hyperlink{class_node}{Node} $\ast$ \hyperlink{class_circuit_ad3a83fee410a9d1324725300564e34b3}{Get\+Node} (const double \&val, \hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcd}{S\+E\+A\+R\+C\+H\+\_\+\+BY} type=\hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcda001479a58fb44c39a29b20d565081a68}{ID})
+\item 
+bool \hyperlink{class_circuit_accc2583f39aa8860782a5a74b5badf74}{Has\+Node} (const double \&val, \hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcd}{S\+E\+A\+R\+C\+H\+\_\+\+BY} type=\hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcda001479a58fb44c39a29b20d565081a68}{ID})
+\item 
+\hyperlink{class_element}{Element} $\ast$ \hyperlink{class_circuit_a00cc4492fc12d0df63926d66482466ed}{Get\+Element} (char type, const int \&id)
+\item 
+bool \hyperlink{class_circuit_adbe87d6a9e119ddc538fd3354ba51ca7}{Has\+Element} (char type, const int \&id)
+\item 
+bool \hyperlink{class_circuit_a5b2435ea3098e3723272f8fc620228c8}{Is\+Empty} ()
+\item 
+\hyperlink{class_circuit}{Circuit} \& \hyperlink{class_circuit_a4f5f3e57b05982edbdabd135ffa72576}{operator=} (\hyperlink{class_circuit}{Circuit} \&c)
+\item 
+\hyperlink{class_circuit}{Circuit} $\ast$ \hyperlink{class_circuit_adfadd59857303052342b2b962e9b810d}{Copy} ()
+\item 
+\hyperlink{class_node}{Node} $\ast$$\ast$ \hyperlink{class_circuit_a2d6a6d1c971baa3ac838e92e935e12eb}{Get\+Terminals} (\hyperlink{class_element}{Element} $\ast$e)
+\item 
+\hyperlink{class_node}{Node} $\ast$$\ast$ \hyperlink{class_circuit_a1e4a92a398972c7dbf8a19c4943626bc}{Get\+Terminals} (\hyperlink{class_element}{Element} $\ast$e, \hyperlink{class_node}{Node} $\ast$\&n1, \hyperlink{class_node}{Node} $\ast$\&n2)
+\item 
+void \hyperlink{class_circuit_a01dac750b9078c5b820fe32429b5194a}{Print} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_circuit_a1134e16f26a878377f4d502bff111b9e}\label{class_circuit_a1134e16f26a878377f4d502bff111b9e}} 
+\index{Circuit@{Circuit}!````~Circuit@{$\sim$\+Circuit}}
+\index{````~Circuit@{$\sim$\+Circuit}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{$\sim$\+Circuit()}{~Circuit()}}
+{\footnotesize\ttfamily Circuit\+::$\sim$\+Circuit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_a6a9c21735a28f1222797d71ece99521c}\label{class_circuit_a6a9c21735a28f1222797d71ece99521c}} 
+\index{Circuit@{Circuit}!Circuit@{Circuit}}
+\index{Circuit@{Circuit}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Circuit()}{Circuit()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Circuit\+::\+Circuit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_aaf90541f622878c55fe6377e9d656684}\label{class_circuit_aaf90541f622878c55fe6377e9d656684}} 
+\index{Circuit@{Circuit}!Circuit@{Circuit}}
+\index{Circuit@{Circuit}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Circuit()}{Circuit()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Circuit\+::\+Circuit (\begin{DoxyParamCaption}\item[{\hyperlink{class_circuit}{Circuit} $\ast$}]{c }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_ae98bb5b64036d61c927cfbb2a1e82ad0}\label{class_circuit_ae98bb5b64036d61c927cfbb2a1e82ad0}} 
+\index{Circuit@{Circuit}!Circuit@{Circuit}}
+\index{Circuit@{Circuit}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Circuit()}{Circuit()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Circuit\+::\+Circuit (\begin{DoxyParamCaption}\item[{\hyperlink{class_circuit}{Circuit} \&}]{c }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_circuit_ac8df627490e7b70cbdc547c2be4337d4}\label{class_circuit_ac8df627490e7b70cbdc547c2be4337d4}} 
+\index{Circuit@{Circuit}!Add@{Add}}
+\index{Add@{Add}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily void Circuit\+::\+Add (\begin{DoxyParamCaption}\item[{\hyperlink{class_node}{Node} $\ast$}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_adfadd59857303052342b2b962e9b810d}\label{class_circuit_adfadd59857303052342b2b962e9b810d}} 
+\index{Circuit@{Circuit}!Copy@{Copy}}
+\index{Copy@{Copy}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Copy()}{Copy()}}
+{\footnotesize\ttfamily \hyperlink{class_circuit}{Circuit} $\ast$ Circuit\+::\+Copy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_a00cc4492fc12d0df63926d66482466ed}\label{class_circuit_a00cc4492fc12d0df63926d66482466ed}} 
+\index{Circuit@{Circuit}!Get\+Element@{Get\+Element}}
+\index{Get\+Element@{Get\+Element}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Get\+Element()}{GetElement()}}
+{\footnotesize\ttfamily \hyperlink{class_element}{Element} $\ast$ Circuit\+::\+Get\+Element (\begin{DoxyParamCaption}\item[{char}]{type,  }\item[{const int \&}]{id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_aff4874c7202cfdba682aec96a9bb4079}\label{class_circuit_aff4874c7202cfdba682aec96a9bb4079}} 
+\index{Circuit@{Circuit}!Get\+First\+Node@{Get\+First\+Node}}
+\index{Get\+First\+Node@{Get\+First\+Node}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Get\+First\+Node()}{GetFirstNode()}}
+{\footnotesize\ttfamily \hyperlink{class_node}{Node} $\ast$ Circuit\+::\+Get\+First\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_aeb86f8d79ac985158d41fbee772cc4fc}\label{class_circuit_aeb86f8d79ac985158d41fbee772cc4fc}} 
+\index{Circuit@{Circuit}!Get\+Last\+Node@{Get\+Last\+Node}}
+\index{Get\+Last\+Node@{Get\+Last\+Node}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Get\+Last\+Node()}{GetLastNode()}}
+{\footnotesize\ttfamily \hyperlink{class_node}{Node} $\ast$ Circuit\+::\+Get\+Last\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_ad3a83fee410a9d1324725300564e34b3}\label{class_circuit_ad3a83fee410a9d1324725300564e34b3}} 
+\index{Circuit@{Circuit}!Get\+Node@{Get\+Node}}
+\index{Get\+Node@{Get\+Node}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Get\+Node()}{GetNode()}}
+{\footnotesize\ttfamily \hyperlink{class_node}{Node} $\ast$ Circuit\+::\+Get\+Node (\begin{DoxyParamCaption}\item[{const double \&}]{val,  }\item[{\hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcd}{S\+E\+A\+R\+C\+H\+\_\+\+BY}}]{type = {\ttfamily \hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcda001479a58fb44c39a29b20d565081a68}{ID}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_aa78d50e940323ecd69d42fa2219aeff8}\label{class_circuit_aa78d50e940323ecd69d42fa2219aeff8}} 
+\index{Circuit@{Circuit}!Get\+Num\+Of\+Nodes@{Get\+Num\+Of\+Nodes}}
+\index{Get\+Num\+Of\+Nodes@{Get\+Num\+Of\+Nodes}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Get\+Num\+Of\+Nodes()}{GetNumOfNodes()}}
+{\footnotesize\ttfamily int Circuit\+::\+Get\+Num\+Of\+Nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_a2d6a6d1c971baa3ac838e92e935e12eb}\label{class_circuit_a2d6a6d1c971baa3ac838e92e935e12eb}} 
+\index{Circuit@{Circuit}!Get\+Terminals@{Get\+Terminals}}
+\index{Get\+Terminals@{Get\+Terminals}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Get\+Terminals()}{GetTerminals()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \hyperlink{class_node}{Node} $\ast$$\ast$ Circuit\+::\+Get\+Terminals (\begin{DoxyParamCaption}\item[{\hyperlink{class_element}{Element} $\ast$}]{e }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_a1e4a92a398972c7dbf8a19c4943626bc}\label{class_circuit_a1e4a92a398972c7dbf8a19c4943626bc}} 
+\index{Circuit@{Circuit}!Get\+Terminals@{Get\+Terminals}}
+\index{Get\+Terminals@{Get\+Terminals}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Get\+Terminals()}{GetTerminals()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \hyperlink{class_node}{Node} $\ast$$\ast$ Circuit\+::\+Get\+Terminals (\begin{DoxyParamCaption}\item[{\hyperlink{class_element}{Element} $\ast$}]{e,  }\item[{\hyperlink{class_node}{Node} $\ast$\&}]{n1,  }\item[{\hyperlink{class_node}{Node} $\ast$\&}]{n2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_adbe87d6a9e119ddc538fd3354ba51ca7}\label{class_circuit_adbe87d6a9e119ddc538fd3354ba51ca7}} 
+\index{Circuit@{Circuit}!Has\+Element@{Has\+Element}}
+\index{Has\+Element@{Has\+Element}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Has\+Element()}{HasElement()}}
+{\footnotesize\ttfamily bool Circuit\+::\+Has\+Element (\begin{DoxyParamCaption}\item[{char}]{type,  }\item[{const int \&}]{id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_accc2583f39aa8860782a5a74b5badf74}\label{class_circuit_accc2583f39aa8860782a5a74b5badf74}} 
+\index{Circuit@{Circuit}!Has\+Node@{Has\+Node}}
+\index{Has\+Node@{Has\+Node}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Has\+Node()}{HasNode()}}
+{\footnotesize\ttfamily bool Circuit\+::\+Has\+Node (\begin{DoxyParamCaption}\item[{const double \&}]{val,  }\item[{\hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcd}{S\+E\+A\+R\+C\+H\+\_\+\+BY}}]{type = {\ttfamily \hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcda001479a58fb44c39a29b20d565081a68}{ID}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_a5b2435ea3098e3723272f8fc620228c8}\label{class_circuit_a5b2435ea3098e3723272f8fc620228c8}} 
+\index{Circuit@{Circuit}!Is\+Empty@{Is\+Empty}}
+\index{Is\+Empty@{Is\+Empty}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Is\+Empty()}{IsEmpty()}}
+{\footnotesize\ttfamily bool Circuit\+::\+Is\+Empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_a4f5f3e57b05982edbdabd135ffa72576}\label{class_circuit_a4f5f3e57b05982edbdabd135ffa72576}} 
+\index{Circuit@{Circuit}!operator=@{operator=}}
+\index{operator=@{operator=}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \hyperlink{class_circuit}{Circuit} \& Circuit\+::operator= (\begin{DoxyParamCaption}\item[{\hyperlink{class_circuit}{Circuit} \&}]{c }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_a01dac750b9078c5b820fe32429b5194a}\label{class_circuit_a01dac750b9078c5b820fe32429b5194a}} 
+\index{Circuit@{Circuit}!Print@{Print}}
+\index{Print@{Print}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Print()}{Print()}}
+{\footnotesize\ttfamily void Circuit\+::\+Print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_a66f32b5192bba342006dbc8f512fda12}\label{class_circuit_a66f32b5192bba342006dbc8f512fda12}} 
+\index{Circuit@{Circuit}!Read@{Read}}
+\index{Read@{Read}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Read()}{Read()}}
+{\footnotesize\ttfamily void Circuit\+::\+Read (\begin{DoxyParamCaption}\item[{bool}]{start\+\_\+with\+\_\+printing\+\_\+help = {\ttfamily true} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_a727524e3f110219f51bcbc4e057f12ef}\label{class_circuit_a727524e3f110219f51bcbc4e057f12ef}} 
+\index{Circuit@{Circuit}!Remove@{Remove}}
+\index{Remove@{Remove}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Remove()}{Remove()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Circuit\+::\+Remove (\begin{DoxyParamCaption}\item[{\hyperlink{class_node}{Node} $\ast$}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_circuit_abe72294beb015a2662f1ee79d2409b8b}\label{class_circuit_abe72294beb015a2662f1ee79d2409b8b}} 
+\index{Circuit@{Circuit}!Remove@{Remove}}
+\index{Remove@{Remove}!Circuit@{Circuit}}
+\subsubsection{\texorpdfstring{Remove()}{Remove()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Circuit\+::\+Remove (\begin{DoxyParamCaption}\item[{const double \&}]{val,  }\item[{\hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcd}{S\+E\+A\+R\+C\+H\+\_\+\+BY}}]{type = {\ttfamily \hyperlink{_data_8h_a6262d734859ff0be0daa3fe3b8eccbcda001479a58fb44c39a29b20d565081a68}{ID}} }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Headers/\hyperlink{_data_8h}{Data.\+h}\item 
+Sources/\hyperlink{___circuit_8cpp}{\+\_\+\+Circuit.\+cpp}\item 
+Sources/\hyperlink{_circuit_8cpp}{Circuit.\+cpp}\end{DoxyCompactItemize}

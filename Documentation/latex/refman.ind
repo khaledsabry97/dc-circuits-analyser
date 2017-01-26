@@ -1,0 +1,540 @@
+\begin{theindex}
+
+  \item {\+\_\+\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+\_\+}
+    \subitem {Test.\+h}, \hyperpage{37}
+  \item {\+\_\+\+\_\+\+\_\+.\+h}
+    \subitem {C\+R\+E\+D\+I\+TS}, \hyperpage{23}
+    \subitem {H\+E\+LP}, \hyperpage{23}
+    \subitem {P\+R\+O\+M\+PT}, \hyperpage{23}
+  \item {$\sim$\+Circuit}
+    \subitem {Circuit}, \hyperpage{9}
+  \item {$\sim$\+Node}
+    \subitem {Node}, \hyperpage{17}
+  \item {$\sim$color}
+    \subitem {colorwin\+::color}, \hyperpage{13}
+
+  \indexspace
+
+  \item {Add}
+    \subitem {Circuit}, \hyperpage{10}
+    \subitem {Node}, \hyperpage{18}
+  \item {Ampere}
+    \subitem {K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{39}
+
+  \indexspace
+
+  \item {B\+L\+UE}
+    \subitem {Colors.\+h}, \hyperpage{24}
+  \item {blue}
+    \subitem {colorwin}, \hyperpage{8}
+
+  \indexspace
+
+  \item {C\+R\+E\+D\+I\+TS}
+    \subitem {\+\_\+\+\_\+\+\_\+.\+h}, \hyperpage{23}
+  \item {C\+W\+\_\+\+C\+O\+L\+O\+RS}
+    \subitem {colorwin}, \hyperpage{7}
+  \item {C\+Y\+AN}
+    \subitem {Colors.\+h}, \hyperpage{24}
+  \item {Change\+Id}
+    \subitem {Element}, \hyperpage{15}
+  \item {Change\+Type}
+    \subitem {Element}, \hyperpage{15}
+  \item {Change\+Value}
+    \subitem {Element}, \hyperpage{15}
+  \item {Change\+Volt}
+    \subitem {Node}, \hyperpage{18}
+  \item {Circuit}, \hyperpage{9}
+    \subitem {$\sim$\+Circuit}, \hyperpage{9}
+    \subitem {Add}, \hyperpage{10}
+    \subitem {Circuit}, \hyperpage{10}
+    \subitem {Copy}, \hyperpage{10}
+    \subitem {Element}, \hyperpage{16}
+    \subitem {Get\+Element}, \hyperpage{10}
+    \subitem {Get\+First\+Node}, \hyperpage{10}
+    \subitem {Get\+Last\+Node}, \hyperpage{11}
+    \subitem {Get\+Node}, \hyperpage{11}
+    \subitem {Get\+Num\+Of\+Nodes}, \hyperpage{11}
+    \subitem {Get\+Terminals}, \hyperpage{11}
+    \subitem {Has\+Element}, \hyperpage{11}
+    \subitem {Has\+Node}, \hyperpage{11}
+    \subitem {Is\+Empty}, \hyperpage{12}
+    \subitem {Node}, \hyperpage{20}
+    \subitem {operator=}, \hyperpage{12}
+    \subitem {Print}, \hyperpage{12}
+    \subitem {Read}, \hyperpage{12}
+    \subitem {Remove}, \hyperpage{12}
+  \item {Circuit\+\_\+\+Is\+\_\+\+Power\+\_\+\+Balanced}
+    \subitem {K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{39}
+    \subitem {Solving.\+h}, \hyperpage{31}
+  \item {color}
+    \subitem {colorwin\+::color}, \hyperpage{13}
+  \item {Colors.\+h}
+    \subitem {B\+L\+UE}, \hyperpage{24}
+    \subitem {C\+Y\+AN}, \hyperpage{24}
+    \subitem {G\+R\+E\+EN}, \hyperpage{24}
+    \subitem {R\+ED}, \hyperpage{24}
+    \subitem {W\+H\+I\+TE}, \hyperpage{24}
+    \subitem {Y\+E\+L\+L\+OW}, \hyperpage{25}
+  \item {colorwin}, \hyperpage{7}
+    \subitem {blue}, \hyperpage{8}
+    \subitem {C\+W\+\_\+\+C\+O\+L\+O\+RS}, \hyperpage{7}
+    \subitem {cyan}, \hyperpage{8}
+    \subitem {gray}, \hyperpage{8}
+    \subitem {green}, \hyperpage{8}
+    \subitem {grey}, \hyperpage{8}
+    \subitem {magenta}, \hyperpage{8}
+    \subitem {operator$<$$<$}, \hyperpage{8}
+    \subitem {red}, \hyperpage{8}
+    \subitem {white}, \hyperpage{8}
+    \subitem {yellow}, \hyperpage{8}
+  \item {colorwin\+::color}, \hyperpage{13}
+    \subitem {$\sim$color}, \hyperpage{13}
+    \subitem {color}, \hyperpage{13}
+    \subitem {operator$<$$<$}, \hyperpage{13}
+    \subitem {withcolor}, \hyperpage{13}
+  \item {colorwin\+::withcolor}, \hyperpage{20}
+    \subitem {printf}, \hyperpage{21}
+    \subitem {withcolor}, \hyperpage{20}
+  \item {Command}
+    \subitem {Data.\+h}, \hyperpage{26}
+  \item {Copy}
+    \subitem {Circuit}, \hyperpage{10}
+    \subitem {Element}, \hyperpage{15}
+    \subitem {Node}, \hyperpage{18}
+  \item {count\+Circuit}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{43}
+    \subitem {Solving.\+h}, \hyperpage{31}
+  \item {cyan}
+    \subitem {colorwin}, \hyperpage{8}
+
+  \indexspace
+
+  \item {Data.\+h}
+    \subitem {Command}, \hyperpage{26}
+    \subitem {N\+U\+LL}, \hyperpage{26}
+    \subitem {S\+E\+A\+R\+C\+H\+\_\+\+BY}, \hyperpage{27}
+    \subitem {Type}, \hyperpage{27}
+  \item {det\+Mat}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{43}
+    \subitem {Solving.\+h}, \hyperpage{31}
+  \item {Disable\+\_\+\+Sources}
+    \subitem {K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{40}
+  \item {Disable\+\_\+\+Sources\+\_\+superpostion}
+    \subitem {K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{40}
+  \item {Doubling\+Mat}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{44}
+    \subitem {Solving.\+h}, \hyperpage{32}
+
+  \indexspace
+
+  \item {Element}, \hyperpage{14}
+    \subitem {Change\+Id}, \hyperpage{15}
+    \subitem {Change\+Type}, \hyperpage{15}
+    \subitem {Change\+Value}, \hyperpage{15}
+    \subitem {Circuit}, \hyperpage{16}
+    \subitem {Copy}, \hyperpage{15}
+    \subitem {Element}, \hyperpage{14}
+    \subitem {Get\+Id}, \hyperpage{15}
+    \subitem {Get\+Next}, \hyperpage{15}
+    \subitem {Get\+Node\+Id}, \hyperpage{16}
+    \subitem {Get\+Prev}, \hyperpage{16}
+    \subitem {Get\+Type}, \hyperpage{16}
+    \subitem {Get\+Value}, \hyperpage{16}
+    \subitem {Node}, \hyperpage{16}
+    \subitem {operator==}, \hyperpage{16}
+  \item {error}
+    \subitem {Errors.\+h}, \hyperpage{30}
+  \item {Errors.\+cpp}
+    \subitem {Handle\+Error}, \hyperpage{39}
+  \item {Errors.\+h}
+    \subitem {error}, \hyperpage{30}
+    \subitem {F\+O\+R\+\_\+\+D\+E\+B\+U\+G\+G\+I\+NG}, \hyperpage{28}
+    \subitem {H\+A\+N\+D\+L\+E\+\_\+\+B\+A\+D\+\_\+\+T\+Y\+P\+E\+\_\+\+N\+A\+ME}, 
+		\hyperpage{28}
+    \subitem {H\+A\+N\+D\+L\+E\+\_\+\+D\+U\+P\+L\+I\+C\+A\+T\+E\+\_\+\+E\+L\+E\+M\+E\+NT}, 
+		\hyperpage{28}
+    \subitem {H\+A\+N\+D\+L\+E\+\_\+\+D\+U\+P\+L\+I\+C\+A\+T\+E\+\_\+\+W\+I\+T\+H\+\_\+\+D\+I\+F\+F\+\_\+\+V\+A\+L\+U\+ES}, 
+		\hyperpage{28}
+    \subitem {H\+A\+N\+D\+L\+E\+\_\+\+E\+M\+P\+T\+Y\+\_\+\+N\+O\+DE}, 
+		\hyperpage{29}
+    \subitem {H\+A\+N\+D\+L\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+P\+UT}, 
+		\hyperpage{29}
+    \subitem {H\+A\+N\+D\+L\+E\+\_\+\+N\+E\+G\+A\+T\+I\+V\+E\+\_\+\+R\+E\+S\+I\+S\+T\+A\+N\+CE}, 
+		\hyperpage{29}
+    \subitem {H\+A\+N\+D\+L\+E\+\_\+\+N\+O\+D\+E\+\_\+\+W\+I\+T\+H\+\_\+\+O\+N\+E\+\_\+\+E\+L\+EM}, 
+		\hyperpage{29}
+    \subitem {H\+A\+N\+D\+L\+E\+\_\+\+P\+A\+R\+A\+L\+L\+E\+L\+\_\+\+D\+I\+F\+F\+\_\+\+V\+O\+L\+T\+A\+G\+ES}, 
+		\hyperpage{29}
+    \subitem {H\+A\+N\+D\+L\+E\+\_\+\+S\+A\+M\+E\+\_\+\+P\+O\+L\+A\+R\+I\+TY}, 
+		\hyperpage{29}
+    \subitem {H\+A\+N\+D\+L\+E\+\_\+\+S\+E\+R\+I\+E\+S\+\_\+\+D\+I\+F\+F\+\_\+\+C\+U\+R\+R\+E\+N\+TS}, 
+		\hyperpage{29}
+    \subitem {Handle\+Error}, \hyperpage{30}
+
+  \indexspace
+
+  \item {F\+O\+R\+\_\+\+D\+E\+B\+U\+G\+G\+I\+NG}
+    \subitem {Errors.\+h}, \hyperpage{28}
+
+  \indexspace
+
+  \item {G\+R\+E\+EN}
+    \subitem {Colors.\+h}, \hyperpage{24}
+  \item {Get\+\_\+2\+\_\+\+Nodes}
+    \subitem {K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{40}
+  \item {Get\+\_\+\+Current}
+    \subitem {K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{40}
+    \subitem {Solving.\+h}, \hyperpage{32}
+  \item {Get\+\_\+\+Pow\+\_\+\+Max}
+    \subitem {K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{40}
+    \subitem {Solving.\+h}, \hyperpage{32}
+  \item {Get\+\_\+\+Power}
+    \subitem {K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{41}
+    \subitem {Solving.\+h}, \hyperpage{32}
+  \item {Get\+\_\+\+Res\+\_\+\+Max}
+    \subitem {K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{41}
+    \subitem {Solving.\+h}, \hyperpage{33}
+  \item {Get\+\_\+\+Total\+\_\+\+Dissipated\+\_\+\+Power}
+    \subitem {K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{41}
+    \subitem {Solving.\+h}, \hyperpage{33}
+  \item {Get\+\_\+\+Total\+\_\+\+Supplied\+\_\+\+Power}
+    \subitem {K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{41}
+    \subitem {Solving.\+h}, \hyperpage{33}
+  \item {Get\+\_\+\+Volt\+Diff}
+    \subitem {K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{41}
+    \subitem {Solving.\+h}, \hyperpage{33}
+  \item {Get\+Element}
+    \subitem {Circuit}, \hyperpage{10}
+    \subitem {Node}, \hyperpage{18}
+  \item {Get\+First\+Element}
+    \subitem {Node}, \hyperpage{18}
+  \item {Get\+First\+Node}
+    \subitem {Circuit}, \hyperpage{10}
+  \item {Get\+Id}
+    \subitem {Element}, \hyperpage{15}
+    \subitem {Node}, \hyperpage{18}
+  \item {Get\+Last\+Node}
+    \subitem {Circuit}, \hyperpage{11}
+  \item {Get\+Next}
+    \subitem {Element}, \hyperpage{15}
+    \subitem {Node}, \hyperpage{18}
+  \item {Get\+Node}
+    \subitem {Circuit}, \hyperpage{11}
+  \item {Get\+Node\+Id}
+    \subitem {Element}, \hyperpage{16}
+  \item {Get\+Num\+Of\+Elements}
+    \subitem {Node}, \hyperpage{19}
+  \item {Get\+Num\+Of\+Nodes}
+    \subitem {Circuit}, \hyperpage{11}
+  \item {Get\+Prev}
+    \subitem {Element}, \hyperpage{16}
+    \subitem {Node}, \hyperpage{19}
+  \item {Get\+Terminals}
+    \subitem {Circuit}, \hyperpage{11}
+  \item {Get\+Type}
+    \subitem {Element}, \hyperpage{16}
+  \item {Get\+Value}
+    \subitem {Element}, \hyperpage{16}
+  \item {Get\+Volt}
+    \subitem {Node}, \hyperpage{19}
+  \item {gray}
+    \subitem {colorwin}, \hyperpage{8}
+  \item {green}
+    \subitem {colorwin}, \hyperpage{8}
+  \item {grey}
+    \subitem {colorwin}, \hyperpage{8}
+
+  \indexspace
+
+  \item {H\+A\+N\+D\+L\+E\+\_\+\+B\+A\+D\+\_\+\+T\+Y\+P\+E\+\_\+\+N\+A\+ME}
+    \subitem {Errors.\+h}, \hyperpage{28}
+  \item {H\+A\+N\+D\+L\+E\+\_\+\+D\+U\+P\+L\+I\+C\+A\+T\+E\+\_\+\+E\+L\+E\+M\+E\+NT}
+    \subitem {Errors.\+h}, \hyperpage{28}
+  \item {H\+A\+N\+D\+L\+E\+\_\+\+D\+U\+P\+L\+I\+C\+A\+T\+E\+\_\+\+W\+I\+T\+H\+\_\+\+D\+I\+F\+F\+\_\+\+V\+A\+L\+U\+ES}
+    \subitem {Errors.\+h}, \hyperpage{28}
+  \item {H\+A\+N\+D\+L\+E\+\_\+\+E\+M\+P\+T\+Y\+\_\+\+N\+O\+DE}
+    \subitem {Errors.\+h}, \hyperpage{29}
+  \item {H\+A\+N\+D\+L\+E\+\_\+\+I\+N\+V\+A\+L\+I\+D\+\_\+\+I\+N\+P\+UT}
+    \subitem {Errors.\+h}, \hyperpage{29}
+  \item {H\+A\+N\+D\+L\+E\+\_\+\+N\+E\+G\+A\+T\+I\+V\+E\+\_\+\+R\+E\+S\+I\+S\+T\+A\+N\+CE}
+    \subitem {Errors.\+h}, \hyperpage{29}
+  \item {H\+A\+N\+D\+L\+E\+\_\+\+N\+O\+D\+E\+\_\+\+W\+I\+T\+H\+\_\+\+O\+N\+E\+\_\+\+E\+L\+EM}
+    \subitem {Errors.\+h}, \hyperpage{29}
+  \item {H\+A\+N\+D\+L\+E\+\_\+\+P\+A\+R\+A\+L\+L\+E\+L\+\_\+\+D\+I\+F\+F\+\_\+\+V\+O\+L\+T\+A\+G\+ES}
+    \subitem {Errors.\+h}, \hyperpage{29}
+  \item {H\+A\+N\+D\+L\+E\+\_\+\+S\+A\+M\+E\+\_\+\+P\+O\+L\+A\+R\+I\+TY}
+    \subitem {Errors.\+h}, \hyperpage{29}
+  \item {H\+A\+N\+D\+L\+E\+\_\+\+S\+E\+R\+I\+E\+S\+\_\+\+D\+I\+F\+F\+\_\+\+C\+U\+R\+R\+E\+N\+TS}
+    \subitem {Errors.\+h}, \hyperpage{29}
+  \item {H\+E\+LP}
+    \subitem {\+\_\+\+\_\+\+\_\+.\+h}, \hyperpage{23}
+  \item {Handle\+Error}
+    \subitem {Errors.\+cpp}, \hyperpage{39}
+    \subitem {Errors.\+h}, \hyperpage{30}
+  \item {Has\+Element}
+    \subitem {Circuit}, \hyperpage{11}
+    \subitem {Node}, \hyperpage{19}
+  \item {Has\+Node}
+    \subitem {Circuit}, \hyperpage{11}
+  \item {Headers/\+\_\+\+\_\+\+\_\+.\+h}, \hyperpage{23}
+  \item {Headers/\+Colors.\+h}, \hyperpage{24}
+  \item {Headers/\+Data.\+h}, \hyperpage{26}
+  \item {Headers/\+Errors.\+h}, \hyperpage{27}
+  \item {Headers/\+Solving.\+h}, \hyperpage{30}
+  \item {Headers/\+Test.\+h}, \hyperpage{36}
+  \item {Headers/colorwin.\+hpp}, \hyperpage{25}
+
+  \indexspace
+
+  \item {I\+N\+P\+U\+T\+\_\+\+F\+I\+LE}
+    \subitem {Test.\+h}, \hyperpage{37}
+  \item {init}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{44}
+    \subitem {Solving.\+h}, \hyperpage{33}
+  \item {insert}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{44}
+    \subitem {Solving.\+h}, \hyperpage{34}
+  \item {int\+Elements}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{44}
+    \subitem {Solving.\+h}, \hyperpage{34}
+  \item {Is\+Empty}
+    \subitem {Circuit}, \hyperpage{12}
+    \subitem {Node}, \hyperpage{19}
+  \item {Is\+Essential}
+    \subitem {Node}, \hyperpage{19}
+
+  \indexspace
+
+  \item {K\&\+Y\+\_\+\+Solving.\+cpp}
+    \subitem {Ampere}, \hyperpage{39}
+    \subitem {Circuit\+\_\+\+Is\+\_\+\+Power\+\_\+\+Balanced}, 
+		\hyperpage{39}
+    \subitem {Disable\+\_\+\+Sources}, \hyperpage{40}
+    \subitem {Disable\+\_\+\+Sources\+\_\+superpostion}, \hyperpage{40}
+    \subitem {Get\+\_\+2\+\_\+\+Nodes}, \hyperpage{40}
+    \subitem {Get\+\_\+\+Current}, \hyperpage{40}
+    \subitem {Get\+\_\+\+Pow\+\_\+\+Max}, \hyperpage{40}
+    \subitem {Get\+\_\+\+Power}, \hyperpage{41}
+    \subitem {Get\+\_\+\+Res\+\_\+\+Max}, \hyperpage{41}
+    \subitem {Get\+\_\+\+Total\+\_\+\+Dissipated\+\_\+\+Power}, 
+		\hyperpage{41}
+    \subitem {Get\+\_\+\+Total\+\_\+\+Supplied\+\_\+\+Power}, 
+		\hyperpage{41}
+    \subitem {Get\+\_\+\+Volt\+Diff}, \hyperpage{41}
+    \subitem {Power}, \hyperpage{42}
+    \subitem {Voltage}, \hyperpage{42}
+
+  \indexspace
+
+  \item {magenta}
+    \subitem {colorwin}, \hyperpage{8}
+  \item {main}
+    \subitem {Main.\+cpp}, \hyperpage{42}
+    \subitem {Test.\+h}, \hyperpage{37}
+  \item {Main.\+cpp}
+    \subitem {main}, \hyperpage{42}
+
+  \indexspace
+
+  \item {N\+U\+LL}
+    \subitem {Data.\+h}, \hyperpage{26}
+  \item {Node}, \hyperpage{17}
+    \subitem {$\sim$\+Node}, \hyperpage{17}
+    \subitem {Add}, \hyperpage{18}
+    \subitem {Change\+Volt}, \hyperpage{18}
+    \subitem {Circuit}, \hyperpage{20}
+    \subitem {Copy}, \hyperpage{18}
+    \subitem {Element}, \hyperpage{16}
+    \subitem {Get\+Element}, \hyperpage{18}
+    \subitem {Get\+First\+Element}, \hyperpage{18}
+    \subitem {Get\+Id}, \hyperpage{18}
+    \subitem {Get\+Next}, \hyperpage{18}
+    \subitem {Get\+Num\+Of\+Elements}, \hyperpage{19}
+    \subitem {Get\+Prev}, \hyperpage{19}
+    \subitem {Get\+Volt}, \hyperpage{19}
+    \subitem {Has\+Element}, \hyperpage{19}
+    \subitem {Is\+Empty}, \hyperpage{19}
+    \subitem {Is\+Essential}, \hyperpage{19}
+    \subitem {Node}, \hyperpage{17}
+    \subitem {Remove}, \hyperpage{19, 20}
+  \item {Node\+Solving.\+cpp}
+    \subitem {count\+Circuit}, \hyperpage{43}
+    \subitem {det\+Mat}, \hyperpage{43}
+    \subitem {Doubling\+Mat}, \hyperpage{44}
+    \subitem {init}, \hyperpage{44}
+    \subitem {insert}, \hyperpage{44}
+    \subitem {int\+Elements}, \hyperpage{44}
+    \subitem {print}, \hyperpage{44}
+    \subitem {Search\+Element}, \hyperpage{45}
+    \subitem {Search\+Node}, \hyperpage{45}
+    \subitem {Search\+Node\+By\+Element}, \hyperpage{45}
+    \subitem {Search\+Node\+Non}, \hyperpage{45}
+    \subitem {size\+Of\+The\+Mat}, \hyperpage{45}
+    \subitem {sizeof\+Non}, \hyperpage{45}
+    \subitem {solve}, \hyperpage{46}
+    \subitem {Solve\+Non\+Ess}, \hyperpage{46}
+    \subitem {Solving\+Mat}, \hyperpage{46}
+    \subitem {swap\+Mat}, \hyperpage{46}
+    \subitem {Voltage\+Back}, \hyperpage{46}
+    \subitem {voltage\+Transformation}, \hyperpage{46}
+
+  \indexspace
+
+  \item {O\+U\+T\+P\+U\+T\+\_\+\+F\+I\+LE}
+    \subitem {Test.\+h}, \hyperpage{37}
+  \item {operator$<$$<$}
+    \subitem {colorwin}, \hyperpage{8}
+    \subitem {colorwin\+::color}, \hyperpage{13}
+  \item {operator=}
+    \subitem {Circuit}, \hyperpage{12}
+  \item {operator==}
+    \subitem {Element}, \hyperpage{16}
+
+  \indexspace
+
+  \item {P\+R\+O\+M\+PT}
+    \subitem {\+\_\+\+\_\+\+\_\+.\+h}, \hyperpage{23}
+  \item {Power}
+    \subitem {K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{42}
+  \item {Print}
+    \subitem {Circuit}, \hyperpage{12}
+  \item {print}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{44}
+    \subitem {Solving.\+h}, \hyperpage{34}
+  \item {printf}
+    \subitem {colorwin\+::withcolor}, \hyperpage{21}
+
+  \indexspace
+
+  \item {R\+ED}
+    \subitem {Colors.\+h}, \hyperpage{24}
+  \item {Read}
+    \subitem {Circuit}, \hyperpage{12}
+  \item {red}
+    \subitem {colorwin}, \hyperpage{8}
+  \item {Redirect\+\_\+\+IO}
+    \subitem {Test.\+h}, \hyperpage{37}
+  \item {Remove}
+    \subitem {Circuit}, \hyperpage{12}
+    \subitem {Node}, \hyperpage{19, 20}
+
+  \indexspace
+
+  \item {S\+E\+A\+R\+C\+H\+\_\+\+BY}
+    \subitem {Data.\+h}, \hyperpage{27}
+  \item {Search\+Element}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{45}
+    \subitem {Solving.\+h}, \hyperpage{34}
+  \item {Search\+Node}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{45}
+    \subitem {Solving.\+h}, \hyperpage{34}
+  \item {Search\+Node\+By\+Element}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{45}
+    \subitem {Solving.\+h}, \hyperpage{35}
+  \item {Search\+Node\+Non}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{45}
+    \subitem {Solving.\+h}, \hyperpage{35}
+  \item {size\+Of\+The\+Mat}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{45}
+    \subitem {Solving.\+h}, \hyperpage{35}
+  \item {sizeof\+Non}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{45}
+  \item {solve}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{46}
+    \subitem {Solving.\+h}, \hyperpage{35}
+  \item {Solve\+Non\+Ess}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{46}
+    \subitem {Solving.\+h}, \hyperpage{35}
+  \item {Solving.\+h}
+    \subitem {Circuit\+\_\+\+Is\+\_\+\+Power\+\_\+\+Balanced}, 
+		\hyperpage{31}
+    \subitem {count\+Circuit}, \hyperpage{31}
+    \subitem {det\+Mat}, \hyperpage{31}
+    \subitem {Doubling\+Mat}, \hyperpage{32}
+    \subitem {Get\+\_\+\+Current}, \hyperpage{32}
+    \subitem {Get\+\_\+\+Pow\+\_\+\+Max}, \hyperpage{32}
+    \subitem {Get\+\_\+\+Power}, \hyperpage{32}
+    \subitem {Get\+\_\+\+Res\+\_\+\+Max}, \hyperpage{33}
+    \subitem {Get\+\_\+\+Total\+\_\+\+Dissipated\+\_\+\+Power}, 
+		\hyperpage{33}
+    \subitem {Get\+\_\+\+Total\+\_\+\+Supplied\+\_\+\+Power}, 
+		\hyperpage{33}
+    \subitem {Get\+\_\+\+Volt\+Diff}, \hyperpage{33}
+    \subitem {init}, \hyperpage{33}
+    \subitem {insert}, \hyperpage{34}
+    \subitem {int\+Elements}, \hyperpage{34}
+    \subitem {print}, \hyperpage{34}
+    \subitem {Search\+Element}, \hyperpage{34}
+    \subitem {Search\+Node}, \hyperpage{34}
+    \subitem {Search\+Node\+By\+Element}, \hyperpage{35}
+    \subitem {Search\+Node\+Non}, \hyperpage{35}
+    \subitem {size\+Of\+The\+Mat}, \hyperpage{35}
+    \subitem {solve}, \hyperpage{35}
+    \subitem {Solve\+Non\+Ess}, \hyperpage{35}
+    \subitem {Solving\+Mat}, \hyperpage{35}
+    \subitem {swap\+Mat}, \hyperpage{36}
+    \subitem {Voltage\+Back}, \hyperpage{36}
+    \subitem {voltage\+Transformation}, \hyperpage{36}
+  \item {Solving\+Mat}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{46}
+    \subitem {Solving.\+h}, \hyperpage{35}
+  \item {Sources/\+\_\+\+Circuit.\+cpp}, \hyperpage{38}
+  \item {Sources/\+\_\+\+Element.\+cpp}, \hyperpage{38}
+  \item {Sources/\+\_\+\+Input.\+cpp}, \hyperpage{38}
+  \item {Sources/\+\_\+\+List.\+cpp}, \hyperpage{38}
+  \item {Sources/\+Circuit.\+cpp}, \hyperpage{38}
+  \item {Sources/\+Element.\+cpp}, \hyperpage{38}
+  \item {Sources/\+Errors.\+cpp}, \hyperpage{38}
+  \item {Sources/\+K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{39}
+  \item {Sources/\+Main.\+cpp}, \hyperpage{42}
+  \item {Sources/\+Node.\+cpp}, \hyperpage{43}
+  \item {Sources/\+Node\+Solving.\+cpp}, \hyperpage{43}
+  \item {swap\+Mat}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{46}
+    \subitem {Solving.\+h}, \hyperpage{36}
+
+  \indexspace
+
+  \item {Test.\+h}
+    \subitem {\+\_\+\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+\_\+}, 
+		\hyperpage{37}
+    \subitem {I\+N\+P\+U\+T\+\_\+\+F\+I\+LE}, \hyperpage{37}
+    \subitem {main}, \hyperpage{37}
+    \subitem {O\+U\+T\+P\+U\+T\+\_\+\+F\+I\+LE}, \hyperpage{37}
+    \subitem {Redirect\+\_\+\+IO}, \hyperpage{37}
+    \subitem {test\+\_\+hadi\+\_\+solving2}, \hyperpage{37}
+  \item {test\+\_\+hadi\+\_\+solving2}
+    \subitem {Test.\+h}, \hyperpage{37}
+  \item {Type}
+    \subitem {Data.\+h}, \hyperpage{27}
+
+  \indexspace
+
+  \item {Voltage}
+    \subitem {K\&\+Y\+\_\+\+Solving.\+cpp}, \hyperpage{42}
+  \item {Voltage\+Back}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{46}
+    \subitem {Solving.\+h}, \hyperpage{36}
+  \item {voltage\+Transformation}
+    \subitem {Node\+Solving.\+cpp}, \hyperpage{46}
+    \subitem {Solving.\+h}, \hyperpage{36}
+
+  \indexspace
+
+  \item {W\+H\+I\+TE}
+    \subitem {Colors.\+h}, \hyperpage{24}
+  \item {white}
+    \subitem {colorwin}, \hyperpage{8}
+  \item {withcolor}
+    \subitem {colorwin\+::color}, \hyperpage{13}
+    \subitem {colorwin\+::withcolor}, \hyperpage{20}
+
+  \indexspace
+
+  \item {Y\+E\+L\+L\+OW}
+    \subitem {Colors.\+h}, \hyperpage{25}
+  \item {yellow}
+    \subitem {colorwin}, \hyperpage{8}
+
+\end{theindex}

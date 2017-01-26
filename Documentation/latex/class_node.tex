@@ -1,0 +1,171 @@
+\hypertarget{class_node}{}\section{Node Class Reference}
+\label{class_node}\index{Node@{Node}}
+
+
+{\ttfamily \#include $<$Data.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_node_ae90214a3ccf4ead8527329bbe238570c}{Get\+Id} ()
+\item 
+void \hyperlink{class_node_a1d54adb1267a218ab049f39175cb2733}{Change\+Volt} (const double \&v)
+\item 
+double \hyperlink{class_node_a9745737f7d87d5f9602380e652f61546}{Get\+Volt} ()
+\item 
+int \hyperlink{class_node_a8759b5907bf04c1b9a43056409a59d35}{Get\+Num\+Of\+Elements} ()
+\item 
+bool \hyperlink{class_node_a8f845411f8d2d44530b72810341442ec}{Is\+Essential} ()
+\item 
+bool \hyperlink{class_node_a962fa54dc2c90850fe319785427c738a}{Is\+Empty} ()
+\item 
+\hyperlink{class_element}{Element} $\ast$ \hyperlink{class_node_a29da8868ea4053aede270ed96b7425a0}{Get\+First\+Element} ()
+\item 
+\hyperlink{class_node}{Node} $\ast$ \hyperlink{class_node_a6f8729374beb27838792dc6ef81124e8}{Get\+Next} ()
+\item 
+\hyperlink{class_node}{Node} $\ast$ \hyperlink{class_node_a02f249f184a587e3353c911457f82ef8}{Get\+Prev} ()
+\item 
+void \hyperlink{class_node_a4aff13ab274ffa9fa69be340c28ee9d6}{Add} (\hyperlink{class_element}{Element} $\ast$e)
+\item 
+bool \hyperlink{class_node_ab274bc3fa4b13b1348cc7736b497eef0}{Remove} (\hyperlink{class_element}{Element} $\ast$e)
+\item 
+bool \hyperlink{class_node_aa3ed7f9b891a39c3fb8661316af413ea}{Remove} (char type, const int \&id)
+\item 
+\hyperlink{class_element}{Element} $\ast$ \hyperlink{class_node_aeaa68f0080c52716f6d0df146c8f7cf8}{Get\+Element} (char type, const int \&id)
+\item 
+bool \hyperlink{class_node_a463324063b042abc87cdb61f04798059}{Has\+Element} (char type, const int \&id)
+\item 
+\hyperlink{class_node_ad31a6c58b167b4a444962ead34cd93a1}{Node} (const int \&id)
+\item 
+\hyperlink{class_node_aa0840c3cb5c7159be6d992adecd2097c}{$\sim$\+Node} ()
+\item 
+\hyperlink{class_node}{Node} $\ast$ \hyperlink{class_node_a84931f4fbe5461c5f1553ae37260dd24}{Copy} ()
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_node_a120b136c2c9bc1938e0cd2cca80d91e4}{Circuit}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_node_ad31a6c58b167b4a444962ead34cd93a1}\label{class_node_ad31a6c58b167b4a444962ead34cd93a1}} 
+\index{Node@{Node}!Node@{Node}}
+\index{Node@{Node}!Node@{Node}}
+\subsubsection{\texorpdfstring{Node()}{Node()}}
+{\footnotesize\ttfamily Node\+::\+Node (\begin{DoxyParamCaption}\item[{const int \&}]{id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_aa0840c3cb5c7159be6d992adecd2097c}\label{class_node_aa0840c3cb5c7159be6d992adecd2097c}} 
+\index{Node@{Node}!````~Node@{$\sim$\+Node}}
+\index{````~Node@{$\sim$\+Node}!Node@{Node}}
+\subsubsection{\texorpdfstring{$\sim$\+Node()}{~Node()}}
+{\footnotesize\ttfamily Node\+::$\sim$\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_node_a4aff13ab274ffa9fa69be340c28ee9d6}\label{class_node_a4aff13ab274ffa9fa69be340c28ee9d6}} 
+\index{Node@{Node}!Add@{Add}}
+\index{Add@{Add}!Node@{Node}}
+\subsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily void Node\+::\+Add (\begin{DoxyParamCaption}\item[{\hyperlink{class_element}{Element} $\ast$}]{e }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a1d54adb1267a218ab049f39175cb2733}\label{class_node_a1d54adb1267a218ab049f39175cb2733}} 
+\index{Node@{Node}!Change\+Volt@{Change\+Volt}}
+\index{Change\+Volt@{Change\+Volt}!Node@{Node}}
+\subsubsection{\texorpdfstring{Change\+Volt()}{ChangeVolt()}}
+{\footnotesize\ttfamily void Node\+::\+Change\+Volt (\begin{DoxyParamCaption}\item[{const double \&}]{v }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a84931f4fbe5461c5f1553ae37260dd24}\label{class_node_a84931f4fbe5461c5f1553ae37260dd24}} 
+\index{Node@{Node}!Copy@{Copy}}
+\index{Copy@{Copy}!Node@{Node}}
+\subsubsection{\texorpdfstring{Copy()}{Copy()}}
+{\footnotesize\ttfamily \hyperlink{class_node}{Node} $\ast$ Node\+::\+Copy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_aeaa68f0080c52716f6d0df146c8f7cf8}\label{class_node_aeaa68f0080c52716f6d0df146c8f7cf8}} 
+\index{Node@{Node}!Get\+Element@{Get\+Element}}
+\index{Get\+Element@{Get\+Element}!Node@{Node}}
+\subsubsection{\texorpdfstring{Get\+Element()}{GetElement()}}
+{\footnotesize\ttfamily \hyperlink{class_element}{Element} $\ast$ Node\+::\+Get\+Element (\begin{DoxyParamCaption}\item[{char}]{type,  }\item[{const int \&}]{id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a29da8868ea4053aede270ed96b7425a0}\label{class_node_a29da8868ea4053aede270ed96b7425a0}} 
+\index{Node@{Node}!Get\+First\+Element@{Get\+First\+Element}}
+\index{Get\+First\+Element@{Get\+First\+Element}!Node@{Node}}
+\subsubsection{\texorpdfstring{Get\+First\+Element()}{GetFirstElement()}}
+{\footnotesize\ttfamily \hyperlink{class_element}{Element} $\ast$ Node\+::\+Get\+First\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_ae90214a3ccf4ead8527329bbe238570c}\label{class_node_ae90214a3ccf4ead8527329bbe238570c}} 
+\index{Node@{Node}!Get\+Id@{Get\+Id}}
+\index{Get\+Id@{Get\+Id}!Node@{Node}}
+\subsubsection{\texorpdfstring{Get\+Id()}{GetId()}}
+{\footnotesize\ttfamily int Node\+::\+Get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a6f8729374beb27838792dc6ef81124e8}\label{class_node_a6f8729374beb27838792dc6ef81124e8}} 
+\index{Node@{Node}!Get\+Next@{Get\+Next}}
+\index{Get\+Next@{Get\+Next}!Node@{Node}}
+\subsubsection{\texorpdfstring{Get\+Next()}{GetNext()}}
+{\footnotesize\ttfamily \hyperlink{class_node}{Node} $\ast$ Node\+::\+Get\+Next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a8759b5907bf04c1b9a43056409a59d35}\label{class_node_a8759b5907bf04c1b9a43056409a59d35}} 
+\index{Node@{Node}!Get\+Num\+Of\+Elements@{Get\+Num\+Of\+Elements}}
+\index{Get\+Num\+Of\+Elements@{Get\+Num\+Of\+Elements}!Node@{Node}}
+\subsubsection{\texorpdfstring{Get\+Num\+Of\+Elements()}{GetNumOfElements()}}
+{\footnotesize\ttfamily int Node\+::\+Get\+Num\+Of\+Elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a02f249f184a587e3353c911457f82ef8}\label{class_node_a02f249f184a587e3353c911457f82ef8}} 
+\index{Node@{Node}!Get\+Prev@{Get\+Prev}}
+\index{Get\+Prev@{Get\+Prev}!Node@{Node}}
+\subsubsection{\texorpdfstring{Get\+Prev()}{GetPrev()}}
+{\footnotesize\ttfamily \hyperlink{class_node}{Node} $\ast$ Node\+::\+Get\+Prev (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a9745737f7d87d5f9602380e652f61546}\label{class_node_a9745737f7d87d5f9602380e652f61546}} 
+\index{Node@{Node}!Get\+Volt@{Get\+Volt}}
+\index{Get\+Volt@{Get\+Volt}!Node@{Node}}
+\subsubsection{\texorpdfstring{Get\+Volt()}{GetVolt()}}
+{\footnotesize\ttfamily double Node\+::\+Get\+Volt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a463324063b042abc87cdb61f04798059}\label{class_node_a463324063b042abc87cdb61f04798059}} 
+\index{Node@{Node}!Has\+Element@{Has\+Element}}
+\index{Has\+Element@{Has\+Element}!Node@{Node}}
+\subsubsection{\texorpdfstring{Has\+Element()}{HasElement()}}
+{\footnotesize\ttfamily bool Node\+::\+Has\+Element (\begin{DoxyParamCaption}\item[{char}]{type,  }\item[{const int \&}]{id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a962fa54dc2c90850fe319785427c738a}\label{class_node_a962fa54dc2c90850fe319785427c738a}} 
+\index{Node@{Node}!Is\+Empty@{Is\+Empty}}
+\index{Is\+Empty@{Is\+Empty}!Node@{Node}}
+\subsubsection{\texorpdfstring{Is\+Empty()}{IsEmpty()}}
+{\footnotesize\ttfamily bool Node\+::\+Is\+Empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_a8f845411f8d2d44530b72810341442ec}\label{class_node_a8f845411f8d2d44530b72810341442ec}} 
+\index{Node@{Node}!Is\+Essential@{Is\+Essential}}
+\index{Is\+Essential@{Is\+Essential}!Node@{Node}}
+\subsubsection{\texorpdfstring{Is\+Essential()}{IsEssential()}}
+{\footnotesize\ttfamily bool Node\+::\+Is\+Essential (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_ab274bc3fa4b13b1348cc7736b497eef0}\label{class_node_ab274bc3fa4b13b1348cc7736b497eef0}} 
+\index{Node@{Node}!Remove@{Remove}}
+\index{Remove@{Remove}!Node@{Node}}
+\subsubsection{\texorpdfstring{Remove()}{Remove()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Node\+::\+Remove (\begin{DoxyParamCaption}\item[{\hyperlink{class_element}{Element} $\ast$}]{e }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_node_aa3ed7f9b891a39c3fb8661316af413ea}\label{class_node_aa3ed7f9b891a39c3fb8661316af413ea}} 
+\index{Node@{Node}!Remove@{Remove}}
+\index{Remove@{Remove}!Node@{Node}}
+\subsubsection{\texorpdfstring{Remove()}{Remove()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Node\+::\+Remove (\begin{DoxyParamCaption}\item[{char}]{type,  }\item[{const int \&}]{id }\end{DoxyParamCaption})}
+
+
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_node_a120b136c2c9bc1938e0cd2cca80d91e4}\label{class_node_a120b136c2c9bc1938e0cd2cca80d91e4}} 
+\index{Node@{Node}!Circuit@{Circuit}}
+\index{Circuit@{Circuit}!Node@{Node}}
+\subsubsection{\texorpdfstring{Circuit}{Circuit}}
+{\footnotesize\ttfamily friend class \hyperlink{class_circuit}{Circuit}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Headers/\hyperlink{_data_8h}{Data.\+h}\item 
+Sources/\hyperlink{_node_8cpp}{Node.\+cpp}\end{DoxyCompactItemize}
