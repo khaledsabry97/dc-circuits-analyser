@@ -17,10 +17,9 @@ void Print_Prompt()
     cout << BLUE << ">>> " << CYAN;
 }
 
+#define Point_str "----> "
 void Print_Help()
 {
-    const string Point_str = "----> ";
-
     cout << GREEN 
 
         << "Enter the elements node by node" 

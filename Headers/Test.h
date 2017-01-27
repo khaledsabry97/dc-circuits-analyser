@@ -45,9 +45,8 @@ void test_hadi_solving2()
 
 int main()
 {
-	HandleSignals();
-
-	test_hadi_solving2();
+	Circuit c;
+	c.Read();
 }
 
 #ifdef __OLD_TESTS__

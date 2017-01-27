@@ -15,6 +15,35 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Documentation\Circuit Doc.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Documentation\Element Doc.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Documentation\Node Doc.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\colorwin.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Errors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Format.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Solving.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="Sources\_Circuit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -36,6 +65,12 @@
     <ClCompile Include="Sources\Errors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Format.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\K&amp;Y_Solving.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Sources\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,37 +80,5 @@
     <ClCompile Include="Sources\NodeSolving.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Headers\Colors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Data.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Errors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Solving.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Test.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\___.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Documentation\Circuit Doc.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Documentation\Element Doc.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Documentation\Node Doc.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\colorwin.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

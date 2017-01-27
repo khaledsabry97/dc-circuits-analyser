@@ -36,7 +36,7 @@ void Circuit::_List::_Check_then_add(Element* e, Node* node)
     Element *e_in_list;
     Node *foundNode1, *foundNode2;
 
-    for (auto itr = list.rbegin(); itr != list.rend(); itr++)
+    for (auto itr = list.rbegin(); itr != list.rend(); itr = next(itr))
     {
         _Parse_ElementTuple_pointers(*itr, e_in_list, foundNode1, foundNode2);
 
@@ -172,7 +172,7 @@ bool Circuit::_List::_Remove_invalid_current_source(tpl_itr &itr, tpl_itr &itr2)
             
 
             // remove tuples from list
-            auto temp_itr = itr; itr++;
+            auto temp_itr = itr; itr = next(itr);
             list.erase(temp_itr);
             list.erase(itr2);
         }
@@ -216,7 +216,7 @@ void Circuit::_List::_Print_Tuple_list()
     Element *e, *e2;
     Node *e_term_1, *e_term_2;
 
-    for (auto itr = list.begin(); itr != list.end(); ++itr)
+    for (auto itr = list.begin(); itr != list.end(); itr = next(itr))
     {
         _Parse_ElementTuple_pointers(*itr, e, e_term_1, e_term_2);
 
@@ -285,7 +285,7 @@ void Circuit::_List::Pop_back()
 // returns the address of the first lonely element found, or nullptr otherwise
 void Circuit::_List::Remove_lonely_elements()
 {
-    for (auto itr = list.begin(); itr != list.end(); itr++)
+    for (auto itr = list.begin(); itr != list.end(); itr = next(itr))
     {
         // parse tuple, *itr is an ElementTuple
         Node* node = get<2>(*itr);
@@ -327,7 +327,7 @@ void Circuit::_List::Remove_invalid_sources()
     char element_type = '\0';
 
     // traverse through list looking for sources
-    for (auto itr = list.begin(); itr != list.end(); ++itr)
+    for (auto itr = list.begin(); itr != list.end(); itr = next(itr))
     {
         e = get<0>(*itr);
         // detect type of this src and store it here
@@ -337,7 +337,7 @@ void Circuit::_List::Remove_invalid_sources()
             continue;
 
         // traverse through rest of list
-        for (auto itr2 = next(itr); itr2 != list.end(); ++itr2)
+        for (auto itr2 = next(itr); itr2 != list.end(); itr2 = next(itr2))
         {
             e2 = get<0>(*itr2);
 

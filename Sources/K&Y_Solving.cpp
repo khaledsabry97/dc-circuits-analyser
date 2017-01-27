@@ -86,7 +86,7 @@ double Ampere(Node* n1, Node* n2, Element* e, Circuit* c)
 			// dr said that he will not test any an ideal source so if there is a voltage source there must be a non essential node
 		{
 			Element* e1 = n1->GetFirstElement();
-			if(e1->GetId() == e ->GetId() && e1->GetType() == e->GetType())
+			if(e1->GetId() == e ->GetId())
 				//check to get the resistance not the voltag
 			{ 
 				e1= e1->GetNext();
@@ -145,7 +145,7 @@ double Power(Element* e, Circuit* c)
 	Element* e_temp;
 	int id = e->GetType();
 	int i = 0;
-	double I;
+	int I;
 
 
 	//get two nodes the have the element
@@ -196,7 +196,7 @@ double Power(Element* e, Circuit* c)
 				else
 				e_temp = e_temp->GetNext();
 			}
-			return(-1 * (n1->GetVolt()-n2->GetVolt())*(e_temp->GetValue()));
+			return((n1->GetVolt()-n2->GetVolt())*(e_temp->GetValue()));
 		}
 
 	default: //R
@@ -255,11 +255,10 @@ void Get_2_Nodes(Element* e, Node* &n1, Node* &n2, Circuit* c)
 double Get_Total_Dissipated_Power(Circuit* c)
 {
 	Node* n1 = c->GetFirstNode();
-	
-	double TP = 0 ,P = 0;
+	Element* e1 =n1->GetFirstElement();
+	double TP = 0 ,P = 0, I;
 	while (n1!=NULL)
 	{
-		Element* e1 =n1->GetFirstElement();
 		while( e1 !=NULL)
 		{
 			if(e1->GetType() == 'R')
@@ -279,19 +278,18 @@ double Get_Total_Dissipated_Power(Circuit* c)
 		}
 		n1 = n1->GetNext();
 	}
-	return TP / 2;
+	return TP;
 }
 
 // calculate total power supplied in the circuit "negative"
 double Get_Total_Supplied_Power(Circuit* c)
 {
-	double TP = 0 ,P = 0;
+	double TP = 0 ,P = 0, I;
 
 	Node* n1 = c->GetFirstNode();
-	
+	Element* e1 = n1->GetFirstElement();
 	while (n1 != NULL)
 	{
-		Element* e1 = n1->GetFirstElement();
 		while(e1 != NULL)
 		{
 			if (e1->GetType() == 'E' || e1->GetType() == 'J' )
@@ -307,15 +305,17 @@ double Get_Total_Supplied_Power(Circuit* c)
 		}
 		n1 = n1->GetNext();
 	}
-	return TP / 2;
+	return TP;
 }
 
 // returns true if total power is balanced, false otherwise
-bool Circuit_Is_Power_Balanced(Circuit* c)
+void Circuit_Is_Power_Balanced(Circuit* c)
 {
 	double TSP = Get_Total_Supplied_Power(c);
 	double TDP = Get_Total_Dissipated_Power(c);
-	return ( Round(TSP, 1) + Round(TDP, 1) == 0 );
+	if (-1 * TSP == TDP) cout << "The circuit is power balanced" << endl;
+	else cout << "The circuit isn't power balanced" << endl;
+
 }
 
 
@@ -428,10 +428,10 @@ double Get_Power(Circuit* circuit, Element* element)
 {
 	Node* n1;
 	Node* n2;
-	Element* e_temp = element;
+	Element* e_temp;
 	int id=element->GetType();
 	int i=0;
-	double I;
+	int I;
     Get_2_Nodes(element,n1,n2,circuit);
 	//get two nodes the have the element
 	switch (id)
@@ -524,15 +524,4 @@ double Get_VoltDiff(Circuit* circuit, const int node1_id, const int node2_id, El
 	SolveNonEss(c2);
 
 	return Get_VoltDiff(c2,  node1_id,  node2_id);
-}
-
-double roundf(const double &x)
-{
-   return x >= 0.0f ? floorf(x + 0.5f) : ceilf(x - 0.5f);
-}
-// round num to given precision
-double Round(const double &num, const int precision)
-{
-  int helper = pow(10, precision);
-  return (roundf(num * helper) / helper);
 }
