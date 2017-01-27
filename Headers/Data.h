@@ -190,40 +190,34 @@ class Circuit
         void Print();
         
     private:
-        // alias for tuple
+        // aliases for tuples
         typedef tuple<Element*, Node*, Node*> ElementTuple;
+        typedef list<ElementTuple>::iterator tpl_itr;
 
-        // temp vector(TODO: list) for elements 
+        // temp list for elements 
         // store them while reading for error checking
         class _List
         {
             private:
-                // TODO: make it a list not vector
-                list<ElementTuple> l;
+                list<ElementTuple> list;
 
-                // check element is not duplicate/invalid before adding it
-                void _Check(Element* e);
+                void _Check_then_add(Element* e, Node* node);
 
-                // invalid source : 
-                // current srcs in series OR
-                // voltage srcs in parallel
-                void _Remove_invalid_voltage_sources(list<ElementTuple>& volt_list);
-                void _Remove_invalid_current_sources(list<ElementTuple>& curr_list);
-                // help remove invalid sources
-                void _Get_Sources(list<ElementTuple>& volt_list, list<ElementTuple>& curr_list);
-                void _Add_to_tuple_list(Element* e, Node* terminal, list<ElementTuple>& some_list);
-                static void _Parse_ElementTuple_pointers(ElementTuple& tpl ,Element*& e, Node*& term1, Node*& term2);
-                void _Print_Tuple_list(list<ElementTuple>& some_list);
+                bool _Remove_invalid_voltage_source(tpl_itr &itr, tpl_itr &itr2);
+                bool _Remove_invalid_current_source(tpl_itr &itr, tpl_itr &itr2);
+
+                void _Parse_ElementTuple_pointers(ElementTuple& tpl, Element*& e, Node*& term1, Node*& term2);
+
+                void _Print_Tuple_list();
+
                 bool _Is_Parallel(const ElementTuple& first, const ElementTuple& second);
                 bool _Is_Series(const ElementTuple& first, const ElementTuple& second);
             public:
-                void Add(Element*);
+                void Add(Element* e, Node* node);
+                void Pop_back();
+                void Clear();
                 void Remove_lonely_elements();
                 void Remove_invalid_sources();
-                bool Remove(Element* e);
-                void Clear();
-                // debugging
-                void Print();
         };
 
         // handle user input in reading
@@ -298,21 +292,27 @@ class Circuit
         // invalid node : has one element or empty
         void _Remove_invalid_nodes();
 
+        //      invalid elements are:-
+        // lonely elements: connected to one node
+        // curr sources in series
+        // volt srcs in parallel
+        void _Remove_invalid_elements(_List &list);
+
         void _Push_back(Node* n);
         void _Push_front(Node* n);
         bool _Pop_back();
         bool _Pop_front();
 
-        // lonely element : that exists one time
-        void _Remove_lonely_elements();
+        
 
         // re-read this circuit if Circuit::Read ended with empty circuit
         void _Reread_if_empty();
 
-        void _Read_nodes();
+        void _Read_nodes(_List &list);
         void _Read_elements(_List& list, Node* newNode, bool& still_reading_nodes, const int& nodeI);
 
-        // check node is valid before adding it
+        // called after filling the node in Circuit::Read
+        // decides whether to add node or not depending on its size
         void _Check_and_add_node(Node* newNode, _List& list ,int& nodeI, const bool& continueReading);
 
         // is this given character a valid type?

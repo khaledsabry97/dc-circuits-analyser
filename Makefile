@@ -17,6 +17,7 @@ COMPILER_FLAGS = -std=c++$(CPP_VER)
 COMPILER_FLAGS += -I $(HDR_DIR) 
 COMPILER_FLAGS += -g 
 COMPILER_FLAGS += $(SRC_DIR)/*.cpp -o $(EXEC)
+COMPILER_FLAGS += -ferror-limit=50
 
 
 main: 

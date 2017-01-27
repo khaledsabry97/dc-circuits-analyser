@@ -40,7 +40,7 @@ void test_hadi_solving2()
 	print(c);
 	cout << "New Circuit After Solving:"<<endl;
 	SolveNonEss(c);					//Solvig Non Essential Nodes [This Function Take THe Main Circuit As A parameter]		
-	print(c);
+	c->Print();
 }
 
 int main()

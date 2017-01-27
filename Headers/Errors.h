@@ -53,6 +53,8 @@ error {
 #define HANDLE_INVALID_INPUT RED << "\tInvalid input, type h to see valid commands\n" << WHITE 
 #define HANDLE_PARALLEL_DIFF_VOLTAGES RED << "\tFound two parallel voltage sources with different values, deleteing both of them\n" << WHITE
 #define HANDLE_SERIES_DIFF_CURRENTS RED <<  "\tFound two current sources with different values in series, deleteing both of them\n" << WHITE
+#define HANDLE_LONELY_ELEMENT RED <<  "\tFound lonely element, deleting it\n" << WHITE
+
 
 // print the appropriate message for the error 
 // with color RED if colors are enabled

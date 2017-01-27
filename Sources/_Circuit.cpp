@@ -173,7 +173,7 @@ void Circuit::_Check_and_add_node(Node* newNode, _List& list ,int& nodeI, const 
         cout << HANDLE_NODE_WITH_ONE_ELEM;
         
         // remove the element from the list before removing the node
-        list.Remove(newNode->GetFirstElement());
+        list.Pop_back();
 
         delete newNode;
         nodeI--;
