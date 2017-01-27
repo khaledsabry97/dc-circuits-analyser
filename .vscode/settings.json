@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        ".xonshrc": "shellscript"
+        ".xonshrc": "shellscript",
+        "iostream": "cpp",
+        "list": "cpp"
     }
 }

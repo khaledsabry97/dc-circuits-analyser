@@ -105,6 +105,11 @@ bool Element::operator== (Element& e)
     return (_id == e.GetId() && GetType() == e.GetType());
 }
 
+bool Element::IsSame(Element* e1, Element* e2)
+{
+    return (*e1 == *e2);
+}
+
 // return current node id
 // throws NODE_ID_IN_ELEM_UNASSIGNED if id wasn't assigned
 int Element::GetNodeId()

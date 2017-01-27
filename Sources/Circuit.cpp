@@ -28,10 +28,12 @@ Circuit::~Circuit()
 // read the whole circuit from the user
 void Circuit::Read()
 {
-    _Read_nodes();
+    // for temporary storage of elements
+    _List list;
+
+    _Read_nodes(list);
     
-    _Remove_invalid_sources();  
-    _Remove_lonely_elements();
+    _Remove_invalid_elements(list); 
     _Remove_invalid_nodes();   
 
     _Reread_if_empty();
@@ -148,88 +150,6 @@ Node* Circuit::GetFirstNode()
 int Circuit::GetNumOfNodes()
 {
     return(_numNodes);
-}
-
-void Circuit::_Push_back(Node* n)
-{
-    if (!n)
-        throw -1;       // cant handle empty pointer
-
-    n->_next = nullptr;
-
-    // handle special case, when first time pushing
-    if (!_lastNode && !_firstNode)
-    {
-        _lastNode = _firstNode = n;
-        n->_prev = nullptr;
-        _numNodes++;
-        return;
-    }
-
-    _lastNode->_next = n;
-    n->_prev = _lastNode;
-    _lastNode = n;
-    _numNodes++;
-}
-
-void Circuit::_Push_front(Node* n)
-{
-    if (!n)
-        throw -1;       // cant handle empty pointer
-
-    n->_prev = nullptr;
-
-    if (!_lastNode && !_firstNode)
-    {
-        _lastNode = _firstNode = n;
-        n->_next = nullptr;
-        _numNodes++;
-        return;
-    }   
-
-    n->_next = _firstNode;
-    _firstNode->_prev = n; 
-    _firstNode = n;
-    _numNodes++;
-}
-
-bool Circuit::_Pop_back()
-{
-    if (!_lastNode)
-        return false;
-
-    Node* temp = _lastNode;
-
-    // if there is only one node, move both to null after removing it
-    if (_lastNode == _firstNode)
-        _lastNode = nullptr; 
-        
-    _lastNode = _lastNode->_prev;
-    _lastNode->_next = nullptr;
-    delete temp;
-    _numNodes--;
-
-    return true;
-}
-
-bool Circuit::_Pop_front()
-{
-    if (!_firstNode)
-        return false;
-
-    Node* temp = _firstNode;
-
-    // if there is only one node, move both to null after removing it
-    if (_lastNode == _firstNode)
-        _lastNode = nullptr;     
-
-    _firstNode = _firstNode->_next;
-    if (_firstNode)     // TODO: chekc if this helped avoid seg. fault
-        _firstNode->_prev = nullptr;
-    delete temp;
-    _numNodes--;
-
-    return true;
 }
 
 bool Circuit::Remove(const double &val, SEARCH_BY type)

@@ -4,7 +4,6 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include <vector>
 #include <list>
 #include <tuple>
 #include <cmath>
@@ -60,6 +59,9 @@ class Element
         void ChangeValue(const double &num);
 
         Element* Copy();
+
+        // TODO: document this
+        static bool IsSame(Element*, Element*);
         bool operator== (Element&);
 
     private:
@@ -188,20 +190,36 @@ class Circuit
         void Print();
         
     private:
+        // alias for tuple
+        typedef tuple<Element*, Node*, Node*> ElementTuple;
+
         // temp vector(TODO: list) for elements 
         // store them while reading for error checking
         class _List
         {
             private:
-                // TODO: make it a list not vector (if you can)
-                vector<Element*> v;
+                // TODO: make it a list not vector
+                list<ElementTuple> l;
 
                 // check element is not duplicate/invalid before adding it
                 void _Check(Element* e);
+
+                // invalid source : 
+                // current srcs in series OR
+                // voltage srcs in parallel
+                void _Remove_invalid_voltage_sources(list<ElementTuple>& volt_list);
+                void _Remove_invalid_current_sources(list<ElementTuple>& curr_list);
+                // help remove invalid sources
+                void _Get_Sources(list<ElementTuple>& volt_list, list<ElementTuple>& curr_list);
+                void _Add_to_tuple_list(Element* e, Node* terminal, list<ElementTuple>& some_list);
+                static void _Parse_ElementTuple_pointers(ElementTuple& tpl ,Element*& e, Node*& term1, Node*& term2);
+                void _Print_Tuple_list(list<ElementTuple>& some_list);
+                bool _Is_Parallel(const ElementTuple& first, const ElementTuple& second);
+                bool _Is_Series(const ElementTuple& first, const ElementTuple& second);
             public:
                 void Add(Element*);
-                void Add_without_check(Element*);
-                Element* Get_lonely_elements();
+                void Remove_lonely_elements();
+                void Remove_invalid_sources();
                 bool Remove(Element* e);
                 void Clear();
                 // debugging
@@ -266,8 +284,6 @@ class Circuit
         Node* _lastNode;
         int _numNodes;
 
-        // alias for tuple
-        typedef tuple<Element*, Node*, Node*> ElementTuple;
 
         // is this given val (ID or VOLT) is in ptr? 
         // used to increase readability
@@ -306,19 +322,5 @@ class Circuit
 
         // make response according to given command from user input
         // see Circuit::_Input and command enumerator
-        void _HadleCommand(const Command &cmd, bool &still_reading_nodes, bool &still_reading_elements);
-
-        // invalid source : 
-        // current srcs in series OR
-        // voltage srcs in parallel
-        void _Remove_invalid_sources();
-        void _Remove_invalid_voltage_sources(list<ElementTuple>& volt_list);
-        void _Remove_invalid_current_sources(list<ElementTuple>& curr_list);
-        // help remove invalid sources
-        void _Get_Sources(list<ElementTuple>& volt_list, list<ElementTuple>& curr_list);
-        void _Add_to_tuple_list(Element* e, Node* terminal, list<ElementTuple>& some_list);
-        void _Parse_ElementTuple_pointers(ElementTuple& tpl ,Element*& e, Node*& term1, Node*& term2);
-        void _Print_Tuple_list(list<ElementTuple>& some_list);
-        bool _Is_Parallel(const ElementTuple& first, const ElementTuple& second);
-        bool _Is_Series(const ElementTuple& first, const ElementTuple& second);
+        void _RespondToCommand(const Command &cmd, bool &still_reading_nodes, bool &still_reading_elements);
 };
