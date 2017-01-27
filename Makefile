@@ -41,6 +41,9 @@ newtest:
 duty:
 	egrep -H -n '(BUG|TODO):'  Sources/*.* Headers/*.* -A 1 -B 1
 
+update:
+	git add .; git commit ; git push
+
 clean:
 	rm $(EXEC) 2> /dev/null
 	rm -r *.dSYM $(BLD_DIR)/*.dSYM 2> /dev/null

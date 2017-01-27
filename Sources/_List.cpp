@@ -42,7 +42,7 @@ void Circuit::_List::_Check_then_add(Element* e, Node* node)
 
         if (Element::IsSame(e, e_in_list))
         {
-            _Check_errors_between_two_nodes(e, e_in_list, foundNode1, foundNode2);
+            _Check_errors_between_two_nodes(e, e_in_list, foundNode1, foundNode2, node);
 
             // element is valid, add its node to tuple
             get<2>(*itr) = node;
@@ -56,7 +56,7 @@ void Circuit::_List::_Check_then_add(Element* e, Node* node)
 }
 
 // see _Check_then_add()
-void Circuit::_List::_Check_errors_between_two_nodes(Element* e, Element* e_in_list, Node* foundNode1, Node* foundNode2)
+void Circuit::_List::_Check_errors_between_two_nodes(Element* e, Element* e_in_list, Node* foundNode1, Node* foundNode2, Node* node)
 {
     // check errors
     // tuple is full -> duplicate
