@@ -445,7 +445,7 @@ double Get_Power(Circuit* circuit, Element* element)
 		    //and this is important for to get the correct power and the total power
 		{
 			e_temp = n1->GetFirstElement();
-			if(e_temp->GetType() != element ->GetType())
+			if(e_temp && e_temp->GetType() != element ->GetType())
 			{ 
 				e_temp= e_temp->GetNext();
 			}
@@ -453,7 +453,7 @@ double Get_Power(Circuit* circuit, Element* element)
 		else 
 		{
 			e_temp = n2->GetFirstElement();
-			if(e_temp->GetType() != element ->GetType())
+			if (e_temp && (e_temp->GetType() != element ->GetType()))
 			{ 
 				e_temp= e_temp->GetNext();
 			}
@@ -472,7 +472,7 @@ double Get_Power(Circuit* circuit, Element* element)
 			//by pointing a pointer to one of the two nodes that have the current source
 		    // to get the value and the sign
 		    bool check =true;
-			while(check)
+			while(check && e_temp)
 			{
 				if(e_temp->GetId() == element->GetId() && e_temp->GetType() == element->GetType())
 					check = false;
@@ -485,6 +485,7 @@ double Get_Power(Circuit* circuit, Element* element)
 	default: //R
 		//volt n1 - volt n2= v12 
 		//P = [v12 *V12]/ R
+		assert(e_temp == NULL && "e_temp is null their is an attempt to derefrence it");
 		assert(e_temp->GetValue() == 0 && "error, attempt to divide on zero, elemet e_temp value is zero");
 
 		return(((n1->GetVolt() - n2->GetVolt()) * (n1->GetVolt() - n2->GetVolt())) / e_temp->GetValue());
