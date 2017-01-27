@@ -26,6 +26,7 @@
     <ClCompile Include="Sources\Element.cpp" />
     <ClCompile Include="Sources\Errors.cpp" />
     <ClCompile Include="Sources\Format.cpp" />
+    <ClCompile Include="Sources\Interface.cpp" />
     <ClCompile Include="Sources\K&amp;Y_Solving.cpp" />
     <ClCompile Include="Sources\Main.cpp" />
     <ClCompile Include="Sources\Node.cpp" />
