@@ -1,5 +1,6 @@
 #include "Data.h"
 #include "Solving.h"
+
 void Interface(Circuit * c) {
 	cout << "Enter the action you want to perform" << endl;
 	cout << "Valid commands" << endl;
@@ -37,7 +38,6 @@ void Interface(Circuit * c) {
 				cout << "I= " << Get_Current(c, e, spacefic) << endl;;
 			}
 			else
-
 				cout << "I= " << Get_Current(c, e) << endl;
 
 	}
@@ -91,7 +91,7 @@ void Interface(Circuit * c) {
 			cout<<"Rmax = "<<Get_Res_Max(c, E2)<<endl;
 		}
 		else if (option == 'M') {
-			cout << "Enter the resistance please  " << endl;
+			cout << "Enter the Resistance please  " << endl;
 			Element *E3 = NULL;
 			char MTYPE; int MID;
 			cin >> MTYPE >> MID;
