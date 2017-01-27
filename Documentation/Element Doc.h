@@ -1,6 +1,5 @@
 #ifdef _DO_NOT_INCLUDE_ME_
 // do not include this header file in project
-// TODO include GetNodeId
 Documentation of the Classes:
 listing public functionality only
 
@@ -111,6 +110,17 @@ NOTE: static here means you call it just if it is inside a namespace, see exampl
         cout << "they are the same element\n";
     else
         cout << "they are different elements\n";
+<END>
+
+// get id of the connected node 
+void GetNodeId();
+
+NOTE: if not connected to a node it returns -1
+
+<EXAMPLE>
+    Node* n = new Node(5);
+    Element* e = new Element('R', 6, 4);
+    cout << n->GetNodeId(); // prints 5
 <END>
 
 #endif

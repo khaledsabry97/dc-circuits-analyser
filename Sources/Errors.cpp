@@ -56,47 +56,43 @@ void HandleError(const error& err)
     }
 }
 
-#if !defined(_WIN32)
-    void HandleSignals()
+void HandleSignals()
+{
+    // exit
+    signal(SIGABRT, sgnl::Terminate);
+    signal(SIGINT, sgnl::Terminate);
+    signal(SIGTERM, sgnl::Terminate);
+
+    // segmentation fault
+    signal(SIGSEGV, sgnl::Seg_Fault);
+
+    // float point
+    signal(SIGFPE, sgnl::Divide_by_zero);
+}
+
+namespace sgnl
+{
+    void Seg_Fault(int signum)
     {
-        // exit
-        signal(SIGABRT, sgnl::Terminate);
-        signal(SIGINT, sgnl::Terminate);
-        signal(SIGTERM, sgnl::Terminate);
-
-        // segmentation fault
-        signal(SIGSEGV, sgnl::Seg_Fault);
-
-        // float point
-        signal(SIGFPE, sgnl::Divide_by_zero);
+        cerr << RED << "\t\tProgram Tried to access invalid memory\n";
+        cerr << "\t\tTerminating...\n" << WHITE;
+        Sleep(2 * SECOND);
+        exit(SIGSEGV);
     }
-
-    namespace sgnl
-    {
-        void Seg_Fault(int signum)
-        {
-            cerr << RED << "\t\tProgram Tried to access invalid memory\n";
-            cerr << "\t\tTerminating...\n" << WHITE;
-            Sleep(2 * SECOND);
-            exit(SIGSEGV);
-        }
         
-        // stopping program
-        void Terminate(int signum)
-        {
-            cout << YELLOW << "\t\tProgram is terminating..\n" << WHITE;
-            Sleep(2 * SECOND);
-            exit(SUCCESS);
-        }
-
-        // float point signal
-        void Divide_by_zero(int signum)
-        {
-            cerr << RED << "\t\tProgram tried to divide by zero\n\t\tTerminating...\n" << WHITE;
-            Sleep(2 * SECOND);
-            exit(SIGFPE);
-        }
+    // stopping program
+    void Terminate(int signum)
+    {
+        cout << YELLOW << "\t\tProgram is terminating..\n" << WHITE;
+        Sleep(2 * SECOND);
+        exit(SUCCESS);
     }
-#else
-    #define HandleSignals() 
-#endif
+
+    // float point signal
+    void Divide_by_zero(int signum)
+    {
+        cerr << RED << "\t\tProgram tried to divide by zero\n\t\tTerminating...\n" << WHITE;
+        Sleep(2 * SECOND);
+        exit(SIGFPE);
+    }
+}

@@ -20,7 +20,6 @@ void SolveTheCircuit(Circuit*& c)
 
 int main()
 {
-	HandleSignals();
 	Print_Help();
 	Print_Credits();
 
