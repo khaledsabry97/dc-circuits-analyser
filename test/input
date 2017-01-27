@@ -1,5 +1,14 @@
-# 
+# two current sources in series
+# j1 and j2 are invalid
 
+j1 2
+r1 2
+x
+j1 -2
+j2 1
+x
+j2-1
+r1 2
 xx
 
 # 

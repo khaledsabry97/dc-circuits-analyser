@@ -3,7 +3,7 @@
 /*		private		*/
 
 // remove all Voltage sources and current sources
-void Disable_Sources(Circuit* c);
+void Disable_Sources(Circuit*& c);
 
 // calculate voltage between two nodes
 double Voltage(Node* n1, Node* n2);
@@ -46,7 +46,7 @@ Circuit* Disable_Sources_superpostion(Circuit* c,Element* e_temp)
 }
 
 // remove all Voltage sources and current sources
-void Disable_Sources(Circuit* c)
+void Disable_Sources(Circuit*& c)
 {
 	Node* n = c->GetFirstNode();
 	while(n != NULL)
@@ -429,12 +429,11 @@ double Get_Power(Circuit* circuit, Element* element)
 	Node* n1;
 	Node* n2;
 	Element* e_temp;
-	int id=element->GetType();
 	int i=0;
 	int I;
     Get_2_Nodes(element,n1,n2,circuit);
 	//get two nodes the have the element
-	switch (id)
+	switch (element->GetType())
 	{
 	case'E':
 		{

@@ -2,6 +2,7 @@
 #include "Solving.h"
 
 void Interface(Circuit * c) {
+	cout << GREEN;
 	cout << "Enter the action you want to perform" << endl;
 	cout << "Valid commands" << endl;
 	cout << "-> I				current passing through the element" << endl;
@@ -10,9 +11,10 @@ void Interface(Circuit * c) {
 	cout << "-> R				the maximum resistance  " << endl;
 	cout << "-> M				the maximum power" << endl;
 	cout << "-> x				Exit" << endl;
+	cout << WHITE;
 	char option;
 	
-	do {
+	while (true) {
 		cin >> option;
 		option = toupper(option);
 
@@ -98,16 +100,14 @@ void Interface(Circuit * c) {
 			E3 = c->GetElement(MTYPE, MID);
 			cout << "Pmax = " << Get_Pow_Max(c, E3) << endl;
 		}
-		
+
+		else if (option == 'X')
+		{
+			break;
+		}
 		else {
-			cout << "--Enter the action you want to perform" << endl;
-			cout << "Valid commands" << endl;
-			cout << "-> I               current passing through the element" << endl;
-			cout << "-> P               the power supplied or disipated by the element" << endl;
-			cout << "-> V           the voltage difference between two nodes" << endl;
-			cout << "-> Pmax Resistor     the maximum resistance  and the maximum power" << endl;
-			cout << "-> x                      Exit" << endl;
+			HandleError(INVALID_INPUT);
 		}
 		
-	} while (option != 'X');
+	}
 }

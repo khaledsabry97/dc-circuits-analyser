@@ -13,17 +13,24 @@ void SolveTheCircuit(Circuit*& c)
 	voltageTransformation(c2);		//Voltage Source Transformation
 	solve(c2);						//Solve Essential Node Of The Copied Circuit
 	VoltageBack(c2, c);				//This Function Get The Circuit Voltage From The Copied Circuit [c2] To The Main Circuit [c]
-	SolveNonEss(c);					//Solvig Non Essential Nodes [This Function Take THe Main Circuit As A parameter]		
+	SolveNonEss(c);					//Solvig Non Essential Nodes [This Function Take The Main Circuit As A parameter]		
 }
 
 #ifndef __RELEASE__ 
 
 int main()
 {
+	HandleSignals();
+	Print_Help();
+	Print_Credits();
+
     Circuit* c = new Circuit;
 	c->Read();
+
 	SolveTheCircuit(c);
+
 	Circuit_Is_Power_Balanced(c);
+
 	Interface(c);
 }
 
