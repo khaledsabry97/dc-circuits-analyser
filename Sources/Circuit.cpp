@@ -294,8 +294,11 @@ Node** Circuit::GetTerminals(Element* e)
         // both of them is found
         if (terminal[0] && terminal[1])
             break;
-        else // not found some/all of them
-            throw LONELY_ELEMENT;
+        else
+        {
+            HandleError(UNAVAILABLE_ELEMENT);
+            break;
+        }
     }
 
     return terminal;

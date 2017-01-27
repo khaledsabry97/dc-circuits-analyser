@@ -40,6 +40,7 @@ error {
     INVALID_INPUT,
     PARALLEL_DIFF_VOLTAGES,
     SERIES_DIFF_CURRENTS,
+    UNAVAILABLE_ELEMENT,    // when trieng to search for an element not in circuit
 };
 
 // strings to handle errors
@@ -54,6 +55,7 @@ error {
 #define HANDLE_PARALLEL_DIFF_VOLTAGES RED << "\tFound two parallel voltage sources with different values, deleteing both of them\n" << WHITE
 #define HANDLE_SERIES_DIFF_CURRENTS RED <<  "\tFound two current sources with different values in series, deleteing both of them\n" << WHITE
 #define HANDLE_LONELY_ELEMENT RED <<  "\tFound lonely element, deleting it\n" << WHITE
+#define HANDLE_UNAVAILABLE_ELEMENT RED <<  "\tElement not found, please check the circuit\n" << WHITE
 
 
 // print the appropriate message for the error 

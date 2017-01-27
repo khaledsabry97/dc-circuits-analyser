@@ -49,6 +49,11 @@ void HandleError(const error& err)
             cerr << HANDLE_LONELY_ELEMENT;
             break;
         }
+        case UNAVAILABLE_ELEMENT:
+        {
+            cerr << HANDLE_UNAVAILABLE_ELEMENT;
+            break;
+        }
         case INVALID_STORED_TYPE:
             assert(FOR_DEBUGGING && "INVALID_STORED_TYPE Exception has been thrown, you seem to be accessing invalid memory");
         default:
