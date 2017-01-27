@@ -310,10 +310,10 @@ double Get_Total_Supplied_Power(Circuit* c)
 }
 
 // returns true if total power is balanced, false otherwise
-bool Circuit_Is_Power_Balanced(Circuit* c)
+bool Circuit_Is_Power_Balanced(Circuit* circuit)
 {
-	double TSP = Get_Total_Supplied_Power(c);
-	double TDP = Get_Total_Dissipated_Power(c);
+	double TSP = Get_Total_Supplied_Power(circuit);
+	double TDP = Get_Total_Dissipated_Power(circuit);
 	return ( Round(TSP, 1) + Round(TDP, 1) == 0 );
 }
 
@@ -525,7 +525,7 @@ double Get_VoltDiff(Circuit* circuit, const int node1_id, const int node2_id, El
 	return Get_VoltDiff(c2,  node1_id,  node2_id);
 }
 
-float roundf(float x)
+double roundf(double x)
 {
    return x >= 0.0f ? floorf(x + 0.5f) : ceilf(x - 0.5f);
 }

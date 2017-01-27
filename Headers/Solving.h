@@ -65,7 +65,7 @@ double Get_Total_Supplied_Power(Circuit* circuit);
 double Get_Total_Dissipated_Power(Circuit* circuit);
 
 // returns true if total power is balanced, false otherwise
-void Circuit_Is_Power_Balanced(Circuit* circuit);
+bool Circuit_Is_Power_Balanced(Circuit* circuit);
 
 // get the value of resistance such that it
 // receives maximum power from the circuit
@@ -98,3 +98,6 @@ double Get_VoltDiff(Circuit* circuit, const int node1_id, const int node2_id);
 double Get_VoltDiff(Circuit* circuit, const int node1_id, const int node2_id, Element*& due_to_element);
 
 void Interface(Circuit *c);
+
+double roundf(double x);
+double Round(const double &num, const int precision);

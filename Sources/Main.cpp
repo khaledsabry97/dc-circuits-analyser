@@ -13,7 +13,9 @@ void SolveTheCircuit(Circuit*& c)
 	voltageTransformation(c2);		//Voltage Source Transformation
 	solve(c2);						//Solve Essential Node Of The Copied Circuit
 	VoltageBack(c2, c);				//This Function Get The Circuit Voltage From The Copied Circuit [c2] To The Main Circuit [c]
-	SolveNonEss(c);					//Solvig Non Essential Nodes [This Function Take The Main Circuit As A parameter]		
+	SolveNonEss(c);					//Solvig Non Essential Nodes [This Function Take The Main Circuit As A parameter]	
+
+	delete c2;	
 }
 
 #ifndef __RELEASE__ 
@@ -28,9 +30,14 @@ int main()
 
 	SolveTheCircuit(c);
 
-	Circuit_Is_Power_Balanced(c);
-
+	if (Circuit_Is_Power_Balanced(c))
+		cout << "Circuit Is Power Balanced\n";
+	else 
+		cout << "Circuit Is NOT Power Balanced\n";
+		
 	Interface(c);
+
+	delete c;
 }
 
 #endif	/* __RELEASE__ */
