@@ -60,7 +60,6 @@ class Element
 
         Element* Copy();
 
-        // TODO: document this
         static bool IsSame(Element*, Element*);
         bool operator== (Element&);
 
@@ -202,6 +201,7 @@ class Circuit
                 list<ElementTuple> list;
 
                 void _Check_then_add(Element* e, Node* node);
+                void _Check_errors_between_two_nodes(Element* e, Element* e_in_list, Node* foundNode1, Node* foundNode2);
 
                 bool _Remove_invalid_voltage_source(tpl_itr &itr, tpl_itr &itr2);
                 bool _Remove_invalid_current_source(tpl_itr &itr, tpl_itr &itr2);

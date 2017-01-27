@@ -293,8 +293,9 @@ bool Circuit::_Pop_front()
         _lastNode = nullptr;     
 
     _firstNode = _firstNode->_next;
-    if (_firstNode)     // TODO: chekc if this helped avoid seg. fault
+    if (_firstNode)     
         _firstNode->_prev = nullptr;
+
     delete temp;
     _numNodes--;
 

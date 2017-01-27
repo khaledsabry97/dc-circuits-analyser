@@ -10,6 +10,7 @@ listing public functionality only
 #####   Element   #####
 
 ## SUMMARRY
+
 Element(const char &type, const int &id, const double &val);
 Element* Copy();
 
@@ -19,9 +20,12 @@ Element* GetPrev();
 char GetType();
 void ChangeType(const char &c);
 int GetId();
+
 void ChangeId(const int &num);
 double GetValue();
 void ChangeValue(const int &num);
+
+static bool IsSame(Element*, Element*);
 
 /* Constructors and copy */
 
@@ -93,5 +97,20 @@ double GetValue();
 
 // changes the value of the element
 void ChangeValue(const int &num);
+
+// two elements are same, if both have same id and type
+// use when having two elements at two different nodes and want to check if they are the same element
+// returns true if both are the same
+static bool IsSame(Element*, Element*);
+
+NOTE: static here means you call it just if it is inside a namespace, see example below
+
+<EXAMPLE>
+    // we have e1 and e2
+    if (Element::IsSame(e1, e2))
+        cout << "they are the same element\n";
+    else
+        cout << "they are different elements\n";
+<END>
 
 #endif
