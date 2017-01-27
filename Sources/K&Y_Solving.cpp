@@ -110,7 +110,7 @@ double Ampere(Node* n1, Node* n2, Element* e, Circuit* c)
 		else 
 		{
 			Element* e1 = n2->GetFirstElement();
-			if(e1->GetId() == e ->GetId())
+			if(e1->GetId() == e ->GetId() && e1->GetType() == e->GetType())
 			{ 
 				e1= e1->GetNext();
 			}
