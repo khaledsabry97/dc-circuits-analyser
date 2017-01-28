@@ -1,14 +1,21 @@
-# two current sources in series
-# j1 and j2 are invalid
-
-j1 2
-r1 2
+e1 -40
+r1 12
 x
-j1 -2
-j2 1
+r1 12
+r2 20
+r3 25
+j1 -5
 x
-j2-1
-r1 2
+r2 20
+j1 5
+r4 40
+j2 7.5
+x
+r5 40
+r4 40
+j2 -7.5
+x
+r5 40
+r3 25
+e1 40
 xx
-
-# 

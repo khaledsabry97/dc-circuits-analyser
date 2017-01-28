@@ -2,16 +2,16 @@
 #include "Solving.h"
 
 void Interface(Circuit * c) {
-	cout << GREEN;
-	cout << "Enter the action you want to perform" << endl;
-	cout << "Valid commands" << endl;
-	cout << "-> I				current passing through the element" << endl;
-	cout << "-> P				the power supplied or disipated by the element" << endl;
-	cout << "-> V				the voltage difference between two nodes" << endl;
-	cout << "-> R				the maximum resistance  " << endl;
-	cout << "-> M				the maximum power" << endl;
-	cout << "-> x				Exit" << endl;
-	cout << WHITE;
+	cout	 << GREEN
+			 << "Enter the action you want to perform" << endl
+			 << "Valid commands" << endl
+			 << "-> I				current passing through the element" << endl
+			 << "-> P				the power supplied or disipated by the element" << endl
+			 << "-> V				the voltage difference between two nodes" << endl
+			 << "-> R				the maximum resistance  " << endl
+			 << "-> M				the maximum power" << endl
+			 << "-> x				Exit" << endl
+			 << WHITE;
 	char option;
 	
 	while (true) {
@@ -26,6 +26,11 @@ void Interface(Circuit * c) {
 			TYPE = toupper(TYPE);
 			Element* e;
 			e = c->GetElement(TYPE, ID);
+			if (!e)
+			{
+				cout << RED << "This Element is Not Exist\nPlease Try Your Options Again\n";
+				continue;
+			}
 			cout << "press 1 to get current due to spacefic source, 0 to continue " << endl;
 			int option2;
 			cin >> option2;
@@ -40,8 +45,12 @@ void Interface(Circuit * c) {
 				cout << "I= " << Get_Current(c, e, spacefic) << endl;;
 			}
 			else
-				cout << "I= " << Get_Current(c, e) << endl;
-
+			{
+				if (TYPE == 'R')
+					cout << "I= " << fabs(Get_Current(c, e)) << endl;
+				else
+					cout << "I= " << Get_Current(c, e) << endl;
+			}
 	}
 
 			
@@ -51,13 +60,18 @@ void Interface(Circuit * c) {
 			char Type1; int ID1;
 			cin >> Type1 >> ID1;
 			E = c->GetElement(Type1, ID1);
+			if (!E)
+			{
+				cout << RED << "This Element is Not Exist\nPlease Try Your Options Again\n";
+				continue;
+			}
 			int Node1, Node2;
 			Node** ptr = NULL;
 			ptr =  c->GetTerminals(E);
 			Node1 = ptr[0]->GetId();
 			Node2 = ptr[1]->GetId();
 			Element  *e1 = NULL;
-			cout << "press 1 to get Voltage Dif due to spacefic source " << endl;
+			cout << "press 1 to get Voltage Dif due to spacefic source , 0 to continue" << endl;
 			int option2;
 			cin >> option2;
 			if (option2 == 1) {
@@ -69,7 +83,12 @@ void Interface(Circuit * c) {
 				cout << "V= " << Get_VoltDiff(c, Node1, Node2, e1)<<endl;
 			}
 			else
-				cout << "V= " << Get_VoltDiff(c, Node1, Node2)<<endl;
+			{
+				if(E->GetType() == 'J')
+					cout << "V= " << Get_VoltDiff(c, Node1, Node2)<<endl;
+				else
+					cout << "V= " << fabs(Get_VoltDiff(c, Node1, Node2))<<endl;
+			}
 
 
 		}
@@ -80,6 +99,11 @@ void Interface(Circuit * c) {
 			char PTYPE; int PID;
 			cin >> PTYPE >> PID;
 			e1 = c->GetElement(PTYPE, PID);
+			if (!e1)
+			{
+				cout << RED << "This Element is Not Exist\nPlease Try Your Options Again\n";
+				continue;
+			}
 			cout<<"P= "<<Get_Power(c, e1)<<endl;
 
 
@@ -90,6 +114,11 @@ void Interface(Circuit * c) {
 			char RTYPE; int RID;
 			cin >> RTYPE >> RID;
 			E2 = c->GetElement(RTYPE, RID);
+			if (!E2)
+			{
+				cout << RED << "This Element is Not Exist\nPlease Try Your Options Again\n";
+				continue;
+			}
 			cout<<"Rmax = "<<Get_Res_Max(c, E2)<<endl;
 		}
 		else if (option == 'M') {
@@ -98,12 +127,30 @@ void Interface(Circuit * c) {
 			char MTYPE; int MID;
 			cin >> MTYPE >> MID;
 			E3 = c->GetElement(MTYPE, MID);
+			if (!E3)
+			{
+				cout << RED << "This Element is Not Exist\nPlease Try Your Options Again\n";
+				continue;
+			}
 			cout << "Pmax = " << Get_Pow_Max(c, E3) << endl;
 		}
 
 		else if (option == 'X')
 		{
 			break;
+		}
+		else if (option == 'H')
+		{
+			cout	<< GREEN
+					<< "Enter the action you want to perform" << endl
+					<< "Valid commands" << endl
+					<< "-> I				current passing through the element" << endl
+					<< "-> P				the power supplied or disipated by the element" << endl
+					<< "-> V				the voltage difference between two nodes" << endl
+					<< "-> R				the maximum resistance  " << endl
+					<< "-> M				the maximum power" << endl
+					<< "-> x				Exit" << endl
+					<< WHITE;
 		}
 		else {
 			HandleError(INVALID_INPUT);

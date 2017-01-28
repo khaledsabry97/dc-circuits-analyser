@@ -30,10 +30,7 @@ int main()
 
 	SolveTheCircuit(c);
 
-	if (Circuit_Is_Power_Balanced(c))
-		cout << "Circuit Is Power Balanced\n";
-	else 
-		cout << "Circuit Is NOT Power Balanced\n";
+	Circuit_Is_Power_Balanced(c);
 		
 	Interface(c);
 

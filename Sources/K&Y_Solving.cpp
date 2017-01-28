@@ -265,13 +265,13 @@ double Get_Total_Dissipated_Power(Circuit* c)
 			{
 				P = Power(e1,c);
 			}
-			else if( e1->GetType() == 'E'|| e1->GetType() == 'J' )
-			{
-				P = Power (e1,c);
-				if(P < 0 )
-				//this case is just to ensure that the power is dissipated or supplied
-				P = 0;
-			}
+			//else if( e1->GetType() == 'E'|| e1->GetType() == 'J' )
+			//{
+				/*P = Power (e1,c);*/
+			//	if(P < 0 )
+			//	//this case is just to ensure that the power is dissipated or supplied
+			//	P = 0;
+			//}
 			TP = TP + P;
 			P = 0;
 			e1 = e1->GetNext();
@@ -293,13 +293,18 @@ double Get_Total_Supplied_Power(Circuit* c)
 		Element* e1 = n1->GetFirstElement();
 		while(e1 != NULL)
 		{
-			if (e1->GetType() == 'E' || e1->GetType() == 'J' )
+			if (e1->GetType() == 'R')
 			{
-				P = Power(e1,c);
-				if( P > 0)
-				//this case is just to ensure that the power is dissipated or supplied
-					P = 0;
+				e1 = e1->GetNext();
+				continue;
 			}
+			//if (e1->GetType() == 'E' || e1->GetType() == 'J' )
+			//{
+				P = Power(e1,c);
+			//	if( P > 0)
+			//	//this case is just to ensure that the power is dissipated or supplied
+			//		P = 0;
+			//}
 			TP = TP + P;
 			P = 0;
 			e1 = e1->GetNext();
@@ -310,11 +315,14 @@ double Get_Total_Supplied_Power(Circuit* c)
 }
 
 // returns true if total power is balanced, false otherwise
-bool Circuit_Is_Power_Balanced(Circuit* circuit)
+void Circuit_Is_Power_Balanced(Circuit* c)
 {
-	double TSP = Get_Total_Supplied_Power(circuit);
-	double TDP = Get_Total_Dissipated_Power(circuit);
-	return ( Round(TSP, 1) + Round(TDP, 1) == 0 );
+	double TSP = Get_Total_Supplied_Power(c);
+	double TDP = Get_Total_Dissipated_Power(c);
+	if ( Round(TSP, 1) + Round(TDP, 1) == 0 )
+		cout << "The Circuit Is Balanced\n";
+	else
+		cout << "The Circuit Isn't Balanced\n";
 }
 
 
@@ -428,12 +436,11 @@ double Get_Power(Circuit* circuit, Element* element)
 	Node* n1;
 	Node* n2;
 	Element* e_temp = element;
-	int id=element->GetType();
 	int i=0;
 	double I;
     Get_2_Nodes(element,n1,n2,circuit);
 	//get two nodes the have the element
-	switch (id)
+	switch (element->GetType())
 	{
 	case'E':
 		{

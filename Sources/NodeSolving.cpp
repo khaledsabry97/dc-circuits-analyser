@@ -442,7 +442,7 @@ void solve(Circuit *&c)
 				while (e)
 				{
 					if(e->GetType() == 'R')
-						series = e->GetValue();
+						series += e->GetValue();
 					else
 					{
 						e = e->GetNext();
@@ -525,6 +525,7 @@ void solve(Circuit *&c)
 						}
 					}
 					e = e->GetNext();
+					series = 0;
 				}
 				i++;
 				if(i == size)
@@ -713,6 +714,8 @@ void SolveNonEss(Circuit *&c)
 		return;
 	}
 	Node *n = c->GetFirstNode();
+	bool test;
+	double volt2[2];
 	while (n)
 	{
 		if (!n->IsEssential())
@@ -737,17 +740,37 @@ void SolveNonEss(Circuit *&c)
 						sumR += eCom->GetValue();
 					else if(e->GetType() == 'E')
 						sumV += eCom->GetValue();
-					eCom = SearchElement(e, n->GetId(), c);
+					eCom = SearchElement(eCom, n->GetId(), c);
 				}
 				volt[i] = SearchNodeByElement(eCom2, c);
+				volt2[i] = volt[i];
+				if (i == 0 && eCom2->GetType() == 'R')
+				{
+					test = true;
+				}
+				else
+					test = false;
 				i++;
 				e =e->GetNext();
 			}
-			double IPranch = ((volt[0] - volt[1]) / sumR);
+			double IPranch;
+			if (volt[0] < volt[1])
+			{
+				double x = volt[0];
+				volt[0] = volt[1];
+				volt[1] = x;
+			}
+			if (!test && volt2[0] == volt[0] && volt2[0] < 0)
+				IPranch = ((volt[0] - volt[1] - fabs(sumV)) / sumR);
+			else
+				IPranch = ((volt[0] - volt[1] - sumV) / sumR);
+			/*else
+				IPranch = ((volt[1] - volt[0] - sumV) / sumR);*/
 			e = n->GetFirstElement();
 			sumR =  0;
 			while (e)
 			{
+				sumR = 0;
 				if (e->GetType() == 'R')
 				{
 					Element *eCom2 = e;
@@ -759,10 +782,17 @@ void SolveNonEss(Circuit *&c)
 						eCom2 = eCom;
 						if (eCom->GetType() == 'R')
 							sumR += eCom->GetValue();
-						eCom = SearchElement(e, n->GetId(), c);
+						eCom = SearchElement(eCom, n->GetId(), c);
 					}
 					double NodeV = SearchNodeByElement(eCom2, c);
-					n->ChangeVolt(sumV - ((IPranch * sumR) - NodeV));
+					if (NodeV == volt[0])
+						n->ChangeVolt(/*sumV - */(-(IPranch * sumR) + NodeV));
+					else if (!test && volt2[0] == volt[0] && volt2[0] < 0)
+					{
+						n->ChangeVolt(((IPranch * sumR) + NodeV));
+					}
+					else
+						n->ChangeVolt(-((IPranch * sumR) + NodeV));
 				}
 				e = e->GetNext();
 			}

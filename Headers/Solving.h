@@ -65,7 +65,7 @@ double Get_Total_Supplied_Power(Circuit* circuit);
 double Get_Total_Dissipated_Power(Circuit* circuit);
 
 // returns true if total power is balanced, false otherwise
-bool Circuit_Is_Power_Balanced(Circuit* circuit);
+void Circuit_Is_Power_Balanced(Circuit* circuit);
 
 // get the value of resistance such that it
 // receives maximum power from the circuit
