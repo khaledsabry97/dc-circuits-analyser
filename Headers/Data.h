@@ -73,8 +73,9 @@ class Element
         Type _type;
         int _id;
         double _value;
-        int _node_id;
+        int _node_id;// TODO: make it better, pointer to node 
 
+        void _Constructor(const char &type, const int &id, const double &val, const int &node_id);
         void _SetType(const char &c);
         void _SetValue(const double &num);
         void _SetId(const int &id);

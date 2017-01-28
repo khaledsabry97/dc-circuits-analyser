@@ -3,20 +3,27 @@
 */
 #include "Data.h"
 
-// constructor
+// constructors:
 Element::Element(const char &type, const int &id, const double &val) 
-	:_next(nullptr), _prev(nullptr), _type(R), _id(-1), _value(0), _node_id(-1)
 {
-    _SetType(type);
-    _SetId(id);
-    _SetValue(val);
+    _Constructor(type, id, val, -1);
 }
-// TODO: make it better
+
 // constructor for Circuit::Read() to assign the element its node_id on creation
 // before testing it and adding to its node
 Element::Element(const char &type, const int &id, const double &val, const int &node_id)
-    :_next(nullptr), _prev(nullptr), _type(R), _id(-1), _value(0)
 {
+    _Constructor(type, id, val, node_id);
+}
+
+// main constructor, to be called from both overloaded constructors
+void Element::_Constructor(const char &type, const int &id, const double &val, const int &node_id)
+{
+    _next = _prev = nullptr;
+    _type = R;
+    _id = -1;
+    _value = 0;
+
     try
     {
         _SetType(type);
