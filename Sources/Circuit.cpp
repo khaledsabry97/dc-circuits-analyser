@@ -307,35 +307,9 @@ Node** Circuit::GetTerminals(Element* e)
 // the same as above, but takes 2 nodes by argument to put nodes in them
 Node** Circuit::GetTerminals(Element* e, Node* &n1, Node* &n2)
 {
-    // array to hold the addresses of the terminals
-    Node** terminal = new Node*[2];
-    terminal[0] = terminal[1] = nullptr;
+    Node** terminals = GetTerminals(e);
+    n1 = terminals[0];
+    n2 = terminals[1];
 
-    // select the first terminal, get him, then do the same for the second one
-    int select = 0;
-
-    while (true)   
-    {
-        // traverse through all nodes to get the first one 
-        Node* n = GetFirstNode();
-        while (n)
-        {
-            if (n->HasElement(e->GetType(), e->GetId()))
-                terminal[select++] = n;
-
-            n = n->GetNext();
-        }
-
-        // both of them is found
-        if (terminal[0] && terminal[1])
-            break;
-        else // not found some/all of them
-            throw LONELY_ELEMENT;
-    }
-
-    // return them
-    n1 = terminal[0];
-    n2 = terminal[1];
-
-    return terminal;
+    return terminals;
 }
