@@ -27,6 +27,7 @@ int main()
 
     Circuit* c = new Circuit;
 	c->Read();
+	c->Print();
 
 	SolveTheCircuit(c);
 

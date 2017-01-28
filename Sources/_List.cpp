@@ -140,6 +140,7 @@ bool Circuit::_List::_Remove_invalid_voltage_source(tpl_itr &itr, tpl_itr &itr2)
     return false;
 }
 
+// BUG: removes every series 
 bool Circuit::_List::_Remove_invalid_current_source(tpl_itr &itr, tpl_itr &itr2)
 {
     if (_Is_Series(*itr, *itr2))
@@ -243,17 +244,38 @@ bool Circuit::_List::_Is_Parallel(const ElementTuple& first, const ElementTuple&
 
 bool Circuit::_List::_Is_Series(const ElementTuple& first, const ElementTuple& second)
 {
-    // get terminals from the tuple
-    Node *e_term_1 = get<1>(first), 
+    // get terminals from the tuple, store them at pointers
+    Node 
+    *e_term_1 = get<1>(first), 
     *e_term_2 = get<2>(first), 
 
     *e2_term_1 = get<1>(second), 
     *e2_term_2 = get<2>(second);
 
-    // i know it is bad :( 
-    return !_Is_Parallel(first, second) && 
-        (e_term_1 == e2_term_1 || e_term_1 == e2_term_2 || 
-        e_term_2 == e2_term_1 || e_term_2 == e2_term_2);
+    Node* e_terminals[] = {e_term_1, e_term_2};
+
+    /*pseudo-code
+        to be series:
+            1- first & second must have one common node, not two or zero
+            2- that node should have only two elements, the first and second
+    */
+
+    // get shared node
+    Node* common = nullptr;
+
+    for (const auto terminal: e_terminals)
+    {
+        if (terminal == e2_term_1 || terminal == e2_term_2)
+        {
+            if (common) // we have two common then
+                return false;
+            else
+                common = e_term_2;
+        }
+    }
+    
+    // common should have only two elements
+    return (common->GetNumOfElements() == 2);
 }
 
 //      public:
