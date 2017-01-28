@@ -96,9 +96,11 @@ void Circuit::Add(Node* n)
         _Push_front(n);
     else 
         _Push_back(n);
+
+    // give it this circuit's address
+    n->_from_circuit = this;
 }
 
-// TODO: detect node is in circuit
 bool Circuit::Remove(Node* n)
 {
     /*  pseudo:
@@ -117,8 +119,12 @@ bool Circuit::Remove(Node* n)
         ;n = lastnode -----> +
         ;n is not in list ---->  +
     */
+    // cant delete null
     if (!n)
-        return false;       // cant delete null
+        return false;       
+    // cant delete node if from another circuit
+    if (n->_from_circuit != this)
+        throw DEL_NODE_FROM_WRONG_CIRC;
 
     // node is on edge: first/last
     if (n == _firstNode)

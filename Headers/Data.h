@@ -34,6 +34,10 @@ Command {
     CMD_INVALID,
 };
 
+class Element;
+class Node;
+class Circuit;
+
 class Element
 {
     public:
@@ -126,6 +130,7 @@ class Node
         const int _id;
         double _volt;
         int _numElements;
+        Circuit* _from_circuit;
 
         friend class Circuit; 
 };

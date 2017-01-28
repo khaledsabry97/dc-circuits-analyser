@@ -5,8 +5,10 @@
 
 
 // constructor
-Node::Node(const int &id) 
-	:_id(id), _next(nullptr), _prev(nullptr), _firstElement(nullptr), _volt(0), _numElements(0)
+Node::Node(const int &id)
+	:_id(id), _next(nullptr), _prev(nullptr), 
+    _firstElement(nullptr), _volt(0), 
+    _numElements(0), _from_circuit(nullptr)
 {}
 
 // next node

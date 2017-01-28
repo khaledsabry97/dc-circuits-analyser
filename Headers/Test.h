@@ -24,32 +24,47 @@ void Redirect_IO(bool redirect)
 	freopen(INPUT_FILE, "r", stdin);
 }
 
-void test_hadi_solving2()
-{
-    Circuit* c = new Circuit;
-    c->Read();						//Reading the Circuit
-	Circuit *c2 = c->Copy();		//Copying The Circuit To Another Pointer
-	voltageTransformation(c2);		//Voltage Source Transformation
-	cout << "Circuit Before Solving: "<<endl;
-	print(c2);						//Print The Circuit Data
-	solve(c2);						//Solve Essential Node Of The Copied Circuit
-	cout << "Circuit After Solving:"<<endl;
-	print(c2);	
-	VoltageBack(c2, c);				//This Function Get The Circuit Voltage From The Copied Circuit [c2] To The Main Circuit [c]
-	cout << "Main Circuit After Getting The Nodes Voltage Back To It: " <<endl;
-	print(c);
-	cout << "New Circuit After Solving:"<<endl;
-	SolveNonEss(c);					//Solvig Non Essential Nodes [This Function Take THe Main Circuit As A parameter]		
-	c->Print();
-}
 
 int main()
 {
-	Circuit c;
-	c.Read();
+	//
 }
 
 #ifdef __OLD_TESTS__
+	void test_remove_node_from_another_circ()
+	{
+		Circuit c;
+		c.Read();
+		
+		Node* n = new Node(5);
+		try
+		{
+			c.Remove(n);
+		}
+		catch (const error &err)
+		{
+			if (err == DEL_NODE_FROM_WRONG_CIRC)
+				cout << "it works\n";
+		}
+	}
+	void test_hadi_solving2()
+	{
+		Circuit* c = new Circuit;
+		c->Read();						//Reading the Circuit
+		Circuit *c2 = c->Copy();		//Copying The Circuit To Another Pointer
+		voltageTransformation(c2);		//Voltage Source Transformation
+		cout << "Circuit Before Solving: "<<endl;
+		print(c2);						//Print The Circuit Data
+		solve(c2);						//Solve Essential Node Of The Copied Circuit
+		cout << "Circuit After Solving:"<<endl;
+		print(c2);	
+		VoltageBack(c2, c);				//This Function Get The Circuit Voltage From The Copied Circuit [c2] To The Main Circuit [c]
+		cout << "Main Circuit After Getting The Nodes Voltage Back To It: " <<endl;
+		print(c);
+		cout << "New Circuit After Solving:"<<endl;
+		SolveNonEss(c);					//Solvig Non Essential Nodes [This Function Take THe Main Circuit As A parameter]		
+		c->Print();
+	}
 
 	void test_khaled_functions()
 	{

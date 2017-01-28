@@ -11,7 +11,7 @@ Element::Element(const char &type, const int &id, const double &val)
     _SetId(id);
     _SetValue(val);
 }
-
+// TODO: make it better
 // constructor for Circuit::Read() to assign the element its node_id on creation
 // before testing it and adding to its node
 Element::Element(const char &type, const int &id, const double &val, const int &node_id)
