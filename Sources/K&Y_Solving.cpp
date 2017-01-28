@@ -20,23 +20,61 @@ void Get_2_Nodes(Element* e, Node* &n1, Node* &n2, Circuit* c);
 // remove all Voltage sources and current sources only one source remains
 Circuit* Disable_Sources_superpostion(Circuit* c,Element* e_temp);
 
+Node *searchNode(Circuit *c, Element *e, int nodeID)
+{
+	Node *n = c->GetFirstNode();
+	while (n)
+	{
+		Element *ele = n->GetFirstElement();
+		while (ele)
+		{
+			if (ele->GetId() == e->GetId() && ele->GetType() ==e->GetType() && n->GetId() != nodeID)
+			{
+				return n;
+			}
+			ele = ele->GetNext();
+		}
+		n = n->GetNext();
+	}
+	return NULL;
+}
+
 // remove all Voltage sources and current sources only one source remains
 // return circuit with one (voltag or current) source 
 Circuit* Disable_Sources_superpostion(Circuit* c,Element* e_temp)
 {
 	Circuit* c_copy = c->Copy();
 	Node* n = c_copy->GetFirstNode();
+	Node *n_temp;
 	while(n != NULL)
 	{
 		Element* e = n->GetFirstElement();
 		while(e != NULL)
 		{
-			if(e->GetType() == 'E' || e->GetType()=='J')
+			if(e->GetType()=='J')
 			{
 				//check only on voltag and current sources and delete them
-				if(e_temp->GetId() != e->GetId() || e_temp->GetType()!= e->GetType())
+				if(e_temp->GetId() != e->GetId() && e_temp->GetType()!= e->GetType())
 					//this condion is just to let a specific source 
-				n->Remove(e);
+					n->Remove(e);
+			}
+			else if (e->GetType() == 'E')
+			{
+				if (!n->IsEssential())
+				{
+					if(e_temp->GetId() == e->GetId() && e_temp->GetType() == e->GetType())
+						continue;
+					n_temp = searchNode(c_copy, e, n->GetId());
+					Element *e_temp2 = n_temp->GetFirstElement();
+					while (e_temp2->GetType() != e->GetType() && e_temp2->GetId() != e->GetId())
+						e_temp2 = e_temp2->GetNext();
+					n->Remove(e);
+					e = n->GetFirstElement();
+					e = e->Copy();//solution: add a copy of e in n_temp, not e itself
+					n_temp->Remove(e_temp2);
+					n_temp->Add(e);
+					bool test = c_copy->Remove(n->GetId());
+				}
 			}
 			e = e->GetNext();
 		}
@@ -49,6 +87,7 @@ Circuit* Disable_Sources_superpostion(Circuit* c,Element* e_temp)
 void Disable_Sources(Circuit*& c)
 {
 	Node* n = c->GetFirstNode();
+	Node *n_temp;
 	while(n != NULL)
 	{
 		Element* e = n->GetFirstElement();
@@ -57,7 +96,20 @@ void Disable_Sources(Circuit*& c)
 			if(e->GetType() == 'E' || e->GetType()=='J')
 			//check only on voltag and current sources and delete them
 			{
-				n->Remove(e);
+				if (!n->IsEssential())
+				{
+					n_temp = searchNode(c, e, n->GetId());
+					Element *e_temp2 = n_temp->GetFirstElement();
+					while (e_temp2->GetType() != e->GetType() && e_temp2->GetId() != e->GetId())
+						e_temp2 = e_temp2->GetNext();
+					n->Remove(e);
+					e = n->GetFirstElement();
+					n_temp->Remove(e_temp2);
+					n_temp->Add(e);
+					bool test = c->Remove(n->GetId());
+				}
+				else
+					n->Remove(e);
 			}
 			e = e->GetNext();
 		}

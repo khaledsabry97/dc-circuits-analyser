@@ -98,6 +98,7 @@ void Circuit::Add(Node* n)
         _Push_back(n);
 }
 
+// TODO: detect node is in circuit
 bool Circuit::Remove(Node* n)
 {
     /*  pseudo:
