@@ -275,7 +275,7 @@ bool Circuit::_List::_Is_Series(const ElementTuple& first, const ElementTuple& s
     }
     
     // common should have only two elements
-    return (common->GetNumOfElements() == 2);
+    return (common && common->GetNumOfElements() == 2);
 }
 
 //      public:
