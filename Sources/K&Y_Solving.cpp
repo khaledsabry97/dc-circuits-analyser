@@ -70,10 +70,12 @@ Circuit* Disable_Sources_superpostion(Circuit* c,Element* e_temp)
 						e_temp2 = e_temp2->GetNext();
 					n->Remove(e);
 					e = n->GetFirstElement();
-					e = e->Copy();//solution: add a copy of e in n_temp, not e itself
+					Element *ele = e->Copy();//solution: add a copy of e in n_temp, not e itself
 					n_temp->Remove(e_temp2);
-					n_temp->Add(e);
+					n_temp->Add(ele);
 					bool test = c_copy->Remove(n->GetId());
+					n = c->GetFirstNode();
+					e = n->GetFirstElement();
 				}
 			}
 			e = e->GetNext();
@@ -104,9 +106,12 @@ void Disable_Sources(Circuit*& c)
 						e_temp2 = e_temp2->GetNext();
 					n->Remove(e);
 					e = n->GetFirstElement();
+					Element *ele = e->Copy();//solution: add a copy of e in n_temp, not e itself
 					n_temp->Remove(e_temp2);
-					n_temp->Add(e);
+					n_temp->Add(ele);
 					bool test = c->Remove(n->GetId());
+					n = c->GetFirstNode();
+					e = n->GetFirstElement();
 				}
 				else
 					n->Remove(e);
@@ -378,9 +383,9 @@ void Circuit_Is_Power_Balanced(Circuit* c)
 }
 
 
-double Get_Res_Max(Circuit* circuit, Element* resistance)
+double Get_Res_Max(Circuit* c, Element* resistance)
 {
-	circuit = circuit->Copy();
+	Circuit *circuit = c->Copy();
 
 	bool removed_1,removed_2;
 	Element* resistance_2;  //pointer to the resistance in second node
@@ -421,9 +426,9 @@ double Get_Res_Max(Circuit* circuit, Element* resistance)
 }
 
 
-double Get_Pow_Max(Circuit* circuit, Element* resistance)
+double Get_Pow_Max(Circuit* c, Element* resistance)
 {
-	circuit = circuit->Copy();
+	Circuit *circuit = c->Copy();
 
 	double vth;
 

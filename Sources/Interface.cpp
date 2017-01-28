@@ -1,7 +1,8 @@
 #include "Data.h"
 #include "Solving.h"
 
-void Interface(Circuit * c) {
+void print_interface_commands()
+{
 	cout	 << GREEN
 			 << "Enter the action you want to perform" << endl
 			 << "Valid commands" << endl
@@ -12,6 +13,10 @@ void Interface(Circuit * c) {
 			 << "-> M				the maximum power" << endl
 			 << "-> x				Exit" << endl
 			 << WHITE;
+}
+
+void Interface(Circuit * c) {
+	void print_interface_commands();
 	char option;
 	
 	while (true) {
@@ -28,21 +33,35 @@ void Interface(Circuit * c) {
 			e = c->GetElement(TYPE, ID);
 			if (!e)
 			{
-				cout << RED << "This Element is Not Exist\nPlease Try Your Options Again\n";
+				cerr << RED << "\tEntered element doesn\'t exist\n" << WHITE;
+				void print_interface_commands();
 				continue;
 			}
 			cout << "press 1 to get current due to spacefic source, 0 to continue " << endl;
 			int option2;
 			cin >> option2;
 
-			if (option2 == 1) {
+			if (option2 == 1 && e->GetType() == 'R') {
 				Element  *spacefic = NULL;
 				char Stype; int Sid;
 				cout << "Enter the Source please  " << endl;
 				cin >> Stype >> Sid;
 				Stype = toupper(Stype);
 				spacefic = c->GetElement(Stype, Sid);
-				cout << "I= " << Get_Current(c, e, spacefic) << endl;;
+				if (!spacefic)
+				{
+					cerr << RED << "\tEntered element doesn\'t exist\n" << WHITE;
+					void print_interface_commands();
+					continue;
+				}
+				else if (spacefic->GetType() == 'J' || spacefic->GetType() == 'E')
+					cout << "I= " << Get_Current(c, e, spacefic) << endl;
+				else
+				{
+					cout << BLUE << "You Didn't Enter A Source\n Please Try Again\n" << WHITE;
+					void print_interface_commands();
+					continue;
+				}
 			}
 			else
 			{
@@ -62,7 +81,8 @@ void Interface(Circuit * c) {
 			E = c->GetElement(Type1, ID1);
 			if (!E)
 			{
-				cout << RED << "This Element is Not Exist\nPlease Try Your Options Again\n";
+				cerr << RED << "\tEntered element doesn\'t exist\n" << WHITE;
+				void print_interface_commands();
 				continue;
 			}
 			int Node1, Node2;
@@ -74,13 +94,26 @@ void Interface(Circuit * c) {
 			cout << "press 1 to get Voltage Dif due to spacefic source , 0 to continue" << endl;
 			int option2;
 			cin >> option2;
-			if (option2 == 1) {
+			if (option2 == 1 && E->GetType() == 'R') {
 
 				cout << "Enter the source please " << endl;
 				char Stype; int Sid;
 				cin >> Stype >> Sid;
 				e1 = c->GetElement(Stype, Sid);
-				cout << "V= " << Get_VoltDiff(c, Node1, Node2, e1)<<endl;
+				if (!e1)
+				{
+					cerr << RED << "\tEntered element doesn\'t exist\n" << WHITE;
+					void print_interface_commands();
+					continue;
+				}
+				else if (e1->GetType() == 'J' || e1->GetType() == 'E')
+					cout << "V= " << Get_VoltDiff(c, Node1, Node2, e1)<<endl;
+				else
+				{
+					cout << BLUE << "You Didn't Enter A Source\n Please Try Again\n" << WHITE;
+					void print_interface_commands();
+					continue;
+				}	
 			}
 			else
 			{
@@ -101,7 +134,8 @@ void Interface(Circuit * c) {
 			e1 = c->GetElement(PTYPE, PID);
 			if (!e1)
 			{
-				cout << RED << "This Element is Not Exist\nPlease Try Your Options Again\n";
+				cerr << RED << "\tEntered element doesn\'t exist\n" << WHITE;
+				void print_interface_commands();
 				continue;
 			}
 			cout<<"P= "<<Get_Power(c, e1)<<endl;
@@ -116,10 +150,18 @@ void Interface(Circuit * c) {
 			E2 = c->GetElement(RTYPE, RID);
 			if (!E2)
 			{
-				cout << RED << "This Element is Not Exist\nPlease Try Your Options Again\n";
+				cerr << RED << "\tEntered element doesn\'t exist\n" << WHITE;
+				void print_interface_commands();
 				continue;
 			}
-			cout<<"Rmax = "<<Get_Res_Max(c, E2)<<endl;
+			else if (E2->GetType() == 'R')
+				cout<<"Rmax = "<<Get_Res_Max(c, E2)<<endl;
+			else
+			{
+				cout << BLUE << "You Didn't Enter An Resestance\nPlease Try The Option Again\n";
+				void print_interface_commands();
+				continue;
+			}
 		}
 		else if (option == 'M') {
 			cout << "Enter the Resistance please  " << endl;
@@ -129,10 +171,18 @@ void Interface(Circuit * c) {
 			E3 = c->GetElement(MTYPE, MID);
 			if (!E3)
 			{
-				cout << RED << "This Element is Not Exist\nPlease Try Your Options Again\n";
+				cerr << RED << "\tEntered element doesn\'t exist\n" << WHITE;
+				void print_interface_commands();
 				continue;
 			}
-			cout << "Pmax = " << Get_Pow_Max(c, E3) << endl;
+			else if (E3->GetType() == 'R')
+				cout << "Pmax = " << Get_Pow_Max(c, E3) << endl;
+			else
+			{
+				cout << BLUE << "You Didn't Enter An Resestance\nPlease Try The Option Again\n";
+				void print_interface_commands();
+				continue;
+			}
 		}
 
 		else if (option == 'X')
@@ -141,16 +191,7 @@ void Interface(Circuit * c) {
 		}
 		else if (option == 'H')
 		{
-			cout	<< GREEN
-					<< "Enter the action you want to perform" << endl
-					<< "Valid commands" << endl
-					<< "-> I				current passing through the element" << endl
-					<< "-> P				the power supplied or disipated by the element" << endl
-					<< "-> V				the voltage difference between two nodes" << endl
-					<< "-> R				the maximum resistance  " << endl
-					<< "-> M				the maximum power" << endl
-					<< "-> x				Exit" << endl
-					<< WHITE;
+			void print_interface_commands();
 		}
 		else {
 			HandleError(INVALID_INPUT);

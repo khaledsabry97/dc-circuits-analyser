@@ -68,10 +68,10 @@ void Circuit_Is_Power_Balanced(Circuit* circuit);
 
 // get the value of resistance such that it
 // receives maximum power from the circuit
-double Get_Res_Max(Circuit* circuit, Element* resistance);
+double Get_Res_Max(Circuit* c, Element* resistance);
 
 // for the given resistance
-double Get_Pow_Max(Circuit* circuit, Element* resistance);
+double Get_Pow_Max(Circuit* c, Element* resistance);
 
 /*   Extended   */
 
