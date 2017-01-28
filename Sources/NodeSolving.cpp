@@ -280,7 +280,7 @@ double *SolvingMat(double **arr,double *arr2,int size)
 	return det;
 }
 
-Element *SearchElement(Element *e, int NodeID, Circuit *c)
+Element *SearchElement(Element *e, int &NodeID, Circuit *c)
 {
 	Node *temp = c->GetFirstNode();
 	while (temp)
@@ -288,14 +288,19 @@ Element *SearchElement(Element *e, int NodeID, Circuit *c)
 		if (!temp->IsEssential())
 		{
 			Element *tempE = temp->GetFirstElement();
-			if (tempE->GetType() == e->GetType() && tempE->GetId() == e->GetId())
+			while (tempE)
 			{
-				if(temp->GetId() != NodeID)
+				if (tempE->GetType() == e->GetType() && tempE->GetId() == e->GetId())
 				{
-					if (tempE->GetNext())
-						return tempE->GetNext();
-					return tempE->GetPrev();
+					if(temp->GetId() != NodeID)
+					{
+						NodeID = temp->GetId();
+						if (tempE->GetNext())
+							return tempE->GetNext();
+						return tempE->GetPrev();
+					}
 				}
+				tempE = tempE->GetNext();
 			}
 		}
 		temp = temp->GetNext();
@@ -377,6 +382,7 @@ void solve(Circuit *&c)
 		{
 			if (n->IsEssential())
 			{
+				int nodeID = n->GetId();
 				count++;
 				if (count == 1)
 				{
@@ -395,14 +401,14 @@ void solve(Circuit *&c)
 						series = e->GetValue();
 					else if(e->GetType() == 'J')
 						CS += e->GetValue();
-					Element *tempE = SearchElement(e, n->GetId(), c);
+					Element *tempE = SearchElement(e, nodeID, c);
 					while (tempE)
 					{
 						if(tempE->GetType() == 'R')
 							series += tempE->GetValue();
 						else if(tempE->GetType() == 'J')
 							CS = tempE->GetValue();
-						tempE = SearchElement(tempE, n->GetId(), c);
+						tempE = SearchElement(tempE, nodeID, c);
 					}
 					if (series != 0)
 						sumR += 1 / series;
@@ -431,6 +437,7 @@ void solve(Circuit *&c)
 		{
 			if (n->IsEssential())
 			{
+				int nodeID = n->GetId();
 				count++;
 				if (count == 1)
 				{
@@ -448,7 +455,7 @@ void solve(Circuit *&c)
 						e = e->GetNext();
 						continue;
 					}
-					Element *tempE = SearchElement(e, n->GetId(), c);
+					Element *tempE = SearchElement(e, nodeID, c);
 					if (!tempE)
 					{
 						j = count -1;
@@ -489,7 +496,7 @@ void solve(Circuit *&c)
 							}
 							else
 								break;
-							tempE = SearchElement(tempE, n->GetId(), c);
+							tempE = SearchElement(tempE, nodeID, c);
 						}
 						if (tempE != NULL)
 						{
@@ -718,21 +725,23 @@ void SolveNonEss(Circuit *&c)
 	double volt2[2];
 	while (n)
 	{
-		if (!n->IsEssential())
+		if (!n->IsEssential() && n->GetVolt() == 0)
 		{
 			Element *e = n->GetFirstElement();
 			double volt[2], sumR, sumV;
 			sumR = 0;
 			sumV = 0;
 			int i = 0;
+			int nodeID = n->GetId();
 			while (e)
 			{
+				nodeID = n->GetId();
 				Element *eCom2 = e;
 				if (e->GetType() == 'R')
 					sumR += e->GetValue();
 				else if(e->GetType() == 'E')
 					sumV += e->GetValue();
-				Element *eCom = SearchElement(e, n->GetId(), c);
+				Element *eCom = SearchElement(e, nodeID, c);
 				while (eCom)
 				{
 					eCom2 = eCom;
@@ -740,7 +749,7 @@ void SolveNonEss(Circuit *&c)
 						sumR += eCom->GetValue();
 					else if(e->GetType() == 'E')
 						sumV += eCom->GetValue();
-					eCom = SearchElement(eCom, n->GetId(), c);
+					eCom = SearchElement(eCom, nodeID, c);
 				}
 				volt[i] = SearchNodeByElement(eCom2, c);
 				volt2[i] = volt[i];
@@ -768,21 +777,23 @@ void SolveNonEss(Circuit *&c)
 				IPranch = ((volt[1] - volt[0] - sumV) / sumR);*/
 			e = n->GetFirstElement();
 			sumR =  0;
+			nodeID = n->GetId();
 			while (e)
 			{
+				nodeID = n->GetId();
 				sumR = 0;
 				if (e->GetType() == 'R')
 				{
 					Element *eCom2 = e;
 					if (e->GetType() == 'R')
 						sumR += e->GetValue();
-					Element *eCom = SearchElement(e, n->GetId(), c);
+					Element *eCom = SearchElement(e, nodeID, c);
 					while (eCom)
 					{
 						eCom2 = eCom;
 						if (eCom->GetType() == 'R')
 							sumR += eCom->GetValue();
-						eCom = SearchElement(eCom, n->GetId(), c);
+						eCom = SearchElement(eCom, nodeID, c);
 					}
 					double NodeV = SearchNodeByElement(eCom2, c);
 					if (NodeV == volt[0])

@@ -37,7 +37,7 @@ Node *SearchNodeNon(Element *&e, Circuit *c, int ID);	//Searching For The Non Es
 
 Node *SearchNode(Circuit *c, int ID);				//Searching The Node By Its ID
 
-Element *SearchElement(Element *e, int, Circuit *c);		//Searching The Element
+Element *SearchElement(Element *e, int&, Circuit *c);		//Searching The Element
 
 void print(Circuit *c);		//Just For Testing
 
@@ -64,7 +64,6 @@ double Get_Total_Supplied_Power(Circuit* circuit);
 
 double Get_Total_Dissipated_Power(Circuit* circuit);
 
-// returns true if total power is balanced, false otherwise
 void Circuit_Is_Power_Balanced(Circuit* circuit);
 
 // get the value of resistance such that it
