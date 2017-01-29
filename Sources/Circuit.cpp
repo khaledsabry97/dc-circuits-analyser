@@ -46,23 +46,22 @@ void Circuit::Print()
 		cout << "The Circuit Is Empty\n";
 	else
 	{
-        // get nodes in an array
+        // get nodes in an vector
         int size = GetNumOfNodes();
-        Node** arr = new Node*[size];
+        vector<Node*> vec(size, nullptr);
 
-        // loop through nodes
-		Node* n = GetFirstNode();
-        while (n)
-        {
-            arr[n->GetId() - 1] = n;
-
-            n = n->GetNext();
-        }
+        // fill it
+        Node* n = GetFirstNode();
+        for (int i = 0; i < size; i++, n = n->GetNext())
+            vec[i] = n;
+        
+        // sort it ascendingly
+        sort(vec.begin(), vec.end(), _compareNodes);
 
         // print them sorted in the array
         for (int i = 0; i < size; i++)
         {
-            n = arr[i];
+            n = vec[i];
             
             cout << "---Node #" << n->GetId() << " with voltage " << n->GetVolt() << " volt\n";
 
@@ -304,6 +303,8 @@ Node** Circuit::GetTerminals(Element* e)
         else
         {
             HandleError(UNAVAILABLE_ELEMENT);
+            delete[] terminal;
+            return nullptr;
             break;
         }
     }

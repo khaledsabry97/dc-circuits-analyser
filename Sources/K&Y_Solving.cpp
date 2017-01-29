@@ -202,6 +202,10 @@ double Power(Element* e, Circuit* c)
 
 	//get two nodes the have the element
     Node** terminals = c->GetTerminals(e);
+
+	// not one of them is found, element is not in circuit
+	if (terminals == NULL)
+		return 0;
 	
 	switch (e->GetType())
 	{

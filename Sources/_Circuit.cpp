@@ -64,8 +64,8 @@ void Circuit::_Remove_invalid_nodes()
 // volt srcs in parallel
 void Circuit::_Remove_invalid_elements(_List &list)
 {
-    list.Remove_lonely_elements();
     list.Remove_invalid_sources();
+    list.Remove_lonely_elements();
 }
 
 void Circuit::_Reread_if_empty()
@@ -300,4 +300,9 @@ bool Circuit::_Pop_front()
     _numNodes--;
 
     return true;
+}
+
+bool Circuit::_compareNodes(Node* n1, Node* n2) 
+{ 
+    return (n1->GetId() < n2->GetId());
 }

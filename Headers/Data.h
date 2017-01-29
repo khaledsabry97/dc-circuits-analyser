@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <vector>
 #include <tuple>
 #include <cmath>
 #include "Errors.h"
@@ -329,4 +330,7 @@ class Circuit
         // make response according to given command from user input
         // see Circuit::_Input and command enumerator
         void _RespondToCommand(const Command &cmd, bool &still_reading_nodes, bool &still_reading_elements);
+
+        // used for std::sort in Circuit::Print
+        static bool _compareNodes(Node* n1, Node* n2);
 };
