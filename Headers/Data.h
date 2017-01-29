@@ -6,6 +6,7 @@
 #include <string>
 #include <list>
 #include <vector>
+#include <algorithm>
 #include <tuple>
 #include <cmath>
 #include "Errors.h"

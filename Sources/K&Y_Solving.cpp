@@ -56,7 +56,11 @@ Circuit* Disable_Sources_superpostion(Circuit* c,Element* e_temp)
 				//check only on voltag and current sources and delete them
 				if(e_temp->GetId() != e->GetId() && e_temp->GetType()!= e->GetType())
 					//this condion is just to let a specific source 
+				{
 					n->Remove(e);
+					e = n->GetFirstElement();
+					continue;
+				}
 			}
 			else if (e->GetType() == 'E')
 			{
@@ -76,6 +80,7 @@ Circuit* Disable_Sources_superpostion(Circuit* c,Element* e_temp)
 					bool test = c_copy->Remove(n->GetId());
 					n = c->GetFirstNode();
 					e = n->GetFirstElement();
+					continue;
 				}
 			}
 			e = e->GetNext();
@@ -112,9 +117,14 @@ void Disable_Sources(Circuit*& c)
 					bool test = c->Remove(n->GetId());
 					n = c->GetFirstNode();
 					e = n->GetFirstElement();
+					continue;
 				}
 				else
+				{
 					n->Remove(e);
+					e = n->GetFirstElement();
+					continue;
+				}
 			}
 			e = e->GetNext();
 		}
@@ -374,8 +384,8 @@ double Get_Total_Supplied_Power(Circuit* c)
 // returns true if total power is balanced, false otherwise
 void Check_Circ_Is_PowerBalanced(Circuit* c)
 {
-	double TSP = Get_Total_Supplied_Power(c);
-	double TDP = Get_Total_Dissipated_Power(c);
+	double TSP = fabs(Get_Total_Supplied_Power(c));
+	double TDP = fabs(Get_Total_Dissipated_Power(c));
 
 	// set precision when printing to 4 digits
 	cout.precision(4);
@@ -409,10 +419,11 @@ double Get_Res_Max(Circuit* c, Element* resistance)
 	nodes = circuit->GetTerminals(resistance);   
 
 	resistance_2id = resistance->GetId();
+	Element *res = nodes[0]->GetElement(resistance->GetType(), resistance->GetId());
 
-	removed_1 = nodes[0]->Remove(resistance);   //delete resistance in first node
+	removed_1 = nodes[0]->Remove(res);   //delete resistance in first node
 
-	resistance_2 = nodes[1]->GetElement(R, resistance_2id);
+	resistance_2 = nodes[1]->GetElement('R', resistance_2id);
 
 	removed_2 = nodes[1]->Remove(resistance_2);  //delete resistance in second node
 
@@ -433,6 +444,8 @@ double Get_Res_Max(Circuit* c, Element* resistance)
 	VoltageBack(c2, circuit);
 
 	SolveNonEss(circuit);	
+
+	print(circuit);
 
 	return abs( Voltage(nodes[0], nodes[1]) );    // voltage ==  Rth
 }
@@ -560,7 +573,12 @@ double Get_Power(Circuit* circuit, Element* element)
 	default: //R
 		//volt n1 - volt n2= v12 
 		//P = [v12 *V12]/ R
-		assert(e_temp->GetValue() == 0 && "error, attempt to divide on zero, elemet e_temp value is zero");
+		//assert(e_temp->GetValue() == 0 && "error, attempt to divide on zero, elemet e_temp value is zero");
+		if (e_temp->GetValue() == 0)
+		{
+			cout << RED << "\terror, attempt to divide on zero, elemet e_temp value is zero" <<endl << WHITE;
+			return 0;
+		}
 
 		return(((terminals[0]->GetVolt() - terminals[1]->GetVolt()) * (terminals[0]->GetVolt() - terminals[1]->GetVolt())) / e_temp->GetValue());
 		break;

@@ -86,6 +86,7 @@ void Interface(Circuit * c) {
 			char Type1; int ID1;
 			Print_Prompt();
 			cin >> Type1 >> ID1;
+			Type1 = toupper(Type1);
 			E = c->GetElement(Type1, ID1);
 			if (!E)
 			{
@@ -142,6 +143,7 @@ void Interface(Circuit * c) {
 			char PTYPE; int PID;
 			Print_Prompt();
 			cin >> PTYPE >> PID;
+			PTYPE = toupper(PTYPE);
 			e1 = c->GetElement(PTYPE, PID);
 			if (!e1)
 			{
@@ -159,6 +161,7 @@ void Interface(Circuit * c) {
 			char RTYPE; int RID;
 			Print_Prompt();
 			cin >> RTYPE >> RID;
+			RTYPE = toupper(RTYPE);
 			E2 = c->GetElement(RTYPE, RID);
 			if (!E2)
 			{
@@ -181,6 +184,7 @@ void Interface(Circuit * c) {
 			char MTYPE; int MID;
 			Print_Prompt();
 			cin >> MTYPE >> MID;
+			MTYPE = toupper(MTYPE);
 			E3 = c->GetElement(MTYPE, MID);
 			if (!E3)
 			{

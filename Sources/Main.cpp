@@ -28,11 +28,11 @@ int main()
     Circuit* c = new Circuit;
 	c->Read();
 
+	SolveTheCircuit(c);
+
 	cout << WHITE << '\n';//TODO: move this to Function
 	c->Print();
 	cout << '\n';
-
-	SolveTheCircuit(c);
 
 	cout << YELLOW << '\n';
 	Check_Circ_Is_PowerBalanced(c);

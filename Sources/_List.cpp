@@ -100,40 +100,23 @@ bool Circuit::_List::_Remove_invalid_voltage_source(tpl_itr &itr, tpl_itr &itr2)
         // remove both 
         if (e->GetValue()   !=   e2->GetValue())
         {
-            int id1 = e->GetId(), id2 = e2->GetId();
+            int id2 = e2->GetId();
 
             // tell user
             HandleError(PARALLEL_DIFF_VOLTAGES);
 
-            // remove both of them
-            //
             // remove from term_1
-            e_term_1->Remove('E', id1);
             e_term_1->Remove('E', id2);
+
             // remove from term_2
-            e_term_2->Remove('E', id1);
             e_term_2->Remove('E', id2);
 
-            // remove tuples from list
-            list.erase(itr2);
-			list.erase(itr++);
-        }
-        // if they are equall
-        else
-        {
-            int id2 = e2->GetId();
-
-            // just remove last one 
-            //
-            // from list
-            list.erase(itr2);
-            // from terminal 1
-            e2_term_1->Remove('E', id2);
-            // from terminal 2
-            e2_term_2->Remove('E', id2);
+            // remove tuple from list
+            list.erase(itr2++);
+            itr2--;//solves some issues
         }
 
-        // stop the inner loop
+        // want to remove the other node 
         return true;
     }    
 
@@ -155,42 +138,21 @@ bool Circuit::_List::_Remove_invalid_current_source(tpl_itr &itr, tpl_itr &itr2)
         // remove both
         if (e->GetValue()  !=  e2->GetValue())
         {
-            int id1 = e->GetId(), id2 = e2->GetId();
+            int id2 = e2->GetId();
 
             // tell user
             HandleError(SERIES_DIFF_CURRENTS);
 
-            // remove both of them
-            //
-            // remove e
-            e_term_1->Remove('J', id1);
-            e_term_2->Remove('J', id1);
             // remove e2
             e2_term_1->Remove('J', id2);
             e2_term_2->Remove('J', id2);
             
-
             // remove tuples from list
             itr2 = list.erase(itr2);
-			itr = list.erase(itr);
-        }
-        // they are equall
-        // remove last one
-        else 
-        {
-            int id2 = e2->GetId();
-
-            // just remove last one 
-            //
-            // from list
-            list.erase(itr2);
-            // from terminal 1
-            e2_term_1->Remove('J', id2);
-            // from terminal 2
-            e2_term_2->Remove('J', id2);
+            itr2--;//solves some issues
         }
 
-        // stop the inner loop
+        // want to remove the other one
         return true;
     }
 
@@ -380,9 +342,8 @@ void Circuit::_List::Remove_invalid_sources()
     Element *e, *e2;
     char element_type = '\0';
 
-    // traverse through list looking for source
-	auto itr = list.begin();
-    while (itr != list.end()) 
+    // traverse through list looking for sources
+    for (auto itr = list.begin(); itr != list.end();) 
     {
         e = get<0>(*itr);
         // detect type of this src and store it here
@@ -394,7 +355,7 @@ void Circuit::_List::Remove_invalid_sources()
 			continue;
 		}
 
-		bool to_break = false;
+		bool found_invalid = false;
         // traverse through rest of list
         for (auto itr2 = next(itr); itr2 != list.end(); itr2++)
         {
@@ -408,20 +369,31 @@ void Circuit::_List::Remove_invalid_sources()
             switch (element_type)
             {
                 case 'E':
-                    to_break = _Remove_invalid_voltage_source(itr, itr2);
+                    found_invalid = _Remove_invalid_voltage_source(itr, itr2);
                     break;
                 case 'J':
-                    to_break = _Remove_invalid_current_source(itr, itr2);
+                    found_invalid = _Remove_invalid_current_source(itr, itr2);
                     break;
                 default:
                     assert(FOR_DEBUGGING);
             }
-
-			if (to_break)
-				break;
         }
 
-		if (!to_break)
-			itr++;
+        // remove this 
+		if (found_invalid)
+        {
+            Node *n1 = get<1>(*itr), *n2 = get<2>(*itr);
+            int id = e->GetId();
+
+            n1->Remove(element_type ,id);
+            n2->Remove(element_type ,id);
+
+            itr = list.erase(itr);
+        }
+        // go to next one
+        else
+        {
+            itr++;
+        }
     }
 }
