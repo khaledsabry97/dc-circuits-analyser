@@ -158,7 +158,7 @@ bool Node::IsEmpty()
     return (!_numElements);
 }
 
-// look for the element in list
+// look for the element in my_list
 // returns the address of the element if found, otherwise nullptr
 Element* Node::GetElement(char type, const int &id)
 {

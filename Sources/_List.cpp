@@ -1,6 +1,6 @@
 /*     
         Circuit::_List
-     list to store elements while reading
+     my_list to store elements while reading
      used for issue tracking (error handling during reading)
 */
 #include "Data.h"
@@ -12,7 +12,7 @@
 void Circuit::_List::_Check_then_add(Element* e, Node* node)
 {
     /*pseudo-code:
-        loop list in reverse:
+        loop my_list in reverse:
             if found:
                 if tuple has both nodes:
                     throw DUPLICATE_ELEMENT
@@ -36,7 +36,7 @@ void Circuit::_List::_Check_then_add(Element* e, Node* node)
     Element *e_in_list;
     Node *foundNode1, *foundNode2;
 
-    for (auto itr = list.rbegin(); itr != list.rend(); itr++)
+    for (auto itr = my_list.rbegin(); itr != my_list.rend(); itr++)
     {
         _Parse_ElementTuple_pointers(*itr, e_in_list, foundNode1, foundNode2);
 
@@ -52,7 +52,7 @@ void Circuit::_List::_Check_then_add(Element* e, Node* node)
 
     // tuple is not found, lets make new tuple
     ElementTuple tpl(e, node, nullptr);
-    list.push_back(tpl);
+    my_list.push_back(tpl);
 }
 
 // see _Check_then_add()
@@ -111,8 +111,8 @@ bool Circuit::_List::_Remove_invalid_voltage_source(tpl_itr &itr, tpl_itr &itr2)
             // remove from term_2
             e_term_2->Remove('E', id2);
 
-            // remove tuple from list
-            list.erase(itr2++);
+            // remove tuple from my_list
+            my_list.erase(itr2++);
             itr2--;//solves some issues
         }
 
@@ -147,8 +147,8 @@ bool Circuit::_List::_Remove_invalid_current_source(tpl_itr &itr, tpl_itr &itr2)
             e2_term_1->Remove('J', id2);
             e2_term_2->Remove('J', id2);
             
-            // remove tuples from list
-            itr2 = list.erase(itr2);
+            // remove tuples from my_list
+            itr2 = my_list.erase(itr2);
             itr2--;//solves some issues
         }
 
@@ -176,7 +176,7 @@ void Circuit::_List::_Print_Tuple_list()
     Element *e, *e2;
     Node *e_term_1, *e_term_2;
 
-    for (auto itr = list.begin(); itr != list.end(); itr = next(itr))
+    for (auto itr = my_list.begin(); itr != my_list.end(); itr = next(itr))
     {
         _Parse_ElementTuple_pointers(*itr, e, e_term_1, e_term_2);
 
@@ -242,7 +242,7 @@ bool Circuit::_List::_Is_Series(const ElementTuple& first, const ElementTuple& s
 
 //      public:
 
-// adds address of element in list with its corresponding nodes
+// adds address of element in my_list with its corresponding nodes
 void Circuit::_List::Add(Element* e, Node* node)
 {
     try
@@ -259,7 +259,7 @@ void Circuit::_List::Add(Element* e, Node* node)
 
 void Circuit::_List::Pop_back()
 {
-    list.pop_back();
+    my_list.pop_back();
 }
 
 // remove lonely elements/nodes
@@ -267,7 +267,7 @@ void Circuit::_List::Pop_back()
 // lonely element: second terminal is null
 void Circuit::_List::Remove_lonelys()
 {
-    for (auto itr = list.begin(); itr != list.end(); itr++)
+    for (auto itr = my_list.begin(); itr != my_list.end(); itr++)
     {
         // parse tuple, *itr is an ElementTuple
         Element* &e = get<0>(*itr);
@@ -314,21 +314,21 @@ void Circuit::_List::Remove_lonelys()
 
         // removing e is a signal that this tuple is no more valid
         if (!e)
-            list.erase(itr++);
+            my_list.erase(itr++);
     }
 } 
 
-// clears the list from data
+// clears the my_list from data
 void Circuit::_List::Clear()
 {
-    list.clear();
+    my_list.clear();
 }
 
 void Circuit::_List::Remove_invalid_sources()
 {
     /*pseudo-code:
         get data
-            make list for current
+            make my_list for current
             --    --  for voltage
             file them with tuples
 
@@ -342,8 +342,8 @@ void Circuit::_List::Remove_invalid_sources()
     Element *e, *e2;
     char element_type = '\0';
 
-    // traverse through list looking for sources
-    for (auto itr = list.begin(); itr != list.end();) 
+    // traverse through my_list looking for sources
+    for (auto itr = my_list.begin(); itr != my_list.end();) 
     {
         e = get<0>(*itr);
         // detect type of this src and store it here
@@ -356,8 +356,8 @@ void Circuit::_List::Remove_invalid_sources()
 		}
 
 		bool found_invalid = false;
-        // traverse through rest of list
-        for (auto itr2 = next(itr); itr2 != list.end(); itr2++)
+        // traverse through rest of my_list
+        for (auto itr2 = next(itr); itr2 != my_list.end(); itr2++)
         {
             e2 = get<0>(*itr2);
 
@@ -388,7 +388,7 @@ void Circuit::_List::Remove_invalid_sources()
             n1->Remove(element_type ,id);
             n2->Remove(element_type ,id);
 
-            itr = list.erase(itr);
+            itr = my_list.erase(itr);
         }
         // go to next one
         else

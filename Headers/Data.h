@@ -209,7 +209,7 @@ class Circuit
         class _List
         {
             private:
-                list<ElementTuple> list;
+                list<ElementTuple> my_list;
 
                 void _Check_then_add(Element* e, Node* node);
                 void _Check_errors_between_two_nodes(Element* e, Element* e_in_list, Node* foundNode1, Node* foundNode2, Node* node);
@@ -307,7 +307,7 @@ class Circuit
         // lonely elements: connected to one node
         // curr sources in series
         // volt srcs in parallel
-        void _Remove_invalids(_List &list);
+        void _Remove_invalids(_List &my_list);
 
         void _Push_back(Node* n);
         void _Push_front(Node* n);
@@ -319,12 +319,12 @@ class Circuit
         // re-read this circuit if Circuit::Read ended with empty circuit
         void _Reread_if_empty();
 
-        void _Read_nodes(_List &list);
-        void _Read_elements(_List& list, Node* newNode, bool& still_reading_nodes, const int& nodeI);
+        void _Read_nodes(_List &my_list);
+        void _Read_elements(_List& my_list, Node* newNode, bool& still_reading_nodes, const int& nodeI);
 
         // called after filling the node in Circuit::Read
         // decides whether to add node or not depending on its size
-        void _Check_and_add_node(Node* newNode, _List& list ,int& nodeI, const bool& continueReading);
+        void _Check_and_add_node(Node* newNode, _List& my_list ,int& nodeI, const bool& continueReading);
 
         // is this given character a valid type?
         // valid types: r, e, j

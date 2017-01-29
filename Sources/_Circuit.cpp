@@ -62,10 +62,10 @@ void Circuit::_Remove_empty_nodes()
 // lonely elements: connected to one node
 // curr sources in series
 // volt srcs in parallel
-void Circuit::_Remove_invalids(_List &list)
+void Circuit::_Remove_invalids(_List &my_list)
 {
-    list.Remove_invalid_sources();
-    list.Remove_lonelys();
+    my_list.Remove_invalid_sources();
+    my_list.Remove_lonelys();
 }
 
 void Circuit::_Reread_if_empty()
@@ -77,7 +77,7 @@ void Circuit::_Reread_if_empty()
     }
 }
 
-void Circuit::_Read_nodes(_List &list)
+void Circuit::_Read_nodes(_List &my_list)
 {
     bool still_reading_nodes = true;
 
@@ -89,13 +89,13 @@ void Circuit::_Read_nodes(_List &list)
         
         Node* newNode = new Node(nodeI);
         
-        _Read_elements(list, newNode, still_reading_nodes, nodeI);
+        _Read_elements(my_list, newNode, still_reading_nodes, nodeI);
 
-        _Check_and_add_node(newNode, list, nodeI, still_reading_nodes);
+        _Check_and_add_node(newNode, my_list, nodeI, still_reading_nodes);
     }
 }
 
-void Circuit::_Read_elements(_List& list, Node* newNode, bool& still_reading_nodes, const int& nodeI)
+void Circuit::_Read_elements(_List& my_list, Node* newNode, bool& still_reading_nodes, const int& nodeI)
 {
     Element* e = nullptr;
     bool still_reading_elements = true;
@@ -113,7 +113,7 @@ void Circuit::_Read_elements(_List& list, Node* newNode, bool& still_reading_nod
             try
             {
                 e = new Element(input.type, input.id, input.val, nodeI);
-                list.Add(e, newNode);
+                my_list.Add(e, newNode);
             }
             catch (const error &err)
             {
@@ -154,7 +154,7 @@ bool Circuit::_Is_valid_type(char& readenChar)
 
 // called after filling the node in Circuit::Read
 // decides whether to add node or not depending on its size
-void Circuit::_Check_and_add_node(Node* newNode, _List& list ,int& nodeI, const bool& continueReading)
+void Circuit::_Check_and_add_node(Node* newNode, _List& my_list ,int& nodeI, const bool& continueReading)
 {
     if (newNode->IsEmpty())
     {
@@ -172,8 +172,8 @@ void Circuit::_Check_and_add_node(Node* newNode, _List& list ,int& nodeI, const 
     {
         cout << HANDLE_NODE_WITH_ONE_ELEM;
         
-        // remove the element from the list before removing the node
-        list.Pop_back();
+        // remove the element from the my_list before removing the node
+        my_list.Pop_back();
 
         delete newNode;
         nodeI--;

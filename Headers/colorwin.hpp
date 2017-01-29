@@ -25,6 +25,7 @@
 #include <Windows.h>
 #include <iostream>
 #include <stack>
+#include <stdio.h>
 
 namespace colorwin
 {

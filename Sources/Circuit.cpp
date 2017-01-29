@@ -29,11 +29,11 @@ Circuit::~Circuit()
 void Circuit::Read()
 {
     // for temporary storage of elements
-    _List list;
+    _List my_list;
 
-    _Read_nodes(list);
+    _Read_nodes(my_list);
     
-    _Remove_invalids(list); 
+    _Remove_invalids(my_list); 
     _Remove_empty_nodes();   
 
     _Reread_if_empty();
@@ -80,9 +80,9 @@ void Circuit::Add(Node* n)
 {
     /* pseudo:
         if essential:
-            put at front of list
+            put at front of my_list
         else
-            put at end of list
+            put at end of my_list
 
         put:
             ;let the pointer be ptr
@@ -116,7 +116,7 @@ bool Circuit::Remove(Node* n)
         ;special cases:
         ;n = firstnode ----> +
         ;n = lastnode -----> +
-        ;n is not in list ---->  +
+        ;n is not in my_list ---->  +
     */
     // cant delete null
     if (!n)
@@ -162,7 +162,7 @@ bool Circuit::Remove(const double &val, SEARCH_BY type)
 {
     Node* temp = _firstNode;
 
-    // iterate through list 
+    // iterate through my_list 
     while (!_IsIt(temp, val, type))
     {
         temp = temp->GetNext();
@@ -177,7 +177,7 @@ Node* Circuit::GetNode(const double &val, SEARCH_BY type)
 {
      Node* temp = _firstNode;
 
-    // iterate through list 
+    // iterate through my_list 
     while (!_IsIt(temp, val, type))
     {
         temp = temp->GetNext();
@@ -192,7 +192,7 @@ bool Circuit::HasNode(const double &val, SEARCH_BY type)
 {
     Node* temp = _firstNode;
 
-    // iterate through list 
+    // iterate through my_list 
     while (!_IsIt(temp, val, type))
     {
         temp = temp->GetNext();
