@@ -148,19 +148,18 @@ double Ampere(Node* n1, Node* n2, Element* e, Circuit* c)
 			{ 
 				e1= e1->GetNext();
 			}
-				Node* n3= n1;
-				Node* n4 = n2;
-				Get_2_Nodes(e1,n3,n4,c);
+
+				Node** terminals = c->GetTerminals(e);
 				//get two nodes the have the resistance
-				Node* n5 = n3;
-				if( n3 != n1 )
+				Node* n5 = terminals[0];
+				if( terminals[0] != n1 )
 			    //what we do here is just to have the correct sign 
 				//and this is important for to get the correct power and the total power
 				{
-					n3 = n1;
-			     	n4 = n5;
+					terminals[0] = n1;
+			     	terminals[1] = n5;
 				}
-				double V =Voltage(n3,n4);
+				double V =Voltage(terminals[0],terminals[1]);
 				double A = V/e1->GetValue();
 				return A;
 		}
@@ -171,20 +170,17 @@ double Ampere(Node* n1, Node* n2, Element* e, Circuit* c)
 			{ 
 				e1= e1->GetNext();
 			}
-				Node* n3= n1;
-				Node* n4 = n2;
-				Get_2_Nodes(e1,n3,n4,c);
-			    //get two nodes the have the resistance
-
-				Node* n5 = n3;
-				if( n3 != n2 )
-				//what we do here is just to have the correct sign 
+				Node** terminals = c->GetTerminals(e);
+				//get two nodes the have the resistance
+				Node* n5 = terminals[0];
+				if( terminals[0] != n2 )
+			    //what we do here is just to have the correct sign 
 				//and this is important for to get the correct power and the total power
 				{
-					n3 = n2;
-			     	n4 = n5;
+					terminals[0] = n2;
+			     	terminals[1] = n5;
 				}
-				double V =Voltage(n3,n4);
+				double V =Voltage(terminals[0],terminals[1]);
 				double A = V/e1->GetValue();
 				return A;
 		}
@@ -205,19 +201,19 @@ double Power(Element* e, Circuit* c)
 
 
 	//get two nodes the have the element
-    Get_2_Nodes(e, n1, n2, c);
+    Node** terminals = c->GetTerminals(e);
 	
 	switch (e->GetType())
 	{
 	case'E':
 		{
-		I = Ampere(n1,n2,e,c);
+		I = Ampere(terminals[0],terminals[1],e,c);
 		//get the ampere
-		if(! n1->IsEssential())
+		if(! terminals[0]->IsEssential())
 			// this condition is important for sign
 		    //and this is important for to get the correct power and the total power
 		{
-			e_temp = n1->GetFirstElement();
+			e_temp = terminals[0]->GetFirstElement();
 			if(e_temp->GetType() != e ->GetType())
 			{ 
 				e_temp= e_temp->GetNext();
@@ -225,7 +221,7 @@ double Power(Element* e, Circuit* c)
 		}
 		else 
 		{
-			e_temp = n2->GetFirstElement();
+			e_temp = terminals[1]->GetFirstElement();
 			if(e_temp->GetType() != e ->GetType())
 			{ 
 				e_temp= e_temp->GetNext();
@@ -240,7 +236,7 @@ double Power(Element* e, Circuit* c)
 		{
 			//volt n1 - volt n2= v12
 			//P = v12 * I
-			e_temp = n1->GetFirstElement();
+			e_temp = terminals[0]->GetFirstElement();
 			// I try here to handel the sign 
 			//by pointing a pointer to one of the two nodes that have the current source
 		    // to get the value and the sign
@@ -252,13 +248,13 @@ double Power(Element* e, Circuit* c)
 				else
 				e_temp = e_temp->GetNext();
 			}
-			return(-1 * (n1->GetVolt()-n2->GetVolt())*(e_temp->GetValue()));
+			return(-1 * (terminals[0]->GetVolt()-terminals[1]->GetVolt())*(e_temp->GetValue()));
 		}
 
 	default: //R
 		//volt n1 - volt n2= v12 
 		//P = [v12 *V12]/ R
-		return(((n1->GetVolt()-n2->GetVolt())*(n1->GetVolt()-n2->GetVolt()))/e->GetValue());
+		return(((terminals[0]->GetVolt()-terminals[1]->GetVolt())*(terminals[0]->GetVolt()-terminals[1]->GetVolt()))/e->GetValue());
 		break;
 		}
 
@@ -495,19 +491,19 @@ double Get_Power(Circuit* circuit, Element* element)
 	Element* e_temp = element;
 	int i=0;
 	double I;
-    Get_2_Nodes(element,n1,n2,circuit);
+    Node** terminals = circuit->GetTerminals(element);
 	//get two nodes the have the element
 	switch (element->GetType())
 	{
 	case'E':
 		{
-		I = Ampere(n1,n2,element,circuit);
+		I = Ampere(terminals[0],terminals[1],element,circuit);
 		//get the ampere
-		if(! n1->IsEssential())
+		if(! terminals[0]->IsEssential())
 			// this condition is important for sign
 		    //and this is important for to get the correct power and the total power
 		{
-			e_temp = n1->GetFirstElement();
+			e_temp = terminals[0]->GetFirstElement();
 			if(e_temp->GetType() != element ->GetType())
 			{ 
 				e_temp= e_temp->GetNext();
@@ -515,7 +511,7 @@ double Get_Power(Circuit* circuit, Element* element)
 		}
 		else 
 		{
-			e_temp = n2->GetFirstElement();
+			e_temp = terminals[1]->GetFirstElement();
 			if(e_temp->GetType() != element ->GetType())
 			{ 
 				e_temp= e_temp->GetNext();
@@ -530,7 +526,7 @@ double Get_Power(Circuit* circuit, Element* element)
 		{
 			//volt n1 - volt n2= v12
 			//P = v12 * I
-			e_temp = n1->GetFirstElement();
+			e_temp = terminals[0]->GetFirstElement();
 			// I try here to handel the sign 
 			//by pointing a pointer to one of the two nodes that have the current source
 		    // to get the value and the sign
@@ -542,7 +538,7 @@ double Get_Power(Circuit* circuit, Element* element)
 				else
 					e_temp =e_temp->GetNext();
 			}
-			return((n1->GetVolt()-n2->GetVolt())*(e_temp->GetValue()));
+			return((terminals[0]->GetVolt()-n2->GetVolt())*(e_temp->GetValue()));
 		}
 
 	default: //R
@@ -550,7 +546,7 @@ double Get_Power(Circuit* circuit, Element* element)
 		//P = [v12 *V12]/ R
 		assert(e_temp->GetValue() == 0 && "error, attempt to divide on zero, elemet e_temp value is zero");
 
-		return(((n1->GetVolt() - n2->GetVolt()) * (n1->GetVolt() - n2->GetVolt())) / e_temp->GetValue());
+		return(((terminals[0]->GetVolt() - terminals[1]->GetVolt()) * (terminals[0]->GetVolt() - terminals[1]->GetVolt())) / e_temp->GetValue());
 		break;
 		}
 
