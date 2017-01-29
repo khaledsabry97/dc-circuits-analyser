@@ -191,3 +191,8 @@ bool Node::HasElement(char type, const int &id)
 
     return false;         // not found
 }
+
+bool Node::_Remove_me_from_circ()
+{
+    return (_from_circuit->Remove(this));
+}

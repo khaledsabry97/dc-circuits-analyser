@@ -134,7 +134,10 @@ class Node
         int _numElements;
         Circuit* _from_circuit;
 
+        bool _Remove_me_from_circ();
+
         friend class Circuit; 
+        friend class _List;
 };
 
 class Circuit
@@ -223,7 +226,7 @@ class Circuit
                 void Add(Element* e, Node* node);
                 void Pop_back();
                 void Clear();
-                void Remove_lonely_elements();
+                void Remove_lonelys();
                 void Remove_invalid_sources();
         };
 
@@ -297,13 +300,13 @@ class Circuit
         void _Copy_this_to_me(Circuit*);
 
         // invalid node : has one element or empty
-        void _Remove_invalid_nodes();
+        void _Remove_empty_nodes();
 
         //      invalid elements are:-
         // lonely elements: connected to one node
         // curr sources in series
         // volt srcs in parallel
-        void _Remove_invalid_elements(_List &list);
+        void _Remove_invalids(_List &list);
 
         void _Push_back(Node* n);
         void _Push_front(Node* n);

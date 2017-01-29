@@ -33,8 +33,8 @@ void Circuit::Read()
 
     _Read_nodes(list);
     
-    _Remove_invalid_elements(list); 
-    _Remove_invalid_nodes();   
+    _Remove_invalids(list); 
+    _Remove_empty_nodes();   
 
     _Reread_if_empty();
 }

@@ -372,11 +372,23 @@ double Get_Total_Supplied_Power(Circuit* c)
 }
 
 // returns true if total power is balanced, false otherwise
-void Circuit_Is_Power_Balanced(Circuit* c)
+void Check_Circ_Is_PowerBalanced(Circuit* c)
 {
 	double TSP = Get_Total_Supplied_Power(c);
 	double TDP = Get_Total_Dissipated_Power(c);
-	if ( Round(TSP, 1) + Round(TDP, 1) == 0 )
+
+	// set precision when printing to 4 digits
+	cout.precision(4);
+
+	// it is required to print both
+	cout << "Total Supplied Power = " << fabs(TSP) << '\n';
+	cout << "Total Dissipated Power = " << TDP << '\n';
+
+	// store difference in integer so we get only 0 or 1 ommitting tiny differences in float number
+	int difference = Round(TSP, 4) - Round(TDP, 4);
+	
+	// to be balanced, difference should be between -1 and 1
+	if (difference <= 1 && difference >= -1)
 		cout << "The Circuit Is Balanced\n";
 	else
 		cout << "The Circuit Isn't Balanced\n";

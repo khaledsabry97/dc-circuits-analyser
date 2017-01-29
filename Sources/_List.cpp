@@ -300,27 +300,59 @@ void Circuit::_List::Pop_back()
     list.pop_back();
 }
 
-// detects lonely elements
-// returns the address of the first lonely element found, or nullptr otherwise
-void Circuit::_List::Remove_lonely_elements()
+// remove lonely elements/nodes
+// lonely node: has one element
+// lonely element: second terminal is null
+void Circuit::_List::Remove_lonelys()
 {
-    for (auto itr = list.begin(); itr != list.end();)
+    for (auto itr = list.begin(); itr != list.end(); itr++)
     {
         // parse tuple, *itr is an ElementTuple
-        Node* node = get<2>(*itr);
-        Element* e = get<0>(*itr);
+        Element* &e = get<0>(*itr);
+        Node* terminals[] = {get<1>(*itr), get<2>(*itr)};
+        int id = e->GetId();
+        char type = e->GetType();
+        
 
-        if (!node)
+        // if lonely element, 
+        // remove e from n1, make e null as a sign
+        if (!terminals[1])
         {
-            // remove it 
             HandleError(LONELY_ELEMENT);
-            delete e;
-
-            list.erase(itr++);
-			continue;
+            terminals[0]->Remove(e);
+            e = nullptr;
         }
 
-		itr++;
+        // lonely nodes
+        // remove element from other node, maybe that other node is not lonely
+        for (int i = 0; i < 2; i++)
+        {
+            Node* &term = terminals[i];
+            Node* &other_term = terminals[(i + 1) % 2];
+
+            // ignore unfound terminals
+            if (!term)
+                continue;
+            
+            // node found, see if lonely
+            if (term->GetNumOfElements() == 1)
+            {
+                cerr << HANDLE_NODE_WITH_ONE_ELEM;//TODO: make better
+
+                // remove element from other node if found
+                if (other_term)
+                    other_term->Remove(type, id);
+
+                // remove the whole node
+                term->_Remove_me_from_circ();
+                e = nullptr;
+                term = nullptr;
+            }
+        }
+
+        // removing e is a signal that this tuple is no more valid
+        if (!e)
+            list.erase(itr++);
     }
 } 
 

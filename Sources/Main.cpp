@@ -27,12 +27,17 @@ int main()
 
     Circuit* c = new Circuit;
 	c->Read();
+
+	cout << WHITE << '\n';//TODO: move this to Function
 	c->Print();
+	cout << '\n';
 
 	SolveTheCircuit(c);
 
-	Circuit_Is_Power_Balanced(c);
-		
+	cout << YELLOW << '\n';
+	Check_Circ_Is_PowerBalanced(c);
+	cout << WHITE << '\n';
+
 	Interface(c);
 
 	delete c;

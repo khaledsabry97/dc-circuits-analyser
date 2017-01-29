@@ -33,7 +33,7 @@ void Circuit::_Copy_this_to_me(Circuit* c)
 }
 
 // invalid nodes: that have one/zero elements
-void Circuit::_Remove_invalid_nodes()
+void Circuit::_Remove_empty_nodes()
 {
     Node* n = GetFirstNode();
     for (int count = 0; n; count++)
@@ -62,15 +62,15 @@ void Circuit::_Remove_invalid_nodes()
 // lonely elements: connected to one node
 // curr sources in series
 // volt srcs in parallel
-void Circuit::_Remove_invalid_elements(_List &list)
+void Circuit::_Remove_invalids(_List &list)
 {
     list.Remove_invalid_sources();
-    list.Remove_lonely_elements();
+    list.Remove_lonelys();
 }
 
 void Circuit::_Reread_if_empty()
 {
-    if (IsEmpty())
+    if (GetNumOfNodes() <= 1)
     {
         cerr << RED << "\tCircuit is Empty \n" << "\tEnter the circuit again\n" << WHITE;
         Read();
