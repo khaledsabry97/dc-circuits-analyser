@@ -37,8 +37,5 @@ void Element::_SetId(const int &id)
 
 void Element::_SetNodeId(const int &node_id)
 {
-    if (node_id < 0)
-        throw INVALID_NODE_ID;
-
     _node_id = node_id;
 }

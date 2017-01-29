@@ -16,7 +16,7 @@ void print_interface_commands()
 }
 
 void Interface(Circuit * c) {
-	void print_interface_commands();
+	print_interface_commands();
 	char option;
 	
 	while (true) {

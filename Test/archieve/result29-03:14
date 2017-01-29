@@ -1,0 +1,38 @@
+[0;32mEnter the elements node by node
+
+Valid Commands:-
+----> x 	end the node
+----> xx 	end all nodes
+----> h 	help
+----> c 	credits
+----> p 	print the completed nodes
+----> Ctrl+z or Ctrl+c	exit program
+----> # 	make a comment
+
+Valid Types:-
+----> r 	Resistance
+----> e 	Voltage Source
+----> j 	Current Source
+
+All commands/types could be written in upper or lower case
+
+[0m[1;33mCredits:
+> Hadi Maher	Mahmoud Youssri
+> Mohammed Magdi	Khaled Sabri	Mahmoud Adas
+
+[0m[0mNode #1:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0mNode #2:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0mNode #3:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0mNode #4:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0mNode #5:
+[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;34m>>> [0;36m[0;31m	Found two current sources with different values in series, deleteing both of them
+[0mThe Circuit Isn't Balanced
+[0;32mEnter the action you want to perform
+Valid commands
+-> I				current passing through the element
+-> P				the power supplied or disipated by the element
+-> V				the voltage difference between two nodes
+-> R				the maximum resistance  
+-> M				the maximum power
+-> x				Exit
+
