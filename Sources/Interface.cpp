@@ -141,7 +141,7 @@ void Interface(Circuit * c) {
 						cout << GREEN << "V= " << fabs(Get_VoltDiff(c, Node1, Node2)) << endl << WHITE;
 				}
 			}
-			else if (op = 'N')
+			else if (op == 'N')
 			{
 				int node1, node2;
 				//node1 = node2 = -1;

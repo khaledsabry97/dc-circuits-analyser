@@ -391,7 +391,7 @@ void Check_Circ_Is_PowerBalanced(Circuit* c)
 	cout.precision(4);
 
 	// it is required to print both
-	cout << "Total Supplied Power = " << fabs(TSP) << '\n';
+	cout << "Total Supplied Power = " << TSP << '\n';
 	cout << "Total Dissipated Power = " << TDP << '\n';
 
 	// store difference in integer so we get only 0 or 1 ommitting tiny differences in float number
@@ -595,6 +595,17 @@ double Get_VoltDiff(Circuit* circuit, const int node1_id, const int node2_id)
 	Node*node1 = circuit->GetNode( node1_id);
 
 	Node*node2 = circuit->GetNode( node2_id);      //get pointers to the nodes by their id
+
+	if (!node1)
+	{
+		cout << "The First Node Doesn't Exist\n";
+		return 0;
+	}
+	if (!node2)
+	{
+		cout << "The Second Node Is Not Exist\n";
+		return 0;
+	}
 
 	return Voltage(node1, node2);
 }

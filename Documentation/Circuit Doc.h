@@ -10,6 +10,7 @@ Circuit();
 Circuit(Circuit* c);
 Circuit(Circuit& c);
 Circuit* Copy();
+Circuit* CopyAndReset();
 void Read();
 
 void Add(Node* n);

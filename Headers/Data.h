@@ -189,7 +189,10 @@ class Circuit
         Circuit& operator= (Circuit &c);
 
         // return a deep copy of this circuit
-        Circuit* Copy();  
+        Circuit* Copy(); 
+
+        // same as Copy, but resets all node voltages to zero
+        Circuit* CopyAndReset();
 
         // returns array of two terminals of given element
         Node** GetTerminals(Element* e);  

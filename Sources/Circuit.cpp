@@ -321,3 +321,29 @@ Node** Circuit::GetTerminals(Element* e, Node* &n1, Node* &n2)
 
     return terminals;
 }
+
+Circuit* Circuit::CopyAndReset()
+{
+    // allocate data
+    Circuit* newCirc = new Circuit;
+
+    // copy nodes
+    Node* originalNode = _firstNode;
+
+    // traverse through them all till null
+    while (originalNode)
+    {
+        Node* copiedNode = originalNode->Copy();
+
+        // reset it to zero
+        copiedNode->_volt = 0;
+
+        newCirc->Add(copiedNode);
+
+        // go to the next
+        originalNode = originalNode->_next;
+    }
+
+    // here is your copy
+    return newCirc;
+}
