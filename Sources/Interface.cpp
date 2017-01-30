@@ -8,7 +8,8 @@ void print_interface_commands()
 			 << "Valid commands:" << endl
 			 << "----> I \tcurrent passing through an element" << endl
 			 << "----> P \tpower supplied or disipated in an element" << endl
-			 << "----> V \tvoltage difference between two nodes" << endl
+			 << "----> VN \tvoltage difference between two nodes" << endl
+			 << "----> VE \tvoltage difference on element" <<endl
 			 << "----> R \tmaximum resistance  " << endl
 			 << "----> M \tmaximum power" << endl
 			 << "----> H \thelp" << endl
@@ -42,7 +43,7 @@ void Interface(Circuit * c) {
 				print_interface_commands();
 				continue;
 			}
-			cout << "press 1 to get current due to spacefic source, 0 to continue " << endl;
+			cout << BLUE << "press 1 to get current due to spacefic source, 0 to continue " << endl << WHITE;
 			int option2;
 			Print_Prompt();
 			cin >> option2;
@@ -62,10 +63,10 @@ void Interface(Circuit * c) {
 					continue;
 				}
 				else if (spacefic->GetType() == 'J' || spacefic->GetType() == 'E')
-					cout << "I= " << Get_Current(c, e, spacefic) << endl;
+					cout << GREEN << "I= " << Get_Current(c, e, spacefic) << endl << WHITE;
 				else
 				{
-					cout << BLUE << "You Didn't Enter A Source\n Please Try Again\n" << WHITE;
+					cout << RED << "You Didn't Enter A Source\n Please Try Again\n" << WHITE;
 					print_interface_commands();
 					continue;
 				}
@@ -73,68 +74,108 @@ void Interface(Circuit * c) {
 			else
 			{
 				if (TYPE == 'R')
-					cout << "I= " << fabs(Get_Current(c, e)) << endl;
+					cout << GREEN << "I= " << fabs(Get_Current(c, e)) << endl << WHITE;
 				else
-					cout << "I= " << Get_Current(c, e) << endl;
+					cout << GREEN << "I= " << Get_Current(c, e) << endl << WHITE;
 			}
 	}
 
 			
 		else if (option == 'V') {
-			cout << "Enter the element " << endl;
-			Element *E = NULL;
-			char Type1; int ID1;
-			Print_Prompt();
-			cin >> Type1 >> ID1;
-			Type1 = toupper(Type1);
-			E = c->GetElement(Type1, ID1);
-			if (!E)
+			char op;
+			cin >> op;
+			op = toupper(op);
+			if (op == 'E')
 			{
-				cerr << RED << "\tEntered element doesn\'t exist\n" << WHITE;
-				print_interface_commands();
-				continue;
-			}
-			int Node1, Node2;
-			Node** ptr = NULL;
-			ptr =  c->GetTerminals(E);
-			Node1 = ptr[0]->GetId();
-			Node2 = ptr[1]->GetId();
-			Element  *e1 = NULL;
-			cout << "press 1 to get Voltage Dif due to spacefic source , 0 to continue" << endl;
-			int option2;
-			Print_Prompt();
-			cin >> option2;
-			if (option2 == 1 && E->GetType() == 'R') {
-
-				cout << "Enter the source please " << endl;
-				char Stype; int Sid;
+				cout << "Enter the element " << endl;
+				Element *E = NULL;
+				char Type1; int ID1;
 				Print_Prompt();
-				cin >> Stype >> Sid;
-				e1 = c->GetElement(Stype, Sid);
-				if (!e1)
+				cin >> Type1 >> ID1;
+				Type1 = toupper(Type1);
+				E = c->GetElement(Type1, ID1);
+				if (!E)
 				{
 					cerr << RED << "\tEntered element doesn\'t exist\n" << WHITE;
 					print_interface_commands();
 					continue;
 				}
-				else if (e1->GetType() == 'J' || e1->GetType() == 'E')
-					cout << "V= " << Get_VoltDiff(c, Node1, Node2, e1)<<endl;
+				int Node1, Node2;
+				Node** ptr = NULL;
+				ptr =  c->GetTerminals(E);
+				Node1 = ptr[0]->GetId();
+				Node2 = ptr[1]->GetId();
+				Element  *e1 = NULL;
+				cout << BLUE << "press 1 to get Voltage Dif due to spacefic source , 0 to continue" << endl << WHITE;
+				int option2;
+				Print_Prompt();
+				cin >> option2;
+				if (option2 == 1 && E->GetType() == 'R') {
+
+					cout << "Enter the source please " << endl;
+					char Stype; int Sid;
+					Print_Prompt();
+					cin >> Stype >> Sid;
+					Stype = toupper(Stype);
+					e1 = c->GetElement(Stype, Sid);
+					if (!e1)
+					{
+						cerr << RED << "\tEntered element doesn\'t exist\n" << WHITE;
+						print_interface_commands();
+						continue;
+					}
+					else if (e1->GetType() == 'J' || e1->GetType() == 'E')
+						cout << GREEN << "V= " << fabs(Get_VoltDiff(c, Node1, Node2, e1)) << endl << WHITE;
+					else
+					{
+						cout << RED << "You Didn't Enter A Source\n Please Try Again\n" << WHITE;
+						print_interface_commands();
+						continue;
+					}	
+				}
 				else
 				{
-					cout << BLUE << "You Didn't Enter A Source\n Please Try Again\n" << WHITE;
-					print_interface_commands();
-					continue;
-				}	
+					if(E->GetType() == 'J')
+						cout << GREEN << "V= " << Get_VoltDiff(c, Node1, Node2) << endl << WHITE;
+					else
+						cout << GREEN << "V= " << fabs(Get_VoltDiff(c, Node1, Node2)) << endl << WHITE;
+				}
 			}
-			else
+			else if (op = 'N')
 			{
-				if(E->GetType() == 'J')
-					cout << "V= " << Get_VoltDiff(c, Node1, Node2)<<endl;
+				int node1, node2;
+				//node1 = node2 = -1;
+				cout << "Enter The Two Nodes\n";
+				cin >> node1 >> node2;
+				cout << BLUE << "press 1 to get Voltage Dif due to spacefic source , 0 to continue" << endl << WHITE;
+				int op2;
+				cin >> op2;
+				if (op2 == 1)
+				{
+					cout << "Enter the source please " << endl;
+					char Stype; int Sid;
+					Print_Prompt();
+					cin >> Stype >> Sid;
+					Stype = toupper(Stype);
+					Element *e1 = c->GetElement(Stype, Sid);
+					if (!e1)
+					{
+						cerr << RED << "\tEntered element doesn\'t exist\n" << WHITE;
+						print_interface_commands();
+						continue;
+					}
+					else if (e1->GetType() == 'J' || e1->GetType() == 'E')
+						cout << GREEN << "V= " << fabs(Get_VoltDiff(c, node1, node2, e1)) << endl << WHITE;
+					else
+					{
+						cout << RED << "You Didn't Enter A Source\n Please Try Again\n" << WHITE;
+						print_interface_commands();
+						continue;
+					}
+				}
 				else
-					cout << "V= " << fabs(Get_VoltDiff(c, Node1, Node2))<<endl;
+					cout << GREEN << "V = " << fabs(Get_VoltDiff(c, node1, node2)) << endl << WHITE;
 			}
-
-
 		}
 
 		else if (option == 'P') {
@@ -151,9 +192,7 @@ void Interface(Circuit * c) {
 				print_interface_commands();
 				continue;
 			}
-			cout<<"P= "<<Get_Power(c, e1)<<endl;
-
-
+			cout<< GREEN << "P= "<<Get_Power(c, e1) << endl << WHITE;
 		}
 		else if (option == 'R') {
 			cout << "Enter the Resistance please  " << endl;
@@ -170,10 +209,10 @@ void Interface(Circuit * c) {
 				continue;
 			}
 			else if (E2->GetType() == 'R')
-				cout<<"Rmax = "<<Get_Res_Max(c, E2)<<endl;
+				cout<< GREEN << "Rmax = "<<Get_Res_Max(c, E2) << endl << WHITE;
 			else
 			{
-				cout << BLUE << "You Didn't Enter An Resestance\nPlease Try The Option Again\n";
+				cout << RED << "You Didn't Enter An Resestance\nPlease Try The Option Again\n" << WHITE;
 				print_interface_commands();
 				continue;
 			}
@@ -193,10 +232,10 @@ void Interface(Circuit * c) {
 				continue;
 			}
 			else if (E3->GetType() == 'R')
-				cout << "Pmax = " << Get_Pow_Max(c, E3) << endl;
+				cout << GREEN << "Pmax = " << Get_Pow_Max(c, E3) << endl << WHITE;
 			else
 			{
-				cout << BLUE << "You Didn't Enter An Resestance\nPlease Try The Option Again\n";
+				cout << RED << "You Didn't Enter An Resestance\nPlease Try The Option Again\n" << WHITE;
 				print_interface_commands();
 				continue;
 			}
@@ -204,6 +243,8 @@ void Interface(Circuit * c) {
 
 		else if (option == 'X')
 		{
+			cout << "System Exit\nThank You\n";
+			Print_Credits();
 			break;
 		}
 		else if (option == 'H')
