@@ -43,7 +43,7 @@ Node *searchNode(Circuit *c, Element *e, int nodeID)
 // return circuit with one (voltag or current) source 
 Circuit* Disable_Sources_superpostion(Circuit* c,Element* e_temp)
 {
-	Circuit* c_copy = c->Copy();
+	Circuit* c_copy = c->CopyAndReset();
 	Node* n = c_copy->GetFirstNode();
 	Node *n_temp;
 	while(n != NULL)
@@ -54,8 +54,13 @@ Circuit* Disable_Sources_superpostion(Circuit* c,Element* e_temp)
 			if(e->GetType()=='J')
 			{
 				//check only on voltag and current sources and delete them
-				if(e_temp->GetId() != e->GetId() && e_temp->GetType()!= e->GetType())
+				if(e_temp->GetId() == e->GetId() && e_temp->GetType() == e->GetType())
 					//this condion is just to let a specific source 
+				{
+					e = e->GetNext();
+					continue;
+				}
+				else
 				{
 					n->Remove(e);
 					e = n->GetFirstElement();
@@ -67,7 +72,10 @@ Circuit* Disable_Sources_superpostion(Circuit* c,Element* e_temp)
 				if (!n->IsEssential())
 				{
 					if(e_temp->GetId() == e->GetId() && e_temp->GetType() == e->GetType())
+					{
+						e = e->GetNext();
 						continue;
+					}
 					n_temp = searchNode(c_copy, e, n->GetId());
 					Element *e_temp2 = n_temp->GetFirstElement();
 					while (e_temp2->GetType() != e->GetType() && e_temp2->GetId() != e->GetId())
@@ -407,7 +415,7 @@ void Check_Circ_Is_PowerBalanced(Circuit* c)
 
 double Get_Res_Max(Circuit* c, Element* resistance)
 {
-	Circuit *circuit = c->Copy();
+	Circuit *circuit = c->CopyAndReset();
 
 	bool removed_1,removed_2;
 	Element* resistance_2;  //pointer to the resistance in second node
@@ -435,7 +443,7 @@ double Get_Res_Max(Circuit* c, Element* resistance)
 								
 	nodes[1]->Add(e2);
 
-	Circuit *c2 = circuit->Copy();		//Copying The Circuit To Another Pointer
+	Circuit *c2 = circuit->CopyAndReset();		//Copying The Circuit To Another Pointer
 
 	voltageTransformation(c2);		//Voltage Source Transformation
 
@@ -453,11 +461,11 @@ double Get_Res_Max(Circuit* c, Element* resistance)
 
 double Get_Pow_Max(Circuit* c, Element* resistance)
 {
-	Circuit *circuit = c->Copy();
+	Circuit *circuit = c->CopyAndReset();
 
 	double vth;
 
-	Circuit *c2 = circuit->Copy();		//Copying The Circuit To Another Pointer
+	Circuit *c2 = circuit->Copy();		//CopyAndReseting The Circuit To Another Pointer
 	
 	voltageTransformation(c2);		//Voltage Source Transformation
 	
@@ -498,7 +506,7 @@ double Get_Current(Circuit* circuit, Element* element, Element* due_to_element)
   
 	c2 = Disable_Sources_superpostion(circuit,due_to_element);    //disable the sources in the copied circuit except the due to element
 
-    Circuit *c3 = c2->Copy();		//Copying The Circuit To Another Pointer
+    Circuit *c3 = c2->Copy();		//CopyAndReseting The Circuit To Another Pointer
 	   
 	voltageTransformation(c3);		//Voltage Source Transformation
 
@@ -617,7 +625,7 @@ double Get_VoltDiff(Circuit* circuit, const int node1_id, const int node2_id, El
   
 	c2 = Disable_Sources_superpostion(circuit, due_to_element);
 
-    Circuit *c3 = c2->Copy();		//Copying The Circuit To Another Pointer
+    Circuit *c3 = c2->CopyAndReset();		//Copying The Circuit To Another Pointer
 	   
 	voltageTransformation(c3);		//Voltage Source Transformation
 
