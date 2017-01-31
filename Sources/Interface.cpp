@@ -71,6 +71,11 @@ void Interface(Circuit * c) {
 					continue;
 				}
 			}
+			else if (option2 == 1 && (e->GetType() == 'J' || e->GetType() == 'E'))
+			{
+				cout << RED << "Can't Caculate The Current Due To Spacefic Source On A Source\n" << WHITE;
+				cout << GREEN << "Total I= " << Get_Current(c, e) << endl << WHITE;
+			}
 			else
 			{
 				if (TYPE == 'R')
@@ -133,12 +138,20 @@ void Interface(Circuit * c) {
 						continue;
 					}	
 				}
-				else
+				else if (option2 == 1 && (E->GetType() == 'J' || E->GetType() == 'E'))
 				{
+					cout << RED << "Can't Caculate The VOLTAGE Due To Spacefic Source On A Source\n" << WHITE;
 					if(E->GetType() == 'J')
 						cout << GREEN << "V= " << Get_VoltDiff(c, Node1, Node2) << endl << WHITE;
 					else
 						cout << GREEN << "V= " << fabs(Get_VoltDiff(c, Node1, Node2)) << endl << WHITE;
+				}
+				else
+				{
+					if(E->GetType() == 'J')
+						cout << GREEN << "Total V= " << Get_VoltDiff(c, Node1, Node2) << endl << WHITE;
+					else
+						cout << GREEN << "Total V= " << fabs(Get_VoltDiff(c, Node1, Node2)) << endl << WHITE;
 				}
 			}
 			else if (op == 'N')
@@ -147,6 +160,20 @@ void Interface(Circuit * c) {
 				//node1 = node2 = -1;
 				cout << "Enter The Two Nodes\n";
 				cin >> node1 >> node2;
+				Node *n1 = c->GetNode(node1);
+				Node *n2 = c->GetNode(node2);
+				if (!n1)
+				{
+					cout << RED << "The Node Id: " << node1 << " Does Not Exist\nPlease Try Agian\n" << WHITE;
+					print_interface_commands();
+					continue;
+				}
+				else if (!n2)
+				{
+					cout << RED << "The Node Id: " << node2 << " Does Not Exist\nPlease Try Agian\n" << WHITE;
+					print_interface_commands();
+					continue;
+				}
 				cout << BLUE << "press 1 to get Voltage Dif due to spacefic source , 0 to continue" << endl << WHITE;
 				int op2;
 				cin >> op2;
